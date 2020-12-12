@@ -11,11 +11,13 @@ type Dosage {
 type Prescriptions {
   dosage: [Dosage]
   form: [String]
+  generic_name: String
   manufacturer: String
   name: String
   quantity: [String]
 }
 
 type Query {
+  prescription(prescription: String): [Prescriptions]
   prescriptions: [Prescriptions]
 }
