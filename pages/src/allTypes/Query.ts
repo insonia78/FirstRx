@@ -1,8 +1,9 @@
-import { stringArg, queryType } from "@nexus/schema";
+import { stringArg, queryType, extendType } from "@nexus/schema";
 import { Prescriptions } from "./Prescriptions";
 import { data } from "../data";
 
-export const Query = queryType({
+export const Query = extendType({
+    type:'Mutation',
     definition(t){
          t.list.field("prescriptions",{
              type: Prescriptions,
@@ -20,14 +21,18 @@ export const Query = queryType({
                           
                          let v = value.name.toLowerCase();
                          it_matches = true;
+                          
                         for(let i = 0 ; i < lenght_of_the_prescription_to_search; i++)
                         {
                             if(v[i] !== prescription.toLowerCase()[i])
                                     it_matches = false;
-                        }     
+                        } 
+                           
                          if(it_matches)
                          {
-
+                           
+                            Object.assign(value,{search_name:`${value.name}(${value.generic_name})`})
+                            console.log(value);   
                            ar.push(value);
                          }
                          it_matches = true;
@@ -39,6 +44,8 @@ export const Query = queryType({
                          }
                          if(it_matches)
                          {
+                            Object.assign(value,{search_name:`${value.generic_name}(${value.name})`})
+                            console.log(value);
                            ar.push(value);
                          }
                          

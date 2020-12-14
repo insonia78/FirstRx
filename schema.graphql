@@ -8,6 +8,11 @@ type Dosage {
   type: String
 }
 
+type Mutation {
+  prescription(prescription: String): [Prescriptions]
+  prescriptions: [Prescriptions]
+}
+
 type Prescriptions {
   dosage: [Dosage]
   form: [String]
@@ -15,9 +20,9 @@ type Prescriptions {
   manufacturer: String
   name: String
   quantity: [String]
+  search_name: String
 }
 
 type Query {
-  prescription(prescription: String): [Prescriptions]
-  prescriptions: [Prescriptions]
+  ok: Boolean!
 }

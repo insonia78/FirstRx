@@ -5,6 +5,7 @@ export const Prescriptions = objectType({
     definition(t) {
         t.string('name');
         t.string('generic_name');
+        t.string('search_name');
         t.string('manufacturer');
         t.list.string('form');
         t.list.field('dosage', {
