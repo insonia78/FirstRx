@@ -5,7 +5,7 @@ const PrescriptionDetailedForm = (props) => {
 
 
     return (
-        <div>
+        
             <div className="list-unstyled mt-3 mb-4 prescription-form">
                 <div className="prescription-form-select-container ">
                     <h6 className="prescription-form-description">Does this match your prescription? Make adjustments below
@@ -80,8 +80,7 @@ const PrescriptionDetailedForm = (props) => {
                     </select>
                 </div>
             </div>
-            <button className=" prescription-form-select-button btn btn-secondary btn-sm"> Next: Step2 >></button>
-        </div>
+        
 
     );
 }

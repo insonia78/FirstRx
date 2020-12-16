@@ -38,7 +38,7 @@ export default function Home() {
   }
   return (
     <>
-      <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">       
+      <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
         <main role="main" className="container d-flex flex-column flex-md-row align-items-center" style={{ height: "90vh" }}>
           <div className="card-deck col-12 text-center my-auto">
             <div className="card mb-4 shadow-sm">
@@ -52,13 +52,15 @@ export default function Home() {
                   {prescriptions}
                 </datalist>
                 {prescriptionDetails.length === 1 &&
-                        <PrescriptionDetailedForm data={prescriptionDetails} />
-               
+                  <div>
+                    <PrescriptionDetailedForm data={prescriptionDetails} />
+                    <button className=" prescription-form-select-button btn btn-secondary btn-sm"> Next: Step2 >></button>
+                  </div>
                 }
               </div>
             </div>
           </div>
-        </main>        
+        </main>
       </div>
     </>
 
