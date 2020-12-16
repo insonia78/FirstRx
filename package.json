@@ -5,7 +5,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "react":"next",
+    "react-dom":"next"
   },
   "dependencies": {
     "@apollo/client": "^3.3.4",
