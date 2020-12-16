@@ -54,7 +54,7 @@ export default function Home() {
                 {prescriptionDetails.length === 1 &&
                   <div>
                     <PrescriptionDetailedForm data={prescriptionDetails} />
-                    <button className=" prescription-form-select-button btn btn-secondary btn-sm"> Next: Step2 >></button>
+                    <button className=" prescription-form-select-button btn btn-secondary btn-sm"> Next: Step2 {'>>'}</button>
                   </div>
                 }
               </div>
