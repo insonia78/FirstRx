@@ -6,6 +6,7 @@ import { initializeApollo } from "./src/apolloClient";
 import { Nav, Navbar, Form, Button, FormControl, InputGroup, NavDropdown } from 'react-bootstrap';
 import { PrescriptionsInterface } from './src/interfaces/prescritpion.interface';
 import HomeMobile from './src/components/Mobile/HomeMobile';
+import HomeDesktop from './src/components/HomeDesktop';
 const GET_PRESCRIPTIONS = gql`
     mutation  prescription($prescription:String){
           prescription(prescription:$prescription)
@@ -29,7 +30,10 @@ const GET_PRESCRIPTIONS = gql`
 export default function Home() {
   
   return(
-    <></>
+    <>
+      <HomeDesktop />
+    
+    </>
        //<HomeMobile /> 
   );
 }
