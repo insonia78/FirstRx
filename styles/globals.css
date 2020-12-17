@@ -28,19 +28,18 @@ a {
  position:absolute;
  left:7.85vw;
  right:7.85vw;
- top:5%;
- bottom:80.3%;
+ top:4.9vh;
+ bottom:80.33vh;
  border:1px solid black; 
  
   
 }
 .header-container > .header{
   position:absolute;
-  left:8.54vw;
-  right:8.3vw;
-  top:5.9vh;
-  bottom:81.5vh; 
-  
+  left:0.694vw;
+  right:0.486vw;
+  top:1.1vh;
+  bottom:81.3vh;  
   height:12.66vh;
   width:83.2vw; 
   
