@@ -166,9 +166,9 @@
    }
    .main-desktop-bottom-container{
        position:absolute;
-       left:8.05vw;
+       left:7.85vw;
        top: 83.44vh;
-       right:7.57vw;
+       right:7.85vw;
        bottom:2.78vh;
        border: 1px solid #c4c4c4;
        box-sizing: border-box;
@@ -183,12 +183,9 @@
    }
    .main-desktop-bottom-text{
     position:absolute;
-    left:3.34w;
-    top: 2.23vh;
-    
-    bottom:5.3vh;
-    border: 1px solid #c4c4c4;
-    box-sizing: border-box;
+    left:3.34vw;
+    top: 2.23vh;    
+    bottom:5.3vh;    
     min-height:13.8vh;
 
     font-style: normal;
