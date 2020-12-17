@@ -29,7 +29,8 @@ const GET_PRESCRIPTIONS = gql`
 export default function Home() {
   
   return(
-       <HomeMobile /> 
+    <></>
+       //<HomeMobile /> 
   );
 }
 // <Head>

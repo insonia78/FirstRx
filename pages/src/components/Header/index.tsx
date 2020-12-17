@@ -5,19 +5,35 @@ const Header = (props) => {
 
 
     return (
-        <div className="cover-container d-flex w-100 h-100 p-3 mx-auto flex-column">
-            <header>
-                <div className="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-                    <h3 className="my-0 mr-md-auto font-weight-bold">FirstRx</h3>
-                    <nav className="my-2 my-md-1 mr-md-1" style={{ width: '35%' }}>
-                        <select name="age" className="browser-default custom-select" style={{ width: '100%' }}>
+        
+            <header className="header-container">
+                 <div className="header">
+                     <div className="header-content">                
+                        <div className="header-title-container" >
+                            FirstRx                        
+                        </div>
+                        <div className="header-slogan-container">
+                            Find low cash prices for prescriptions
+                        </div>
+                    </div>
+                     <nav>
+                        <div className="header-about-first-rx-container">
+                            About FirstRx
+                        </div> 
+                        <div className="header-help-container">
+                            Help
+                        </div> 
+                        <div className="header-select-language-label-container">
+                            Select Language
+                        </div> 
+                        <select name="language" className="header-select-language ">
                             <option value="english">English</option>
                             <option value="spanish">Spanish</option>
                         </select>
                     </nav>
-                </div>
+                </div>          
             </header>
-        </div>
+        
     );
 };
 
