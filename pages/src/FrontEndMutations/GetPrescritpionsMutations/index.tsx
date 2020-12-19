@@ -22,4 +22,6 @@ mutation  prescription($prescription:String){
 }
 
 `;
-export default GET_PRESCRIPTIONS;
+export default{
+      GET_PRESCRIPTIONS,
+};
