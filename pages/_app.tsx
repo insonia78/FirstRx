@@ -5,8 +5,10 @@ import '../styles/globals.css';
 import Header from './src/components/HeaderDesktop';
 import Footer from './src/components/Footer';
 import _Head from './src/components/_Head';
-import '../styles/desktop.css';
 import HeaderDesktop from "./src/components/HeaderDesktop";
+import '../styles/desktop.css';
+import '../styles/main-desktop-left.css';
+
 
 
 function MyApp({ Component, pageProps }) {

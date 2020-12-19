@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation, gql } from "@apollo/client";
-
+import PrescriptionDetailedForm  from '../../component/PrescriptionDetailedForm';
 
 const GET_PRESCRIPTIONS = gql`
 mutation  prescription($prescription:String){
@@ -24,13 +24,20 @@ mutation  prescription($prescription:String){
 const FindPrescriptionHome = () =>{
 
     const [prescriptions, setPrescriptions] = useState([]);
+    const [prescriptionDetails, setPrescriptionDetails] = useState([]);
     const [getPrescriptions] = useMutation(GET_PRESCRIPTIONS, {
          onError(err) {
               console.log(err);
         
             },
             update(proxy, result) {
+            if (result.data.prescription.length === 1) {
+                setPrescriptionDetails(result.data.prescription);
+                console.log('result', result.data.prescription);
+                return;
+                }
               let options = [];
+
               result.data.prescription.forEach((element)=>{
                       options.push(<option value={element.search_name} />); 
         
@@ -48,11 +55,14 @@ const FindPrescriptionHome = () =>{
         }
 
     return(
-        <div>
-             <input type="text" list="prescriptions" className="form-control mt-3 mb-4" onChange={searchPrescription} id="usr" />
-             <datalist id="prescriptions">
+        <div className="test">            
+             <span className="desktop-main-left-find-prescription-home-title" >Step 1: Your Prescription</span>
+             <input  placeholder="Type Drug Name" className="desktop-main-left-find-prescription-home-input" type="text" list="prescriptions" onChange={searchPrescription} id="usr" />
+             <datalist className= "desktop-main-left-find-prescription-home-datalist" id="prescriptions">
                {prescriptions}
               </datalist>
+              {prescriptionDetails.length === 1 &&
+                <PrescriptionDetailedForm data ={prescriptionDetails} />}
         </div>
 
     );

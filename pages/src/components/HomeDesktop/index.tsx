@@ -1,6 +1,7 @@
 
 import React, { useState } from 'react';
 import HeaderDesktop from '../HeaderDesktop';
+import FindPrescriptionHome from './FindPrescriptionHome';
 
 
 
@@ -17,7 +18,9 @@ export default function HomeDesktop() {
             <main>
                 <div className="main-desktop-container">
                     <div className="main-desktop-title">Check here <b>First</b> for your <b>Rx</b> savings!</div>
-                    <div className="main-desktop-side-left"></div>
+                    <div className="main-desktop-side-left">
+                         <FindPrescriptionHome />                    
+                    </div>
                     <div className="main-desktop-side-right"></div>
                 </div>
                 <div className="main-desktop-bottom-container">
