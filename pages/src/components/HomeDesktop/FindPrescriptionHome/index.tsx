@@ -53,9 +53,6 @@ const FindPrescriptionHome = () =>{
              <datalist id="prescriptions">
                {prescriptions}
               </datalist>
-
-
-
         </div>
 
     );
