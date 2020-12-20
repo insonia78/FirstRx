@@ -5,16 +5,18 @@ const PrescriptionDetailedForm = (props) => {
 
 
     return (
-           <> 
-            
-               <div className="main-desktop-left-prescription-form-description">Does this match your prescription? Make adjustments below
-                    so that we can accurately compare prices. Don't worry, you will be
+        <div >
+            <div className="main-desktop-left-prescription-form-description">Does this match your prescription? Make adjustments below
+            so that we can accurately compare prices. Don't worry, you will be
                 able to adjust this again.</div>
-                
+            <div className="main-desktop-left-prescription-form-title-container">
                 <div className="main-desktop-left-prescription-form-title">
                     {props.data[0].search_name}
 
                 </div>
+            </div>
+            
+            <div className="main-desktop-left-prescription-form-description-container">
                 <div className="main-desktop-left-prescription-form-label main-desktop-left-prescription-form-manufacturer-label" >
                     Manufacture
                 </div>
@@ -28,7 +30,7 @@ const PrescriptionDetailedForm = (props) => {
                         }
                     </select>
                 </div>
-                <div className="main-desktop-left-prescription-form-label main-desktop-left-prescription-form-format-label">  
+                <div className="main-desktop-left-prescription-form-label main-desktop-left-prescription-form-format-label">
                     Format
                 </div>
                 <div>
@@ -77,8 +79,9 @@ const PrescriptionDetailedForm = (props) => {
                         }
                     </select>
                 </div>
-            </>
-        
+            </div>
+        </div>
+
 
     );
 }

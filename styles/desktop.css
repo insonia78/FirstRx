@@ -120,11 +120,12 @@
    
    }
    .main-desktop-container{
-    position:absolute;
+    position:relative;
     left:7.85vw;
     right:7.85vw;
     top:21.1vh;
     bottom:18.22vh;
+    width: 84.38vw;;
     border: 1px solid #c4c4c4;
     box-sizing: border-box;
     min-height:60.66vh;
@@ -143,10 +144,13 @@
        line-height: 5.6rem;
        color: #000000;
     }
+   
    .main-desktop-side-left{
-    position:absolute;     
+    position:relative; 
+    min-height:50.37vh;
+    height:auto;    
+    width:47.64vw;  
     top:8.55vh;
-    bottom:1.78vh;
     left:4.236vw;
     right:32.5vw;
     background: #EFEFEF;

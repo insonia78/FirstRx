@@ -1,3 +1,23 @@
+.main-desktop-left-prescription-form-title-container{
+    position:relative;
+    top:22.33vh;
+    bottom:24.1vh;
+    left:5.21vw;
+    right:9.8vw;
+    width:37.5vw;
+    min-height:3.9vh;   
+}
+.main-desktop-left-prescription-form-title{
+    position: inherit;
+    top:0;
+    left:0;    
+    font-style: normal;
+    font-weight: normal;
+    font-size: 3rem;
+    line-height: 3.5rem; 
+
+}
+
 .main-desktop-left-prescription-form-description{
     position:absolute;
     top:16.4vh;
@@ -10,20 +30,16 @@
     line-height: 2.1rem;
  
 }
-.main-desktop-left-prescription-form-title{
-    position:absolute;
-    top:22.33vh;
-    bottom:24.1vh;
-    left:5.21vw;
-    right:9.8vw;
-    font-style: normal;
-    font-weight: normal;
-    font-size: 3rem;
-    line-height: 3.5rem;
 
+.main-desktop-left-prescription-form-description-container{
+    position:relative;
+    height:24.1vh;  
+    background:red;  
+    margin-bottom:2vh;    
 }
 .main-desktop-left-prescription-form-label{
-    position:absolute;
+    position:relative;
+    top:2vh;
     left:5.21vw;
     font-style: normal;
     font-weight: bold;
@@ -31,28 +47,24 @@
     line-height: 2.3rem;
 }
 .main-desktop-left-prescription-form-manufacturer-label{
-    position:absolute;
-    right:27.01vw;
-    top: 27.44vh;
+    position:inherit;
+    top:1vh;
     bottom:20.33vh;
+    margin-bottom:.9%;
   
 }
 .main-desktop-left-prescription-form-format-label{
-   position:absolute;
-   top:31.56vh;
-   bottom:16.22vh;
+   position:inherit;
+   margin-bottom:.9%;
 }
 .main-desktop-left-prescription-form-dosage-label{
-    position:absolute;
-    top:35.66vh;
-    bottom:12.11vh;
+    position:inherit;
+    margin-bottom:.9%;
 
 }
 .main-desktop-left-prescription-form-quantity-label{
-    position:absolute;
-    top:39.56vh;
-    bottom:8vh;
-
+    position:inherit;
+    margin-bottom:.9%;
 }
 .main-desktop-left-prescription-form-select{
        position:absolute;
@@ -90,7 +102,7 @@
 }
 .main-desktop-left-prescription-form-quantity-select{
     position:absolute;
-    top:39.44vh;
-    bottom:7.55vh;
+    top:35.34vh;
+    bottom:11.67vh;
 
 }
