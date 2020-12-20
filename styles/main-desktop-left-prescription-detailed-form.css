@@ -1,14 +1,13 @@
 .main-desktop-left-prescription-form-title-container{
     position:relative;
-    top:22.33vh;
-    bottom:24.1vh;
     left:5.21vw;
+    margin-top:1vh;
     right:9.8vw;
     width:37.5vw;
     min-height:3.9vh;   
 }
 .main-desktop-left-prescription-form-title{
-    position: inherit;
+    position: relative;
     top:0;
     left:0;    
     font-style: normal;
@@ -19,11 +18,10 @@
 }
 
 .main-desktop-left-prescription-form-description{
-    position:absolute;
-    top:16.4vh;
-    bottom:29.22vh;
+    position:relative;
     left:1.32vw;
     right:2.71vw;
+    margin-top:9.4vh;
     font-style: normal;
     font-weight: 500;
     font-size: 1.8rem;
@@ -32,10 +30,12 @@
 }
 
 .main-desktop-left-prescription-form-description-container{
-    position:relative;
-    height:24.1vh;  
-    background:red;  
-    margin-bottom:2vh;    
+    position:relative;    
+    margin-top:.9vh;
+    height:24.1vh;
+    width: 47.64vw;
+    margin-bottom:2vh;
+    display:inline-block;    
 }
 .main-desktop-left-prescription-form-label{
     position:relative;
@@ -47,31 +47,34 @@
     line-height: 2.3rem;
 }
 .main-desktop-left-prescription-form-manufacturer-label{
-    position:inherit;
-    top:1vh;
-    bottom:20.33vh;
-    margin-bottom:.9%;
+    position:relative;
+    top:1vh;    
+    margin-bottom:.1%;
   
 }
 .main-desktop-left-prescription-form-format-label{
-   position:inherit;
+   position:relative;
    margin-bottom:.9%;
 }
 .main-desktop-left-prescription-form-dosage-label{
-    position:inherit;
+    position:relative;
     margin-bottom:.9%;
 
 }
 .main-desktop-left-prescription-form-quantity-label{
-    position:inherit;
+    position:relative;
     margin-bottom:.9%;
 }
-.main-desktop-left-prescription-form-select{
-       position:absolute;
+.main-desktop-left-prescription-form-select-container{
+       position:relative;
        left: 15.28vw;
-       right:9.03vw;
-       width:23.33vw;
-       height:2.08vw;
+       margin-top:-3vh;
+       
+}
+
+.main-desktop-left-prescription-form-select{
+        width:23.33vw;
+        height:2.08vw;
        font-style: normal;
        font-weight: normal;
        font-size: 1.8rem;
@@ -86,23 +89,19 @@
 
 }
 .main-desktop-left-prescription-form-manufacturer-select{
-    position:absolute;
-    top:27.55vh;
-    bottom:20.44vh;
+    position:relative;       
+    margin-bottom:.1%;
 }
 .main-desktop-left-prescription-form-format-select{
-    position:absolute;
-    top:31.22vh;
-    bottom:15.78vh;
+    position:relative; 
+    margin-bottom:.7%;
 }
 .main-desktop-left-prescription-form-dosage-select{
-    position:absolute;
-    top:35.34vh;
-    bottom:11.67vh;
+    position:relative; 
+    margin-bottom:.7%;
 }
 .main-desktop-left-prescription-form-quantity-select{
-    position:absolute;
-    top:35.34vh;
-    bottom:11.67vh;
+    position:relative; 
+    margin-bottom:.7%;
 
 }

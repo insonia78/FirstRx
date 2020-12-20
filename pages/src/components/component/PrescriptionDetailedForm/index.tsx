@@ -20,7 +20,7 @@ const PrescriptionDetailedForm = (props) => {
                 <div className="main-desktop-left-prescription-form-label main-desktop-left-prescription-form-manufacturer-label" >
                     Manufacture
                 </div>
-                <div>
+                <div className="main-desktop-left-prescription-form-select-container">
                     <select className="main-desktop-left-prescription-form-select main-desktop-left-prescription-form-manufacturer-select">
                         {
                             props.data.map((element, index) =>
@@ -33,7 +33,7 @@ const PrescriptionDetailedForm = (props) => {
                 <div className="main-desktop-left-prescription-form-label main-desktop-left-prescription-form-format-label">
                     Format
                 </div>
-                <div>
+                <div className="main-desktop-left-prescription-form-select-container">
                     <select className="main-desktop-left-prescription-form-select main-desktop-left-prescription-form-format-select">
                         {
                             props.data.map(element =>
@@ -50,7 +50,7 @@ const PrescriptionDetailedForm = (props) => {
                 <div className="main-desktop-left-prescription-form-label main-desktop-left-prescription-form-dosage-label" >
                     Dosage
                 </div>
-                <div>
+                <div className="main-desktop-left-prescription-form-select-container">
                     <select className="main-desktop-left-prescription-form-select main-desktop-left-prescription-form-dosage-select">
                         {
                             props.data.map(element =>
@@ -66,7 +66,7 @@ const PrescriptionDetailedForm = (props) => {
                 <div className="main-desktop-left-prescription-form-label main-desktop-left-prescription-form-quantity-label">
                     Quantity
                 </div>
-                <div>
+                <div className="main-desktop-left-prescription-form-select-container">
                     <select className="main-desktop-left-prescription-form-select main-desktop-left-prescription-form-quantity-select">
                         {
                             props.data.map(element =>
