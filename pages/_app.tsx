@@ -8,6 +8,7 @@ import _Head from './src/components/_Head';
 import HeaderDesktop from "./src/components/HeaderDesktop";
 import '../styles/desktop.css';
 import '../styles/main-desktop-left.css';
+import '../styles/main-desktop-left-prescription-detailed-form.css';
 
 
 

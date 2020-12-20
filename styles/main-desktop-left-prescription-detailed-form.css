@@ -1,0 +1,96 @@
+.main-desktop-left-prescription-form-description{
+    position:absolute;
+    top:16.4vh;
+    bottom:29.22vh;
+    left:1.32vw;
+    right:2.71vw;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.8rem;
+    line-height: 2.1rem;
+ 
+}
+.main-desktop-left-prescription-form-title{
+    position:absolute;
+    top:22.33vh;
+    bottom:24.1vh;
+    left:5.21vw;
+    right:9.8vw;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 3rem;
+    line-height: 3.5rem;
+
+}
+.main-desktop-left-prescription-form-label{
+    position:absolute;
+    left:5.21vw;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 2rem;
+    line-height: 2.3rem;
+}
+.main-desktop-left-prescription-form-manufacturer-label{
+    position:absolute;
+    right:27.01vw;
+    top: 27.44vh;
+    bottom:20.33vh;
+  
+}
+.main-desktop-left-prescription-form-format-label{
+   position:absolute;
+   top:31.56vh;
+   bottom:16.22vh;
+}
+.main-desktop-left-prescription-form-dosage-label{
+    position:absolute;
+    top:35.66vh;
+    bottom:12.11vh;
+
+}
+.main-desktop-left-prescription-form-quantity-label{
+    position:absolute;
+    top:39.56vh;
+    bottom:8vh;
+
+}
+.main-desktop-left-prescription-form-select{
+       position:absolute;
+       left: 15.28vw;
+       right:9.03vw;
+       width:23.33vw;
+       height:2.08vw;
+       font-style: normal;
+       font-weight: normal;
+       font-size: 1.8rem;
+       line-height: 2.1rem;
+
+} 
+.main-desktop-left-prescription-form-select option{
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.8rem;
+    line-height: 2.1rem;
+
+}
+.main-desktop-left-prescription-form-manufacturer-select{
+    position:absolute;
+    top:27.55vh;
+    bottom:20.44vh;
+}
+.main-desktop-left-prescription-form-format-select{
+    position:absolute;
+    top:31.22vh;
+    bottom:15.78vh;
+}
+.main-desktop-left-prescription-form-dosage-select{
+    position:absolute;
+    top:35.34vh;
+    bottom:11.67vh;
+}
+.main-desktop-left-prescription-form-quantity-select{
+    position:absolute;
+    top:39.44vh;
+    bottom:7.55vh;
+
+}
