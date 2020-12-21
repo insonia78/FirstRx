@@ -2,6 +2,8 @@
 import React, { useState } from 'react';
 import HeaderDesktop from '../HeaderDesktop';
 import FindPrescriptionHome from './FindPrescriptionHome';
+import Location from './Location';
+import { useRouter } from "next/router"
 
 
 
@@ -10,8 +12,12 @@ import FindPrescriptionHome from './FindPrescriptionHome';
 
 
 
-export default function HomeDesktop() {
-
+export default function HomeDesktop(props) {
+    const router = useRouter()
+  const {
+    query: { component },
+  } = router
+   
     return (
         <>
             <main>
@@ -19,7 +25,11 @@ export default function HomeDesktop() {
                     <div className="main-desktop-title">Check here <b>First</b> for your <b>Rx</b> savings!</div>
                     <div className="main-desktop-sides-container"> 
                         <div className="main-desktop-side-left">
-                            <FindPrescriptionHome />
+                            
+                            { props.component === 'prescription' && <FindPrescriptionHome />}
+                            { component === 'location' && <Location />}
+                            
+                                
                         </div>
 
                         <div className="main-desktop-side-right"></div>

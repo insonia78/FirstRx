@@ -31,7 +31,7 @@ export default function Home() {
   
   return(
     <>
-      <HomeDesktop />
+      <HomeDesktop component={"prescription"} />
     
     </>
        //<HomeMobile /> 

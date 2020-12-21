@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useMutation, gql } from "@apollo/client";
 import PrescriptionDetailedForm  from '../../component/PrescriptionDetailedForm';
+import { useRouter } from 'next/router'
 
 const GET_PRESCRIPTIONS = gql`
 mutation  prescription($prescription:String){
@@ -25,6 +26,7 @@ const FindPrescriptionHome = () =>{
 
     const [prescriptions, setPrescriptions] = useState([]);
     const [prescriptionDetails, setPrescriptionDetails] = useState([]);
+    const router = useRouter();
     const [getPrescriptions] = useMutation(GET_PRESCRIPTIONS, {
          onError(err) {
               console.log(err);
@@ -50,7 +52,7 @@ const FindPrescriptionHome = () =>{
     
         console.log(e.target.value);
         getPrescriptions({variables: {prescription: e.target.value }}); 
-    
+        //src/components/HomeDesktop
     
         }
 
@@ -62,7 +64,17 @@ const FindPrescriptionHome = () =>{
                {prescriptions}
               </datalist>
               {prescriptionDetails.length === 1 &&
-                <PrescriptionDetailedForm data ={prescriptionDetails} />}
+              <>
+                <PrescriptionDetailedForm data ={prescriptionDetails} />
+                <button className="next-button" onClick={() => router.push
+                (
+                  {
+                    pathname:'/src/components/HomeDesktop',
+                    query:{component:'location'},
+                  })    
+                 }>Next: Step2 {'>>'}</button>
+              </>
+                }
         </div>
 
     );

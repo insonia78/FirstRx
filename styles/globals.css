@@ -20,45 +20,7 @@ a {
   box-sizing: border-box;
 }
 
-.prescription-form{
-    display:grid;
-    grid-template-columns: auto auto; 
-    grid-gap:5px;
-    border:1px solid black;
-    background-color: #DCDCDC;
-    padding-right: 5px;
-    padding-bottom:5px;
-  
-}
-.prescription-form select{
-  background-color: #DCDCDC;
-  margin-bottom:4px;  
-  border:1px solid #696969;
-  
-}
-.prescription-form label       { text-align:center; }
-.prescription-form select      { text-align:left; }  
-.prescription-form label:after { content: ":"; }
-.prescription-form-select-container{
-  
-  grid-column-start: 1;
-  grid-column-end: 3;
 
-}
-.card-title{
-    
-}
-.prescription-form-title{ 
-  
-  font-weight:bolder;
-     
-}
-.prescription-form-description{
-  
-}
-.prescription-form-select-button{
-  float:right;
-}
 
 /* @media only screen and (max-width: 420px) {
   html,
