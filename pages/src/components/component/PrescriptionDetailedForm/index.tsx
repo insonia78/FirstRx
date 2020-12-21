@@ -5,7 +5,7 @@ const PrescriptionDetailedForm = (props) => {
 
 
     return (
-        <div >
+        <div  >
             <div className="main-desktop-left-prescription-form-description">Does this match your prescription? Make adjustments below
             so that we can accurately compare prices. Don't worry, you will be
                 able to adjust this again.</div>

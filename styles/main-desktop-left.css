@@ -1,24 +1,21 @@
 
 .desktop-main-left-find-prescription-home-title{
-    position:absolute;
+    position:relative;
     top:2.34vh;
-    bottom:45.4vh;
     left:1.45vw;
     right:14.37vw;
     font-style: normal;
     font-weight: bold;
     font-size: 3.6rem;
-    line-height: 4.2rem;
-    
-    color: #333333; 
-    
+    line-height: 4.2rem;    
+    color: #333333;    
 
 }
 .desktop-main-left-find-prescription-home-input{
-  width: 44.51vw;
-  height:6.55vh;
   position:relative;
-  top:8.11vh;
+  width: 44.51vw;
+  height:6.55vh;  
+  top:2.11vh;
   bottom:35.66vh;
   left:1.46vw;
   right:1.67vw;

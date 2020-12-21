@@ -55,7 +55,7 @@ const FindPrescriptionHome = () =>{
         }
 
     return(
-        <div className="test">            
+        <div>            
              <span className="desktop-main-left-find-prescription-home-title" >Step 1: Your Prescription</span>
              <input  placeholder="Type Drug Name" className="desktop-main-left-find-prescription-home-input" type="text" list="prescriptions" onChange={searchPrescription} id="usr" />
              <datalist className= "desktop-main-left-find-prescription-home-datalist" id="prescriptions">

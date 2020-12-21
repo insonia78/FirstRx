@@ -17,17 +17,18 @@ export default function HomeDesktop() {
             <main>
                 <div className="main-desktop-container">
                     <div className="main-desktop-title">Check here <b>First</b> for your <b>Rx</b> savings!</div>
+                    <div className="main-desktop-sides-container"> 
+                        <div className="main-desktop-side-left">
+                            <FindPrescriptionHome />
+                        </div>
 
-                    <div className="main-desktop-side-left">
-                        <FindPrescriptionHome />
+                        <div className="main-desktop-side-right"></div>
                     </div>
-
-                    <div className="main-desktop-side-right"></div>
                 </div>
-                {/* <div className="main-desktop-bottom-container">
+                <div className="main-desktop-bottom-container">
                     <span className="main-desktop-bottom-text">This is an easy and simple process to get big savings. Find the lowest price at a
                     pharmacy near you. Get texted a coupon. Bring to your pharmacist. Save $.</span>
-                </div> */}
+                </div>
             </main>
 
         </>
