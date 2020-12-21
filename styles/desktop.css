@@ -1,7 +1,5 @@
 .header-desktop-container{
-    /* margin-top:4.4%;
-    margin-left:11.3%;
-    margin-right:11.2%; */
+   
     min-height:14.8vh;
     width:84.38vw; 
     position:relative;
@@ -9,21 +7,23 @@
     right:7.85vw;
     top:4.9vh;
     bottom:80.33vh;
-    border:1px solid #c4c4c4; 
-    
+    border:1px solid #c4c4c4;   
      
    }
-   .header-desktop-container > .header-desktop{  
+   .header-desktop-container > .header-desktop{
+
      height:12.67vh;
      margin-left:.57vw;
      margin-right:.57vw;
      margin-top:1vh;
      margin-bottom:1vh;  
      background:#cccccc;
-     border:1px solid #cccccc;  
+     border:1px solid #cccccc;
+
    }
    
    .header-desktop-title-container{
+
      position:absolute; 
      top:3vh; 
      right:64.02vw;  
@@ -38,13 +38,15 @@
      color:#000000;
      
    }
-    .header-desktop-slogan-container{ 
+    .header-desktop-slogan-container{
+
      position:absolute;
      left:8.68vw;
      right:40.97vw;
      top:8.8vh; 
      bottom:3.66vh;
      height:2.34vh;
+     
      font-style:normal;
      font-weight:normal;
      font-size:2.0rem;
@@ -54,11 +56,13 @@
    }
    
    .header-desktop-about-first-rx-container{
+
      position:absolute;
      left:45.625vw;
      right:25.69vw;
      top:6.44vh;
      bottom:6.9vh;
+     
      font-style:normal;
      font-weight:bold;
      font-size:2.4rem;
@@ -68,6 +72,7 @@
    }
    
    .header-desktop-help-container{
+
      position:absolute;
      left:58.68vw;
      right:19.72vw;
@@ -83,6 +88,7 @@
    
    .header-desktop-select-language-label-container
    {
+
      position: absolute;
      left: 68.40vw;
      right: 4.30vw;
@@ -98,6 +104,7 @@
    
    
    .header-desktop-select-language{
+
      width:11.67vw;
      height:3vh;
      position: absolute;
@@ -112,6 +119,7 @@
    
    }
    .header-desktop-select-language option{
+
      font-family: Roboto;
      font-style: normal;
      font-weight: bold;   
@@ -120,6 +128,7 @@
    
    }
    .main-desktop-container{
+
     position:relative;
     left:7.85vw;
     right:7.85vw;
@@ -128,10 +137,12 @@
     border: 1px solid #c4c4c4;
     box-sizing: border-box;
     min-height:60.66vh;
-    height:auto;     
+    height:auto;
+
    }
    
    .main-desktop-title{
+
        width:79.583vw;
        height:6.22vh;
        position:relative;       
@@ -139,6 +150,7 @@
        right:0.66vw;
        top:1.11vh;
        bottom: 88vh;       
+       
        font-style: normal;
        font-weight: normal;
        font-size: 4.8rem;
@@ -166,7 +178,8 @@
     margin-bottom:2vh;
     background: #EFEFEF;
     border: 3px solid #c4c4c4;
-    box-sizing: border-box;    
+    box-sizing: border-box;
+
    }
    .main-desktop-side-right{    
     
@@ -179,6 +192,7 @@
        
    }
    .main-desktop-bottom-container{
+
        position:relative;
        margin-left:7.85vw;
        margin-right:7.85vw;       
@@ -187,6 +201,7 @@
        margin-top:8.5vh;
        min-height:13.8vh;
        width:84.375vw;
+
        font-style: normal;
        font-weight: normal;
        font-size: 3rem;
@@ -195,6 +210,7 @@
 
    }
    .main-desktop-bottom-text{
+
     position:absolute;
     left:3.34vw;
     top: 2.23vh;    
