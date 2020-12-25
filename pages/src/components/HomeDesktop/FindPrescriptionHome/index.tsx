@@ -55,11 +55,19 @@ const FindPrescriptionHome = () =>{
         //src/components/HomeDesktop
     
         }
+     const clearInput = (e) =>{
+      
+         
+         let listBox = document.getElementById("prescription").value = "";
+         document.getElementById("prescription").lenght = 0;
+          // listBox[0].value= "";
+          // listBox[0].options.length = 0;
+     }   
 
     return(
         <div>            
              <span className="desktop-main-left-find-prescription-home-title" >Step 1: Your Prescription</span>
-             <input  placeholder="Type Drug Name" className="desktop-main-left-find-prescription-home-input" type="text" list="prescriptions" onChange={searchPrescription} id="usr" />
+             <input  onFocus={clearInput} placeholder="Type Drug Name" className="desktop-main-left-find-prescription-home-input" type="text" list="prescriptions" onChange={searchPrescription} id="prescription" />
              <datalist className= "desktop-main-left-find-prescription-home-datalist" id="prescriptions">
                {prescriptions}
               </datalist>

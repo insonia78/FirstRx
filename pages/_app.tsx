@@ -9,7 +9,7 @@ import HeaderDesktop from "./src/components/HeaderDesktop";
 import '../styles/desktop.css';
 import '../styles/main-desktop-left.css';
 import '../styles/main-desktop-left-prescription-detailed-form.css';
-
+import '../styles/main-desktop-location.css';
 
 
 function MyApp({ Component, pageProps }) {

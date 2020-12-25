@@ -1,0 +1,25 @@
+.desktop-main-left-location-caption{
+    position:relative;
+    top:2.11vh;
+    left:1.46vw;
+    margin-top:1vh;
+    margin-bottom:1vh;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 1.8rem;
+    line-height: 2.1rem;
+    /* identical to box height */
+
+
+    color: #000000;
+}
+.desktop-main-location-detect-location{
+    position:relative;
+    left:1.46vw;
+    margin-top:3vh;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 30px;
+    line-height: 35px;
+
+}

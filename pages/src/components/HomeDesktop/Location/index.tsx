@@ -53,15 +53,25 @@ const Location = () =>{
     
     
         }
+      
+      const clearInput = (e) =>{
+       
+          
+          let listBox = document.getElementById("location").value = "";
+          document.getElementById("location").lenght = 0;
+           // listBox[0].value= "";
+           // listBox[0].options.length = 0;
+      }   
 
     return(
         <div>            
              <span className="desktop-main-left-find-prescription-home-title" >Step 2: Your Location</span>
-             <input  placeholder="Type City or Zip Code" className="desktop-main-left-find-prescription-home-input" type="text" list="Locations" onChange={searchPrescription} id="usr" />
+             <div className="desktop-main-left-location-caption">Choose a location where you would like to pick up your prescription.</div>
+             <input  onFocus={clearInput} placeholder="Type City or Zip Code" className="desktop-main-left-find-prescription-home-input" type="text" list="Locations" onChange={searchPrescription} id="location" />
              <datalist className= "desktop-main-left-find-prescription-home-datalist" id="Locations">
                {locations}
               </datalist>
-              
+             <div className="desktop-main-location-detect-location"> Or...<u>Detect Locaiton</u></div>              
         </div>
 
     );
