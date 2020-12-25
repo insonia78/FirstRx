@@ -54,13 +54,9 @@ const Location = () =>{
     
         }
       
-      const clearInput = (e) =>{
-       
-          
+      const clearInput = (e) =>{          
           let listBox = document.getElementById("location").value = "";
-          document.getElementById("location").lenght = 0;
-           // listBox[0].value= "";
-           // listBox[0].options.length = 0;
+          document.getElementById("location").lenght = 0;          
       }   
 
     return(

@@ -1,15 +1,15 @@
 import { ApolloProvider } from "@apollo/client";
 import { useApollo } from "pages/src/apolloClient";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import '../styles/globals.css';
+import '../styles/globals.scss';
 import Header from './src/components/HeaderDesktop';
 import Footer from './src/components/Footer';
 import _Head from './src/components/_Head';
 import HeaderDesktop from "./src/components/HeaderDesktop";
-import '../styles/desktop.css';
-import '../styles/main-desktop-left.css';
-import '../styles/main-desktop-left-prescription-detailed-form.css';
-import '../styles/main-desktop-location.css';
+import '../styles/desktop.scss';
+import '../styles/main-desktop-left.scss';
+import '../styles/main-desktop-left-prescription-detailed-form.scss';
+import '../styles/main-desktop-location.scss';
 
 
 function MyApp({ Component, pageProps }) {
