@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useMutation, gql } from "@apollo/client";
-
+import { useRouter } from 'next/router';
 
 const GET_LOCATION = gql`
 mutation  location($location:String){
@@ -21,79 +21,112 @@ mutation  location($location:String){
       }
 }
 `;
-const Location = () =>{
+const Location = (props) => {
 
-    const [locations, setLocations] = useState([]);
-    const [locationsDetails, setLocationsDetails] = useState([]);
-    const [getLocations] = useMutation(GET_LOCATION, {
-         onError(err) {
-              console.log(err);
-        
-            },
-            update(proxy, result) {
-            if (result.data.prescription.length === 1) {
-                setLocationsDetails(result.data.prescription);
-                console.log('result', result.data.prescription);
-                return;
-                }
-              let options = [];
+  console.log("Location",props);
+  const [locations, setLocations] = useState([]);
+  const [locationsDetails, setLocationsDetails] = useState([]);
+  const[getLocation,setLocation] = useState({});
+  const router = useRouter();
+  let myLocation;
 
-              result.data.prescription.forEach((element)=>{
-                      options.push(<option value={element.search_name} />); 
-        
-              })
-              console.log(options);
-              setLocations(options);
-            }
-          });
-    const searchPrescription = (e) => {
-    
-        console.log(e.target.value);
-        getLocations({variables: {prescription: e.target.value }}); 
-    
-    
-        }
-      
-      const clearInput = (e) =>{          
-          let listBox = document.getElementById("location").value = "";
-          document.getElementById("location").lenght = 0;          
-      }   
-      const getCurrentPosition = ()=>{
-        let value;
-        navigator.geolocation.getCurrentPosition(async  (position) =>{
-          console.log("position",position);
-          let latitude =`latitude=${position.coords.latitude}`;
-          let longitude = `&longitude=${position.coords.longitude}`;
-          console.log("Latitude is :", position.coords.latitude);
-          console.log("Longitude is :", position.coords.longitude);
-          let query = latitude + longitude + "&localityLanguage=en";
-          let bigdatacloud_api =
-          "https://api.bigdatacloud.net/data/reverse-geocode-client?";
-          bigdatacloud_api += query;
-          let myObj = await (await fetch(bigdatacloud_api)).json();
-          value  = {
-            postCode:myObj.postcode,
-            city:myObj.locality,
-            country:myObj.countryName,
-          };
-          console.log(value);
-        });
+  const [getLocations] = useMutation(GET_LOCATION, {
+    onError(err) {
+      console.log(err);
 
+    },
+    update(proxy, result) {
+      if (result.data.prescription.length === 1) {
+        setLocationsDetails(result.data.prescription);
+        console.log('result', result.data.prescription);
+        return;
       }
-      
-    
-    return(
-        <div>            
-             <span className="desktop-main-left-find-prescription-home-title" >Step 2: Your Location</span>
-             <div className="desktop-main-left-location-caption">Choose a location where you would like to pick up your prescription.</div>
-             <input  onFocus={clearInput} placeholder="Type City or Zip Code" className="desktop-main-left-find-prescription-home-input" type="text" list="Locations" onChange={searchPrescription} id="location" />
-             <datalist className= "desktop-main-left-find-prescription-home-datalist" id="Locations">
-               {locations}
-              </datalist>
-             <div onClick={getCurrentPosition} className="desktop-main-location-detect-location"> Or...<u>Detect Locaiton</u></div>              
-        </div>
+      let options = [];
 
-    );
+      result.data.prescription.forEach((element) => {
+        options.push(<option value={element.search_name} />);
+
+      })
+      console.log(options);
+      setLocations(options);
+    }
+  });
+  const searchPrescription = (e) => {
+
+    console.log(e.target.value);
+    getLocations({ variables: { prescription: e.target.value } });
+
+
+  }
+
+  const clearInput = (e) => {
+    let listBox = document.getElementById("location").value = "";
+    document.getElementById("location").lenght = 0;
+  }
+  const getCurrentPosition = () => {
+
+    navigator.geolocation.getCurrentPosition(async (position) => {
+    
+      let latitude = `latitude=${position.coords.latitude}`;
+      let longitude = `&longitude=${position.coords.longitude}`;      
+      let query = latitude + longitude + "&localityLanguage=en";
+      let bigdatacloud_api = process.env.LOCATION_API;
+
+      bigdatacloud_api += `?${query}`;
+      let myObj = await fetch(bigdatacloud_api)
+        .catch(handleError);
+
+      if (myObj.ok) {
+        myObj = await myObj.json();
+        myLocation = {
+          postCode: myObj.postcode,
+          city: myObj.locality,
+          country: myObj.countryName,
+          state: myObj.principalSubdivisionCode.split('-')[1],
+        };
+        setLocation(myLocation);
+        document.getElementById('location').value = ` ${myLocation.postCode}, ${myLocation.city}, ${myLocation.state}`;  
+      }
+      console.log(myLocation);
+    });
+
+  }
+  var handleError = function (err) {
+    console.warn(err);
+    return new Response(JSON.stringify({
+      code: 400,
+      message: 'Stupid network Error'
+    }));
+  };
+
+  return (
+    <div>
+      <span className="desktop-main-left-find-prescription-home-title" >Step 2: Your Location</span>
+      <div className="desktop-main-left-location-caption">Choose a location where you would like to pick up your prescription.</div>
+      <input onFocus={clearInput} placeholder="Type City or Zip Code" className="desktop-main-left-find-prescription-home-input" type="text" list="Locations" onChange={searchPrescription} id="location" />
+      <datalist className="desktop-main-left-find-prescription-home-datalist" id="Locations">
+        {locations}
+      </datalist>
+      <div onClick={getCurrentPosition} className="desktop-main-location-detect-location"> Or...<u>Detect Location</u></div>
+      
+      {Object.keys(getLocation).length !== 0 && getLocation.constructor === Object && <button className="next-button desktop-button-location" onClick={() => router.push
+        (
+          {
+            pathname: '/src/components/HomeDesktop',
+            query: { component: 'coupons' },
+          })
+      }>Next: Step3 {'>>'}</button>}
+      <div className="desktop-location-back-button" onClick={() => router.push
+        (
+          {
+            pathname: '/src/components/HomeDesktop',
+            query: { component: 'prescription' },
+          })
+      }><u>{'<<'} Step 1: Your Prescription</u></div>
+
+    </div>
+
+  );
 
 }
 

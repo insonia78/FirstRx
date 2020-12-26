@@ -5,3 +5,8 @@
 //     url: true
 //   }
 // });
+module.exports = {
+    env: {
+        LOCATION_API: process.env.LOCATION_API,
+    },
+  };

@@ -3,16 +3,21 @@
 
 const PrescriptionDetailedForm = (props) => {
 
-
+    console.log(props);
+    const onChange = (e) => {
+        props.setPrescriptionDetails({ ...props.getPrescriptionsDetails, [e.target.name]: e.target.value });
+    }
     return (
         <>
+            
             <div>
                 <div className="main-desktop-left-prescription-form-description">Does this match your prescription? Make adjustments below
                 so that we can accurately compare prices. Don't worry, you will be
                 able to adjust this again.</div>
                 <div className="main-desktop-left-prescription-form-title-container">
-                    <div className="main-desktop-left-prescription-form-title">
-                        {props.data[0].search_name}
+                    <div
+                        className="main-desktop-left-prescription-form-title">
+                        {props.data[0].search_name || props.getSetPrescriptionDetails}
 
                     </div>
                 </div>
@@ -22,7 +27,10 @@ const PrescriptionDetailedForm = (props) => {
                         Manufacture
                 </div>
                     <div className="main-desktop-left-prescription-form-select-container">
-                        <select className="main-desktop-left-prescription-form-select main-desktop-left-prescription-form-manufacturer-select">
+                        <select
+                            onChange={onChange}
+                            defaultValue={props.getSetPrescriptionDetails !== undefined ? props.getSetPrescriptionDetails.manufactor : ""}
+                            className="main-desktop-left-prescription-form-select main-desktop-left-prescription-form-manufacturer-select">
                             {
                                 props.data.map((element, index) =>
                                     <option key={`manufactor${index}`} value={element.manufacturer}>{element.manufacturer}</option>
@@ -35,7 +43,10 @@ const PrescriptionDetailedForm = (props) => {
                         Format
                 </div>
                     <div className="main-desktop-left-prescription-form-select-container">
-                        <select className="main-desktop-left-prescription-form-select main-desktop-left-prescription-form-format-select">
+                        <select
+                            onChange={onChange}
+                            defaultValue={props.getSetPrescriptionDetails !== undefined ? props.getSetPrescriptionDetails.form : ""}
+                            className="main-desktop-left-prescription-form-select main-desktop-left-prescription-form-format-select">
                             {
                                 props.data.map(element =>
                                     element.form.map((e, index) =>
@@ -52,7 +63,9 @@ const PrescriptionDetailedForm = (props) => {
                         Dosage
                 </div>
                     <div className="main-desktop-left-prescription-form-select-container">
-                        <select className="main-desktop-left-prescription-form-select main-desktop-left-prescription-form-dosage-select">
+                        <select
+                            onChange={onChange}
+                            defaultValue={props.getSetPrescriptionDetails !== undefined ? props.getSetPrescriptionDetails.dosage : ""} className="main-desktop-left-prescription-form-select main-desktop-left-prescription-form-dosage-select">
                             {
                                 props.data.map(element =>
                                     element.dosage.map((e, index) =>
@@ -68,11 +81,14 @@ const PrescriptionDetailedForm = (props) => {
                         Quantity
                 </div>
                     <div className="main-desktop-left-prescription-form-select-container">
-                        <select className="main-desktop-left-prescription-form-select main-desktop-left-prescription-form-quantity-select">
+                        <select
+                            onChange={onChange}
+                            defaultValue={props.getSetPrescriptionDetails !== undefined ? props.getSetPrescriptionDetails.quantity : ""}
+                            className="main-desktop-left-prescription-form-select main-desktop-left-prescription-form-quantity-select">
                             {
                                 props.data.map(element =>
                                     element.dosage.map((e, index) =>
-                                        <option key={`dosage${index}`} value={e.quantity}>{e.quantity}</option>
+                                        <option key={`quantity${index}`} value={e.quantity}>{e.quantity}</option>
 
                                     )
 
@@ -81,7 +97,7 @@ const PrescriptionDetailedForm = (props) => {
                         </select>
                     </div>
                 </div>
-            </div>           
+            </div>
         </>
 
     );

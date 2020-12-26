@@ -13,9 +13,11 @@ import { useRouter } from "next/router"
 
 
 export default function HomeDesktop(props) {
-    const router = useRouter()
+    const [getPrescription,setPrescription] = useState({});
+    const router = useRouter();
   const {
-    query: { component },
+    query: { component,
+           prescriptions  },
   } = router
    
     return (
@@ -25,9 +27,9 @@ export default function HomeDesktop(props) {
                     <div className="main-desktop-title">Check here <b>First</b> for your <b>Rx</b> savings!</div>
                     <div className="main-desktop-sides-container"> 
                         <div className="main-desktop-side-left">
-                            
-                            { props.component === 'prescription' && <FindPrescriptionHome />}
-                            { component === 'location' && <Location />}
+                            {component === 'prescription' && <FindPrescriptionHome getSetPrescriptionDetails={prescriptions} getPrescriptionDetails={getPrescription} setPrescriptionDetails={setPrescription} />}
+                            { props.component === 'prescription' && <FindPrescriptionHome getSetPrescriptionDetails={prescriptions} getPrescriptionDetails={getPrescription} setPrescriptionDetails={setPrescription}/>}
+                            { component === 'location' && <Location data={prescriptions}/>}
                             
                                 
                         </div>
