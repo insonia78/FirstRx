@@ -58,7 +58,30 @@ const Location = () =>{
           let listBox = document.getElementById("location").value = "";
           document.getElementById("location").lenght = 0;          
       }   
+      const getCurrentPosition = ()=>{
+        let value;
+        navigator.geolocation.getCurrentPosition(async  (position) =>{
+          console.log("position",position);
+          let latitude =`latitude=${position.coords.latitude}`;
+          let longitude = `&longitude=${position.coords.longitude}`;
+          console.log("Latitude is :", position.coords.latitude);
+          console.log("Longitude is :", position.coords.longitude);
+          let query = latitude + longitude + "&localityLanguage=en";
+          let bigdatacloud_api =
+          "https://api.bigdatacloud.net/data/reverse-geocode-client?";
+          bigdatacloud_api += query;
+          let myObj = await (await fetch(bigdatacloud_api)).json();
+          value  = {
+            postCode:myObj.postcode,
+            city:myObj.locality,
+            country:myObj.countryName,
+          };
+          console.log(value);
+        });
 
+      }
+      
+    
     return(
         <div>            
              <span className="desktop-main-left-find-prescription-home-title" >Step 2: Your Location</span>
@@ -67,7 +90,7 @@ const Location = () =>{
              <datalist className= "desktop-main-left-find-prescription-home-datalist" id="Locations">
                {locations}
               </datalist>
-             <div className="desktop-main-location-detect-location"> Or...<u>Detect Locaiton</u></div>              
+             <div onClick={getCurrentPosition} className="desktop-main-location-detect-location"> Or...<u>Detect Locaiton</u></div>              
         </div>
 
     );
