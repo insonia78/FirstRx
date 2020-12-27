@@ -5,31 +5,44 @@ import FindPrescriptionHome from './FindPrescriptionHome';
 import Location from './Location';
 import { useRouter } from "next/router"
 
-
-
-
-
-
-
-
 export default function HomeDesktop(props) {
-    const [getPrescription,setPrescription] = useState({});
+    let data = {
+        search_name: "",
+        name: "",
+        generic_name: "",
+        manufacturer: "",
+        form: "",
+        quantity: "",
+        dosage: [],
+      }
+    const [getPrescription,setPrescriptionUseState] = useState({...data});
     const router = useRouter();
+    const setPrescription = ( value )=>{
+        
+       setPrescriptionUseState(getPrescription =>({
+            ...getPrescription,...value
+        }));
+        
+    }
+    
   const {
     query: { component,
-           prescriptions  },
+           prescriptions },
   } = router
    
     return (
         <>
             <main>
+                
+                
+                {console.log('getPrescription HomeDesktop',getPrescription)}
                 <div className="main-desktop-container">
                     <div className="main-desktop-title">Check here <b>First</b> for your <b>Rx</b> savings!</div>
                     <div className="main-desktop-sides-container"> 
                         <div className="main-desktop-side-left">
-                            {component === 'prescription' && <FindPrescriptionHome getSetPrescriptionDetails={prescriptions} getPrescriptionDetails={getPrescription} setPrescriptionDetails={setPrescription} />}
-                            { props.component === 'prescription' && <FindPrescriptionHome getSetPrescriptionDetails={prescriptions} getPrescriptionDetails={getPrescription} setPrescriptionDetails={setPrescription}/>}
-                            { component === 'location' && <Location data={prescriptions}/>}
+                            {component === 'prescription' && <FindPrescriptionHome dataFromRoute={prescriptions} getPrescriptionDetails={getPrescription} setPrescriptionDetails={setPrescription} />}
+                            {component === 'location' && <Location dataFromRoute={prescriptions}/>}
+                            {component === undefined && <FindPrescriptionHome dataFromRoute={prescriptions} getPrescriptionDetails={getPrescription} setPrescriptionDetails={setPrescription}/>}
                             
                                 
                         </div>

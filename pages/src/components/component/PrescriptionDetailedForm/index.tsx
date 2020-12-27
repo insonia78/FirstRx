@@ -1,11 +1,15 @@
 
 
 
-const PrescriptionDetailedForm = (props) => {
+const PrescriptionDetailedForm = ({dataFromServer,dataFromRoute,setPrescriptionDetails}) => {
 
-    console.log(props);
+    if(dataFromRoute !== undefined)
+       dataFromRoute = JSON.parse(dataFromRoute);
     const onChange = (e) => {
-        props.setPrescriptionDetails({ ...props.getPrescriptionsDetails, [e.target.name]: e.target.value });
+        let val ={
+            [e.target.name]: e.target.value
+        }        
+        setPrescriptionDetails(val);        
     }
     return (
         <>
@@ -17,7 +21,7 @@ const PrescriptionDetailedForm = (props) => {
                 <div className="main-desktop-left-prescription-form-title-container">
                     <div
                         className="main-desktop-left-prescription-form-title">
-                        {props.data[0].search_name || props.getSetPrescriptionDetails}
+                        {( dataFromRoute !== undefined ? dataFromRoute.search_name : dataFromServer[0].search_name)}
 
                     </div>
                 </div>
@@ -28,11 +32,12 @@ const PrescriptionDetailedForm = (props) => {
                 </div>
                     <div className="main-desktop-left-prescription-form-select-container">
                         <select
+                            name ="manufactor"
                             onChange={onChange}
-                            defaultValue={props.getSetPrescriptionDetails !== undefined ? props.getSetPrescriptionDetails.manufactor : ""}
+                            defaultValue={dataFromRoute !== undefined ?dataFromRoute.manufactor : ""}
                             className="main-desktop-left-prescription-form-select main-desktop-left-prescription-form-manufacturer-select">
                             {
-                                props.data.map((element, index) =>
+                                dataFromServer.map((element, index) =>
                                     <option key={`manufactor${index}`} value={element.manufacturer}>{element.manufacturer}</option>
 
                                 )
@@ -44,11 +49,12 @@ const PrescriptionDetailedForm = (props) => {
                 </div>
                     <div className="main-desktop-left-prescription-form-select-container">
                         <select
+                            name ="form"
                             onChange={onChange}
-                            defaultValue={props.getSetPrescriptionDetails !== undefined ? props.getSetPrescriptionDetails.form : ""}
+                            defaultValue={ dataFromRoute !== undefined ?  dataFromRoute.form : ""}
                             className="main-desktop-left-prescription-form-select main-desktop-left-prescription-form-format-select">
                             {
-                                props.data.map(element =>
+                                dataFromServer.map(element =>
                                     element.form.map((e, index) =>
                                         <option key={`form${index}`} value={e}>{e}</option>
 
@@ -64,10 +70,11 @@ const PrescriptionDetailedForm = (props) => {
                 </div>
                     <div className="main-desktop-left-prescription-form-select-container">
                         <select
+                            name ="dosage"
                             onChange={onChange}
-                            defaultValue={props.getSetPrescriptionDetails !== undefined ? props.getSetPrescriptionDetails.dosage : ""} className="main-desktop-left-prescription-form-select main-desktop-left-prescription-form-dosage-select">
+                            defaultValue={ dataFromRoute !== undefined ?  dataFromRoute.dosage : ""} className="main-desktop-left-prescription-form-select main-desktop-left-prescription-form-dosage-select">
                             {
-                                props.data.map(element =>
+                                dataFromServer.map(element =>
                                     element.dosage.map((e, index) =>
                                         <option key={`dosage${index}`} value={e.dosage}>{e.dosage}</option>
 
@@ -82,11 +89,12 @@ const PrescriptionDetailedForm = (props) => {
                 </div>
                     <div className="main-desktop-left-prescription-form-select-container">
                         <select
+                            name ="quantity"
                             onChange={onChange}
-                            defaultValue={props.getSetPrescriptionDetails !== undefined ? props.getSetPrescriptionDetails.quantity : ""}
+                            defaultValue={dataFromRoute !== undefined ? dataFromRoute.quantity : ""}
                             className="main-desktop-left-prescription-form-select main-desktop-left-prescription-form-quantity-select">
                             {
-                                props.data.map(element =>
+                                dataFromServer.map(element =>
                                     element.dosage.map((e, index) =>
                                         <option key={`quantity${index}`} value={e.quantity}>{e.quantity}</option>
 

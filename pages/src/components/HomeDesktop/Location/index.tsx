@@ -21,9 +21,9 @@ mutation  location($location:String){
       }
 }
 `;
-const Location = (props) => {
+const Location = ({dataFromRoute}) => {
 
-  console.log("Location",props);
+  
   const [locations, setLocations] = useState([]);
   const [locationsDetails, setLocationsDetails] = useState([]);
   const[getLocation,setLocation] = useState({});
@@ -36,9 +36,8 @@ const Location = (props) => {
 
     },
     update(proxy, result) {
-      if (result.data.prescription.length === 1) {
-        setLocationsDetails(result.data.prescription);
-        console.log('result', result.data.prescription);
+      if (result.data.prescription.length === 1) {        
+        setLocationsDetails(result.data.prescription);        
         return;
       }
       let options = [];
@@ -87,7 +86,7 @@ const Location = (props) => {
         setLocation(myLocation);
         document.getElementById('location').value = ` ${myLocation.postCode}, ${myLocation.city}, ${myLocation.state}`;  
       }
-      console.log(myLocation);
+      
     });
 
   }
@@ -103,7 +102,7 @@ const Location = (props) => {
     <div>
       <span className="desktop-main-left-find-prescription-home-title" >Step 2: Your Location</span>
       <div className="desktop-main-left-location-caption">Choose a location where you would like to pick up your prescription.</div>
-      <input onFocus={clearInput} placeholder="Type City or Zip Code" className="desktop-main-left-find-prescription-home-input" type="text" list="Locations" onChange={searchPrescription} id="location" />
+      <input  autoComplete="off" onFocus={clearInput} placeholder="Type City or Zip Code" className="desktop-main-left-find-prescription-home-input" type="text" list="Locations" onChange={searchPrescription} id="location" />
       <datalist className="desktop-main-left-find-prescription-home-datalist" id="Locations">
         {locations}
       </datalist>
@@ -120,7 +119,7 @@ const Location = (props) => {
         (
           {
             pathname: '/src/components/HomeDesktop',
-            query: { component: 'prescription' },
+            query: { component: 'prescription', prescriptions:dataFromRoute},
           })
       }><u>{'<<'} Step 1: Your Prescription</u></div>
 
