@@ -1,8 +1,9 @@
+import styles from '../../../../../styles/PrescriptionDetailedForm.module.scss';
 
 
+const PrescriptionDetailedForm = ({disabled = false,dataFromServer,dataFromRoute,setPrescriptionDetails}) => {
 
-const PrescriptionDetailedForm = ({dataFromServer,dataFromRoute,setPrescriptionDetails}) => {
-
+    
     if(dataFromRoute !== undefined)
        dataFromRoute = JSON.parse(dataFromRoute);
     const onChange = (e) => {
@@ -12,10 +13,9 @@ const PrescriptionDetailedForm = ({dataFromServer,dataFromRoute,setPrescriptionD
         setPrescriptionDetails(val);        
     }
     return (
-        <>
-            
-            <div>
-                <div className="main-desktop-left-prescription-form-description">Does this match your prescription? Make adjustments below
+        <>     
+            <div>    
+               <div className="main-desktop-left-prescription-form-description">Does this match your prescription? Make adjustments below
                 so that we can accurately compare prices. Don't worry, you will be
                 able to adjust this again.</div>
                 <div className="main-desktop-left-prescription-form-title-container">
@@ -32,29 +32,32 @@ const PrescriptionDetailedForm = ({dataFromServer,dataFromRoute,setPrescriptionD
                 </div>
                     <div className="main-desktop-left-prescription-form-select-container">
                         <select
+                            disabled={disabled}
                             name ="manufactor"
                             onChange={onChange}
                             defaultValue={dataFromRoute !== undefined ?dataFromRoute.manufactor : ""}
-                            className="main-desktop-left-prescription-form-select main-desktop-left-prescription-form-manufacturer-select">
+                            className={ (disabled ? styles.disabled_fonts_weight: "") +" main-desktop-left-prescription-form-select main-desktop-left-prescription-form-manufacturer-select" }>
                             {
-                                dataFromServer.map((element, index) =>
+                                 dataFromServer && dataFromServer.map((element, index) =>
                                     <option key={`manufactor${index}`} value={element.manufacturer}>{element.manufacturer}</option>
 
                                 )
                             }
+                            {  dataFromServer === undefined && <option value={dataFromRoute.manufacturer}>{dataFromRoute.manufacturer}</option>}
                         </select>
                     </div>
                     <div className="main-desktop-left-prescription-form-label main-desktop-left-prescription-form-format-label">
                         Format
                 </div>
                     <div className="main-desktop-left-prescription-form-select-container">
-                        <select
+                        <select                            
+                            disabled={disabled}
                             name ="form"
                             onChange={onChange}
                             defaultValue={ dataFromRoute !== undefined ?  dataFromRoute.form : ""}
-                            className="main-desktop-left-prescription-form-select main-desktop-left-prescription-form-format-select">
+                            className={ (disabled ? styles.disabled_fonts_weight: "") + " main-desktop-left-prescription-form-select main-desktop-left-prescription-form-format-select"}>
                             {
-                                dataFromServer.map(element =>
+                                dataFromServer && dataFromServer.map(element =>
                                     element.form.map((e, index) =>
                                         <option key={`form${index}`} value={e}>{e}</option>
 
@@ -63,6 +66,7 @@ const PrescriptionDetailedForm = ({dataFromServer,dataFromRoute,setPrescriptionD
 
                                 )
                             }
+                            {  dataFromServer === undefined && <option value= { dataFromRoute.form } >{ dataFromRoute.form } </option> }
                         </select>
                     </div>
                     <div className="main-desktop-left-prescription-form-label main-desktop-left-prescription-form-dosage-label" >
@@ -70,11 +74,13 @@ const PrescriptionDetailedForm = ({dataFromServer,dataFromRoute,setPrescriptionD
                 </div>
                     <div className="main-desktop-left-prescription-form-select-container">
                         <select
+                            disabled={disabled}
                             name ="dosage"
                             onChange={onChange}
-                            defaultValue={ dataFromRoute !== undefined ?  dataFromRoute.dosage : ""} className="main-desktop-left-prescription-form-select main-desktop-left-prescription-form-dosage-select">
+                            defaultValue={ dataFromRoute !== undefined ?  dataFromRoute.dosage : ""} 
+                            className={ (disabled ? styles.disabled_fonts_weight: "") +" main-desktop-left-prescription-form-select main-desktop-left-prescription-form-dosage-select"}>
                             {
-                                dataFromServer.map(element =>
+                                 dataFromServer && dataFromServer.map(element =>
                                     element.dosage.map((e, index) =>
                                         <option key={`dosage${index}`} value={e.dosage}>{e.dosage}</option>
 
@@ -82,6 +88,7 @@ const PrescriptionDetailedForm = ({dataFromServer,dataFromRoute,setPrescriptionD
 
                                 )
                             }
+                            {  dataFromServer === undefined && <option value= { dataFromRoute.dosage } > { dataFromRoute.dosage } </option> }
                         </select>
                     </div>
                     <div className="main-desktop-left-prescription-form-label main-desktop-left-prescription-form-quantity-label">
@@ -89,12 +96,13 @@ const PrescriptionDetailedForm = ({dataFromServer,dataFromRoute,setPrescriptionD
                 </div>
                     <div className="main-desktop-left-prescription-form-select-container">
                         <select
+                            disabled={disabled}
                             name ="quantity"
                             onChange={onChange}
                             defaultValue={dataFromRoute !== undefined ? dataFromRoute.quantity : ""}
-                            className="main-desktop-left-prescription-form-select main-desktop-left-prescription-form-quantity-select">
+                            className={ (disabled ? styles.disabled_fonts_weight: "") +" main-desktop-left-prescription-form-select main-desktop-left-prescription-form-quantity-select"}>
                             {
-                                dataFromServer.map(element =>
+                                  dataFromServer && dataFromServer.map(element =>
                                     element.dosage.map((e, index) =>
                                         <option key={`quantity${index}`} value={e.quantity}>{e.quantity}</option>
 
@@ -102,6 +110,7 @@ const PrescriptionDetailedForm = ({dataFromServer,dataFromRoute,setPrescriptionD
 
                                 )
                             }
+                            {  dataFromServer === undefined && <option value={dataFromRoute.quantity}>{dataFromRoute.quantity}</option>}
                         </select>
                     </div>
                 </div>

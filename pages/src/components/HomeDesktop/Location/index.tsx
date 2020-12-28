@@ -21,12 +21,13 @@ mutation  location($location:String){
       }
 }
 `;
-const Location = ({dataFromRoute}) => {
+const Location = ({dataFromRoute,location}) => {
 
   
   const [locations, setLocations] = useState([]);
   const [locationsDetails, setLocationsDetails] = useState([]);
   const[getLocation,setLocation] = useState({});
+  const[reset,setReset ] = useState(false);
   const router = useRouter();
   let myLocation;
 
@@ -57,10 +58,12 @@ const Location = ({dataFromRoute}) => {
 
 
   }
-
+  
   const clearInput = (e) => {
     let listBox = document.getElementById("location").value = "";
     document.getElementById("location").lenght = 0;
+    setReset(true);
+    
   }
   const getCurrentPosition = () => {
 
@@ -88,8 +91,10 @@ const Location = ({dataFromRoute}) => {
       }
       
     });
+    
 
   }
+ 
   var handleError = function (err) {
     console.warn(err);
     return new Response(JSON.stringify({
@@ -97,29 +102,44 @@ const Location = ({dataFromRoute}) => {
       message: 'Stupid network Error'
     }));
   };
-
+  const resetInput = () =>{    
+    setLocation({});  
+  }
   return (
-    <div>
+    <div>      
+      {reset && (location = null)}            
       <span className="desktop-main-left-find-prescription-home-title" >Step 2: Your Location</span>
       <div className="desktop-main-left-location-caption">Choose a location where you would like to pick up your prescription.</div>
-      <input  autoComplete="off" onFocus={clearInput} placeholder="Type City or Zip Code" className="desktop-main-left-find-prescription-home-input" type="text" list="Locations" onChange={searchPrescription} id="location" />
+      <input  defaultValue={location ? location : "" } autoComplete="off" onFocus={(e)=>{
+                       clearInput(e);
+                       resetInput();                       
+                       }
+                    } 
+                placeholder="Type City or Zip Code" className="desktop-main-left-find-prescription-home-input" type="text" list="Locations" onChange={searchPrescription} id="location" />
       <datalist className="desktop-main-left-find-prescription-home-datalist" id="Locations">
         {locations}
       </datalist>
       <div onClick={getCurrentPosition} className="desktop-main-location-detect-location"> Or...<u>Detect Location</u></div>
-      
-      {Object.keys(getLocation).length !== 0 && getLocation.constructor === Object && <button className="next-button desktop-button-location" onClick={() => router.push
+      {console.log('getLocation',getLocation)}
+      {console.log('location',location)}
+      {((Object.keys(getLocation).length !== 0 && getLocation.constructor === Object) || location) && <button className="next-button desktop-button-location" onClick={() => router.push
         (
           {
             pathname: '/src/components/HomeDesktop',
-            query: { component: 'coupons' },
+            query: { component: 'choose-your-coupon', 
+            prescriptions:dataFromRoute,
+            location:document.getElementById('location').value.trim() },
           })
       }>Next: Step3 {'>>'}</button>}
       <div className="desktop-location-back-button" onClick={() => router.push
         (
           {
             pathname: '/src/components/HomeDesktop',
-            query: { component: 'prescription', prescriptions:dataFromRoute},
+            query: { component: 'prescription', 
+            prescriptions:dataFromRoute,
+            location:document.getElementById('location').value.trim(),
+          
+          },
           })
       }><u>{'<<'} Step 1: Your Prescription</u></div>
 

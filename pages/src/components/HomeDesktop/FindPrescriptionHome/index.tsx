@@ -22,11 +22,12 @@ mutation  prescription($prescription:String){
       }
 }
 `;
-export default function FindPrescriptionHome ({dataFromRoute,getPrescriptionDetails,setPrescriptionDetails}){  
+export default function FindPrescriptionHome ({location,dataFromRoute,getPrescriptionDetails,setPrescriptionDetails}){  
 
   
   const [prescriptions, setPrescriptions] = useState([]);
   const [prescriptionDetails, set_PrescriptionDetails] = useState([]);
+  const [resetDatFromRoute,setresetDatFromRoute ] = useState(false);
   
   
   const router = useRouter();
@@ -47,7 +48,7 @@ export default function FindPrescriptionHome ({dataFromRoute,getPrescriptionDeta
           manufacturer: result.data.prescription[0].manufacturer,
           form: result.data.prescription[0].form[0],
           quantity: result.data.prescription[0].quantity[0],
-          dosage: result.data.prescription[0].dosage[0],
+          dosage: result.data.prescription[0].dosage[0].dosage,
 
         }      
         setPrescriptionDetails(data);         
@@ -75,6 +76,8 @@ export default function FindPrescriptionHome ({dataFromRoute,getPrescriptionDeta
 
     let listBox = document.getElementById("prescription").value = "";
     document.getElementById("prescription").innerHTML = ""; 
+    set_PrescriptionDetails([]);
+    setresetDatFromRoute(true);
     
   }
   
@@ -88,13 +91,14 @@ export default function FindPrescriptionHome ({dataFromRoute,getPrescriptionDeta
   const setPrescriptionsDataFromRoute = () => {
     dataFromRoute = JSON.parse(dataFromRoute);    
     setPrescriptionDetails(dataFromRoute);
+    
     document.getElementById("prescription").value  = dataFromRoute.search_name; 
     getPrescriptions({ variables: { prescription: dataFromRoute.search_name } });
   }
   
   return (
-    <div>
-
+    <div>     
+      {resetDatFromRoute && (dataFromRoute = undefined)}  
       <span className="desktop-main-left-find-prescription-home-title" >Step 1: Your Prescription</span>
       <input autoComplete="off"  onFocus={clearInput} placeholder="Type Drug Name" className="desktop-main-left-find-prescription-home-input" type="text" list="prescriptions" onChange={searchPrescription} id="prescription" />
       <datalist className="desktop-main-left-find-prescription-home-datalist" id="prescriptions">
@@ -109,7 +113,9 @@ export default function FindPrescriptionHome ({dataFromRoute,getPrescriptionDeta
               {
                 pathname: '/src/components/HomeDesktop',
                 query: {
-                  component: 'location', prescriptions: JSON.stringify(getPrescriptionDetails),
+                  component: 'location', 
+                  prescriptions: JSON.stringify(getPrescriptionDetails),
+                  location:location,
                 }
               }
             )

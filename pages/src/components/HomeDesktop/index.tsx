@@ -4,6 +4,7 @@ import HeaderDesktop from '../HeaderDesktop';
 import FindPrescriptionHome from './FindPrescriptionHome';
 import Location from './Location';
 import { useRouter } from "next/router"
+import ChooseYourCoupon from './ChooseYourCoupon';
 
 export default function HomeDesktop(props) {
     let data = {
@@ -27,21 +28,25 @@ export default function HomeDesktop(props) {
     
   const {
     query: { component,
-           prescriptions },
+           prescriptions,
+           location },
   } = router
    
     return (
         <>
-            <main>
-                
-                
-                {console.log('getPrescription HomeDesktop',getPrescription)}
+            <main>           
                 <div className="main-desktop-container">
                     <div className="main-desktop-title">Check here <b>First</b> for your <b>Rx</b> savings!</div>
                     <div className="main-desktop-sides-container"> 
                         <div className="main-desktop-side-left">
-                            {component === 'prescription' && <FindPrescriptionHome dataFromRoute={prescriptions} getPrescriptionDetails={getPrescription} setPrescriptionDetails={setPrescription} />}
-                            {component === 'location' && <Location dataFromRoute={prescriptions}/>}
+                            {component === 'choose-your-coupon' && < ChooseYourCoupon dataFromRoute={prescriptions} location={location} />}
+                            {component === 'prescription' && 
+                            <FindPrescriptionHome
+                            location={location} 
+                            dataFromRoute={prescriptions} 
+                            getPrescriptionDetails={getPrescription} 
+                            setPrescriptionDetails={setPrescription} />}
+                            {component === 'location' && <Location dataFromRoute={prescriptions} location={location}/>}
                             {component === undefined && <FindPrescriptionHome dataFromRoute={prescriptions} getPrescriptionDetails={getPrescription} setPrescriptionDetails={setPrescription}/>}
                             
                                 

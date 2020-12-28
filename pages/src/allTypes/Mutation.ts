@@ -27,12 +27,15 @@ export const Query = extendType({
                         
                         if(buildt_search_name_by_prescription_name.localeCompare(prescription.toLowerCase()) === 0)
                         {
+                            Object.assign(value,{search_name:`${value.name} (${value.generic_name})`})
                             ar.push(value);
                             return ar;
-                        }   
-                                                 
+                        }                                            
+                        
                         if(buildt_search_name_by_prescription_generic.localeCompare(prescription.toLowerCase()) === 0)
                         {
+                                      
+                            Object.assign(value,{search_name:`${value.generic_name} (${value.name})`})
                             ar.push(value);
                             return ar;
                         }    
@@ -49,6 +52,7 @@ export const Query = extendType({
                            
                             Object.assign(value,{search_name:`${value.name} (${value.generic_name})`})
                             ar.push(value);
+                            
                          }
                          it_matches = true;
                          let g = value.generic_name.toLowerCase();
@@ -61,6 +65,7 @@ export const Query = extendType({
                          {
                             Object.assign(value,{search_name:`${value.generic_name} (${value.name})`})
                             ar.push(value);
+                            
                          }
                          
 
