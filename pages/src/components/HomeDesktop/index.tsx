@@ -5,8 +5,12 @@ import FindPrescriptionHome from './FindPrescriptionHome';
 import Location from './Location';
 import { useRouter } from "next/router"
 import ChooseYourCoupon from './ChooseYourCoupon';
+import { IconContext } from "react-icons";
+import { MdPrint } from 'react-icons/Md';
+import Coupon from '../component/Coupon';
+import CouponDetails from './CouponDetails';
 
-export default function HomeDesktop(props) {
+export default function HomeDesktop({ props }) {
     let data = {
         search_name: "",
         name: "",
@@ -15,44 +19,52 @@ export default function HomeDesktop(props) {
         form: "",
         quantity: "",
         dosage: [],
-      }
-    const [getPrescription,setPrescriptionUseState] = useState({...data});
-    const router = useRouter();
-    const setPrescription = ( value )=>{
-        
-       setPrescriptionUseState(getPrescription =>({
-            ...getPrescription,...value
-        }));
-        
     }
-    
-  const {
-    query: { component,
-           prescriptions,
-           location },
-  } = router
-   
+    const [getPrescription, setPrescriptionUseState] = useState({ ...data });
+    const router = useRouter();
+    const setPrescription = (value) => {
+
+        setPrescriptionUseState(getPrescription => ({
+            ...getPrescription, ...value
+        }));
+
+    }
+
+    const {
+        query: { component,
+            prescriptions,
+            location,
+            coupon,
+            container },
+    } = router
+
     return (
         <>
-            <main>           
+            <main>
                 <div className="main-desktop-container">
                     <div className="main-desktop-title">Check here <b>First</b> for your <b>Rx</b> savings!</div>
-                    <div className="main-desktop-sides-container"> 
-                        <div className="main-desktop-side-left">
-                            {component === 'choose-your-coupon' && < ChooseYourCoupon dataFromRoute={prescriptions} location={location} />}
-                            {component === 'prescription' && 
-                            <FindPrescriptionHome
-                            location={location} 
-                            dataFromRoute={prescriptions} 
-                            getPrescriptionDetails={getPrescription} 
-                            setPrescriptionDetails={setPrescription} />}
-                            {component === 'location' && <Location dataFromRoute={prescriptions} location={location}/>}
-                            {component === undefined && <FindPrescriptionHome dataFromRoute={prescriptions} getPrescriptionDetails={getPrescription} setPrescriptionDetails={setPrescription}/>}
-                            
-                                
-                        </div>
+                    <div className="main-desktop-sides-container">
+                        {container === undefined &&
+                            <div className='main-desktop-sides-inner-container'>
+                                <span className="main-desktop-side-left">
+                                    {component === 'choose-your-coupon' && < ChooseYourCoupon dataFromRoute={prescriptions} location={location} />}
+                                    {component === 'prescription' &&
+                                        <FindPrescriptionHome
+                                            location={location}
+                                            dataFromRoute={prescriptions}
+                                            getPrescriptionDetails={getPrescription}
+                                            setPrescriptionDetails={setPrescription} />}
 
-                        <div className="main-desktop-side-right"></div>
+                                    {component === 'location' && <Location dataFromRoute={prescriptions} location={location} />}
+                                    {component === undefined && <FindPrescriptionHome dataFromRoute={prescriptions} getPrescriptionDetails={getPrescription} setPrescriptionDetails={setPrescription} />}
+
+
+                                </span>
+
+                                <span className="main-desktop-side-right"></span>
+                            </div>
+                        }
+                        {container === 'coupon' && <CouponDetails prescription={prescriptions} coupon={coupon} />}
                     </div>
                 </div>
                 <div className="main-desktop-bottom-container">
@@ -65,6 +77,15 @@ export default function HomeDesktop(props) {
         //<HomeMobile /> 
     );
 }
+
+
+
+
+// export async function getStaticProps(){
+
+//     return {};
+// }
+
 // <Head>
 // <title>FirstRx</title>
 // <link rel="icon" href="/favicon.ico" />

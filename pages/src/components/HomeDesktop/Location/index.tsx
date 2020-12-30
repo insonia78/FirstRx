@@ -133,13 +133,13 @@ const Location = ({dataFromRoute,location}) => {
       }>Next: Step3 {'>>'}</button>}
       <div className="desktop-location-back-button" onClick={() => router.push
         (
-          {
+          {            
             pathname: '/src/components/HomeDesktop',
             query: { component: 'prescription', 
             prescriptions:dataFromRoute,
             location:document.getElementById('location').value.trim(),
           
-          },
+          }
           })
       }><u>{'<<'} Step 1: Your Prescription</u></div>
 

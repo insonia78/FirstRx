@@ -27,7 +27,7 @@ const ChooseYourCoupon = ({dataFromRoute,location}) => {
        
         for(let i = 0 ; i < 7; i++)
         {
-           arr.push(<CouponsTiles couponsData={null} />);
+           arr.push(<CouponsTiles prescription={dataFromRoute} couponsData={dataFromRoute} />);
         }  
         
 

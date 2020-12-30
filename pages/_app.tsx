@@ -10,7 +10,8 @@ import '../styles/desktop.scss';
 import '../styles/main-desktop-left.scss';
 import '../styles/main-desktop-left-prescription-detailed-form.scss';
 import '../styles/main-desktop-location.scss';
-import '../styles/main-choose-your-coupon.scss';
+import '../styles/main-choose-home-coupon.scss';
+import '../styles/main-desktop-coupon-component.scss';
 import '../styles/main-desktop-coupons-tiles.scss';
 
 function MyApp({ Component, pageProps }) {
