@@ -1,3 +1,5 @@
+import Link from "next/link";
+import React from "react";
 
 
 
@@ -20,9 +22,9 @@ const HeaderDesktop = (props) => {
                     <div className="header-desktop-about-first-rx-container">
                         About FirstRx
                     </div>
-                    <div className="header-desktop-help-container">
+                    <Link href='/src/components/HeaderDesktop/Help'><div className="header-desktop-help-container">
                         Help
-                    </div>
+                    </div></Link>
                     <div className="header-desktop-select-language-label-container">
                         Select Language
                     </div>

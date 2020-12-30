@@ -7,6 +7,8 @@ import { Nav, Navbar, Form, Button, FormControl, InputGroup, NavDropdown } from 
 import { PrescriptionsInterface } from './src/interfaces/prescritpion.interface';
 import HomeMobile from './src/components/Mobile/HomeMobile';
 import HomeDesktop from './src/components/HomeDesktop';
+import _Head from './src/components/_Head';
+import HeaderDesktop from './src/components/HeaderDesktop';
 const GET_PRESCRIPTIONS = gql`
     mutation  prescription($prescription:String){
           prescription(prescription:$prescription)
@@ -30,8 +32,8 @@ const GET_PRESCRIPTIONS = gql`
 export default function Home() {
   
   return(
-    <>
-      <HomeDesktop component={"prescription"} />
+    <>     
+      <HomeDesktop />
     
     </>
        //<HomeMobile /> 

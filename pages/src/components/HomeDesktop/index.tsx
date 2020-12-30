@@ -10,7 +10,7 @@ import { MdPrint } from 'react-icons/Md';
 import Coupon from '../component/Coupon';
 import CouponDetails from './CouponDetails';
 
-export default function HomeDesktop({ props }) {
+export default function HomeDesktop() {
     let data = {
         search_name: "",
         name: "",

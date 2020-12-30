@@ -18,12 +18,11 @@ function MyApp({ Component, pageProps }) {
   const client = useApollo(pageProps.initialApolloState);
   return (
      
-     <ApolloProvider client = {client}>
-        <_Head />     
-        < HeaderDesktop/>
+     <ApolloProvider client = {client}> 
+         <_Head />     
+         < HeaderDesktop/>     
          <Component {...pageProps} />
-         {/* <Footer /> */}
-      
+         {/* <Footer /> */}      
      </ApolloProvider> 
   );
 }
