@@ -1,6 +1,7 @@
 import { makeSchema, queryType } from '@nexus/schema';
 import path from 'path';
-import * as types from "./allTypes";
+import * as types from "./AllTypes";
+
 
 // const Query = queryType({
 //     definition(t){

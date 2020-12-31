@@ -1,7 +1,17 @@
 import { useRouter } from "next/router";
 
-const Coupon = ({  prescription, coupon }) => {
-    prescription = JSON.parse(prescription);
+const Coupon = ({  prescription, coupon = undefined}) => {
+    let search_name = "";
+    let dosage = "";
+    let form = "";
+    if(prescription !== undefined)
+    {
+       prescription = JSON.parse(prescription);
+       search_name = prescription.search_name;
+       dosage = prescription.dosage;
+       form = prescription.form;
+
+    }
 
     return (
         <div className='desktop-coupon-component-container'>
@@ -10,7 +20,7 @@ const Coupon = ({  prescription, coupon }) => {
             
             <div className='desktop-coupon-component-phone-number' >Questions? Give us a call at <b>800.555.1212</b></div>
             
-            <div className='desktop-coupon-component-prescription'> { prescription.search_name} { prescription.dosage} , { prescription.form} </div>
+            <div className='desktop-coupon-component-prescription'> {search_name} { dosage} , {form} </div>
             <div className='desktop-coupon-component-details-container'>
                 <ul className='desktop-coupon-component-deatils-identification'>
                     <li>ID: {'XXXXXXXXXX'}</li>

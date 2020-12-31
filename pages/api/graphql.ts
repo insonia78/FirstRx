@@ -2,7 +2,7 @@
 
 import { ApolloServer } from "apollo-server-micro";
 
-import { schema } from 'pages/src/schema'; 
+import { schema } from 'components/schema'; 
 
 const server = new ApolloServer({schema});
 const handler = server.createHandler({ path:'/api/graphql'});

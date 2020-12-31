@@ -1,8 +1,8 @@
 import { stringArg, queryType, extendType } from "@nexus/schema";
-import { Prescriptions } from "./Prescriptions";
+import  Prescriptions  from "./Prescriptions";
 import { data } from "../data";
 
-export const Query = extendType({
+ const Mutation = extendType({
     type:'Mutation',
     definition(t){
          t.list.field("prescriptions",{
@@ -77,3 +77,4 @@ export const Query = extendType({
          });
     }
 })
+export default Mutation;

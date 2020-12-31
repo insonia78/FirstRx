@@ -13,7 +13,7 @@ export default function HelpDesktop() {
         <>
             <main>
                 <div className="main-desktop-container">
-                    <Link href='/../pages/src/components/HomeDesktop'><div className={styles.header_desktop_help} ><u>{'<<<'}Home</u></div></Link>
+                    <Link href='/'><div className={styles.header_desktop_help} ><u>{'<<<'}Home</u></div></Link>
                     <div className={styles.main_desktop_help_title}><b>FirstRX Help</b></div>
                     <div className='main-desktop-home-coupon-container'>
                         <div className={styles.main_desktop_help_question}>Questions? Give us a call at <b>800.555.1212</b></div>

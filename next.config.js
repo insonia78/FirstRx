@@ -1,12 +1,7 @@
-// const withCSS = require('@zeit/next-css')
-
-// module.exports = withCSS({
-//   cssLoaderOptions: {
-//     url: true
-//   }
-// });
 module.exports = {
     env: {
-        LOCATION_API: process.env.LOCATION_API,
+        
+        AWS_ACCESS_KEY_ID:'AKIA54MM5HGD2ZG4D6VA',
+        AWS_SECRET_ACCESS_KEY:'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'
     },
-  };
+  }

@@ -22,13 +22,13 @@ mutation  prescription($prescription:String){
       }
 }
 `;
-export default function FindPrescriptionHome({ location, dataFromRoute, getPrescriptionDetails, setPrescriptionDetails }) {
+export default function FindPrescriptionHome({ location = undefined, dataFromRoute, getPrescriptionDetails, setPrescriptionDetails }) {
 
 
   const [prescriptions, setPrescriptions] = useState([]);
   const [prescriptionDetails, set_PrescriptionDetails] = useState([]);
   const [resetDatFromRoute, setresetDatFromRoute] = useState(false);
-
+  const[restInputValue,setRestInputValue] = useState("");
 
   const router = useRouter();
   const [getPrescriptions, { loading: mutationLoading, error: mutationError },] = useMutation(GET_PRESCRIPTIONS, {
@@ -66,6 +66,7 @@ export default function FindPrescriptionHome({ location, dataFromRoute, getPresc
   });
 
   const searchPrescription = (e) => {
+    setRestInputValue(e.target.value);
     getPrescriptions({ variables: { prescription: e.target.value } });
 
 
@@ -74,7 +75,8 @@ export default function FindPrescriptionHome({ location, dataFromRoute, getPresc
   const clearInput = (e) => {
 
 
-    let listBox = document.getElementById("prescription").value = "";
+    setRestInputValue("");
+    
     document.getElementById("prescription").innerHTML = "";
     set_PrescriptionDetails([]);
     setresetDatFromRoute(true);
@@ -92,7 +94,7 @@ export default function FindPrescriptionHome({ location, dataFromRoute, getPresc
     dataFromRoute = JSON.parse(dataFromRoute);
     setPrescriptionDetails(dataFromRoute);
 
-    document.getElementById("prescription").value = dataFromRoute.search_name;
+    setRestInputValue(dataFromRoute.search_name);
     getPrescriptions({ variables: { prescription: dataFromRoute.search_name } });
   }
 
@@ -105,7 +107,8 @@ export default function FindPrescriptionHome({ location, dataFromRoute, getPresc
         autoComplete="off" 
         onFocus={clearInput} 
         placeholder="Type Drug Name" 
-        className="desktop-main-left-find-prescription-home-input" 
+        className="desktop-main-left-find-prescription-home-input"
+        value={restInputValue} 
         type="text" 
         list="prescriptions" 
         onChange={searchPrescription} 

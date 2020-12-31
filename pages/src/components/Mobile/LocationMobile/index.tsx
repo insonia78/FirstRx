@@ -4,8 +4,7 @@ import { useMutation, useQuery, gql } from "@apollo/client";
 import styles from '../styles/Home.module.css';
 import PrescriptionDetailedForm from './../../component/PrescriptionDetailedForm';
 
-import { PrescriptionsInterface } from './../../../interfaces/prescritpion.interface';
-import GET_PRESCRIPTIONS from '../../../FrontEndMutations/GetPrescritpionsMutations';
+import { PrescriptionsInterface } from '../../../../../components/interfaces/prescritpion.interface';
 
 
 

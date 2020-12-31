@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useMutation, gql } from "@apollo/client";
 import { useRouter } from 'next/router';
 
@@ -28,6 +28,7 @@ const Location = ({dataFromRoute,location}) => {
   const [locationsDetails, setLocationsDetails] = useState([]);
   const[getLocation,setLocation] = useState({});
   const[reset,setReset ] = useState(false);
+  const[restInputValue,setRestInputValue] = useState("");
   const router = useRouter();
   let myLocation;
 
@@ -53,15 +54,14 @@ const Location = ({dataFromRoute,location}) => {
   });
   const searchPrescription = (e) => {
 
-    console.log(e.target.value);
+    setRestInputValue(e.target.value);
     getLocations({ variables: { prescription: e.target.value } });
 
 
   }
   
   const clearInput = (e) => {
-    let listBox = document.getElementById("location").value = "";
-    document.getElementById("location").lenght = 0;
+    setRestInputValue("");
     setReset(true);
     
   }
@@ -72,29 +72,35 @@ const Location = ({dataFromRoute,location}) => {
       let latitude = `latitude=${position.coords.latitude}`;
       let longitude = `&longitude=${position.coords.longitude}`;      
       let query = latitude + longitude + "&localityLanguage=en";
-      let bigdatacloud_api = process.env.LOCATION_API;
+      let bigdatacloud_api ="https://api.bigdatacloud.net/data/reverse-geocode-client";
 
       bigdatacloud_api += `?${query}`;
       let myObj = await fetch(bigdatacloud_api)
         .catch(handleError);
 
       if (myObj.ok) {
-        myObj = await myObj.json();
+       let obj = await myObj.json();
         myLocation = {
-          postCode: myObj.postcode,
-          city: myObj.locality,
-          country: myObj.countryName,
-          state: myObj.principalSubdivisionCode.split('-')[1],
+          postCode: obj.postcode,
+          city: obj.locality,
+          country: obj.countryName,
+          state: obj.principalSubdivisionCode.split('-')[1],
         };
         setLocation(myLocation);
-        document.getElementById('location').value = ` ${myLocation.postCode}, ${myLocation.city}, ${myLocation.state}`;  
-      }
+         let v = ` ${myLocation.postCode}, ${myLocation.city}, ${myLocation.state}`;  
+         setRestInputValue(v); 
+        }
       
     });
     
 
   }
- 
+  useEffect(() => {
+
+    if (location !== undefined)
+        setRestInputValue(location); 
+           
+  }, []);
   var handleError = function (err) {
     console.warn(err);
     return new Response(JSON.stringify({
@@ -107,10 +113,10 @@ const Location = ({dataFromRoute,location}) => {
   }
   return (
     <div>      
-      {reset && (location = null)}            
+      {reset && (location = undefined)}            
       <span className="desktop-main-left-find-prescription-home-title" >Step 2: Your Location</span>
       <div className="desktop-main-left-location-caption">Choose a location where you would like to pick up your prescription.</div>
-      <input  defaultValue={location ? location : "" } autoComplete="off" onFocus={(e)=>{
+      <input value={restInputValue}  autoComplete="off" onFocus={(e)=>{
                        clearInput(e);
                        resetInput();                       
                        }
@@ -128,7 +134,7 @@ const Location = ({dataFromRoute,location}) => {
             pathname: '/src/components/HomeDesktop',
             query: { component: 'choose-your-coupon', 
             prescriptions:dataFromRoute,
-            location:document.getElementById('location').value.trim() },
+            location:restInputValue.trim() },
           })
       }>Next: Step3 {'>>'}</button>}
       <div className="desktop-location-back-button" onClick={() => router.push
@@ -137,7 +143,7 @@ const Location = ({dataFromRoute,location}) => {
             pathname: '/src/components/HomeDesktop',
             query: { component: 'prescription', 
             prescriptions:dataFromRoute,
-            location:document.getElementById('location').value.trim(),
+            location:restInputValue.trim(),
           
           }
           })

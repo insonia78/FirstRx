@@ -37,7 +37,7 @@ const ChooseYourCoupon = ({dataFromRoute,location}) => {
       <div>
         <span className="desktop-main-left-find-prescription-home-title" >Step 3: Choose Your Coupon</span>
         <div className="desktop-main-left-location-caption">In { location } <u onClick={returnToLocation}>Change Location</u> </div>
-        <PrescriptionDetailedForm disabled={true}  dataFromRoute={dataFromRoute}  />
+        <PrescriptionDetailedForm disabled={true}  dataFromRoute={dataFromRoute}   />
         <br />
         <div className="desktop-choose-your-coupon-sort">Sorted by: Price</div>
         <div className='desktop-choose-your-coupon-list-container'>

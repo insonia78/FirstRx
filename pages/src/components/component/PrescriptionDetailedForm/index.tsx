@@ -1,11 +1,19 @@
 import styles from '../../../../../styles/PrescriptionDetailedForm.module.scss';
 
 
-const PrescriptionDetailedForm = ({disabled = false,dataFromServer,dataFromRoute,setPrescriptionDetails}) => {
-
-    
+const PrescriptionDetailedForm = ({disabled = false,dataFromServer = undefined,dataFromRoute = undefined,setPrescriptionDetails = undefined}) => {
+    let manufacturer = "";
+    let form = ""; 
+    let dosage = "";  
+    let quantity = ""; 
     if(dataFromRoute !== undefined)
+    {
        dataFromRoute = JSON.parse(dataFromRoute);
+       manufacturer = dataFromRoute.manufacturer;
+       form = dataFromRoute.form;
+       dosage = dataFromRoute.dosage;
+       quantity = dataFromRoute.quantity
+    }
     const onChange = (e) => {
         let val ={
             [e.target.name]: e.target.value
@@ -21,7 +29,7 @@ const PrescriptionDetailedForm = ({disabled = false,dataFromServer,dataFromRoute
                 <div className="main-desktop-left-prescription-form-title-container">
                     <div
                         className="main-desktop-left-prescription-form-title">
-                        {( dataFromRoute !== undefined ? dataFromRoute.search_name : dataFromServer[0].search_name)}
+                        {( dataFromRoute !== undefined ? dataFromRoute.search_name :(dataFromServer === undefined ? "" : dataFromServer[0].search_name))}
 
                     </div>
                 </div>
@@ -35,7 +43,7 @@ const PrescriptionDetailedForm = ({disabled = false,dataFromServer,dataFromRoute
                             disabled={disabled}
                             name ="manufactor"
                             onChange={onChange}
-                            defaultValue={dataFromRoute !== undefined ?dataFromRoute.manufactor : ""}
+                            defaultValue={dataFromRoute && manufacturer}
                             className={ (disabled ? styles.disabled_fonts_weight: "") +" main-desktop-left-prescription-form-select main-desktop-left-prescription-form-manufacturer-select" }>
                             {
                                  dataFromServer && dataFromServer.map((element, index) =>
@@ -43,7 +51,7 @@ const PrescriptionDetailedForm = ({disabled = false,dataFromServer,dataFromRoute
 
                                 )
                             }
-                            {  dataFromServer === undefined && <option value={dataFromRoute.manufacturer}>{dataFromRoute.manufacturer}</option>}
+                            {  dataFromServer === undefined && <option value={manufacturer}>{manufacturer}</option>}
                         </select>
                     </div>
                     <div className="main-desktop-left-prescription-form-label main-desktop-left-prescription-form-format-label">
@@ -54,7 +62,7 @@ const PrescriptionDetailedForm = ({disabled = false,dataFromServer,dataFromRoute
                             disabled={disabled}
                             name ="form"
                             onChange={onChange}
-                            defaultValue={ dataFromRoute !== undefined ?  dataFromRoute.form : ""}
+                            defaultValue={ dataFromRoute && form }
                             className={ (disabled ? styles.disabled_fonts_weight: "") + " main-desktop-left-prescription-form-select main-desktop-left-prescription-form-format-select"}>
                             {
                                 dataFromServer && dataFromServer.map(element =>
@@ -66,7 +74,7 @@ const PrescriptionDetailedForm = ({disabled = false,dataFromServer,dataFromRoute
 
                                 )
                             }
-                            {  dataFromServer === undefined && <option value= { dataFromRoute.form } >{ dataFromRoute.form } </option> }
+                            {  dataFromServer === undefined && <option value= { form } >{ form } </option> }
                         </select>
                     </div>
                     <div className="main-desktop-left-prescription-form-label main-desktop-left-prescription-form-dosage-label" >
@@ -77,7 +85,7 @@ const PrescriptionDetailedForm = ({disabled = false,dataFromServer,dataFromRoute
                             disabled={disabled}
                             name ="dosage"
                             onChange={onChange}
-                            defaultValue={ dataFromRoute !== undefined ?  dataFromRoute.dosage : ""} 
+                            defaultValue={ dataFromRoute && dosage } 
                             className={ (disabled ? styles.disabled_fonts_weight: "") +" main-desktop-left-prescription-form-select main-desktop-left-prescription-form-dosage-select"}>
                             {
                                  dataFromServer && dataFromServer.map(element =>
@@ -88,7 +96,7 @@ const PrescriptionDetailedForm = ({disabled = false,dataFromServer,dataFromRoute
 
                                 )
                             }
-                            {  dataFromServer === undefined && <option value= { dataFromRoute.dosage } > { dataFromRoute.dosage } </option> }
+                            {  dataFromServer === undefined && <option value= { dosage } > { dosage } </option> }
                         </select>
                     </div>
                     <div className="main-desktop-left-prescription-form-label main-desktop-left-prescription-form-quantity-label">
@@ -99,7 +107,7 @@ const PrescriptionDetailedForm = ({disabled = false,dataFromServer,dataFromRoute
                             disabled={disabled}
                             name ="quantity"
                             onChange={onChange}
-                            defaultValue={dataFromRoute !== undefined ? dataFromRoute.quantity : ""}
+                            defaultValue={dataFromRoute && quantity}
                             className={ (disabled ? styles.disabled_fonts_weight: "") +" main-desktop-left-prescription-form-select main-desktop-left-prescription-form-quantity-select"}>
                             {
                                   dataFromServer && dataFromServer.map(element =>
@@ -110,7 +118,7 @@ const PrescriptionDetailedForm = ({disabled = false,dataFromServer,dataFromRoute
 
                                 )
                             }
-                            {  dataFromServer === undefined && <option value={dataFromRoute.quantity}>{dataFromRoute.quantity}</option>}
+                            {  dataFromServer === undefined && <option value={quantity}>{quantity}</option>}
                         </select>
                     </div>
                 </div>

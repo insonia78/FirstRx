@@ -1,6 +1,6 @@
 import { objectType } from "@nexus/schema";
-import { Dosage } from "./Dosage";
-export const Prescriptions = objectType({
+import Dosage  from "./Dosage";
+ const Prescriptions = objectType({
     name: "Prescriptions",    
     definition(t) {
         t.string('name');
@@ -17,3 +17,4 @@ export const Prescriptions = objectType({
         t.list.string('quantity');
     }
 });
+export default Prescriptions;

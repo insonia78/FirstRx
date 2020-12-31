@@ -1,6 +1,7 @@
 import { objectType } from "@nexus/schema";
+import { findDangerousChanges } from "graphql";
 
-export const Dosage = objectType({
+const Dosage = objectType({
     name: "Dosage",
     definition(t) {
         t.string('dosage');
@@ -8,3 +9,4 @@ export const Dosage = objectType({
         t.string('type');
     }
 })
+export default Dosage;
