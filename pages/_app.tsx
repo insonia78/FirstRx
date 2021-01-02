@@ -13,17 +13,34 @@ import '../styles/main-desktop-location.scss';
 import '../styles/main-choose-home-coupon.scss';
 import '../styles/main-desktop-coupon-component.scss';
 import '../styles/main-desktop-coupons-tiles.scss';
+import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
+import { useEffect } from "react";
 
 function MyApp({ Component, pageProps }) {
   const client = useApollo(pageProps.initialApolloState);
+  const getSizes = () => {
+    
+    let body = document.body;
+    body.style.transform = `scale( ${((window.outerWidth - 10)
+      / window.innerWidth).toString()})`;
+    body.style.transformOrigin = '0 0';
+
+  }
+  useEffect(() => {
+    window.addEventListener(
+      "resize", getSizes, false);
+
+  }, []);
+
+
   return (
-     
-     <ApolloProvider client = {client}> 
-         <_Head />     
-         < HeaderDesktop/>     
-         <Component {...pageProps} />
-         {/* <Footer /> */}      
-     </ApolloProvider> 
+    <ApolloProvider client={client}>
+      <_Head />
+      < HeaderDesktop />
+      <Component {...pageProps} />
+      {/* <Footer /> */}
+    </ApolloProvider>
+
   );
 }
 

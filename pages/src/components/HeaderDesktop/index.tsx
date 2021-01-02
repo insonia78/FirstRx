@@ -25,13 +25,15 @@ const HeaderDesktop = (props) => {
                     <Link href='/src/components/HeaderDesktop/Help'><div className={styles.header_desktop_help_container}>
                         Help
                     </div></Link>
-                    <div className={styles.header_desktop_select_language_label_container}>
-                        Select Language
+                    <div>
+                        <div className={styles.header_desktop_select_language_label_container}>
+                            Select Language
+                        </div>
+                        <select name="language" className={styles.header_desktop_select_language }>
+                            <option value="english">English</option>
+                            <option value="spanish">Spanish</option>
+                        </select>
                     </div>
-                    <select name="language" className={styles.header_desktop_select_language }>
-                        <option value="english">English</option>
-                        <option value="spanish">Spanish</option>
-                    </select>
                 </nav> 
                 
             </div>

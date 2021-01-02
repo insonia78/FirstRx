@@ -1,18 +1,21 @@
 .header_desktop_container{
    
     min-height:14.8vh;
+    height:100%;
     width:84.38vw; 
+    max-width:100%;
     position:relative;
     left:7.85vw;
-    right:7.85vw;
     top:4.9vh;
-    bottom:80.33vh;
-    border:1px solid #c4c4c4;   
+    border:1px solid #c4c4c4; 
+     
      
    }
    .header_desktop{
-
-     height:12.67vh;
+     max-width:100%;  
+     min-height:12.67vh;
+     height:auto;
+     max-height:100%;
      margin-left:.57vw;
      margin-right:.57vw;
      margin-top:1vh;
@@ -129,3 +132,4 @@
    
    
    }
+  
