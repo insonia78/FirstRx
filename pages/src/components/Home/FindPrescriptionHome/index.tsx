@@ -122,7 +122,7 @@ export default function FindPrescriptionHome({ location = undefined, dataFromRou
       {prescriptionDetails.length === 1 &&
         <>
           <PrescriptionDetailedForm dataFromServer={prescriptionDetails} dataFromRoute={dataFromRoute} setPrescriptionDetails={setPrescriptionDetails} />
-          <button className="next-button next-button-find-prescription" onClick={() => router.push
+          <button className={`next-button ${styles.next_button_find_prescription}`} onClick={() => router.push
             (
               {
                 pathname: '/src/components/Home',

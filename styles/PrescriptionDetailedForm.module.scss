@@ -118,7 +118,8 @@
 @media only screen and (max-width: 420px) {
    .prescription_detailed_form_container{
       width: 77.5vw;
-      height:23.90vh;
+      min-height:23.90vh;
+      height:auto;
       margin-top:3vh;
       margin-left:1.46vw;
       background: #EFEFEF;
@@ -157,13 +158,13 @@
    }
   
    .main_desktop_left_prescription_form_description_container{
-      position:relative;    
+       
       margin-top:.2vh;
-      height:11.6vh;
+      height:13.6vh;
       width:77.187vw;
-      margin-bottom:1vh;
+      margin-bottom:.1vh;
       display:inline-block;
-      background-color:red;    
+       
    }
    .main_desktop_left_prescription_form_label{
       position:relative;
@@ -174,11 +175,49 @@
       font-size: 1.2rem;
       line-height: 1.1rem;
    }
+   .main_desktop_left_prescription_form_select{
+      
+      position:relative;
+      top:-1vh;
+      width:54.06vw;
+      min-height:2.11vh;
+      height:auto;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 1.2rem;
+      line-height: .9rem;
+      margin-left:3vw;
+      margin-top:2.1vh;
+      color: #000000;
+      background-color:#c4c4c4;
+      border: 1px solid #c4c4c4;
+      box-sizing: border-box;
+
+   }
+   .main_desktop_left_prescription_form_select option{
+      font-style: normal;
+      font-weight: normal;
+      font-size: 1.2rem;
+      line-height:.9rem;
+   
+   } 
    .main_desktop_left_prescription_form_manufacturer_label{
       position:relative;
       top:.1vh;    
-      margin-bottom:1.3vh;    
+      margin-bottom:.1vh;    
    }
-  
+   .main_desktop_left_prescription_form_manufacturer_select{
+      position:relative;       
+      margin-bottom:.1vh;
+   }
+   .main_desktop_left_prescription_form_format_label{
+      position:relative;
+      margin-bottom:.9%;
+    }
+    .main_desktop_left_prescription_form_format_select{
+      position:relative; 
+      margin-bottom:.7%;
+   }
+    
  
  }

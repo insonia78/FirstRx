@@ -17,11 +17,14 @@ import { useEffect } from "react";
 function MyApp({ Component, pageProps }) {
   const client = useApollo(pageProps.initialApolloState);
   const getSizes = () => {
-    
+        
     let body = document.body;
     body.style.transform = `scale( ${((window.outerWidth - 10)
       / window.innerWidth).toString()})`;
     body.style.transformOrigin = '0 0';
+    body.style.height = window.outerHeight.toString();
+    
+
 
   }
   useEffect(() => {
