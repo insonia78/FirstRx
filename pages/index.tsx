@@ -1,14 +1,9 @@
-import Head from 'next/head';
+
 import React, { useState } from 'react';
 import { useMutation, useQuery, gql } from "@apollo/client";
-import styles from '../styles/Home.module.css';
 import { initializeApollo } from "../components/apolloClient";
-import { Nav, Navbar, Form, Button, FormControl, InputGroup, NavDropdown } from 'react-bootstrap';
-import { PrescriptionsInterface } from '../components/interfaces/prescritpion.interface';
-import HomeMobile from './src/components/Mobile/HomeMobile';
-import HomeDesktop from './src/components/HomeDesktop';
-import _Head from './src/components/_Head';
-import HeaderDesktop from './src/components/HeaderDesktop';
+import Home from './src/components/Home';
+
 const GET_PRESCRIPTIONS = gql`
     mutation  prescription($prescription:String){
           prescription(prescription:$prescription)
@@ -29,11 +24,11 @@ const GET_PRESCRIPTIONS = gql`
     }
 
 `;
-export default function Home() {
+export default function Index() {
   
   return(
     <>     
-      <HomeDesktop />
+      <Home />
     
     </>
        //<HomeMobile /> 

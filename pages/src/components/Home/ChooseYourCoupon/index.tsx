@@ -15,7 +15,7 @@ const ChooseYourCoupon = ({dataFromRoute,location}) => {
         router.push
         (
           {
-            pathname: '/src/components/HomeDesktop',
+            pathname: '/src/components/Home',
             query: { component: 'location', 
             prescriptions:dataFromRoute,
             location:location },

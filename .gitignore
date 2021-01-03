@@ -6,3 +6,4 @@ jspm_packages
 .serverless_nextjs
 # Serverless directories
 .serverless
+/.env.local

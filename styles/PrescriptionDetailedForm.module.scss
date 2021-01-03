@@ -2,3 +2,183 @@
    color:black;
    font-weight:bolder;
 }
+
+.main_desktop_left_prescription_form_description{
+   position:relative;
+   left:1.32vw;
+   right:2.71vw;
+   margin-top:3.4vh;
+   font-style: normal;
+   font-weight: 500;
+   font-size: 1.8rem;
+   line-height: 2.1rem;
+
+}
+.main_desktop_left_prescription_form_title_container{
+   position:relative;
+   left:5.21vw;
+   margin-top:1vh;
+   right:9.8vw;
+   width:37.5vw;
+   min-height:3.9vh;   
+}
+.main_desktop_left_prescription_form_title{
+   position: relative;
+   top:0;
+   left:0;    
+   font-style: normal;
+   font-weight: normal;
+   font-size: 3rem;
+   line-height: 3.5rem; 
+
+}
+.main_desktop_left_prescription_form_description_container{
+   position:relative;    
+   margin-top:.9vh;
+   height:24.1vh;
+   width: 47.64vw;
+   margin-bottom:2vh;
+   display:inline-block;    
+}
+.main_desktop_left_prescription_form_label{
+   position:relative;
+   top:2vh;
+   left:5.21vw;
+   font-style: normal;
+   font-weight: bold;
+   font-size: 2rem;
+   line-height: 2.3rem;
+}
+.main_desktop_left_prescription_form_manufacturer_label{
+   position:relative;
+   top:1vh;    
+   margin-bottom:.1%;
+ 
+}
+.main_desktop_left_prescription_form_format_label{
+  position:relative;
+  margin-bottom:.9%;
+}
+.main_desktop_left_prescription_form_dosage_label{
+   position:relative;
+   margin-bottom:.9%;
+
+}
+.main_desktop_left_prescription_form_quantity_label{
+   position:relative;
+   margin-bottom:.9%;
+}
+.main_desktop_left_prescription_form_select_container{
+      position:relative;
+      left: 15.28vw;
+      margin-top:-3vh;
+      
+}
+
+.main_desktop_left_prescription_form_select{
+       width:23.33vw;
+       height:2.08vw;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 1.8rem;
+      line-height: 2.1rem;
+      
+      background-color:#c4c4c4;
+      border: 1px solid #c4c4c4;
+      box-sizing: border-box;
+
+} 
+.main_desktop_left_prescription_form_select option{
+   font-style: normal;
+   font-weight: normal;
+   font-size: 1.8rem;
+   line-height: 2.1rem;
+
+}
+.main_desktop_left_prescription_form_manufacturer_select{
+   position:relative;       
+   margin-bottom:.1%;
+}
+.main_desktop_left_prescription_form_format_select{
+   position:relative; 
+   margin-bottom:.7%;
+}
+.main_desktop_left_prescription_form_dosage_select{
+   position:relative; 
+   margin-bottom:.7%;
+}
+.main_desktop_left_prescription_form_quantity_select{
+   position:relative; 
+   margin-bottom:.7%;
+
+}
+.next_button_find_prescription{
+   margin-top:1vh;
+}
+@media only screen and (max-width: 420px) {
+   .prescription_detailed_form_container{
+      width: 77.5vw;
+      height:23.90vh;
+      margin-top:3vh;
+      margin-left:1.46vw;
+      background: #EFEFEF;
+      border: 1px solid #C4C4C4;
+      box-sizing: border-box
+      
+   }
+   .main_desktop_left_prescription_form_description{
+      position:relative;
+      left:1.46vw;
+      right:.71vw;
+      margin-top:.7vh;
+      font-style: normal;
+      font-weight: bold;
+      font-size: .9rem;
+      line-height: 1.1rem;
+   
+   }
+   .main_desktop_left_prescription_form_title_container{
+      position:relative;
+      left:5.21vw;
+      margin-top:1vh;
+      right:9.8vw;
+      width:77.187vw;
+      min-height:6.15vh;   
+   }
+   .main_desktop_left_prescription_form_title{
+      position: relative;
+      top:0;
+      left:0;    
+      font-style: normal;
+      font-weight: normal;
+      font-size: 1.8rem;
+      line-height: 2.1rem; 
+   
+   }
+  
+   .main_desktop_left_prescription_form_description_container{
+      position:relative;    
+      margin-top:.2vh;
+      height:11.6vh;
+      width:77.187vw;
+      margin-bottom:1vh;
+      display:inline-block;
+      background-color:red;    
+   }
+   .main_desktop_left_prescription_form_label{
+      position:relative;
+      top:.2vh;
+      left:1.46vw;
+      font-style: normal;
+      font-weight: normal;
+      font-size: 1.2rem;
+      line-height: 1.1rem;
+   }
+   .main_desktop_left_prescription_form_manufacturer_label{
+      position:relative;
+      top:.1vh;    
+      margin-bottom:1.3vh;    
+   }
+  
+ 
+ }

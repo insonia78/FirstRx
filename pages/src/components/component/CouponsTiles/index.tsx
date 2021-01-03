@@ -8,7 +8,7 @@ const CouponsTiles = ({ prescription, couponsData }) => {
         router.push
             (
                 {
-                    pathname: '/src/components/HomeDesktop',
+                    pathname: '/src/components/Home',
                     query: { container: 'coupon', prescriptions: prescription },
                 })
 

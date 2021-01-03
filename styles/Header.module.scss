@@ -131,5 +131,100 @@
      color: #000000;
    
    
-   }
-  
+    }
+   
+   @media only screen and (max-width: 420px) {
+    
+    .header_desktop_container{
+     
+      min-height:8.260vh; 
+      width: 100vw;
+      height:8.260vh;      
+      position: relative;
+      top:0;
+      left:0;
+      bottom:81.2vh;
+      background:#cccccc;
+      display:flex;          
+     }
+     .header_desktop{
+      min-height:8.260vh; 
+      width: 100vw;
+      height:8.260vh;
+      margin-left:0vw;
+      margin-right:0vw;
+      margin-top:0vh;
+      margin-bottom:0vh;      
+     }
+     .header_desktop_title_container{
+
+      position:absolute; 
+      top:1.5vh; 
+      left:3.125vw;
+      
+      height:auto;
+    
+      font-weight: bold;
+      font-style: normal;
+      font-size:4rem;
+      line-height:3.5rem;
+      color:#000000;
+      
+    }
+    .header_desktop_slogan_container{
+
+      position:absolute;
+      left:15.625vw;
+      top:5.31vh; 
+      height:auto;
+      
+      font-style:normal;
+      font-weight:normal;
+      font-size:1.08rem;
+      line-height:2.2rem;
+      color:#000000;
+      
+    }
+    .hamburger_menu_container{
+      float:right;
+      position:absolute;
+      top:4.177vh;
+      right:5.834vw;
+
+    }
+    .hamburger_menu_line{
+      margin-top:0.616vh;
+      width:6.56vw;
+      height:0.41vh;
+
+      background: #333333;
+      border-radius: 8px;
+
+    }
+    .header_desktop_select_language{
+
+      width:18.162vw;
+      height:2.11vh;
+      position:absolute;      
+      left:79.69vw;
+      top: 1.40vh;
+     
+      border: 1px solid #333333;
+      box-sizing: border-box;
+      font-size:1rem;
+      line-height:.9rem;
+      background: #CCCCCC
+    
+    }
+    .header_desktop_select_language option{
+
+      font-family: Roboto;
+      font-style: normal;
+      font-weight: normal;   
+      color: #000000;
+    
+    
+    }
+
+  }
+    

@@ -131,7 +131,7 @@ const Location = ({dataFromRoute,location}) => {
       {((Object.keys(getLocation).length !== 0 && getLocation.constructor === Object) || location) && <button className="next-button desktop-button-location" onClick={() => router.push
         (
           {
-            pathname: '/src/components/HomeDesktop',
+            pathname: '/src/components/Home',
             query: { component: 'choose-your-coupon', 
             prescriptions:dataFromRoute,
             location:restInputValue.trim() },
@@ -140,7 +140,7 @@ const Location = ({dataFromRoute,location}) => {
       <div className="desktop-location-back-button" onClick={() => router.push
         (
           {            
-            pathname: '/src/components/HomeDesktop',
+            pathname: '/src/components/Home',
             query: { component: 'prescription', 
             prescriptions:dataFromRoute,
             location:restInputValue.trim(),

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useMutation, gql } from "@apollo/client";
 import PrescriptionDetailedForm from '../../component/PrescriptionDetailedForm';
 import { useRouter } from 'next/router'
-
+import styles from './../../../../../styles/FindPrescriptionHome.module.scss';
 const GET_PRESCRIPTIONS = gql`
 mutation  prescription($prescription:String){
       prescription(prescription:$prescription)
@@ -101,13 +101,13 @@ export default function FindPrescriptionHome({ location = undefined, dataFromRou
   return (
     <div>
       {resetDatFromRoute && (dataFromRoute = undefined)}
-      <span className="desktop-main-left-find-prescription-home-title" >Step 1: Your Prescription</span>
+      <span className={styles.desktop_main_left_find_prescription_home_title} >Step 1: Your Prescription</span>
       
         <input 
         autoComplete="off" 
         onFocus={clearInput} 
         placeholder="Type Drug Name" 
-        className="desktop-main-left-find-prescription-home-input"
+        className={styles.desktop_main_left_find_prescription_home_input}
         value={restInputValue} 
         type="text" 
         list="prescriptions" 
@@ -125,7 +125,7 @@ export default function FindPrescriptionHome({ location = undefined, dataFromRou
           <button className="next-button next-button-find-prescription" onClick={() => router.push
             (
               {
-                pathname: '/src/components/HomeDesktop',
+                pathname: '/src/components/Home',
                 query: {
                   component: 'location',
                   prescriptions: JSON.stringify(getPrescriptionDetails),

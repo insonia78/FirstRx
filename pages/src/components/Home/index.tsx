@@ -1,16 +1,25 @@
 
-import React, { useState } from 'react';
-import HeaderDesktop from '../HeaderDesktop';
+import React, { useEffect, useState } from 'react';
+
 import FindPrescriptionHome from './FindPrescriptionHome';
 import Location from './Location';
 import { useRouter } from "next/router"
 import ChooseYourCoupon from './ChooseYourCoupon';
-import { IconContext } from "react-icons";
-import { MdPrint } from 'react-icons/Md';
-import Coupon from '../component/Coupon';
 import CouponDetails from './CouponDetails';
+import styles from './../../../../styles/Home.module.scss';
 
-export default function HomeDesktop() {
+export default function Home() {
+    const[windowWidth, setWindowWidth] = useState(0);
+    const getSizes = () => { 
+     setWindowWidth(window.innerWidth); 
+   }
+ 
+    useEffect(()=>{
+        setWindowWidth(window.innerWidth);
+        window.addEventListener(
+         "resize", getSizes, false);
+   
+     });
     let data = {
         search_name: "",
         name: "",
@@ -41,12 +50,12 @@ export default function HomeDesktop() {
     return (
         <>
             <main>
-                <div className="main-desktop-container">
-                    <div className="main-desktop-title">Check here <b>First</b> for your <b>Rx</b> savings!</div>
-                    <div className="main-desktop-sides-container">
+                <div className={styles.main_desktop_container}>
+                    <div className={styles.main_desktop_title}>Check here <b>First</b> for your <b>Rx</b> savings!</div>
+                    <div className={styles.main_desktop_sides_container}>
                         {container === undefined &&
-                            <div className='main-desktop-sides-inner-container'>
-                                <span className="main-desktop-side-left">
+                            <div className={styles.main_desktop_sides_inner_container}>
+                                <span className={styles.main_desktop_side_left}>
                                     {component === 'choose-your-coupon' && < ChooseYourCoupon dataFromRoute={prescriptions} location={location} />}
                                     {component === 'prescription' &&
                                         <FindPrescriptionHome
@@ -61,14 +70,14 @@ export default function HomeDesktop() {
 
                                 </span>
 
-                                <span className="main-desktop-side-right"></span>
+                                { windowWidth > 420 && <span className={styles.main_desktop_side_right}></span> }
                             </div>
                         }
                         {container === 'coupon' && <CouponDetails prescription={prescriptions} coupon={coupon} />}
                     </div>
                 </div>
-                <div className="main-desktop-bottom-container">
-                    <span className="main-desktop-bottom-text">This is an easy and simple process to get big savings. Find the lowest price at a
+                <div className={styles.main_desktop_bottom_container}>
+                    <span className={styles.main_desktop_bottom_text}>This is an easy and simple process to get big savings. Find the lowest price at a
                     pharmacy near you. Get texted a coupon. Bring to your pharmacist. Save $.</span>
                 </div>
             </main>

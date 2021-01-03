@@ -20,23 +20,18 @@ a {
 * {
   box-sizing: border-box;
 }
-//  @media only screen and (min-width: 100vh) {
-//    body {
-//     transform: translate(0px, 0px) scale(1);
-//   }
-   
-//  }
-
-
-/* @media only screen and (max-width: 420px) {
-  html,
-  body {
-       
-  }
+#prescription{
+  margin-top:2vh;
 }
-@media only screen and (max-width: 320px) {
-  html,
-  body {
-       
+ @media only screen and (max-width: 420px) {
+   html,
+   body {
+    font-size:2.38vw;
+    font-family :"Roboto", sans-serif;
+    position:relative;
+   
   }
-}  */
+   
+ }
+
+
