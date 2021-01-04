@@ -1,0 +1,168 @@
+.main_desktop_home_coupon_container{
+
+    width:75.625vw;
+    min-height:68.56vh;
+    margin-top:2.2vh;
+    margin-left:4.036vw;
+    margin-bottom:1.2vh;
+    height:auto;
+    border: 1px solid #C4C4C4;
+    box-sizing: border-box;
+  
+  }
+  .main_desktop_home_coupon_new_search{
+    position:relative;
+    top: 1.8vh;
+    left: 2.5vw;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 1.8rem;
+    line-height: 2.1rem;
+    text-decoration:none;
+    cursor:pointer;
+  
+    color: #000000;
+  }
+  .main_desktop_home_coupon_printer_container{
+          float:right;
+          margin-top:3vh;
+          margin-right:2.1vw;
+        
+  }
+  .main_desktop_home_coupon_printer_icon{
+    display:inline-block;
+    position:relative;
+    top:-2.2vh;
+    width:6.472vw;
+    height:7.5vh;  
+  }
+  .main_desktop_home_coupon_printer_text{  
+    display:inline-block;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 2.4rem;
+    line-height: 2.8rem;
+    text-align: center;
+    color: #333333;
+    cursor:pointer;
+  
+  }
+  .main_desktop_home_coupon_label{
+    position:relative;
+    top: 3.75vh;
+    left: 2.5vw;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 4.8rem;
+    line-height: 5.6rem;
+  
+    color: #333333;
+  
+  }
+  .main_desktop_home_coupon_phone_input{
+    width:33.47vw;
+    height:6.55vh;
+    margin-left:2.5vw;
+    margin-top:2vh;
+    margin-bottom:1vh;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 3.6rem;
+    line-height: 4.2rem;
+  
+     color: #9C9C9C;
+  
+  }
+  .main_desktop_home_coupon_text_me{
+    
+    display:inline-block;
+    width:21.80vw;
+    height:4.67vh;
+    margin-left:1.94vw;
+    padding-top:1vh;
+    border-radius: 8px;
+    background-color: #C4C4C4;
+    font-style: normal;
+    font-weight: normal;
+    font-size: 24px;
+    line-height: 28px;
+    text-align: center;
+    vertical-align: center;
+    cursor:pointer;
+  
+    color: #333333;
+  
+  }
+  .main_desktop_home_coupon_text_me u{
+    position:relative;
+    top:-.5vh;
+  }
+  
+@media only screen and (max-width: 420px) {
+    .main_desktop_home_coupon_container{
+        
+        width:100vw;
+        min-height:68.56vh;
+        margin-top:0;
+        margin-left:0;
+        margin-bottom:1.2vh;
+        height:auto;
+        border: none;
+        box-sizing:none;
+        
+      
+      }
+      .main_desktop_home_coupon_new_search{
+
+        position:absolute;
+        top: 10.19vh;
+        left: 9.5vw;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 1.8rem;
+        line-height: 2.1rem;
+        text-decoration:none;
+        cursor:pointer;
+      
+        color: #000000;
+      }
+      .main_desktop_home_coupon_label{
+
+        position:absolute;
+        top: 14.70vh;
+        left: 9.5vw;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 3.4rem;
+        line-height: 2.8rem;
+      
+        color: #333333;
+      
+      }
+      .desktop_coupon_component_store_info{
+       
+        position:relative;
+        width:73.75vw;
+        height:auto;
+        left: 9.5vw;
+        top:11.07vh;
+        margin-top:0;
+        margin-left:0;   
+        font-style: normal;
+        font-weight: normal;
+        font-size: 2rem;
+        line-height: 2.5rem;
+    
+    }
+    .desktop_coupon_component_phone_number{
+        position:relative;
+        top:11.88vh;
+        margin-left: 9.5vw;    
+        font-style: normal;
+        font-weight: normal;
+        font-size: 1.8rem;
+        line-height: 2.1rem;
+    
+    }
+
+}
