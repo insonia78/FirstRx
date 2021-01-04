@@ -44,7 +44,7 @@ const PrescriptionDetailedForm = ({disabled = false,dataFromServer = undefined,d
                             name ="manufactor"
                             onChange={onChange}
                             defaultValue={dataFromRoute && manufacturer}
-                            className={ (disabled ? styles.disabled_fonts_weight: "") + `${styles.main_desktop_left_prescription_form_select} ${styles.main_desktop_left_prescription_form_manufacturer_select}` }>
+                            className={ (disabled ? styles.disabled_fonts_weight: "") + ` ${styles.main_desktop_left_prescription_form_select} ${styles.main_desktop_left_prescription_form_manufacturer_select}` }>
                             {
                                  dataFromServer && dataFromServer.map((element, index) =>
                                     <option key={`manufactor${index}`} value={element.manufacturer}>{element.manufacturer}</option>
@@ -63,7 +63,7 @@ const PrescriptionDetailedForm = ({disabled = false,dataFromServer = undefined,d
                             name ="form"
                             onChange={onChange}
                             defaultValue={ dataFromRoute && form }
-                            className={ (disabled ? styles.disabled_fonts_weight: "") + `${styles.main_desktop_left_prescription_form_select} ${styles.main_desktop_left_prescription_form_format_select}`}>
+                            className={ (disabled ? styles.disabled_fonts_weight: "") + ` ${styles.main_desktop_left_prescription_form_select} ${styles.main_desktop_left_prescription_form_format_select}`}>
                             {
                                 dataFromServer && dataFromServer.map(element =>
                                     element.form.map((e, index) =>
@@ -86,7 +86,7 @@ const PrescriptionDetailedForm = ({disabled = false,dataFromServer = undefined,d
                             name ="dosage"
                             onChange={onChange}
                             defaultValue={ dataFromRoute && dosage } 
-                            className={ (disabled ? styles.disabled_fonts_weight: "") + `${styles.main_desktop_left_prescription_form_select} ${styles.main_desktop_left_prescription_form_dosage_select}`}>
+                            className={ (disabled ? styles.disabled_fonts_weight: "") + ` ${styles.main_desktop_left_prescription_form_select} ${styles.main_desktop_left_prescription_form_dosage_select}`}>
                             {
                                  dataFromServer && dataFromServer.map(element =>
                                     element.dosage.map((e, index) =>
@@ -108,7 +108,7 @@ const PrescriptionDetailedForm = ({disabled = false,dataFromServer = undefined,d
                             name ="quantity"
                             onChange={onChange}
                             defaultValue={dataFromRoute && quantity}
-                            className={ (disabled ? styles.disabled_fonts_weight: "") +`${styles.main_desktop_left_prescription_form_select} ${styles.main_desktop_left_prescription_form_quantity_select}`}>
+                            className={ (disabled ? styles.disabled_fonts_weight: "") + ` ${styles.main_desktop_left_prescription_form_select} ${styles.main_desktop_left_prescription_form_quantity_select}`}>
                             {
                                   dataFromServer && dataFromServer.map(element =>
                                     element.dosage.map((e, index) =>

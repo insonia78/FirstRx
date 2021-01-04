@@ -1,0 +1,17 @@
+@import './FindPrescriptionHome.module.scss';
+@import './Location.module.scss';
+@import './PrescriptionDetailedForm.module.scss';
+
+.desktop_choose_your_coupon_sort{
+    margin-left:5.21vw;
+    
+    font-style: normal;
+    font-weight: bold;
+    font-size: 1.8rem;
+    line-height: 2.1rem;
+
+}
+.desktop_choose_your_coupon_list_container{
+    height:30vh;
+    overflow: scroll;  
+}

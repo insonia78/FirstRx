@@ -3,7 +3,7 @@ import { useMutation, gql } from "@apollo/client";
 import { useRouter } from 'next/router';
 import PrescriptionDetailedForm from '../../component/PrescriptionDetailedForm';
 import CouponsTiles from '../../component/CouponsTiles';
-
+import styles from '../../../../../styles/ChooseYourCoupon.module.scss';
 
 
 const ChooseYourCoupon = ({dataFromRoute,location}) => {
@@ -35,12 +35,12 @@ const ChooseYourCoupon = ({dataFromRoute,location}) => {
     fillCoupon(); 
     return (
       <div>
-        <span className="desktop-main-left-find-prescription-home-title" >Step 3: Choose Your Coupon</span>
-        <div className="desktop-main-left-location-caption">In { location } <u onClick={returnToLocation}>Change Location</u> </div>
+        <span className={styles.desktop_main_left_find_prescription_home_title} >Step 3: Choose Your Coupon</span>
+        <div className={styles.desktop_main_left_location_caption}>In { location } <u onClick={returnToLocation}>Change Location</u> </div>
         <PrescriptionDetailedForm disabled={true}  dataFromRoute={dataFromRoute}   />
         <br />
-        <div className="desktop-choose-your-coupon-sort">Sorted by: Price</div>
-        <div className='desktop-choose-your-coupon-list-container'>
+        <div className={styles.desktop_choose_your_coupon_sort}>Sorted by: Price</div>
+        <div className={styles.desktop_choose_your_coupon_list_container}>
             {arr}
                 
         </div>

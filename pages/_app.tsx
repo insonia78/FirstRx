@@ -8,7 +8,7 @@ import _Head from './src/components/_Head';
 import '../styles/desktop.scss';
 //import '../styles/main-desktop-left-prescription-detailed-form.scss';
 import '../styles/main-desktop-location.scss';
-import '../styles/main-choose-home-coupon.scss';
+//import '../styles/main-choose-home-coupon.scss';
 import '../styles/main-desktop-coupon-component.scss';
 import '../styles/main-desktop-coupons-tiles.scss';
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";

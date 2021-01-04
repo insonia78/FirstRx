@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { useMutation, gql } from "@apollo/client";
 import { useRouter } from 'next/router';
+import styles from '../../../../../styles/Location.module.scss';
+
 
 const GET_LOCATION = gql`
 mutation  location($location:String){
@@ -28,10 +30,21 @@ const Location = ({dataFromRoute,location}) => {
   const [locationsDetails, setLocationsDetails] = useState([]);
   const[getLocation,setLocation] = useState({});
   const[reset,setReset ] = useState(false);
+  const[windowWidth, setWindowWidth] = useState(0);
   const[restInputValue,setRestInputValue] = useState("");
   const router = useRouter();
   let myLocation;
+  
+  const getSizes = () => { 
+    setWindowWidth(window.innerWidth); 
+  }
 
+   useEffect(()=>{
+       setWindowWidth(window.innerWidth);
+       window.addEventListener(
+        "resize", getSizes, false);
+  
+    });
   const [getLocations] = useMutation(GET_LOCATION, {
     onError(err) {
       console.log(err);
@@ -63,6 +76,7 @@ const Location = ({dataFromRoute,location}) => {
   const clearInput = (e) => {
     setRestInputValue("");
     setReset(true);
+    setLocation({});
     
   }
   const getCurrentPosition = () => {
@@ -114,21 +128,33 @@ const Location = ({dataFromRoute,location}) => {
   return (
     <div>      
       {reset && (location = undefined)}            
-      <span className="desktop-main-left-find-prescription-home-title" >Step 2: Your Location</span>
-      <div className="desktop-main-left-location-caption">Choose a location where you would like to pick up your prescription.</div>
-      <input value={restInputValue}  autoComplete="off" onFocus={(e)=>{
-                       clearInput(e);
-                       resetInput();                       
-                       }
-                    } 
-                placeholder="Type City or Zip Code" className="desktop-main-left-find-prescription-home-input" type="text" list="Locations" onChange={searchPrescription} id="location" />
-      <datalist className="desktop-main-left-find-prescription-home-datalist" id="Locations">
-        {locations}
-      </datalist>
-      <div onClick={getCurrentPosition} className="desktop-main-location-detect-location"> Or...<u>Detect Location</u></div>
+      <span className={styles.desktop_main_left_find_prescription_home_title} >Step 2: Your Location</span>
+      <div className={styles.desktop_main_left_location_caption}>Choose a location where you would like to pick up your prescription.</div>
+      { (windowWidth <= 420 && restInputValue ? 
+          <div className={styles.desktop_location_clear}>
+           {restInputValue} <u onClick={clearInput}> Clear</u>
+          </div>
+               
+      
+          
+          : <>
+              <input value={restInputValue}  autoComplete="off" onFocus={(e)=>{
+                              clearInput(e);
+                              resetInput();                       
+                              }
+                            } 
+                        placeholder="Type City or Zip Code" className={styles.desktop_main_left_find_prescription_home_input} type="text" list="Locations" onChange={searchPrescription} id="location" />
+              <datalist className="desktop-main-left-find-prescription-home-datalist" id="Locations">
+                {locations}
+              </datalist>
+            </>)
+        }
+     {(windowWidth <= 420 && restInputValue ? null: 
+          <div onClick={getCurrentPosition} className={styles.desktop_main_location_detect_location}> Or...<u>Detect Location</u></div>
+      )}
       {console.log('getLocation',getLocation)}
       {console.log('location',location)}
-      {((Object.keys(getLocation).length !== 0 && getLocation.constructor === Object) || location) && <button className="next-button desktop-button-location" onClick={() => router.push
+      {((Object.keys(getLocation).length !== 0 && getLocation.constructor === Object) || location) && <button className={`next-button ${styles.desktop_button_location}`} onClick={() => router.push
         (
           {
             pathname: '/src/components/Home',
@@ -137,7 +163,7 @@ const Location = ({dataFromRoute,location}) => {
             location:restInputValue.trim() },
           })
       }>Next: Step3 {'>>'}</button>}
-      <div className="desktop-location-back-button" onClick={() => router.push
+      <div className={styles.desktop_location_back_button} onClick={() => router.push
         (
           {            
             pathname: '/src/components/Home',
@@ -147,7 +173,7 @@ const Location = ({dataFromRoute,location}) => {
           
           }
           })
-      }><u>{'<<'} Step 1: Your Prescription</u></div>
+      }><u>{'<<'} {(windowWidth > 420 ? "Step 1: Your Prescription" :"Step 1")}</u></div>
 
     </div>
 
