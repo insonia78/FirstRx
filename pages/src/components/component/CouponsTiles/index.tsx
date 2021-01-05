@@ -22,7 +22,7 @@ const CouponsTiles = ({ prescription, couponsData }) => {
             </div>
 
             <div className={styles.desktop_coupons_tiles_store_price}>$0.00</div>
-            <div onClick={sendToCoupon} className={styles.desktop_coupons_tiles_store_button}><u>Get Cupon</u></div>
+            <div onClick={sendToCoupon} className={styles.desktop_coupons_tiles_store_button}><u>Get Coupon</u></div>
 
         </div>
     );
