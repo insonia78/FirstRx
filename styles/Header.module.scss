@@ -1,9 +1,8 @@
 .header_desktop_container{
    
     min-height:14.8vh;
-    height:100%;
-    width:84.38vw; 
-    max-width:100%;
+    height:auto;
+    width:84.38vw;    
     position:relative;
     left:7.85vw;
     top:4.9vh;
@@ -12,10 +11,9 @@
      
    }
    .header_desktop{
-     max-width:100%;  
+       
      min-height:12.67vh;
-     height:auto;
-     max-height:100%;
+     height:auto;     
      margin-left:.57vw;
      margin-right:.57vw;
      margin-top:1vh;
@@ -225,6 +223,33 @@
     
     
     }
+    @media only screen and (max-height: 561px) {
+      
+      .header_desktop_container{
+     
+        min-height:8.260vh; 
+        width: 100vw;
+        max-width:110vw;
+        height:8.260vh;      
+        position: relative;
+        top:0;
+        left:0;
+        bottom:81.2vh;
+        background-color:blue;
+        //background:#cccccc;
+        display:flex;          
+       }
+       .header_desktop{
+        min-height:8.260vh; 
+        width: 100vw;
+        height:8.260vh;
+        margin-left:0vw;
+        margin-right:0vw;
+        margin-top:0vh;
+        margin-bottom:0vh;
+        background:none;      
+       }      
+      }
 
   }
     

@@ -9,7 +9,7 @@ export default function _Head() {
       <meta httpEquiv='cache-control' content='no-cache' />
       <meta httpEquiv='expires' content='0' />
       <meta httpEquiv='pragma' content='no-cache' />
-      <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=5"></meta>
+      <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"></meta>
       <link rel="icon" href="/favicon.ico" />
       <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'></link>
     </Head>

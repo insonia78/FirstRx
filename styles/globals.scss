@@ -41,12 +41,14 @@ a {
   color: #333333;
 
 }
- @media only screen and (max-width: 420px) {
+ @media only screen and (max-width: 440px) {
    html,
    body {
     font-size:2.25vmin;
     font-family :"Roboto", sans-serif;
-    position:relative;
+    position:absolute;
+    width:auto;
+    height:auto;
    
   }
   .next-button{  
@@ -74,7 +76,7 @@ a {
   body {
    font-size:1.5vmin;
    font-family :"Roboto", sans-serif;
-   position:relative;
+  background-color:red;
    
   
  }

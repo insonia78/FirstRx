@@ -90,7 +90,7 @@
      color: #000000;       
 
  }
- .main-desktop-bottom-text{
+ .main_desktop_bottom_text{
 
   position:absolute;
   left:3.34vw;
@@ -160,7 +160,39 @@
   border: 1px solid #333333;
   box-sizing: border-box;
  }
+ .main_desktop_bottom_container{
 
+  position:relative;
+  margin-left:7.85vw;
+  margin-right:7.85vw;       
+  border: 1px solid #c4c4c4;
+  box-sizing: border-box;
+  margin-top:6.5vh;
+  min-height:13.8vh;
+  width:82.564vw;
+
+  font-style: normal;
+  font-weight: normal;
+  font-size: 3rem;
+  line-height: 3.5rem;
+  color: #000000;       
+
+}
+.main_desktop_bottom_text{
+
+position:absolute;
+left:3.34vw;
+top: 2.23vh;    
+bottom:5.3vh;    
+min-height:13.8vh;
+
+font-style: normal;
+font-weight: normal;
+font-size: 3rem;
+line-height: 3.5rem;
+color: #000000;
+
+}
 
 
 }
