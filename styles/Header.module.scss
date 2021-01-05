@@ -132,7 +132,7 @@
     }
    
    @media only screen and (max-width: 420px) {
-    
+     @import './SlidingHamburgerMenu.module.scss';
     .header_desktop_container{
      
       min-height:8.260vh; 

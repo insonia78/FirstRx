@@ -1,14 +1,20 @@
 import Link from "next/link";
 import React, { useEffect, useState } from "react";
+import SlidingHamburgerMenu from "../component/SlidingHamburgerMenu";
 import styles from './../../../../styles/Header.module.scss';
 
 
 const Header = (props) => {
    const[windowWidth, setWindowWidth] = useState(0);
+   const [menuOpen,setOpenMenu] = useState(false);
+
    const getSizes = () => { 
     setWindowWidth(window.innerWidth); 
   }
+  const openMenu = ()=>{
+      setOpenMenu(!menuOpen);
 
+  }
    useEffect(()=>{
        setWindowWidth(window.innerWidth);
        window.addEventListener(
@@ -17,7 +23,7 @@ const Header = (props) => {
     });
 
     return (
-        
+        <>
         <header className={styles.header_desktop_container}>
             
             <div className={styles.header_desktop}>                
@@ -52,15 +58,17 @@ const Header = (props) => {
                             <option value="spanish">Spanish</option>
                         </select>
                     </div>
-                    <Link href='/src/components/Header/Help'><div className={styles.hamburger_menu_container}>
+                    <div onClick={openMenu}  className={styles.hamburger_menu_container}>
                         <div className={styles.hamburger_menu_line}></div>
                         <div className={styles.hamburger_menu_line}></div>
                         <div className={styles.hamburger_menu_line}></div>
-                    </div></Link>
+                    </div>
                 </nav>}  
                 
             </div>
         </header>
+        {menuOpen === true && <SlidingHamburgerMenu /> }
+        </>
 
     );
 };

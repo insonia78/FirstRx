@@ -1,0 +1,31 @@
+.sliding_hamburger_menu_container{
+    width:93.4375vw;
+    height:91.792vh;
+    margin-left:6.5625vw;
+    background: rgba(196, 196, 196, 0.95);
+    z-index:1000;
+    transition: .5s ease;
+
+}
+
+.sliding_hamburger_menu_content_container{
+    
+    margin-left:6.25vw;
+    display:flex;
+    justify-content: flex-start;
+    flex-direction:column;
+
+
+}
+.sliding_hamburger_menu_title{
+    font-style: normal;
+    font-weight: bold;
+    font-size: 2.4rem;
+    line-height: 2.8rem;
+
+    color: #000000;
+
+}
+.sliding_hamburger_menu_container ul{
+
+}
