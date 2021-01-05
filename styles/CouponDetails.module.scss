@@ -59,12 +59,20 @@
     color: #333333;
   
   }
+  .main_desktop_home_coupon_phone_text_container
+    {
+      position:relative;
+      left:2.5vw;
+      top:1vh;      
+      margin-bottom:1vh;
+      display:flex;
+      justify-content: flex-start;
+      width:auto;      
+      height:auto;
+    }
   .main_desktop_home_coupon_phone_input{
     width:33.47vw;
-    height:6.55vh;
-    margin-left:2.5vw;
-    margin-top:2vh;
-    margin-bottom:1vh;
+    height:6.55vh;    
     font-style: normal;
     font-weight: normal;
     font-size: 3.6rem;
@@ -74,10 +82,12 @@
   
   }
   .main_desktop_home_coupon_text_me{
-    
-    display:inline-block;
+    display:flex;
+    align-items: center;
+    justify-content: center;
     width:21.80vw;
     height:4.67vh;
+    margin-top:1vh;
     margin-left:1.94vw;
     padding-top:1vh;
     border-radius: 8px;
@@ -86,8 +96,7 @@
     font-weight: normal;
     font-size: 24px;
     line-height: 28px;
-    text-align: center;
-    vertical-align: center;
+    
     cursor:pointer;
   
     color: #333333;
@@ -189,7 +198,9 @@
     .main_desktop_home_coupon_text_me{
     
       display:flex;
-
+      align-items: center;
+      justify-content: center;
+ 
       width:23.4375vw;
       height:5.40vh;
       margin-left:1.94vw;
@@ -202,9 +213,7 @@
       line-height: 1.5rem;
       text-align: none;
       vertical-align: none;
-      align-items: center;
-      justify-content: center;
-      cursor:pointer;
+           cursor:pointer;
     
       color: #333333;
     

@@ -24,13 +24,14 @@ const CouponDetails = ({ windowWidth, prescription, coupon }) => {
                     </div>
                     <div className={styles.main_desktop_home_coupon_label} >Your Coupon</div>
                     <Coupon windowWidth={windowWidth} prescription={prescription} coupon={coupon} />
-
+                    <div className={styles.main_desktop_home_coupon_phone_text_container}>
                     <input
                         type="tel"
                         className={styles.main_desktop_home_coupon_phone_input}
                         placeholder='Type your phone number'
                         pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
                     <div className={styles.main_desktop_home_coupon_text_me}><u>Text Me The Coupon</u></div>
+                    </div>
                 </div>
                 :
                 <div className={styles.main_desktop_home_coupon_container}>
