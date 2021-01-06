@@ -188,8 +188,9 @@
       position:absolute;
       top:4.177vh;
       right:5.834vw;
-
-    }
+      cursor: pointer;
+     
+    }  
     .hamburger_menu_line{
       margin-top:0.616vh;
       width:6.56vw;
@@ -229,14 +230,13 @@
      
         min-height:8.260vh; 
         width: 100vw;
-        max-width:110vw;
+        max-width:120vw;
         height:8.260vh;      
         position: relative;
         top:0;
         left:0;
         bottom:81.2vh;
-        background-color:blue;
-        //background:#cccccc;
+        background:#cccccc;
         display:flex;          
        }
        .header_desktop{

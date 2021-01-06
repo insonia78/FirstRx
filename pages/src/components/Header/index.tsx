@@ -67,7 +67,7 @@ const Header = (props) => {
                 
             </div>
         </header>
-        {menuOpen === true && <SlidingHamburgerMenu /> }
+         <SlidingHamburgerMenu menuOpen={menuOpen}/>
         </>
 
     );
