@@ -1,7 +1,7 @@
 import styles from '../../../../../styles/PrescriptionDetailedForm.module.scss';
 
 
-const PrescriptionDetailedForm = ({disabled = false,dataFromServer = undefined,dataFromRoute = undefined,setPrescriptionDetails = undefined}) => {
+const PrescriptionDetailedForm = ({language,disabled = false,dataFromServer = undefined,dataFromRoute = undefined,setPrescriptionDetails = undefined}) => {
     let manufacturer = "";
     let form = ""; 
     let dosage = "";  
@@ -23,9 +23,17 @@ const PrescriptionDetailedForm = ({disabled = false,dataFromServer = undefined,d
     return (
         <>     
             <div className={styles.prescription_detailed_form_container}>    
-               <div className={styles.main_desktop_left_prescription_form_description}>Does this match your prescription? Make adjustments below
+               <div className={styles.main_desktop_left_prescription_form_description}>
+                   
+                {language === 'english' || language === undefined && `Does this match your prescription? Make adjustments below
                 so that we can accurately compare prices. Don't worry, you will be
-                able to adjust this again.</div>
+                able to adjust this again.`}
+                {language === 'spanish' && `<Spanish> Does this match your prescription? Make adjustments below
+                so that we can accurately compare prices. Don't worry, you will be
+                able to adjust this again.`}
+                
+                </div>
+                
                 <div className={styles.main_desktop_left_prescription_form_title_container}>
                     <div
                         className={styles.main_desktop_left_prescription_form_title}>
@@ -36,7 +44,8 @@ const PrescriptionDetailedForm = ({disabled = false,dataFromServer = undefined,d
 
                 <div className={styles.main_desktop_left_prescription_form_description_container}>
                     <div className= {`${styles.main_desktop_left_prescription_form_label} ${styles.main_desktop_left_prescription_form_manufacturer_label}`} >
-                        Manufacture
+                        {language === 'english' || language === undefined && 'Manufacture'}
+                        {language === 'spanish' && '<Spanish>'}
                     </div>
                     <div className={styles.main_desktop_left_prescription_form_select_container}>
                         <select

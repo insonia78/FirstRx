@@ -44,32 +44,38 @@ export default function Home() {
             prescriptions,
             location,
             coupon,
-            container },
+            container,
+            language  },
     } = router
 
     return (
         <>
             <main>
-                {(windowWidth <= 420 && container === 'coupon') ?                   
-                    <CouponDetails windowWidth={windowWidth} prescription={prescriptions} coupon={coupon} />
-                :
-                <>
-                    <div className={styles.main_desktop_container}>
-                        <div className={styles.main_desktop_title}>Check here <b>First</b> for your <b>Rx</b> savings!</div>
+                {(windowWidth <= 420 && container === 'coupon') &&                  
+                    <CouponDetails language={language} windowWidth={windowWidth} prescription={prescriptions} coupon={coupon} />
+                
+                }
+                { (windowWidth >= 1560 || windowWidth <= 420 && container !== 'coupon') &&
+                 <>    
+                     <div className={styles.main_desktop_container}>
+                     {(language === 'english' ||  language === undefined) &&  <div className={styles.main_desktop_title}>Check here <b>First</b> for your <b>Rx</b> savings!</div>}
+                     {language === 'spanish' &&   <div className={styles.main_desktop_title}> Spanish  <b>Spanish</b> for your <b>Rx</b> Spanish!</div>}
+                     
                         <div className={styles.main_desktop_sides_container}>
                             {container === undefined &&
                                 <div className={styles.main_desktop_sides_inner_container}>
                                     <span className={styles.main_desktop_side_left}>
-                                        {component === 'choose-your-coupon' && < ChooseYourCoupon dataFromRoute={prescriptions} location={location} />}
+                                        {component === 'choose-your-coupon' && < ChooseYourCoupon language={language} dataFromRoute={prescriptions} location={location} />}
                                         {component === 'prescription' &&
                                             <FindPrescriptionHome
+                                                language={language}
                                                 location={location}
                                                 dataFromRoute={prescriptions}
                                                 getPrescriptionDetails={getPrescription}
                                                 setPrescriptionDetails={setPrescription} />}
 
-                                        {component === 'location' && <Location dataFromRoute={prescriptions} location={location} />}
-                                        {component === undefined && <FindPrescriptionHome dataFromRoute={prescriptions} getPrescriptionDetails={getPrescription} setPrescriptionDetails={setPrescription} />}
+                                        {component === 'location' && <Location language={language} dataFromRoute={prescriptions} location={location} />}
+                                        {component === undefined && <FindPrescriptionHome language={language} dataFromRoute={prescriptions} getPrescriptionDetails={getPrescription} setPrescriptionDetails={setPrescription} />}
 
 
                                     </span>
@@ -77,18 +83,60 @@ export default function Home() {
                                     {windowWidth > 420 && <span className={styles.main_desktop_side_right}></span>}
                                 </div>
                             }
-                            {container === 'coupon' && <CouponDetails windowWidth={windowWidth} prescription={prescriptions} coupon={coupon} />}
+                            {container === 'coupon' && <CouponDetails language={language} windowWidth={windowWidth} prescription={prescriptions} coupon={coupon} />}
                         </div>
                     </div>
                     <div className={styles.main_desktop_bottom_container}>
-                        <span className={styles.main_desktop_bottom_text}>This is an easy and simple process to get big savings. Find the lowest price at a
-                    pharmacy near you. Get texted a coupon. Bring to your pharmacist. Save $.</span>
+                    { (language === 'english' ||  language === undefined) &&    <span className={styles.main_desktop_bottom_text}>This is an easy and simple process to get big savings. Find the lowest price at a
+                    pharmacy near you. Get texted a coupon. Bring to your pharmacist. Save $.</span>}
+                    {language === 'spanish' &&    <span className={styles.main_desktop_bottom_text}>{'<<Spanish>>'} This is an easy and simple process to get big savings. Find the lowest price at a
+                    pharmacy near you. Get texted a coupon. Bring to your pharmacist. Save $.</span>}
+                    
                     </div>
                 </>}
+                { (windowWidth > 420 && windowWidth <= 1560 && container !== 'coupon' ) &&
+                 <>    
+                     
+                     {(language === 'english' ||  language === undefined) &&   <div className={styles.main_desktop_title}>Check here <b>First</b> for your <b>Rx</b> savings!</div>}
+                     {language === 'spanish' &&   <div className={styles.main_desktop_title}> Spanish  <b>Spanish</b> for your <b>Rx</b> Spanish!</div>}
+                     
+                        <div className={styles.main_desktop_sides_container}>
+                            {container === undefined &&
+                                <div className={styles.main_desktop_sides_inner_container}>
+                                    <span className={styles.main_desktop_side_left}>
+                                        {component === 'choose-your-coupon' && < ChooseYourCoupon language={language} dataFromRoute={prescriptions} location={location} />}
+                                        {component === 'prescription' &&
+                                            <FindPrescriptionHome
+                                                language={language}
+                                                location={location}
+                                                dataFromRoute={prescriptions}
+                                                getPrescriptionDetails={getPrescription}
+                                                setPrescriptionDetails={setPrescription} />}
+
+                                        {component === 'location' && <Location language={language} dataFromRoute={prescriptions} location={location} />}
+                                        {component === undefined && <FindPrescriptionHome  language={language} dataFromRoute={prescriptions} getPrescriptionDetails={getPrescription} setPrescriptionDetails={setPrescription} />}
+
+
+                                    </span>
+
+                                    {windowWidth > 420 && <span className={styles.main_desktop_side_right}></span>}
+                                </div>
+                            }
+                            {container === 'coupon' && <CouponDetails language={language} windowWidth={windowWidth} prescription={prescriptions} coupon={coupon} />}
+                        </div>
+                    
+                    <div className={styles.main_desktop_bottom_container}>
+                    {(language === 'english' ||  language === undefined) &&    <span className={styles.main_desktop_bottom_text}>This is an easy and simple process to get big savings. Find the lowest price at a
+                    pharmacy near you. Get texted a coupon. Bring to your pharmacist. Save $.</span>}
+                    {language === 'spanish' &&    <span className={styles.main_desktop_bottom_text}>{'<<Spanish>>'} This is an easy and simple process to get big savings. Find the lowest price at a
+                    pharmacy near you. Get texted a coupon. Bring to your pharmacist. Save $.</span>}
+                    </div>
+                </>}
+
             </main>
 
         </>
-        //<HomeMobile /> 
+     
     );
 }
 

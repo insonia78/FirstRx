@@ -47,13 +47,69 @@
 }
 .main_desktop_help_content_paragraph{
     margin-left:2.5vw;
-
     font-style: normal;
     font-weight: normal;
     font-size: 1.8rem;
-    line-height: 2.1rem;
+    line-height: 2.1rem;    
+    color: #000000;    
+
+}
+@media only screen and (max-width: 420px) {
+    .header_desktop_help{
+        position:relative;       
+        left:7.5vw;    
+        top:3.07vh;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 2.2rem;
+        line-height: 1.4rem;
+        text-decoration-line: underline;
+        cursor:pointer;
+        color: #000000;
     
-    color: #000000;
+    }
+    .main_desktop_help_title{
+        position:relative;
+        top:7.343vh;
+        left:7.5vw;
+        margin-left:0;
+        margin-top:0;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 4.4rem;
+        line-height: 4.8rem;
+        color: #000000;
     
+    }
+    .main_desktop_help_question{
+        position:relative;
+        top:16.20vh;
+        left:7.5vw;
+        margin-left:0;
+        margin-top:0;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 1.8rem;
+        line-height: 2rem;        
+        color: #000000;        
+    
+    }
+    .main_desktop_help_content_paragraph{
+        position:relative;
+        top:22.68vh;
+        left:7.5vw;
+        margin-left:0;
+        font-style: italic;
+        font-weight: normal;
+        font-size: 1.5rem;
+        line-height: 1.7rem;
+
+        color: #666666;
+
+    
+    }
+    
+
+
 
 }

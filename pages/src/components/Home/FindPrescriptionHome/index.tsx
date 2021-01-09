@@ -22,7 +22,7 @@ mutation  prescription($prescription:String){
       }
 }
 `;
-export default function FindPrescriptionHome({ location = undefined, dataFromRoute, getPrescriptionDetails, setPrescriptionDetails }) {
+export default function FindPrescriptionHome({language, location = undefined, dataFromRoute, getPrescriptionDetails, setPrescriptionDetails }) {
 
 
   const [prescriptions, setPrescriptions] = useState([]);
@@ -101,8 +101,9 @@ export default function FindPrescriptionHome({ location = undefined, dataFromRou
   return (
     <div>
       {resetDatFromRoute && (dataFromRoute = undefined)}
-      <span className={styles.desktop_main_left_find_prescription_home_title} >Step 1: Your Prescription</span>
-      
+      {language === 'english' || language === undefined && <span className={styles.desktop_main_left_find_prescription_home_title} >Step 1: Your Prescription</span>}
+      {language === 'spanish'  && <span className={styles.desktop_main_left_find_prescription_home_title} >{'<Spanish>'} Step 1: Your Prescription</span>}
+       
         <input 
         autoComplete="off" 
         onFocus={clearInput} 
@@ -121,7 +122,7 @@ export default function FindPrescriptionHome({ location = undefined, dataFromRou
       
       {prescriptionDetails.length === 1 &&
         <>
-          <PrescriptionDetailedForm dataFromServer={prescriptionDetails} dataFromRoute={dataFromRoute} setPrescriptionDetails={setPrescriptionDetails} />
+          <PrescriptionDetailedForm  language={language} dataFromServer={prescriptionDetails} dataFromRoute={dataFromRoute} setPrescriptionDetails={setPrescriptionDetails} />
           <button className={`next-button ${styles.next_button_find_prescription}`} onClick={() => router.push
             (
               {
@@ -133,7 +134,7 @@ export default function FindPrescriptionHome({ location = undefined, dataFromRou
                 }
               }
             )
-          }>Next: Step2 {'>>'}</button>
+          }> {language === 'english' || language === undefined && 'Next: Step2 >>'} {language === 'spanish'  && 'Next: Step2 >>'} </button>
           {mutationLoading && <p>Loading...</p>}
           {mutationError && <p>Error :( Please try again</p>}
         </>

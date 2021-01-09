@@ -6,7 +6,7 @@ import CouponsTiles from '../../component/CouponsTiles';
 import styles from '../../../../../styles/ChooseYourCoupon.module.scss';
 
 
-const ChooseYourCoupon = ({dataFromRoute,location}) => {
+const ChooseYourCoupon = ({language,dataFromRoute,location}) => {
   
 
   const[coupons , setCoupons] = useState([])  
@@ -37,7 +37,7 @@ const ChooseYourCoupon = ({dataFromRoute,location}) => {
       <div>
         <span className={styles.desktop_main_left_find_prescription_home_title} >Step 3: Choose Your Coupon</span>
         <div className={styles.desktop_main_left_location_caption}>In { location } <u onClick={returnToLocation}>Change Location</u> </div>
-        <PrescriptionDetailedForm disabled={true}  dataFromRoute={dataFromRoute}   />
+        <PrescriptionDetailedForm language={language} disabled={true}  dataFromRoute={dataFromRoute}   />
         <br />
         <div className={styles.desktop_choose_your_coupon_sort}>Sorted by: Price</div>
         <div className={styles.desktop_choose_your_coupon_list_container}>

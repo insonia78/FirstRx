@@ -23,7 +23,7 @@ mutation  location($location:String){
       }
 }
 `;
-const Location = ({dataFromRoute,location}) => {
+const Location = ({language,dataFromRoute,location}) => {
 
   
   const [locations, setLocations] = useState([]);
@@ -130,7 +130,7 @@ const Location = ({dataFromRoute,location}) => {
       {reset && (location = undefined)}            
       <span className={styles.desktop_main_left_find_prescription_home_title} >Step 2: Your Location</span>
       <div className={styles.desktop_main_left_location_caption}>Choose a location where you would like to pick up your prescription.</div>
-      { (windowWidth <= 420 && restInputValue ? 
+      { (windowWidth <= 520 && restInputValue ? 
           <div className={styles.desktop_location_clear}>
            {restInputValue} <u onClick={clearInput}> Clear</u>
           </div>
@@ -149,7 +149,7 @@ const Location = ({dataFromRoute,location}) => {
               </datalist>
             </>)
         }
-     {(windowWidth <= 420 && restInputValue ? null: 
+     {(windowWidth <= 520 && restInputValue ? null: 
           <div onClick={getCurrentPosition} className={styles.desktop_main_location_detect_location}> Or...<u>Detect Location</u></div>
       )}
       {console.log('getLocation',getLocation)}
@@ -173,7 +173,7 @@ const Location = ({dataFromRoute,location}) => {
           
           }
           })
-      }><u>{'<<'} {(windowWidth > 420 ? "Step 1: Your Prescription" :"Step 1")}</u></div>
+      }><u>{'<<'} {(windowWidth > 520 ? "Step 1: Your Prescription" :"Step 1")}</u></div>
 
     </div>
 

@@ -1,6 +1,8 @@
 
+import Link from 'next/link';
+import React from 'react';
 import styles from './../../../../../styles/SlidingHamburgerMenu.module.scss';
-const SlidingHamburgerMenu = ({ menuOpen }) => {
+const SlidingHamburgerMenu = ({ menuOpen,setOpenMenu }) => {
 
     return (
         <div className={`${styles.sliding_hamburger_menu_container_start} ` + (menuOpen && styles.sliding_hamburger_menu_container)}>
@@ -11,9 +13,9 @@ const SlidingHamburgerMenu = ({ menuOpen }) => {
                 <br />
                 <br />
                 <div>
-                    <ul>
+                    <ul onClick={ setOpenMenu}>
                         <li><u>About FirstRx</u></li>
-                        <li><u>Help</u></li>
+                        <Link href='/src/components/Header/Help'><li><u>Help</u></li></Link>
                         <li><u>Home / Start Search</u></li>
                     </ul>
                 </div>

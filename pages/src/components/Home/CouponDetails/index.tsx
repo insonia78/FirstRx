@@ -5,7 +5,7 @@ import Coupon from '../../component/Coupon';
 import Link from 'next/link';
 import styles from './../../../../../styles/CouponDetails.module.scss';
 
-const CouponDetails = ({ windowWidth, prescription, coupon }) => {
+const CouponDetails = ({language, windowWidth, prescription, coupon }) => {
 
 
 
@@ -13,7 +13,7 @@ const CouponDetails = ({ windowWidth, prescription, coupon }) => {
 
     return (
         <>
-            {windowWidth > 420 ?
+            {windowWidth > 520 ?
                 <div className={styles.main_desktop_home_coupon_container}>
                     <Link href='/' as='/'><a className={styles.main_desktop_home_coupon_new_search}><u>New Search</u></a></Link>
                     <div className={styles.main_desktop_home_coupon_printer_container}>

@@ -130,9 +130,129 @@
    
    
     }
+    @media only screen and (max-width: 1560px) {
+      .header_desktop_container{
+   
+        min-height:11.97vh;
+        height:auto;
+        width:96.04vw;    
+        position:relative;
+        left:2.52vw;
+        top:2.10vh;
+        border:1px solid #c4c4c4; 
+         
+         
+       }
+       .header_desktop{
+       
+        min-height:10.55vh;
+        height:auto;     
+        margin-left:1.20vw;
+        margin-right:1.08vw;
+        margin-top:.67vh;
+        margin-bottom:.75vh;  
+        background:#cccccc;
+        border:1px solid #cccccc;
+   
+      }
+      .header_desktop_title_container{
+
+        position:absolute; 
+        top:.75vh; 
+        right:none;  
+        left:3.23vw;
+        bottom:7.62vh;
+        height:2.17vh;
+      
+        font-weight: bold;
+        font-style: normal;
+        font-size:5rem;
+        line-height:7.5rem ;
+        color:#000000;
+        
+      }
+       .header_desktop_slogan_container{
+   
+        position:absolute;
+        left:15.35vw;
+        right:none;
+        top:7vh; 
+        bottom:none;
+        height:1.76vh;
+        width:67.63vw;
+
+        font-style:normal;
+        font-weight:normal;
+        font-size:2.0rem;
+        line-height:3.5rem;
+        color:#000000;
+        
+      }
+      .header_desktop_select_language_label_container{
+
+        position: absolute;
+        left: 55.75vw;
+        right: none;
+        top:2.33vh;
+        bottom: none;  
+        font-style:normal;
+        font-weight:bold;
+        font-size:1.6rem;
+        line-height:1.6rem;
+        color:#000000;
+      
+      }      
+      .header_desktop_select_language{
+
+        width:19.11vw;
+        height:3.06vh;
+        position:absolute;      
+        left:72.78vw;
+        top: 2.09vh;
+       
+        border: 1px solid #333333;
+        box-sizing: border-box;
+        font-size:1.8rem;
+        line-height:2.1rem;
+        background: #CCCCCC
+      
+      }
+      .header_desktop_select_language option{
+
+        font-family: Roboto;
+        font-style: normal;
+        font-weight: bold; 
+        // font-size:1.8rem;
+        // line-height:2.1rem;  
+        color: #000000;
+      
+      
+       }
+      .hamburger_menu_container{
+        position:absolute;
+        float:right;
+        width:6.115vmin;
+        height:2.764vmin;        
+        top:6.276vh;
+        right:6.894vw;
+        cursor: pointer;
+       
+      }  
+      .hamburger_menu_line{
+        margin-top:0.616vh;
+        width:6.11vw;
+        height:0.46vh;
+  
+        background: #333333;
+        border-radius: 8px;
+  
+      }
+
+    } 
+   
    
    @media only screen and (max-width: 420px) {
-     @import './SlidingHamburgerMenu.module.scss';
+   
     .header_desktop_container{
      
       min-height:8.260vh; 

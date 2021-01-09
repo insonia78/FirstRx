@@ -1,7 +1,7 @@
 .sliding_hamburger_menu_container_start{
     position:absolute;
     width:0;
-    height:91.792vh;
+    height:100vh;
     left:100vw;
     background: rgba(196, 196, 196, 0.95);
     z-index:1000;
@@ -47,13 +47,6 @@
     //display:flex;
     //align-items: center;
     //text-align:center;
-    margin-bottom:1vh;
+    margin-bottom:5vh;
     cursor:pointer;
 }
-// .sliding_hamburger_menu_container ul li::marker{
-//     //margin-bottom:1.5vh;
-//     font-size: 5.5rem;
-//     color: black;
-    
-    
-//  }
