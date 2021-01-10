@@ -11,6 +11,8 @@ import _Head from './src/components/_Head';
 import { TransformWrapper, TransformComponent } from "react-zoom-pan-pinch";
 import { useEffect } from "react";
 
+// let windowWidth = window.innerWidth;
+// let windowHeight = window.innerHeight;
 function MyApp({ Component, pageProps }) {
   const client = useApollo(pageProps.initialApolloState);
   const getSizes = () => {
@@ -22,7 +24,7 @@ function MyApp({ Component, pageProps }) {
       body.style.transformOrigin = '0 0';
       body.style.height = window.outerHeight.toString();
     }
-
+    //console.log('windowWidth', windowWidth);  
 
   }
   useEffect(() => {

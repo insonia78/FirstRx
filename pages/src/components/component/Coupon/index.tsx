@@ -14,7 +14,7 @@ const Coupon = ({ windowWidth, prescription, coupon = undefined }) => {
 
     return (
         <>{
-            windowWidth > 520 ?
+            windowWidth > 420 ?
             <div className={styles.desktop_coupon_component_container}>
 
                 <div className={styles.desktop_coupon_component_store_info}><b>Show this coupon at</b> {'Store'}, {'Store Address'}</div>

@@ -27,7 +27,7 @@ const ChooseYourCoupon = ({language,dataFromRoute,location}) => {
        
         for(let i = 0 ; i < 7; i++)
         {
-           arr.push(<CouponsTiles prescription={dataFromRoute} couponsData={dataFromRoute} />);
+           arr.push(<CouponsTiles language={language} prescription={dataFromRoute} couponsData={dataFromRoute} />);
         }  
         
 

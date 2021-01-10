@@ -97,6 +97,110 @@
 
 
 }
+@media only screen and (max-width: 1560px) {
+    .desktop_coupon_component_container{
+        display:inline-block;
+        margin-top:1vh;
+        margin-left:2.5vw;
+        width:90.486vw;
+        min-height:44.56vh; 
+        height:auto;
+        border: 2px solid #C4C4C4; 
+        box-sizing: border-box;
+    
+    }
+    .desktop_coupon_component_store_info{ 
+        margin-top:2.22vh;
+        margin-left:1.25vw;   
+        font-style: normal;
+        font-weight: normal;
+        font-size: 2.4rem;
+        line-height: 2.8rem;
+    
+    }
+    .desktop_coupon_component_phone_number{
+        margin-left:1.25vw;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 1.8rem;
+        line-height: 2.1rem;
+    
+    }
+    .desktop_coupon_component_prescription{
+        margin-top: 3vh;
+        margin-left:1.25vw; 
+        font-style: normal;
+        font-weight: normal;
+        font-size: 4.4rem;
+        line-height: 5.6rem;
+        color: #000000;
+    
+    }
+    .desktop_coupon_component_details_container{
+        display:inline-block;
+        width:84.79vw;
+        min-height:14.34vh;
+        height:auto;
+        margin-left:2.57vw;
+        margin-top:1.11vh;
+        background: #EFEFEF;
+        border: 1px solid #C4C4C4; 
+        box-sizing: border-box;
+    
+    }
+    .desktop_coupon_component_deatils_identification{
+        display:inline-block;
+        margin-left:18.865vw;
+        margin-top:.67vh;
+        font-family: Arial;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 2.4rem;
+        line-height: 2.8rem;
+        list-style-type: none;
+        color: #000000;
+    }
+    .desktop_coupon_component_deatils_price{
+        float:right;
+        margin-top:3.11vh;
+        margin-right:20.35vw;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 6.4rem;
+        line-height: 7.5rem;
+        color: #333333;
+    }
+    .desktop_coupon_component_fine_print{ 
+        float:left;
+        margin-left:2.57vw;
+        margin-top:.5vh;
+        width:42.01vw;
+        height:9.55vh;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 1.8rem;
+        line-height: 2.1rem;
+    
+        color: #999999;
+    }
+    .desktop_coupon_component_fine_declairment{
+        float:right;
+        margin-top:.5vh;
+        margin-right:3.125vw;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 3rem;
+        line-height: 4.2rem;
+        text-align: center;
+    
+        color: #000000;
+    
+    
+    }
+
+
+
+}
 @media only screen and (max-width: 420px) {
     .desktop_coupon_component_container{
         display:flex;

@@ -55,7 +55,7 @@ export default function Home() {
                     <CouponDetails language={language} windowWidth={windowWidth} prescription={prescriptions} coupon={coupon} />
                 
                 }
-                { (windowWidth >= 1560 || windowWidth <= 420 && container !== 'coupon') &&
+                { (windowWidth >= 1560) &&
                  <>    
                      <div className={styles.main_desktop_container}>
                      {(language === 'english' ||  language === undefined) &&  <div className={styles.main_desktop_title}>Check here <b>First</b> for your <b>Rx</b> savings!</div>}
@@ -94,7 +94,7 @@ export default function Home() {
                     
                     </div>
                 </>}
-                { (windowWidth > 420 && windowWidth <= 1560 && container !== 'coupon' ) &&
+                { (windowWidth > 420 && windowWidth <= 1560 ) &&
                  <>    
                      
                      {(language === 'english' ||  language === undefined) &&   <div className={styles.main_desktop_title}>Check here <b>First</b> for your <b>Rx</b> savings!</div>}

@@ -10,8 +10,8 @@ const Header = (props) => {
      
    const getSizes = () => { 
     setWindowWidth(window.innerWidth);
-    if(window.innerHeight <=420)
-        window.location.reload();   
+    // if(window.innerHeight <=420)
+    //     window.location.reload();   
   }
   const openMenu = ()=>{
       setOpenMenu(!menuOpen);

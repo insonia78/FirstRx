@@ -74,6 +74,49 @@
     cursor:pointer;
 
 }
+@media only screen and (max-width: 1560px) {
+    .desktop_coupons_tiles_container{
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center; 
+    
+        width:73.45vw;
+        min-height:6.44vh;
+        height:auto;
+        margin-top:2vh;
+        margin-left:5.21vw;      
+    
+    }
+    .desktop_coupons_tiles_store_info_container{        
+        margin-left:5vw;        
+    }
+    .desktop_coupons_tiles_store_price{
+        margin-left:22vw;       
+    }
+    .desktop_coupons_tiles_store_button{    
+        position:absolute;
+        left:62vw;    
+        width:9.5vw;
+        height:4.56vh;    
+        
+        font-style: normal;
+        font-weight: normal;
+        font-size: 1.7rem;
+        line-height: 2rem;
+        color: #333333;        
+        
+        background: #C4C4C4;
+        border-radius: 8px;
+        text-align:center;
+        display:flex;
+        align-items: center;
+        justify-content: center;
+        cursor:pointer;
+    
+    }
+   
+
+}
 @media only screen and (max-width: 420px) {
     .desktop_coupons_tiles_container{
         display: flex;
@@ -89,10 +132,12 @@
         box-sizing: border-box;       
     
     }
-    .desktop_coupons_tiles_store_button{
+    .desktop_coupons_tiles_store_price{
+        margin-left:15vw;       
+    }
+    .desktop_coupons_tiles_store_button{    
     
-    
-        margin-left:8.68vw;    
+        margin-left:0;    
         width:19.375vw;
         height:2.811vh;    
         
