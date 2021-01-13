@@ -45,7 +45,7 @@ export default function Home() {
             location,
             coupon,
             container,
-            language  },
+            language='english'},
     } = router
 
     return (
@@ -55,14 +55,14 @@ export default function Home() {
                     <CouponDetails language={language} windowWidth={windowWidth} prescription={prescriptions} coupon={coupon} />
                 
                 }
-                { (windowWidth >= 1560) &&
+                { (windowWidth > 1560 || (windowWidth <= 420 && container !== 'coupon' )) &&
                  <>    
                      <div className={styles.main_desktop_container}>
-                     {(language === 'english' ||  language === undefined) &&  <div className={styles.main_desktop_title}>Check here <b>First</b> for your <b>Rx</b> savings!</div>}
-                     {language === 'spanish' &&   <div className={styles.main_desktop_title}> Spanish  <b>Spanish</b> for your <b>Rx</b> Spanish!</div>}
-                     
+                     {(language === 'english' ||  language === undefined) && <> <div className={styles.main_desktop_title}>Check here <b>First</b> for your <b>Rx</b> savings!</div></>}
+                     {language === 'spanish' &&   <><div className={styles.main_desktop_title}> Spanish  <b>Spanish</b> for your <b>Rx</b> Spanish!</div></>}
+                      
                         <div className={styles.main_desktop_sides_container}>
-                            {container === undefined &&
+                            {(container === undefined || container === '' || container === null) &&
                                 <div className={styles.main_desktop_sides_inner_container}>
                                     <span className={styles.main_desktop_side_left}>
                                         {component === 'choose-your-coupon' && < ChooseYourCoupon language={language} dataFromRoute={prescriptions} location={location} />}
@@ -73,9 +73,10 @@ export default function Home() {
                                                 dataFromRoute={prescriptions}
                                                 getPrescriptionDetails={getPrescription}
                                                 setPrescriptionDetails={setPrescription} />}
-
+                                         
+                                         
                                         {component === 'location' && <Location language={language} dataFromRoute={prescriptions} location={location} />}
-                                        {component === undefined && <FindPrescriptionHome language={language} dataFromRoute={prescriptions} getPrescriptionDetails={getPrescription} setPrescriptionDetails={setPrescription} />}
+                                        {(component === undefined || component === '' || component === null) && <FindPrescriptionHome language={language} dataFromRoute={prescriptions} getPrescriptionDetails={getPrescription} setPrescriptionDetails={setPrescription} />}
 
 
                                     </span>
@@ -97,11 +98,11 @@ export default function Home() {
                 { (windowWidth > 420 && windowWidth <= 1560 ) &&
                  <>    
                      
-                     {(language === 'english' ||  language === undefined) &&   <div className={styles.main_desktop_title}>Check here <b>First</b> for your <b>Rx</b> savings!</div>}
-                     {language === 'spanish' &&   <div className={styles.main_desktop_title}> Spanish  <b>Spanish</b> for your <b>Rx</b> Spanish!</div>}
+                     {(language === 'english' ||  language === undefined) &&   <><div className={styles.main_desktop_title}>Check here <b>First</b> for your <b>Rx</b> savings!</div></>}
+                     {language === 'spanish' &&   <><div className={styles.main_desktop_title}> Spanish  <b>Spanish</b> for your <b>Rx</b> Spanish!</div></> }
                      
                         <div className={styles.main_desktop_sides_container}>
-                            {container === undefined &&
+                        {(container === undefined || container === '' || container === null) &&
                                 <div className={styles.main_desktop_sides_inner_container}>
                                     <span className={styles.main_desktop_side_left}>
                                         {component === 'choose-your-coupon' && < ChooseYourCoupon language={language} dataFromRoute={prescriptions} location={location} />}
@@ -114,7 +115,7 @@ export default function Home() {
                                                 setPrescriptionDetails={setPrescription} />}
 
                                         {component === 'location' && <Location language={language} dataFromRoute={prescriptions} location={location} />}
-                                        {component === undefined && <FindPrescriptionHome  language={language} dataFromRoute={prescriptions} getPrescriptionDetails={getPrescription} setPrescriptionDetails={setPrescription} />}
+                                        {(component === undefined || component === '' || component === null) && <FindPrescriptionHome  language={language} dataFromRoute={prescriptions} getPrescriptionDetails={getPrescription} setPrescriptionDetails={setPrescription} />}
 
 
                                     </span>

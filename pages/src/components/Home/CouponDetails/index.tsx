@@ -6,7 +6,10 @@ import Link from 'next/link';
 import styles from './../../../../../styles/CouponDetails.module.scss';
 
 const CouponDetails = ({language, windowWidth, prescription, coupon }) => {
-
+ 
+    const printCoupon = () =>{
+        window.print();
+    }
 
 
 
@@ -15,10 +18,14 @@ const CouponDetails = ({language, windowWidth, prescription, coupon }) => {
         <>
             {windowWidth > 420 ?
                 <div className={styles.main_desktop_home_coupon_container}>
-                    <Link href='/' as='/'>
+                    <Link href={
+                        {pathname:'/',
+                         query:{language:language} 
+                        }
+                        } as='/'>
                         <a className={styles.main_desktop_home_coupon_new_search}>
                         <u>
-                        {language === 'english' || language === undefined && 'New Search'}
+                        {(language === 'english' || language === undefined) && 'New Search'}
                         {language === 'spanish' && '<Spanish> New Search'}
                         </u>
                         </a>
@@ -27,19 +34,24 @@ const CouponDetails = ({language, windowWidth, prescription, coupon }) => {
                         <IconContext.Provider value={{ className: styles.main_desktop_home_coupon_printer_icon }}>
                             <MdPrint />
                         </IconContext.Provider>
-                        <div className={styles.main_desktop_home_coupon_printer_text}>
-                            <u>
-                                
-                                {(language === 'english' || language === undefined) && `Print The Coupon`}
-                                {language === 'spanish' && '<Spanish> Print The\\nCoupon'}
-                            </u>
-                        </div>
+                        <map name="print">
+                            <area shape="rect" coords="0,0,82,126" />                            
+                        </map>
+                                               
+                            <div onClick={printCoupon} className={styles.main_desktop_home_coupon_printer_text}>
+                                <u>
+                                    
+                                    {(language === 'english' || language === undefined) && <>Print The <br /> Coupon</>}
+                                    {language === 'spanish' && <>{'<Spanish>'} Print The<br />Coupon</>}
+                                </u>
+                            </div>
+                        
                     </div>
                     <div className={styles.main_desktop_home_coupon_label} >
-                        {language === 'english' || language === undefined && 'Your Coupon'}
+                        {(language === 'english' || language === undefined) && 'Your Coupon'}
                         {language === 'spanish' && '<Spanish> Your Coupon'}                        
                     </div>
-                    <Coupon windowWidth={windowWidth} prescription={prescription} coupon={coupon} />
+                    <Coupon language={language} windowWidth={windowWidth} prescription={prescription} coupon={coupon} />
                     <div className={styles.main_desktop_home_coupon_phone_text_container}>
                     <input
                         type="tel"
@@ -49,7 +61,7 @@ const CouponDetails = ({language, windowWidth, prescription, coupon }) => {
                     <div className={styles.main_desktop_home_coupon_text_me}>
                         <u>
                             
-                        {language === 'english' || language === undefined && 'Text Me The Coupon'}
+                        {(language === 'english' || language === undefined) && 'Text Me The Coupon'}
                         {language === 'spanish' && '<Spanish> Text Me The Coupon'}                
                         </u>
                         </div>
@@ -57,32 +69,40 @@ const CouponDetails = ({language, windowWidth, prescription, coupon }) => {
                 </div>
                 :
                 <div className={styles.main_desktop_home_coupon_container}>
-                    <Link href='/' as='/'><a className={styles.main_desktop_home_coupon_new_search}>
+                    <Link href=
+                    {
+                        {
+                            pathname:'/',
+                            query:{language:language}
+                        }
+                        } 
+                        as='/'
+                    ><a className={styles.main_desktop_home_coupon_new_search}>
                         <u>
-                        {language === 'english' || language === undefined && 'New Search'}
+                        {(language === 'english' || language === undefined) && 'New Search'}
                         {language === 'spanish' && '<Spanish> New Search'}
                             </u>
                         </a>
                     </Link>
 
                     <div className={styles.main_desktop_home_coupon_label} >
-                        {language === 'english' || language === undefined && 'Your Coupon'}
+                        {(language === 'english' || language === undefined) && 'Your Coupon'}
                         {language === 'spanish' && '<Spanish> Your Coupon'}
                     </div>
                     <div className={styles.desktop_coupon_component_store_info}>
                         <b>                            
-                        {language === 'english' || language === undefined && 'Show this coupon at'}
+                        {(language === 'english' || language === undefined) && 'Show this coupon at'}
                         {language === 'spanish' && '<Spanish> Show this coupon at'}
                         </b> {'Store'}, {'Store Address'}
                     </div>
 
                     <div className={styles.desktop_coupon_component_phone_number} >
-                        {language === 'english' || language === undefined && 'Questions? Give us a call at'}
+                        {(language === 'english' || language === undefined) && 'Questions? Give us a call at'}
                         {language === 'spanish' && '<Spanish> Questions? Give us a call at'}
                         <b>800.555.1212</b>    
                     </div>
 
-                    <Coupon windowWidth={windowWidth} prescription={prescription} coupon={coupon} />
+                    <Coupon language={language} windowWidth={windowWidth} prescription={prescription} coupon={coupon} />
                     <div className={styles.main_desktop_home_coupon_phone_text_container}>
                         <input
                             type="tel"
@@ -90,7 +110,7 @@ const CouponDetails = ({language, windowWidth, prescription, coupon }) => {
                             pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
                         <div className={styles.main_desktop_home_coupon_text_me}>
                             <u>
-                            {language === 'english' || language === undefined && 'Text Me The Coupon'}
+                            {(language === 'english' || language === undefined) && 'Text Me The Coupon'}
                             {language === 'spanish' && '<Spanish> Text Me The Coupon'}
                             </u>
                         </div>

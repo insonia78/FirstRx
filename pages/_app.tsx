@@ -24,6 +24,9 @@ function MyApp({ Component, pageProps }) {
       body.style.transformOrigin = '0 0';
       body.style.height = window.outerHeight.toString();
     }
+    else{
+      body.style.transform= 'none';
+    }
     //console.log('windowWidth', windowWidth);  
 
   }

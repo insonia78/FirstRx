@@ -128,11 +128,22 @@ const Location = ({language,dataFromRoute,location}) => {
   return (
     <div>      
       {reset && (location = undefined)}            
-      <span className={styles.desktop_main_left_find_prescription_home_title} >Step 2: Your Location</span>
-      <div className={styles.desktop_main_left_location_caption}>Choose a location where you would like to pick up your prescription.</div>
+      <span className={styles.desktop_main_left_find_prescription_home_title}>
+       {console.log('language',language)} 
+      {(language === 'english' ||  language === undefined) && 'Step 2: Your Location'}
+      {language === 'spanish' &&  '<Spanish>Step 2: Your Location'}        
+      </span>
+      <div className={styles.desktop_main_left_location_caption}>
+      {(language === 'english' ||  language === undefined) && 'Choose a location where you would like to pick up your prescription.'}
+      {language === 'spanish' &&  '<Spanish>Choose a location where you would like to pick up your prescription.'}
+                      
+      </div>
       { (windowWidth <= 520 && restInputValue ? 
           <div className={styles.desktop_location_clear}>
-           {restInputValue} <u onClick={clearInput}> Clear</u>
+           {restInputValue} <u onClick={clearInput}>
+           {(language === 'english' ||  language === undefined) && 'Clear'}
+           {language === 'spanish' &&  '<Spanish>Clear'}              
+            </u>
           </div>
                
       
@@ -149,9 +160,17 @@ const Location = ({language,dataFromRoute,location}) => {
               </datalist>
             </>)
         }
-     {(windowWidth <= 520 && restInputValue ? null: 
-          <div onClick={getCurrentPosition} className={styles.desktop_main_location_detect_location}> Or...<u>Detect Location</u></div>
-      )}
+     {(windowWidth <= 520 && restInputValue) ? null: 
+          <div onClick={getCurrentPosition} className={styles.desktop_main_location_detect_location}>
+             {(language === 'english' ||  language === undefined) &&
+           <>
+          Or...<u>Detect Location</u>
+          </>}
+          {language === 'spanish' &&  <>{'<Spanish>'}
+          Or...<u>Detect Location</u>
+          </>}   
+          </div>
+      }
       {console.log('getLocation',getLocation)}
       {console.log('location',location)}
       {((Object.keys(getLocation).length !== 0 && getLocation.constructor === Object) || location) && <button className={`next-button ${styles.desktop_button_location}`} onClick={() => router.push
@@ -160,9 +179,13 @@ const Location = ({language,dataFromRoute,location}) => {
             pathname: '/src/components/Home',
             query: { component: 'choose-your-coupon', 
             prescriptions:dataFromRoute,
-            location:restInputValue.trim() },
+            location:restInputValue.trim(),
+            language:language },
           })
-      }>Next: Step3 {'>>'}</button>}
+      }>
+        {(language === 'english' ||  language === undefined) && 'Next: Step3'}
+        {language === 'spanish' &&  '<Spanish>Next: Step3'}       
+        {'>>'}</button>}
       <div className={styles.desktop_location_back_button} onClick={() => router.push
         (
           {            
@@ -170,10 +193,15 @@ const Location = ({language,dataFromRoute,location}) => {
             query: { component: 'prescription', 
             prescriptions:dataFromRoute,
             location:restInputValue.trim(),
+            language:language
           
           }
           })
-      }><u>{'<<'} {(windowWidth > 520 ? "Step 1: Your Prescription" :"Step 1")}</u></div>
+      }><u>{'<<'} 
+      {(language === 'english' || language === 'undefined') &&  ` ${(windowWidth > 520 ? "Step 1: Your Prescription" :"Step 1")}`}
+      {(language === 'spanish') &&  `${(windowWidth > 520 ? "<Spanish>Step 1: Your Prescription" :"<Spanish>Step 1")}`}
+      </u>
+      </div>
 
     </div>
 

@@ -44,7 +44,7 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
                 <div className={styles.main_desktop_left_prescription_form_description_container}>
                     <div className={styles.manufactor_container} >
                         <div className={`${styles.main_desktop_left_prescription_form_manufacturer_label} ${styles.main_desktop_left_prescription_form_label}`} >
-                            {language === 'english' || language === undefined && 'Manufacture'}
+                            {(language === 'english' || language === undefined) && 'Manufacture'}
                             {language === 'spanish' && '<Spanish>'}
                         </div>
                         
@@ -66,7 +66,9 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
                     </div>
                     <div className={styles.form_container}>
                         <div className={`${styles.main_desktop_left_prescription_form_label} ${styles.main_desktop_left_prescription_form_format_label}`}>
-                            Format
+                        {(language === 'english' || language === undefined) && 'Format'}
+                            {language === 'spanish' && '<Spanish>'}
+                            
                         </div>
                         
                         <select
@@ -91,7 +93,10 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
                     </div>
                     <div className={styles.dosage_container}>
                         <div className={` ${styles.main_desktop_left_prescription_form_label} ${styles.main_desktop_left_prescription_form_dosage_label}`} >
-                            Dosage
+                        {(language === 'english' || language === undefined) && 'Dosage'}
+                            {language === 'spanish' && '<Spanish>'}
+                          
+                            
                         </div>
 
                         <select
@@ -114,7 +119,10 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
                     </div>
                     <div className={styles.quantity_container}>
                         <div className={`${styles.main_desktop_left_prescription_form_label} ${styles.main_desktop_left_prescription_form_quantity_label}`}>
-                            Quantity
+                        {(language === 'english' || language === undefined) && 'Quantity'}
+                            {language === 'spanish' && '<Spanish>'}
+                          
+                            
                         </div>
                         <select
                             disabled={disabled}

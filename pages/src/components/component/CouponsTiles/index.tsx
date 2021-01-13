@@ -9,7 +9,7 @@ const CouponsTiles = ({language, prescription, couponsData }) => {
             (
                 {
                     pathname: '/src/components/Home',
-                    query: { container: 'coupon', prescriptions: prescription },
+                    query: { container: 'coupon', prescriptions: prescription,language:language },
                 })
 
 

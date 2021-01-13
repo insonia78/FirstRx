@@ -37,7 +37,10 @@
 
 }
 .desktop_coupon_component_details_container{
-    display:inline-block;
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    align-content:space-between;
     width:64.79vw;
     min-height:14.34vh;
     height:auto;
@@ -49,8 +52,8 @@
 
 }
 .desktop_coupon_component_deatils_identification{
-    display:inline-block;
-    margin-left:18.865vw;
+    
+    margin-left:0.865vw;
     margin-top:.67vh;
     font-family: Arial;
     font-style: normal;
@@ -61,9 +64,8 @@
     color: #000000;
 }
 .desktop_coupon_component_deatils_price{
-    float:right;
-    margin-top:3.11vh;
-    margin-right:7.35vw;
+    
+    margin-left:5vw;
     font-style: normal;
     font-weight: bold;
     font-size: 6.4rem;
@@ -99,7 +101,7 @@
 }
 @media only screen and (max-width: 1560px) {
     .desktop_coupon_component_container{
-        display:inline-block;
+        display:inline-block;        
         margin-top:1vh;
         margin-left:2.5vw;
         width:90.486vw;
@@ -137,7 +139,10 @@
     
     }
     .desktop_coupon_component_details_container{
-        display:inline-block;
+        display:flex;
+        justify-content: center;
+        align-items: center;
+        align-content:space-between;
         width:84.79vw;
         min-height:14.34vh;
         height:auto;
@@ -149,8 +154,7 @@
     
     }
     .desktop_coupon_component_deatils_identification{
-        display:inline-block;
-        margin-left:18.865vw;
+        margin-left:0.865vw;
         margin-top:.67vh;
         font-family: Arial;
         font-style: normal;
@@ -161,9 +165,10 @@
         color: #000000;
     }
     .desktop_coupon_component_deatils_price{
-        float:right;
-        margin-top:3.11vh;
-        margin-right:20.35vw;
+        float:none;
+        margin-top:0;
+        margin-right:0;
+        margin-left:5vw;
         font-style: normal;
         font-weight: bold;
         font-size: 6.4rem;
@@ -242,8 +247,8 @@
         //display:inline-block;
         height:4.97vh;
         width:27.19vw;
-        //margin-top:2.11vh;
-        //margin-left:2.35vw;
+        margin-top:4.11vh;
+        margin-left:0;
         font-style: normal;
         font-weight: bold;
         font-size: 4.0rem;

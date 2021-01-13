@@ -84,7 +84,8 @@
         min-height:6.44vh;
         height:auto;
         margin-top:2vh;
-        margin-left:5.21vw;      
+        margin-left:5.21vw;
+              
     
     }
     .desktop_coupons_tiles_store_info_container{        
@@ -93,9 +94,12 @@
     .desktop_coupons_tiles_store_price{
         margin-left:22vw;       
     }
-    .desktop_coupons_tiles_store_button{    
-        position:absolute;
-        left:62vw;    
+    .desktop_coupons_tiles_store_button{
+        position:relative;
+        top:0vh;               
+        left:18vmin;
+        margin-left:0;
+        right:10vw;    
         width:9.5vw;
         height:4.56vh;    
         
@@ -136,8 +140,8 @@
         margin-left:15vw;       
     }
     .desktop_coupons_tiles_store_button{    
-    
-        margin-left:0;    
+        position:static;
+        margin-left:3vw;    
         width:19.375vw;
         height:2.811vh;    
         

@@ -81,6 +81,7 @@
      box-sizing: border-box;
      margin-top:8.5vh;
      min-height:13.8vh;
+     height:auto;
      width:84.375vw;
 
      font-style: normal;
@@ -227,34 +228,36 @@
  }
  .main_desktop_bottom_container{
 
-  position:relative;
+  //position:relative;
   margin-left:7.85vw;
   margin-right:7.85vw;       
   border: 1px solid #c4c4c4;
   box-sizing: border-box;
   margin-top:6.5vh;
   min-height:13.8vh;
+  height:auto;
   width:82.564vw;
 
   font-style: normal;
   font-weight: normal;
-  font-size: 3rem;
-  line-height: 3.5rem;
+  font-size: 1.5rem;
+  line-height: 2.0rem;
   color: #000000;       
 
 }
 .main_desktop_bottom_text{
 
-position:absolute;
-left:3.34vw;
-top: 2.23vh;    
+//position:absolute;
+margin-left:3.34vw;
+margin-top: .23vh;    
 bottom:5.3vh;    
 min-height:13.8vh;
+height:auto;
 
 font-style: normal;
 font-weight: normal;
-font-size: 3rem;
-line-height: 3.5rem;
+font-size: 1.5rem;
+line-height: 2rem;
 color: #000000;
 
 }

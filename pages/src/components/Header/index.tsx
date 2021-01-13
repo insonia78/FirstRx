@@ -7,11 +7,36 @@ import { useRouter } from "next/router";
 const Header = (props) => {
    const[windowWidth, setWindowWidth] = useState(0);
    const [menuOpen,setOpenMenu] = useState(false);
-     
+   const[selectedLanguage,setSelectedLanguage] = useState('english'); 
+   const router = useRouter(); 
+   const {
+    query: { component,
+        prescriptions,
+        location,
+        coupon,
+        container,
+        language  },
+} = router;
    const getSizes = () => { 
     setWindowWidth(window.innerWidth);
-    // if(window.innerHeight <=420)
-    //     window.location.reload();   
+       
+  }
+  const selecteLanguage = (e) =>{
+      console.log(e.target.value);
+      setSelectedLanguage(e.target.value);
+      router.push(
+        {
+          pathname: router.pathname,
+          query: { component: component, 
+          prescriptions:prescriptions,
+          location:location, 
+          coupon:coupon,
+          container:container,
+          language:e.target.value  
+
+        },
+        });
+
   }
   const openMenu = ()=>{
       setOpenMenu(!menuOpen);
@@ -24,16 +49,8 @@ const Header = (props) => {
         console.log('width', window.innerWidth);      
   
     });
-    const router = useRouter();
-    const {
-        query: { component,
-            prescriptions,
-            location,
-            coupon,
-            container,
-            language  },
-    } = router;
-
+    
+    
     return (
         <>        
         <header className={styles.header_desktop_container}>
@@ -43,21 +60,30 @@ const Header = (props) => {
                     FirstRx
                     </div>
                 <div className={styles.header_desktop_slogan_container}>
-                    Find low cash prices for prescriptions
+                {(selectedLanguage === 'english' ||  selectedLanguage === undefined) && 'Find low cash prices for prescriptions'}
+                {selectedLanguage === 'spanish' &&  '<Spanish>Find low cash prices for prescriptions'}    
+            
                 </div>
 
                {windowWidth > 1560 && <nav>
                     <div className={styles.header_desktop_about_first_rx_container}>
-                        About FirstRx
+                    {(selectedLanguage === 'english' || selectedLanguage === undefined) && 'About FirstRx'}
+                    {selectedLanguage === 'spanish' &&  '<Spanish>About FirstRx'}                       
                     </div>
-                    <Link href='/src/components/Header/Help'><div className={styles.header_desktop_help_container}>
-                        Help
+                    <Link href={{
+                        pathname:'/src/components/Header/Help',
+                        query:{language:selectedLanguage}
+                        }}><div className={styles.header_desktop_help_container}>
+                        {(selectedLanguage === 'english' || selectedLanguage === undefined) && 'Help'}
+                        {selectedLanguage === 'spanish' &&  '<Spanish>Help'}    
+                        
                     </div></Link>
                     <div>
                         <div className={styles.header_desktop_select_language_label_container}>
-                            Select Language
+                        {(selectedLanguage === 'english' ||  selectedLanguage=== undefined) && 'Select Language'}
+                        {selectedLanguage === 'spanish' &&  '<Spanish>Select Language'}                           
                         </div>
-                        <select name="language" className={styles.header_desktop_select_language }>
+                        <select value={selectedLanguage} onChange={selecteLanguage} name="language" className={styles.header_desktop_select_language }>
                             <option value="english">English</option>
                             <option value="spanish">Spanish</option>
                         </select>
@@ -65,7 +91,7 @@ const Header = (props) => {
                 </nav>}
                 {windowWidth <= 420 && <nav>                
                     <div>
-                        <select name="language" className={styles.header_desktop_select_language }>
+                        <select name="language" onChange={selecteLanguage} className={styles.header_desktop_select_language }>
                             <option value="english">English</option>
                             <option value="spanish">Spanish</option>
                         </select>
@@ -79,14 +105,15 @@ const Header = (props) => {
                 {(windowWidth > 420 && windowWidth <= 1560) && <nav>                
                     <div>
                          <div className={styles.header_desktop_select_language_label_container}>
-                            Select Language
+                         {(selectedLanguage === 'english' ||  selectedLanguage === undefined) && 'Select Language'}
+                        {selectedLanguage === 'spanish' &&  '<Spanish>Select Language'}
                         </div>
-                        <select name="language" className={styles.header_desktop_select_language }>
+                        <select onChange={selecteLanguage} name="language" className={styles.header_desktop_select_language }>
                             <option value="english">English</option>
                             <option value="spanish">Spanish</option>
                         </select>
                     </div>
-                    <div onClick={openMenu}  className={styles.hamburger_menu_container}>
+                    <div  onClick={openMenu}  className={styles.hamburger_menu_container}>
                         <div className={styles.hamburger_menu_line}></div>
                         <div className={styles.hamburger_menu_line}></div>
                         <div className={styles.hamburger_menu_line}></div>
@@ -95,7 +122,7 @@ const Header = (props) => {
                 
             </div>
         </header>
-         <SlidingHamburgerMenu menuOpen={menuOpen} setOpenMenu={ openMenu}/>
+         <SlidingHamburgerMenu language={selectedLanguage} menuOpen={menuOpen} setOpenMenu={ openMenu}/>
         </>
 
     );

@@ -18,7 +18,8 @@ const ChooseYourCoupon = ({language,dataFromRoute,location}) => {
             pathname: '/src/components/Home',
             query: { component: 'location', 
             prescriptions:dataFromRoute,
-            location:location },
+            location:location,
+            language:language },
           })
 
     } 
@@ -35,11 +36,32 @@ const ChooseYourCoupon = ({language,dataFromRoute,location}) => {
     fillCoupon(); 
     return (
       <div>
-        <span className={styles.desktop_main_left_find_prescription_home_title} >Step 3: Choose Your Coupon</span>
-        <div className={styles.desktop_main_left_location_caption}>In { location } <u onClick={returnToLocation}>Change Location</u> </div>
+        <span className={styles.desktop_main_left_find_prescription_home_title} >
+        {(language === 'english' ||  language === undefined) && 'Step 3: Choose Your Coupon'}
+        {language === 'spanish' &&  '<Spanish>Step 3: Choose Your Coupon'} 
+          
+          
+          
+        </span>
+        <div className={styles.desktop_main_left_location_caption}>
+        {(language === 'english' ||  language === undefined) && 
+        <>
+          In { location } <u onClick={returnToLocation}>Change Location</u> 
+        </>
+        
+        }
+        {language === 'spanish' &&  
+        <>
+         {'<Spanish>'}  In { location } <u onClick={returnToLocation}>Change Location</u> 
+        </>        
+        }
+        </div>
         <PrescriptionDetailedForm language={language} disabled={true}  dataFromRoute={dataFromRoute}   />
         <br />
-        <div className={styles.desktop_choose_your_coupon_sort}>Sorted by: Price</div>
+        <div className={styles.desktop_choose_your_coupon_sort}>
+        {(language === 'english' ||  language === undefined) && 'Sorted by: Price'}
+        {language === 'spanish' &&  'Sorted by: Price'}          
+        </div>
         <div className={styles.desktop_choose_your_coupon_list_container}>
             {arr}
                 

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useMutation, gql } from "@apollo/client";
 import PrescriptionDetailedForm from '../../component/PrescriptionDetailedForm';
-import { useRouter } from 'next/router'
+import { useRouter } from 'next/router';
 import styles from './../../../../../styles/FindPrescriptionHome.module.scss';
 const GET_PRESCRIPTIONS = gql`
 mutation  prescription($prescription:String){
@@ -101,7 +101,7 @@ export default function FindPrescriptionHome({language, location = undefined, da
   return (
     <div>
       {resetDatFromRoute && (dataFromRoute = undefined)}
-      {language === 'english' || language === undefined && <span className={styles.desktop_main_left_find_prescription_home_title} >Step 1: Your Prescription</span>}
+      {(language === 'english' || language === undefined) && <span className={styles.desktop_main_left_find_prescription_home_title} >Step 1: Your Prescription</span>}
       {language === 'spanish'  && <span className={styles.desktop_main_left_find_prescription_home_title} >{'<Spanish>'} Step 1: Your Prescription</span>}
        
         <input 
@@ -131,10 +131,11 @@ export default function FindPrescriptionHome({language, location = undefined, da
                   component: 'location',
                   prescriptions: JSON.stringify(getPrescriptionDetails),
                   location: location,
+                  language:language
                 }
               }
             )
-          }> {language === 'english' || language === undefined && 'Next: Step2 >>'} {language === 'spanish'  && 'Next: Step2 >>'} </button>
+          }> {(language === 'english' || language === undefined) && 'Next: Step2 >>'} {language === 'spanish'  && '<Spanish>Next: Step2 >>'} </button>
           {mutationLoading && <p>Loading...</p>}
           {mutationError && <p>Error :( Please try again</p>}
         </>
