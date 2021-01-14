@@ -18,7 +18,7 @@ function MyApp({ Component, pageProps }) {
   const getSizes = () => {
 
     let body = document.body;
-    if (window.innerWidth > 420) {
+    if (window.innerWidth > 550) {
       body.style.transform = `scale( ${((window.outerWidth - 10)
         / window.innerWidth).toString()})`;
       body.style.transformOrigin = '0 0';

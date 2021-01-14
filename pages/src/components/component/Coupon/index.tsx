@@ -14,7 +14,7 @@ const Coupon = ({ language, windowWidth, prescription, coupon = undefined }) => 
 
     return (
         <>{
-            windowWidth > 420 ?
+            windowWidth > 550 ?
                 <div className={styles.desktop_coupon_component_container}>
 
                     <div className={styles.desktop_coupon_component_store_info}>

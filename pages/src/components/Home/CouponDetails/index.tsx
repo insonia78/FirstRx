@@ -16,7 +16,7 @@ const CouponDetails = ({language, windowWidth, prescription, coupon }) => {
 
     return (
         <>
-            {windowWidth > 420 ?
+            {windowWidth > 550 ?
                 <div className={styles.main_desktop_home_coupon_container}>
                     <Link href={
                         {pathname:'/',

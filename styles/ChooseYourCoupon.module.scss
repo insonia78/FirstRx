@@ -15,7 +15,7 @@
     height:30vh;
     overflow: scroll;  
 }
-@media only screen and (max-width: 1560px) {
+@media only screen and (max-width: 1440px) {
     .desktop_main_left_location_caption{
         left:3.32vw;
         
@@ -23,7 +23,7 @@
     }
 
 }
-@media only screen and (max-width: 420px) {
+@media only screen and (max-width: 550px) {
     .desktop_choose_your_coupon_list_container{
         height:auto;
         overflow: none;  

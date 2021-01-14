@@ -51,11 +51,11 @@ export default function Home() {
     return (
         <>
             <main>
-                {(windowWidth <= 420 && container === 'coupon') &&                  
+                {(windowWidth <= 550 && container === 'coupon') &&                  
                     <CouponDetails language={language} windowWidth={windowWidth} prescription={prescriptions} coupon={coupon} />
                 
                 }
-                { (windowWidth > 1560 || (windowWidth <= 420 && container !== 'coupon' )) &&
+                { (windowWidth > 1440 || (windowWidth <= 550 && container !== 'coupon' )) &&
                  <>    
                      <div className={styles.main_desktop_container}>
                      {(language === 'english' ||  language === undefined) && <> <div className={styles.main_desktop_title}>Check here <b>First</b> for your <b>Rx</b> savings!</div></>}
@@ -81,7 +81,7 @@ export default function Home() {
 
                                     </span>
 
-                                    {windowWidth > 420 && <span className={styles.main_desktop_side_right}></span>}
+                                    {windowWidth > 550 && <span className={styles.main_desktop_side_right}></span>}
                                 </div>
                             }
                             {container === 'coupon' && <CouponDetails language={language} windowWidth={windowWidth} prescription={prescriptions} coupon={coupon} />}
@@ -95,7 +95,7 @@ export default function Home() {
                     
                     </div>
                 </>}
-                { (windowWidth > 420 && windowWidth <= 1560 ) &&
+                { (windowWidth > 550 && windowWidth <= 1440 ) &&
                  <>    
                      
                      {(language === 'english' ||  language === undefined) &&   <><div className={styles.main_desktop_title}>Check here <b>First</b> for your <b>Rx</b> savings!</div></>}
@@ -120,7 +120,7 @@ export default function Home() {
 
                                     </span>
 
-                                    {windowWidth > 420 && <span className={styles.main_desktop_side_right}></span>}
+                                    {windowWidth > 550 && <span className={styles.main_desktop_side_right}></span>}
                                 </div>
                             }
                             {container === 'coupon' && <CouponDetails language={language} windowWidth={windowWidth} prescription={prescriptions} coupon={coupon} />}

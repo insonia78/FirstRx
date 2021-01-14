@@ -25,7 +25,7 @@ export default function Help() {
     return (
         <>
             <main>
-                {windowWidth > 420 ?
+                {windowWidth > 550 ?
                 <>
                     <div className={styles.main_desktop_container}>
                         <Link href={{

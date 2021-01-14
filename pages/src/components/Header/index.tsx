@@ -65,7 +65,7 @@ const Header = (props) => {
             
                 </div>
 
-               {windowWidth > 1560 && <nav>
+               {windowWidth > 1440 && <nav>
                     <div className={styles.header_desktop_about_first_rx_container}>
                     {(selectedLanguage === 'english' || selectedLanguage === undefined) && 'About FirstRx'}
                     {selectedLanguage === 'spanish' &&  '<Spanish>About FirstRx'}                       
@@ -89,7 +89,7 @@ const Header = (props) => {
                         </select>
                     </div>
                 </nav>}
-                {windowWidth <= 420 && <nav>                
+                {windowWidth <= 550 && <nav>                
                     <div>
                         <select name="language" onChange={selecteLanguage} className={styles.header_desktop_select_language }>
                             <option value="english">English</option>
@@ -102,7 +102,7 @@ const Header = (props) => {
                         <div className={styles.hamburger_menu_line}></div>
                     </div>
                 </nav>}                
-                {(windowWidth > 420 && windowWidth <= 1560) && <nav>                
+                {(windowWidth > 550 && windowWidth <= 1440) && <nav>                
                     <div>
                          <div className={styles.header_desktop_select_language_label_container}>
                          {(selectedLanguage === 'english' ||  selectedLanguage === undefined) && 'Select Language'}
