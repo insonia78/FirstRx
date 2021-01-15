@@ -1,0 +1,21 @@
+--- 
+apiVersion: skaffold/v2alpha3
+build: 
+  artifacts: 
+    - 
+      context: services/prescriptions
+      docker: 
+        dockerfile: Dockerfile
+      image: insonia78/services/prescriptions
+      sync: 
+        manual: 
+          - 
+            dest: "."
+            src: src/**/*.ts
+  local: 
+    push: false
+deploy: 
+  kubectl: 
+    manifests: 
+      - ./infra/k8s/*
+kind: Config
