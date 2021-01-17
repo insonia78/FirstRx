@@ -67,7 +67,7 @@ export default function FindPrescriptionHome({language, location = undefined, da
 
   const searchPrescription = (e) => {
     setRestInputValue(e.target.value);
-    getPrescriptions({ variables: { prescription: e.target.value } });
+    getPrescriptions({ variables: { prescription: e.target.value },context:{clientName:'baseUri'} });
 
 
   }

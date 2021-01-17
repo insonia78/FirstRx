@@ -1,5 +1,8 @@
 import { ApolloProvider } from "@apollo/client";
 import { useApollo } from "components/apolloClient";
+
+
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/globals.scss';
 import Header from './src/components/Header';
