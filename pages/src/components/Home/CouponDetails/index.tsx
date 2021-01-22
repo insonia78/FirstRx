@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { IconContext } from 'react-icons';
-import { MdPrint } from 'react-icons/Md';
+import { MdPrint } from 'react-icons/md';
 import Coupon from '../../component/Coupon';
 import Link from 'next/link';
 import styles from './../../../../../styles/CouponDetails.module.scss';
