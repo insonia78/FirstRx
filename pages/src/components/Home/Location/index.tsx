@@ -34,60 +34,66 @@ const Location = ({language,dataFromRoute,location}) => {
   const[restInputValue,setRestInputValue] = useState("");
   const [value,setValue] = useState("");
   const router = useRouter();
+  let autocomplete;
   let myLocation;
+  
   
   const getSizes = () => { 
     setWindowWidth(window.innerWidth); 
   }
-
-   useEffect(()=>{
-       setWindowWidth(window.innerWidth);
-       window.addEventListener(
-        "resize", getSizes, false);
-  
-    });
-  const [getLocations] = useMutation(GET_LOCATION, {
-    onError(err) {
-      console.log(err);
-
-    },
-    update(proxy, result) {
-      if (result.data.prescription.length === 1) {        
-        setLocationsDetails(result.data.prescription);        
-        return;
-      }
-      let options = [];
-
-      result.data.prescription.forEach((element) => {
-        options.push(<option value={element.search_name} />);
-
-      })
-      console.log(options);
-      setLocations(options);
-    }
-  });
-  const searchPrescription = (e) => {
-    setValue(e.target.value); 
-    setRestInputValue(e.target.value);
-    //getLocations({ variables: { prescription: e.target.value } });
-    
+  const gePlace = ()=>{
+    setRestInputValue(autocomplete.getPlace().formatted_address);
+    setLocation({...autocomplete.getPlace()});
 
 
   }
-  const renderFunc = ({ getInputProps, getSuggestionItemProps, suggestions }) => (
-    <div className="autocomplete-root">
-      <input {...getInputProps()} />
-      <div className="autocomplete-dropdown-container">
-        {<div>Loading...</div>}
-        {setLocations(suggestions)}
-        {suggestions.map(suggestion => (
-          <div {...getSuggestionItemProps(suggestion)}>
-            <span>{suggestion.description}</span>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
+   useEffect(()=>{
+       setWindowWidth(window.innerWidth);
+       window.addEventListener(
+        "resize", getSizes, false);  
+    });
+  // const [getLocations] = useMutation(GET_LOCATION, {
+  //   onError(err) {
+  //     console.log(err);
+
+  //   },
+  //   update(proxy, result) {
+  //     if (result.data.prescription.length === 1) {        
+  //       setLocationsDetails(result.data.prescription);        
+  //       return;
+  //     }
+  //     let options = [];
+
+  //     result.data.prescription.forEach((element) => {
+  //       options.push(<option value={element.search_name} />);
+
+  //     })
+    
+  //     setLocations(options);
+  //   }
+  // });
+  const searchPrescription = (e) => { 
+    console.log('regex',(e.target.value.match(/[A-Za-z]/) === null || e.target.value.match(/[0-9]/) === null ));
+    if(e.target.value.match(/[~`!#$%@\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g) !== null || !(e.target.value.match(/[A-Za-z]/) === null || e.target.value.match(/[0-9]/) === null ) )
+    {
+      alert('invalid charachter')
+      return;
+    }  
+
+    setRestInputValue(e.target.value);
+    
+        autocomplete = new window.google.maps.places.Autocomplete(document.getElementById('location') as HTMLInputElement,
+          {
+            types: (value.match(/[0-9]/) ? ["(regions)"] :["(regions)"]),
+            componentRestrictions:{country: 'us'},
+          }
+        );
+
+        autocomplete.addListener("place_changed", gePlace)
+        console.log('autocomplete', autocomplete);
+    
+  }
+  
   const clearInput = (e) => {
     setRestInputValue("");
     setReset(true);
@@ -142,7 +148,7 @@ const Location = ({language,dataFromRoute,location}) => {
   }
   return (
     <div>
-      <PlacesAutocomplete
+      {/* <PlacesAutocomplete
       value={value}
       onChange={value => {
         console.log('value',value)
@@ -152,7 +158,7 @@ const Location = ({language,dataFromRoute,location}) => {
          e.onChange }}
        >
        {renderFunc}
-      </PlacesAutocomplete>      
+      </PlacesAutocomplete>       */}
       {reset && (location = undefined)}            
       <span className={styles.desktop_main_left_find_prescription_home_title}>
        {console.log('language',language)} 
@@ -198,7 +204,7 @@ const Location = ({language,dataFromRoute,location}) => {
           </>}   
           </div>
       }
-      
+      {console.log('getLocation',getLocation)}
       {((Object.keys(getLocation).length !== 0 && getLocation.constructor === Object) || location) && <button className={`next-button ${styles.desktop_button_location}`} onClick={() => router.push
         (
           {
