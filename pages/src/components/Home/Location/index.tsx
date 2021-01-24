@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useMutation, gql } from "@apollo/client";
 import { useRouter } from 'next/router';
 import styles from '../../../../../styles/Location.module.scss';
-
+import PlacesAutocomplete from 'react-places-autocomplete';
 
 const GET_LOCATION = gql`
 mutation  location($location:String){
@@ -32,6 +32,7 @@ const Location = ({language,dataFromRoute,location}) => {
   const[reset,setReset ] = useState(false);
   const[windowWidth, setWindowWidth] = useState(0);
   const[restInputValue,setRestInputValue] = useState("");
+  const [value,setValue] = useState("");
   const router = useRouter();
   let myLocation;
   
@@ -66,13 +67,27 @@ const Location = ({language,dataFromRoute,location}) => {
     }
   });
   const searchPrescription = (e) => {
-
+    setValue(e.target.value); 
     setRestInputValue(e.target.value);
-    getLocations({ variables: { prescription: e.target.value } });
+    //getLocations({ variables: { prescription: e.target.value } });
+    
 
 
   }
-  
+  const renderFunc = ({ getInputProps, getSuggestionItemProps, suggestions }) => (
+    <div className="autocomplete-root">
+      <input {...getInputProps()} />
+      <div className="autocomplete-dropdown-container">
+        {<div>Loading...</div>}
+        {setLocations(suggestions)}
+        {suggestions.map(suggestion => (
+          <div {...getSuggestionItemProps(suggestion)}>
+            <span>{suggestion.description}</span>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
   const clearInput = (e) => {
     setRestInputValue("");
     setReset(true);
@@ -126,7 +141,18 @@ const Location = ({language,dataFromRoute,location}) => {
     setLocation({});  
   }
   return (
-    <div>      
+    <div>
+      <PlacesAutocomplete
+      value={value}
+      onChange={value => {
+        console.log('value',value)
+        setValue(value)}}
+        onBlur={ e =>{
+          console.log('onfocus');
+         e.onChange }}
+       >
+       {renderFunc}
+      </PlacesAutocomplete>      
       {reset && (location = undefined)}            
       <span className={styles.desktop_main_left_find_prescription_home_title}>
        {console.log('language',language)} 
@@ -156,7 +182,8 @@ const Location = ({language,dataFromRoute,location}) => {
                             } 
                         placeholder="Type City or Zip Code" className={styles.desktop_main_left_find_prescription_home_input} type="text" list="Locations" onChange={searchPrescription} id="location" />
               <datalist className="desktop-main-left-find-prescription-home-datalist" id="Locations">
-                {locations}
+                {console.log('locations', locations)}
+                {locations.map( suggestion => suggestion.description)}
               </datalist>
             </>)
         }
@@ -171,8 +198,7 @@ const Location = ({language,dataFromRoute,location}) => {
           </>}   
           </div>
       }
-      {console.log('getLocation',getLocation)}
-      {console.log('location',location)}
+      
       {((Object.keys(getLocation).length !== 0 && getLocation.constructor === Object) || location) && <button className={`next-button ${styles.desktop_button_location}`} onClick={() => router.push
         (
           {
