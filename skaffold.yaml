@@ -22,6 +22,17 @@ build:
           - 
             dest: "."
             src: src/**/*.ts
+    - 
+      context: client
+      docker: 
+        dockerfile: Dockerfile
+      image: insonia78/client
+      sync: 
+        manual: 
+          - 
+            dest: "."
+            src: src/**/*.ts
+   
   local: 
     push: false
 deploy: 

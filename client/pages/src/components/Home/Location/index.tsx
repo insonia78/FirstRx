@@ -1,25 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { useMutation, gql } from "@apollo/client";
+import { useMutation, gql } from '@apollo/client';
 import { useRouter } from 'next/router';
 import styles from '../../../../../styles/Location.module.scss';
-import PlacesAutocomplete from 'react-places-autocomplete';
+import { useAlert } from 'react-alert';
 
 const GET_LOCATION = gql`
-mutation  location($location:String){
-      prescription(location:$location)
+mutation   GetLocationFromZipOrCity($value:String){
+      GetLocationFromZipOrCity(value:$value)
       {
-            search_name
-            name
-            generic_name
-            manufacturer
-            form
-            quantity
-            dosage{
-              dosage
-              quantity
-              type
-
-            }
+           code
+           message
+           predictions
+           {
+             description
+           }
       }
 }
 `;
@@ -36,7 +30,8 @@ const Location = ({language,dataFromRoute,location}) => {
   const router = useRouter();
   let autocomplete;
   let myLocation;
-  
+  const alert = useAlert();
+  let location_choosen = false;
   
   const getSizes = () => { 
     setWindowWidth(window.innerWidth); 
@@ -52,45 +47,42 @@ const Location = ({language,dataFromRoute,location}) => {
        window.addEventListener(
         "resize", getSizes, false);  
     });
-  // const [getLocations] = useMutation(GET_LOCATION, {
-  //   onError(err) {
-  //     console.log(err);
+  const [getLocations] = useMutation(GET_LOCATION, {
+    onError(err) {
+      console.log(err);
+      //alert.error(err);
 
-  //   },
-  //   update(proxy, result) {
-  //     if (result.data.prescription.length === 1) {        
-  //       setLocationsDetails(result.data.prescription);        
-  //       return;
-  //     }
-  //     let options = [];
+    },
+    update(proxy, result) {
+      console.log('result', result.data.GetLocationFromZipOrCity);
+      if (result.data.GetLocationFromZipOrCity.predictions.length === 1) { 
+        console.log('inside');    
+        setRestInputValue(result.data.GetLocationFromZipOrCity.predictions[0].descriptions);         
+        return;
+      }
+      let options = [];
 
-  //     result.data.prescription.forEach((element) => {
-  //       options.push(<option value={element.search_name} />);
+      result.data.GetLocationFromZipOrCity.predictions.forEach((element,index) => {
+        console.log('element',element.description);
+        options.push(<option  key={`location${index}`} value={element.description} />);
 
-  //     })
+      })           
+      setLocations(options);
+    }
+  });
+  const _options = () =>{
+    alert('inside');
+  }
+  const searchLocation = (e) => { 
     
-  //     setLocations(options);
-  //   }
-  // });
-  const searchPrescription = (e) => { 
-    console.log('regex',(e.target.value.match(/[A-Za-z]/) === null || e.target.value.match(/[0-9]/) === null ));
-    if(e.target.value.match(/[~`!#$%@\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g) !== null || !(e.target.value.match(/[A-Za-z]/) === null || e.target.value.match(/[0-9]/) === null ) )
+    if((e.target.value.match(/[~`!#$%@\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g) !== null || !(e.target.value.match(/[A-Za-z]/) === null || e.target.value.match(/[0-9]/) === null )) && location_choosen === false)
     {
-      alert('invalid charachter')
+      alert.error('Invalid Entry');
       return;
     }  
 
     setRestInputValue(e.target.value);
-    
-        autocomplete = new window.google.maps.places.Autocomplete(document.getElementById('location') as HTMLInputElement,
-          {
-            types: (value.match(/[0-9]/) ? ["(regions)"] :["(regions)"]),
-            componentRestrictions:{country: 'us'},
-          }
-        );
-
-        autocomplete.addListener("place_changed", gePlace)
-        console.log('autocomplete', autocomplete);
+    getLocations({variables:{value:e.target.value},context:{clientName:'location'}});   
     
   }
   
@@ -98,6 +90,7 @@ const Location = ({language,dataFromRoute,location}) => {
     setRestInputValue("");
     setReset(true);
     setLocation({});
+    location_choosen =  false;
     
   }
   const getCurrentPosition = () => {
@@ -147,18 +140,7 @@ const Location = ({language,dataFromRoute,location}) => {
     setLocation({});  
   }
   return (
-    <div>
-      {/* <PlacesAutocomplete
-      value={value}
-      onChange={value => {
-        console.log('value',value)
-        setValue(value)}}
-        onBlur={ e =>{
-          console.log('onfocus');
-         e.onChange }}
-       >
-       {renderFunc}
-      </PlacesAutocomplete>       */}
+    <div>      
       {reset && (location = undefined)}            
       <span className={styles.desktop_main_left_find_prescription_home_title}>
        {console.log('language',language)} 
@@ -186,10 +168,10 @@ const Location = ({language,dataFromRoute,location}) => {
                               resetInput();                       
                               }
                             } 
-                        placeholder="Type City or Zip Code" className={styles.desktop_main_left_find_prescription_home_input} type="text" list="Locations" onChange={searchPrescription} id="location" />
-              <datalist className="desktop-main-left-find-prescription-home-datalist" id="Locations">
+                        placeholder="Type City or Zip Code" className={styles.desktop_main_left_find_prescription_home_input} type="text" list="Locations" onChange={searchLocation} id="location" />
+              <datalist  className="desktop-main-left-find-prescription-home-datalist" id="Locations">
                 {console.log('locations', locations)}
-                {locations.map( suggestion => suggestion.description)}
+                {locations}
               </datalist>
             </>)
         }

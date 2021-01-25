@@ -4,6 +4,7 @@ metadata:
   name: ingress-srv
   annotations:
      kubernetes.io/ingress.class: nginx
+     nginx.ingress.kubernetes.io/use-regex: 'true'
 spec:
   rules:
     - host: location.com
@@ -13,4 +14,12 @@ spec:
             backend:
               serviceName: location-srv
               servicePort: 5000
+    - host: client.com
+      http:
+        paths:
+          - path: /?(.*)
+            backend:
+              serviceName: client-srv
+              servicePort: 3001
+         
              

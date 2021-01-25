@@ -2,16 +2,12 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql(`
 
-        type AddressComponentsFromGeolocationForZip{
-            long_name:String
-            short_name:String
-            types:[String]
-        }
+       
         type PredictionsFromPlaceApi{
              description:String 
         } 
-        type GetLocationFromZipOrCityQuery{
-             results:[AddressComponentsFromGeolocationForZip]
+        type GetLocationFromZipOrCityMutation{
+             
              predictions:[PredictionsFromPlaceApi] 
              code:Int
              message:String
@@ -21,11 +17,12 @@ module.exports = gql(`
         }
         type Query{
             
-            GetLocationFromZipOrCity(value:String):GetLocationFromZipOrCityQuery
+            hello:String
 
         } 
         type Mutation{
-            hello:String
+            
+            GetLocationFromZipOrCity(value:String):GetLocationFromZipOrCityMutation
         } 
         schema{
             query:Query

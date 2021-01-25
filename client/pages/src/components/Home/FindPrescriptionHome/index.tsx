@@ -60,7 +60,9 @@ export default function FindPrescriptionHome({language, location = undefined, da
         options.push(<option key={`prescription${index}`} value={element.search_name} />);
 
       })
-      console.log(options);
+      
+      console.log('itereting');
+      options.forEach(element => console.log(element));
       setPrescriptions(options);
     }
   });
