@@ -1,8 +1,14 @@
 const { gql } = require('apollo-server-express');
 
-module.exports = gql(`       
-        
-        type GetLocationFromZipQuery{
+module.exports = gql(`
+
+       
+        type PredictionsFromPlaceApi{
+             description:String 
+        } 
+        type GetLocationFromZipOrCityMutation{
+             
+             predictions:[PredictionsFromPlaceApi] 
              code:Int
              message:String
              country: String
@@ -11,11 +17,12 @@ module.exports = gql(`
         }
         type Query{
             
-            GetLocationFromZip(zip:String):GetLocationFromZipQuery
+            hello:String
 
         } 
         type Mutation{
-            hello:String
+            
+            GetLocationFromZipOrCity(value:String):GetLocationFromZipOrCityMutation
         } 
         schema{
             query:Query

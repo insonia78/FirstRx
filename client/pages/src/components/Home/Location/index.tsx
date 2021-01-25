@@ -1,25 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { useMutation, gql } from "@apollo/client";
+import { useMutation, gql } from '@apollo/client';
 import { useRouter } from 'next/router';
 import styles from '../../../../../styles/Location.module.scss';
-
+import { useAlert } from 'react-alert';
 
 const GET_LOCATION = gql`
-mutation  location($location:String){
-      prescription(location:$location)
+mutation   GetLocationFromZipOrCity($value:String){
+      GetLocationFromZipOrCity(value:$value)
       {
-            search_name
-            name
-            generic_name
-            manufacturer
-            form
-            quantity
-            dosage{
-              dosage
-              quantity
-              type
-
-            }
+           code
+           message
+           predictions
+           {
+             description
+           }
       }
 }
 `;
@@ -32,51 +26,71 @@ const Location = ({language,dataFromRoute,location}) => {
   const[reset,setReset ] = useState(false);
   const[windowWidth, setWindowWidth] = useState(0);
   const[restInputValue,setRestInputValue] = useState("");
+  const [value,setValue] = useState("");
   const router = useRouter();
+  let autocomplete;
   let myLocation;
+  const alert = useAlert();
+  let location_choosen = false;
   
   const getSizes = () => { 
     setWindowWidth(window.innerWidth); 
   }
+  const gePlace = ()=>{
+    setRestInputValue(autocomplete.getPlace().formatted_address);
+    setLocation({...autocomplete.getPlace()});
 
+
+  }
    useEffect(()=>{
        setWindowWidth(window.innerWidth);
        window.addEventListener(
-        "resize", getSizes, false);
-  
+        "resize", getSizes, false);  
     });
   const [getLocations] = useMutation(GET_LOCATION, {
     onError(err) {
       console.log(err);
+      //alert.error(err);
 
     },
     update(proxy, result) {
-      if (result.data.prescription.length === 1) {        
-        setLocationsDetails(result.data.prescription);        
+      console.log('result', result.data.GetLocationFromZipOrCity);
+      if (result.data.GetLocationFromZipOrCity.predictions.length === 1) { 
+        console.log('inside');    
+        setRestInputValue(result.data.GetLocationFromZipOrCity.predictions[0].descriptions);         
         return;
       }
       let options = [];
 
-      result.data.prescription.forEach((element) => {
-        options.push(<option value={element.search_name} />);
+      result.data.GetLocationFromZipOrCity.predictions.forEach((element,index) => {
+        console.log('element',element.description);
+        options.push(<option  key={`location${index}`} value={element.description} />);
 
-      })
-      console.log(options);
+      })           
       setLocations(options);
     }
   });
-  const searchPrescription = (e) => {
+  const _options = () =>{
+    alert('inside');
+  }
+  const searchLocation = (e) => { 
+    
+    if((e.target.value.match(/[~`!#$%@\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g) !== null || !(e.target.value.match(/[A-Za-z]/) === null || e.target.value.match(/[0-9]/) === null )) && location_choosen === false)
+    {
+      alert.error('Invalid Entry');
+      return;
+    }  
 
     setRestInputValue(e.target.value);
-    getLocations({ variables: { prescription: e.target.value } });
-
-
+    getLocations({variables:{value:e.target.value},context:{clientName:'location'}});   
+    
   }
   
   const clearInput = (e) => {
     setRestInputValue("");
     setReset(true);
     setLocation({});
+    location_choosen =  false;
     
   }
   const getCurrentPosition = () => {
@@ -154,8 +168,9 @@ const Location = ({language,dataFromRoute,location}) => {
                               resetInput();                       
                               }
                             } 
-                        placeholder="Type City or Zip Code" className={styles.desktop_main_left_find_prescription_home_input} type="text" list="Locations" onChange={searchPrescription} id="location" />
-              <datalist className="desktop-main-left-find-prescription-home-datalist" id="Locations">
+                        placeholder="Type City or Zip Code" className={styles.desktop_main_left_find_prescription_home_input} type="text" list="Locations" onChange={searchLocation} id="location" />
+              <datalist  className="desktop-main-left-find-prescription-home-datalist" id="Locations">
+                {console.log('locations', locations)}
                 {locations}
               </datalist>
             </>)
@@ -172,7 +187,6 @@ const Location = ({language,dataFromRoute,location}) => {
           </div>
       }
       {console.log('getLocation',getLocation)}
-      {console.log('location',location)}
       {((Object.keys(getLocation).length !== 0 && getLocation.constructor === Object) || location) && <button className={`next-button ${styles.desktop_button_location}`} onClick={() => router.push
         (
           {

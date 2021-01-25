@@ -28,7 +28,7 @@ const baseUri = new HttpLink({
     uri: "/api/graphql"
 })
 const locationUri = new HttpLink({
-    uri: "http://locahost:5000/graphql"
+    uri: "http://localhost:5000/graphql"
 })
 const prescriptionsUri = new HttpLink({
     uri: "http://locahost:4000/graphql"
