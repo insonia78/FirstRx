@@ -1,0 +1,33 @@
+{
+  "executionRoleArn": "$EXECUTION_ROLE_ARN",
+  "containerDefinitions": [
+    {
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": { 
+          "awslogs-group" : "$CLOUDWATCH_LOG_GROUP",
+          "awslogs-region": "$AWS_REGION",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "portMappings": [
+        {
+          "hostPort": 3000,
+          "protocol": "tcp",
+          "containerPort": 3000
+        }
+      ],
+      "image": "$IMAGE_URL",
+      "essential": true,
+      "name": "$CONTAINER_NAME"
+    }
+  ],
+  "memory": "512",
+  "taskRoleArn": "$TASK_ROLE_ARN",
+  "family": "$FAMILY",
+  "requiresCompatibilities": [
+    "FARGATE"
+  ],
+  "networkMode": "awsvpc",
+  "cpu": "256"
+}

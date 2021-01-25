@@ -1,0 +1,47 @@
+version: 0.2
+
+env:
+  variables:
+    RELEASE_VERSION: "1.0.0"
+    ECR_REPOSITORY_URL: "658310991765.dkr.ecr.us-east-1.amazonaws.com"
+
+phases:
+  install:
+    commands:
+      - echo Build started on `date`
+      - export PREV_BUILD_VERSION=$(aws ssm get-parameter --name "$ARTIFACT_VERSION_PARAMETER_NAME" --output text --query Parameter.Value)
+      - export INC_BUILD_VERSION=$(( $PREV_BUILD_VERSION + 1 ))
+      - export THIS_BUILD_VERSION=$RELEASE_VERSION.$INC_BUILD_VERSION
+      - export LATEST_CONTAINER_URI=$ECR_REPOSITORY_URL/$ECR_REPOSITORY_NAME:latest
+      - export BUILD_VERSION_CONTAINER_URI=$ECR_REPOSITORY_URL/$ECR_REPOSITORY_NAME:$THIS_BUILD_VERSION
+      - export IMAGE_URL=$BUILD_VERSION_CONTAINER_URI
+      - export ENV_CONTAINER_URI=$ECR_REPOSITORY_URL/$ECR_REPOSITORY_NAME:$ENV
+      - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REPOSITORY_URL
+  build:
+    commands:
+      - echo Build started on `date`
+      - docker build -f "Dockerfile" -t "$LATEST_CONTAINER_URI" .
+      - docker tag $LATEST_CONTAINER_URI $BUILD_VERSION_CONTAINER_URI
+      - docker tag $LATEST_CONTAINER_URI $ENV_CONTAINER_URI
+      - docker push $LATEST_CONTAINER_URI
+      - docker push $BUILD_VERSION_CONTAINER_URI
+      - docker push $ENV_CONTAINER_URI
+      - aws ssm put-parameter --name $ARTIFACT_VERSION_PARAMETER_NAME --value $INC_BUILD_VERSION --overwrite
+      - envsubst < taskdefinition.json | tee /tmp/taskdefinition.json 
+      - envsubst < appspec.yaml | tee /tmp/appspec.yaml 
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - printf "{\"ImageURI\":\"$BUILD_VERSION_CONTAINER_URI\"}" > imageDetail.json
+      - cat imageDetail.json
+      - printf "[{\"name\":\"$CONTAINER_NAME\", \"imageUri\":\"$BUILD_VERSION_CONTAINER_URI\"}]" > imagedefinitions.json
+      - cat imagedefinitions.json
+      
+
+artifacts:
+  files: 
+    - /tmp/taskdefinition.json
+    - /tmp/appspec.yaml
+    - imageDetail.json
+    - imagedefinitions.json
+  discard-paths: yes
