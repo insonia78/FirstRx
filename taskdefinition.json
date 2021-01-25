@@ -17,9 +17,49 @@
           "containerPort": 3000
         }
       ],
-      "image": "$IMAGE_URL",
+      "image": "$FIRSTRX_IMAGE_URI",
       "essential": true,
-      "name": "$CONTAINER_NAME"
+      "name": "firstrx"
+    },
+    {
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": { 
+          "awslogs-group" : "$CLOUDWATCH_LOG_GROUP",
+          "awslogs-region": "$AWS_REGION",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "portMappings": [
+        {
+          "hostPort": 4000,
+          "protocol": "tcp",
+          "containerPort": 4000
+        }
+      ],
+      "image": "$PRESCRIPTIONS_IMAGE_URI",
+      "essential": true,
+      "name": "prescriptions"
+    },
+    {
+      "logConfiguration": {
+        "logDriver": "awslogs",
+        "options": { 
+          "awslogs-group" : "$CLOUDWATCH_LOG_GROUP",
+          "awslogs-region": "$AWS_REGION",
+          "awslogs-stream-prefix": "ecs"
+        }
+      },
+      "portMappings": [
+        {
+          "hostPort": 5000,
+          "protocol": "tcp",
+          "containerPort": 5000
+        }
+      ],
+      "image": "$LOCATION_IMAGE_URI",
+      "essential": true,
+      "name": "location"
     }
   ],
   "memory": "512",
