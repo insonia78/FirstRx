@@ -28,6 +28,7 @@ phases:
       - docker push $BUILD_VERSION_CONTAINER_URI
       - docker push $ENV_CONTAINER_URI
       - aws ssm put-parameter --name $ARTIFACT_VERSION_PARAMETER_NAME --value $INC_BUILD_VERSION --overwrite
+      - cd ~
       - envsubst < taskdefinition.json | tee /tmp/taskdefinition.json 
       - envsubst < appspec.yaml | tee /tmp/appspec.yaml 
   post_build:
