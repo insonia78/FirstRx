@@ -20,7 +20,8 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - docker build -f "client/Dockerfile" -t "$LATEST_CONTAINER_URI" .
+      - cd client
+      - docker build -f "Dockerfile" -t "$LATEST_CONTAINER_URI" .
       - docker tag $LATEST_CONTAINER_URI $BUILD_VERSION_CONTAINER_URI
       - docker tag $LATEST_CONTAINER_URI $ENV_CONTAINER_URI
       - docker push $LATEST_CONTAINER_URI
