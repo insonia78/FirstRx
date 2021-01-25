@@ -20,6 +20,8 @@ phases:
   build:
     commands:
       - echo Build started on `date`
+      - cp taskdefinition.json /tmp/taskdefinition.json 
+      - cp appspec.yaml /tmp/appspec.yaml 
       - cd client
       - docker build -f "Dockerfile" -t "$LATEST_CONTAINER_URI" .
       - docker tag $LATEST_CONTAINER_URI $BUILD_VERSION_CONTAINER_URI
@@ -28,9 +30,8 @@ phases:
       - docker push $BUILD_VERSION_CONTAINER_URI
       - docker push $ENV_CONTAINER_URI
       - aws ssm put-parameter --name $ARTIFACT_VERSION_PARAMETER_NAME --value $INC_BUILD_VERSION --overwrite
-      - cd ~
-      - envsubst < taskdefinition.json | tee /tmp/taskdefinition.json 
-      - envsubst < appspec.yaml | tee /tmp/appspec.yaml 
+      - envsubst <  /tmp/taskdefinition.json | tee /tmp/envsub/taskdefinition.json 
+      - envsubst < /tmp/appspec.yaml | tee /tmp/envsub/appspec.yaml 
   post_build:
     commands:
       - echo Build completed on `date`
@@ -42,8 +43,8 @@ phases:
 
 artifacts:
   files: 
-    - /tmp/taskdefinition.json
-    - /tmp/appspec.yaml
+    - /tmp/envsub/taskdefinition.json
+    - /tmp/envsub/appspec.yaml
     - imageDetail.json
     - imagedefinitions.json
   discard-paths: yes
