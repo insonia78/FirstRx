@@ -1,17 +1,17 @@
 import styles from '../../../../../styles/PrescriptionDetailedForm.module.scss';
 
 
-const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer = undefined, dataFromRoute = undefined, setPrescriptionDetails = undefined }) => {
+const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer = undefined, prescriptionFromRoute = undefined, setPrescriptionDetails = undefined }) => {
     let manufacturer = "";
     let form = "";
     let dosage = "";
     let quantity = "";
-    if (dataFromRoute !== undefined) {
-        dataFromRoute = JSON.parse(dataFromRoute);
-        manufacturer = dataFromRoute.manufacturer;
-        form = dataFromRoute.form;
-        dosage = dataFromRoute.dosage;
-        quantity = dataFromRoute.quantity
+    if (prescriptionFromRoute !== undefined) {
+        prescriptionFromRoute = JSON.parse(prescriptionFromRoute);
+        manufacturer = prescriptionFromRoute.manufacturer;
+        form = prescriptionFromRoute.form;
+        dosage = prescriptionFromRoute.dosage;
+        quantity = prescriptionFromRoute.quantity
     }
     const onChange = (e) => {
         let val = {
@@ -36,7 +36,7 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
                 <div className={styles.main_desktop_left_prescription_form_title_container}>
                     <div
                         className={styles.main_desktop_left_prescription_form_title}>
-                        {(dataFromRoute !== undefined ? dataFromRoute.search_name : (dataFromServer === undefined ? "" : dataFromServer[0].search_name))}
+                        {(prescriptionFromRoute !== undefined ? prescriptionFromRoute.search_name : (dataFromServer === undefined ? "" : dataFromServer[0].search_name))}
 
                     </div>
                 </div>
@@ -52,7 +52,7 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
                                 disabled={disabled}
                                 name="manufactor"
                                 onChange={onChange}
-                                defaultValue={dataFromRoute && manufacturer}
+                                defaultValue={prescriptionFromRoute && manufacturer}
                                 className={(disabled ? styles.disabled_fonts_weight : "") + ` ${styles.main_desktop_left_prescription_form_manufacturer_select} ${styles.main_desktop_left_prescription_form_select}`}>
                                 {
                                     dataFromServer && dataFromServer.map((element, index) =>
@@ -75,7 +75,7 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
                             disabled={disabled}
                             name="form"
                             onChange={onChange}
-                            defaultValue={dataFromRoute && form}
+                            defaultValue={prescriptionFromRoute && form}
                             className={(disabled ? styles.disabled_fonts_weight : "") + ` ${styles.main_desktop_left_prescription_form_format_select} ${styles.main_desktop_left_prescription_form_select} `}>
                             {
                                 dataFromServer && dataFromServer.map(element =>
@@ -103,7 +103,7 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
                             disabled={disabled}
                             name="dosage"
                             onChange={onChange}
-                            defaultValue={dataFromRoute && dosage}
+                            defaultValue={prescriptionFromRoute && dosage}
                             className={(disabled ? styles.disabled_fonts_weight : "") + ` ${styles.main_desktop_left_prescription_form_select} ${styles.main_desktop_left_prescription_form_dosage_select}`}>
                             {
                                 dataFromServer && dataFromServer.map(element =>
@@ -128,7 +128,7 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
                             disabled={disabled}
                             name="quantity"
                             onChange={onChange}
-                            defaultValue={dataFromRoute && quantity}
+                            defaultValue={prescriptionFromRoute && quantity}
                             className={(disabled ? styles.disabled_fonts_weight : "") + ` ${styles.main_desktop_left_prescription_form_select} ${styles.main_desktop_left_prescription_form_quantity_select}`}>
                             {
                                 dataFromServer && dataFromServer.map(element =>

@@ -22,7 +22,7 @@ mutation  prescription($prescription:String){
       }
 }
 `;
-export default function FindPrescriptionHome({language, location = undefined, dataFromRoute, getPrescriptionDetails, setPrescriptionDetails }) {
+export default function FindPrescriptionHome({language, location = undefined, prescriptionFromRoute, getPrescriptionDetails, setPrescriptionDetails }) {
 
 
   const [prescriptions, setPrescriptions] = useState([]);
@@ -87,22 +87,22 @@ export default function FindPrescriptionHome({language, location = undefined, da
 
   useEffect(() => {
 
-    if (dataFromRoute !== undefined)
+    if (prescriptionFromRoute !== undefined)
       setPrescriptionsDataFromRoute();
   }, []);
 
 
   const setPrescriptionsDataFromRoute = () => {
-    dataFromRoute = JSON.parse(dataFromRoute);
-    setPrescriptionDetails(dataFromRoute);
+    prescriptionFromRoute = JSON.parse(prescriptionFromRoute);
+    setPrescriptionDetails(prescriptionFromRoute);
 
-    setRestInputValue(dataFromRoute.search_name);
-    getPrescriptions({ variables: { prescription: dataFromRoute.search_name } });
+    setRestInputValue(prescriptionFromRoute.search_name);
+    getPrescriptions({ variables: { prescription: prescriptionFromRoute.search_name } });
   }
 
   return (
     <div>
-      {resetDatFromRoute && (dataFromRoute = undefined)}
+      {resetDatFromRoute && (prescriptionFromRoute = undefined)}
       {(language === 'english' || language === undefined) && <span className={styles.desktop_main_left_find_prescription_home_title} >Step 1: Your Prescription</span>}
       {language === 'spanish'  && <span className={styles.desktop_main_left_find_prescription_home_title} >{'<Spanish>'} Step 1: Your Prescription</span>}
        
@@ -124,7 +124,7 @@ export default function FindPrescriptionHome({language, location = undefined, da
       
       {prescriptionDetails.length === 1 &&
         <>
-          <PrescriptionDetailedForm  language={language} dataFromServer={prescriptionDetails} dataFromRoute={dataFromRoute} setPrescriptionDetails={setPrescriptionDetails} />
+          <PrescriptionDetailedForm  language={language} dataFromServer={prescriptionDetails} prescriptionFromRoute={prescriptionFromRoute} setPrescriptionDetails={setPrescriptionDetails} />
           <button className={`next-button ${styles.next_button_find_prescription}`} onClick={() => router.push
             (
               {
