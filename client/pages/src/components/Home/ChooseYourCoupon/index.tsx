@@ -6,7 +6,7 @@ import CouponsTiles from '../../component/CouponsTiles';
 import styles from '../../../../../styles/ChooseYourCoupon.module.scss';
 
 
-const ChooseYourCoupon = ({language,dataFromRoute,location}) => {
+const ChooseYourCoupon = ({language,prescriptionFromRoute,location}) => {
   
 
   const[coupons , setCoupons] = useState([])  
@@ -17,7 +17,7 @@ const ChooseYourCoupon = ({language,dataFromRoute,location}) => {
           {
             pathname: '/src/components/Home',
             query: { component: 'location', 
-            prescriptions:dataFromRoute,
+            prescriptions:prescriptionFromRoute,
             location:location,
             language:language },
           })
@@ -28,7 +28,7 @@ const ChooseYourCoupon = ({language,dataFromRoute,location}) => {
        
         for(let i = 0 ; i < 7; i++)
         {
-           arr.push(<CouponsTiles language={language} prescription={dataFromRoute} couponsData={dataFromRoute} />);
+           arr.push(<CouponsTiles language={language} prescription={prescriptionFromRoute} couponsData={prescriptionFromRoute} />);
         }  
         
 
@@ -56,7 +56,7 @@ const ChooseYourCoupon = ({language,dataFromRoute,location}) => {
         </>        
         }
         </div>
-        <PrescriptionDetailedForm language={language} disabled={true}  dataFromRoute={dataFromRoute}   />
+        <PrescriptionDetailedForm language={language} disabled={true}  prescriptionFromRoute={prescriptionFromRoute}   />
         <br />
         <div className={styles.desktop_choose_your_coupon_sort}>
         {(language === 'english' ||  language === undefined) && 'Sorted by: Price'}

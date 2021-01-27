@@ -65,18 +65,18 @@ export default function Home() {
                             {(container === undefined || container === '' || container === null) &&
                                 <div className={styles.main_desktop_sides_inner_container}>
                                     <span className={styles.main_desktop_side_left}>
-                                        {component === 'choose-your-coupon' && < ChooseYourCoupon language={language} dataFromRoute={prescriptions} location={location} />}
+                                        {component === 'choose-your-coupon' && < ChooseYourCoupon language={language} prescriptionFromRoute={prescriptions} location={location} />}
                                         {component === 'prescription' &&
                                             <FindPrescriptionHome
                                                 language={language}
                                                 location={location}
-                                                dataFromRoute={prescriptions}
+                                                prescriptionFromRoute={prescriptions}
                                                 getPrescriptionDetails={getPrescription}
                                                 setPrescriptionDetails={setPrescription} />}
                                          
                                          
-                                        {component === 'location' && <Location language={language} dataFromRoute={prescriptions} location={location} />}
-                                        {(component === undefined || component === '' || component === null) && <FindPrescriptionHome language={language} dataFromRoute={prescriptions} getPrescriptionDetails={getPrescription} setPrescriptionDetails={setPrescription} />}
+                                        {component === 'location' && <Location language={language} prescriptionFromRoute={prescriptions} location={location} />}
+                                        {(component === undefined || component === '' || component === null) && <FindPrescriptionHome language={language} prescriptionFromRoute={prescriptions} getPrescriptionDetails={getPrescription} setPrescriptionDetails={setPrescription} />}
 
 
                                     </span>
@@ -105,17 +105,17 @@ export default function Home() {
                         {(container === undefined || container === '' || container === null) &&
                                 <div className={styles.main_desktop_sides_inner_container}>
                                     <span className={styles.main_desktop_side_left}>
-                                        {component === 'choose-your-coupon' && < ChooseYourCoupon language={language} dataFromRoute={prescriptions} location={location} />}
+                                        {component === 'choose-your-coupon' && < ChooseYourCoupon language={language} prescriptionFromRoute={prescriptions} location={location} />}
                                         {component === 'prescription' &&
                                             <FindPrescriptionHome
                                                 language={language}
                                                 location={location}
-                                                dataFromRoute={prescriptions}
+                                                prescriptionFromRoute={prescriptions}
                                                 getPrescriptionDetails={getPrescription}
                                                 setPrescriptionDetails={setPrescription} />}
 
-                                        {component === 'location' && <Location language={language} dataFromRoute={prescriptions} location={location} />}
-                                        {(component === undefined || component === '' || component === null) && <FindPrescriptionHome  language={language} dataFromRoute={prescriptions} getPrescriptionDetails={getPrescription} setPrescriptionDetails={setPrescription} />}
+                                        {component === 'location' && <Location language={language} prescriptionFromRoute={prescriptions} location={location} />}
+                                        {(component === undefined || component === '' || component === null) && <FindPrescriptionHome  language={language} prescriptionFromRoute={prescriptions} getPrescriptionDetails={getPrescription} setPrescriptionDetails={setPrescription} />}
 
 
                                     </span>
