@@ -10,6 +10,15 @@ mutation   GetLocationFromZipOrCity($value:String){
       {
            code
            message
+           results{
+             
+             geometry{
+                location{
+                  lat
+                  lng
+                }
+              }
+           }
            predictions
            {
              description
@@ -55,32 +64,35 @@ const Location = ({language,dataFromRoute,location}) => {
     },
     update(proxy, result) {
       console.log('result', result.data.GetLocationFromZipOrCity);
-      if (result.data.GetLocationFromZipOrCity.predictions.length === 1) { 
-        console.log('inside');    
-        setRestInputValue(result.data.GetLocationFromZipOrCity.predictions[0].descriptions);         
+      if(result.data.GetLocationFromZipOrCity.code !== 200)
+      {
+        console.log(result.data.GetLocationFromZipOrCity.message);
         return;
       }
-      let options = [];
+      console.log('results', result.data.GetLocationFromZipOrCity.results);
+      if ( result.data.GetLocationFromZipOrCity.results !== null) { 
+        
+       const location  = result.data.GetLocationFromZipOrCity.results[0].geometry.location;
+          
+       getAddressFromLatAndLng(location.lat,location.lng);         
+        return;
+      }
+      // let options = [];
 
-      result.data.GetLocationFromZipOrCity.predictions.forEach((element,index) => {
-        console.log('element',element.description);
-        options.push(<option  key={`location${index}`} value={element.description} />);
+      // result.data.GetLocationFromZipOrCity.predictions.forEach((element,index) => {
+      //   console.log('element',element.description);
+      //   options.push(<option  onClick={_options} key={`location${index}`} value={element.description} />);
 
-      })           
-      setLocations(options);
+      // }) 
+
+      setLocations(result.data.GetLocationFromZipOrCity.predictions);
     }
   });
   const _options = () =>{
-    alert('inside');
+    console.log('inside');
   }
   const searchLocation = (e) => { 
     
-    if((e.target.value.match(/[~`!#$%@\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g) !== null || !(e.target.value.match(/[A-Za-z]/) === null || e.target.value.match(/[0-9]/) === null )) && location_choosen === false)
-    {
-      alert.error('Invalid Entry');
-      return;
-    }  
-
     setRestInputValue(e.target.value);
     getLocations({variables:{value:e.target.value},context:{clientName:'location'}});   
     
@@ -93,12 +105,10 @@ const Location = ({language,dataFromRoute,location}) => {
     location_choosen =  false;
     
   }
-  const getCurrentPosition = () => {
-
-    navigator.geolocation.getCurrentPosition(async (position) => {
-    
-      let latitude = `latitude=${position.coords.latitude}`;
-      let longitude = `&longitude=${position.coords.longitude}`;      
+const getAddressFromLatAndLng = async (lat,lng) =>{
+  
+      let latitude = `latitude=${lat}`;
+      let longitude = `&longitude=${lng}`; 
       let query = latitude + longitude + "&localityLanguage=en";
       let bigdatacloud_api ="https://api.bigdatacloud.net/data/reverse-geocode-client";
 
@@ -108,7 +118,10 @@ const Location = ({language,dataFromRoute,location}) => {
 
       if (myObj.ok) {
        let obj = await myObj.json();
+       console.log(obj);
         myLocation = {
+          latitude: lat,
+          longitude:lng,
           postCode: obj.postcode,
           city: obj.locality,
           country: obj.countryName,
@@ -119,6 +132,19 @@ const Location = ({language,dataFromRoute,location}) => {
          setRestInputValue(v); 
         }
       
+        
+    
+
+}
+
+  const getCurrentPosition = () => {
+
+    
+    navigator.geolocation.getCurrentPosition(async (position) => {
+    
+      let latitude = `${position.coords.latitude}`;
+      let longitude = `${position.coords.longitude}`; 
+      getAddressFromLatAndLng(latitude,longitude);
     });
     
 
@@ -169,9 +195,11 @@ const Location = ({language,dataFromRoute,location}) => {
                               }
                             } 
                         placeholder="Type City or Zip Code" className={styles.desktop_main_left_find_prescription_home_input} type="text" list="Locations" onChange={searchLocation} id="location" />
-              <datalist  className="desktop-main-left-find-prescription-home-datalist" id="Locations">
+              <datalist  onClick={_options} className="desktop-main-left-find-prescription-home-datalist" id="Locations">
                 {console.log('locations', locations)}
-                {locations}
+                 {locations.map((element,index) =>
+                  <option  onClick={_options} key={`location${index}`} value={element.description} />
+                )}
               </datalist>
             </>)
         }
