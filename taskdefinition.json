@@ -19,7 +19,11 @@
       ],
       "image": "$FIRSTRX_IMAGE_URI",
       "essential": true,
-      "name": "firstrx"
+      "name": "firstrx",
+      "secrets": [{
+        "name": "APIKEY",
+        "valueFrom": "$APIKEY_SSM_PARAMETER_ARN"
+      }]
     },
     {
       "logConfiguration": {
