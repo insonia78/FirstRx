@@ -17,9 +17,16 @@ spec:
     - host: client.com
       http:
         paths:
-          - path: /?(.*)
+          - path: 
             backend:
               serviceName: client-srv
-              servicePort: 3001
+              servicePort: 3000
+    - host: text-messages.com
+      http:
+        paths:
+          - path: /graphql
+            backend:
+              serviceName: text-messages-srv
+              servicePort: 7000
          
              

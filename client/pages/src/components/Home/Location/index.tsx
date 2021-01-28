@@ -80,8 +80,8 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
    */
   const [getLocations] = useMutation(GET_LOCATION, {
     onError(err) {
-      
-      alert.error(err);
+      console.log(err);
+      alert.show(err);
 
     },
     update(proxy, result) {
