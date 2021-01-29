@@ -1,7 +1,22 @@
-import styles from '../../../../../styles/PrescriptionDetailedForm.module.scss';
+//import styles from '../../../../../styles/PrescriptionDetailedForm.module.scss';// for version 1 with wire frames
 
+/**
+ * @COMPONENT
+ * Displays the details of the prescription selected
+ * 
+ * refrencing version of: 1/28/2021
+ * source: https://github.com/emilynorton?tab=repositories
+ * 
+ * @param language // the languages selected English|Spanish
+ * @param disabled // for making the selects editable
+ * @param dataFromServer //Prescription comming from the server
+ * @param prescriptionFromRoute // the prescription passed in when using the route function
+ * @useState setPrescriptionDetails // sets the prescription chosen 
+ */
 
 const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer = undefined, prescriptionFromRoute = undefined, setPrescriptionDetails = undefined }) => {
+    
+   
     let manufacturer = "";
     let form = "";
     let dosage = "";
@@ -13,6 +28,12 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
         dosage = prescriptionFromRoute.dosage;
         quantity = prescriptionFromRoute.quantity
     }
+    /**
+     * Sets the values from the select tag
+     * 
+     * @useState setPrescriptionsDetails
+     * @param e 
+     */
     const onChange = (e) => {
         let val = {
             [e.target.name]: e.target.value
@@ -21,6 +42,135 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
     }
     return (
         <>
+            {
+                /**
+                * refrencing version of: 1/28/2021
+                * source: https://github.com/emilynorton?tab=repositories
+                */
+            }
+            {(language === 'english' || language === undefined) && <><p className="instructions">Adjust the information below so it matches your exact prescription. You can also adjust the details later.</p></>}
+            {language === 'spanish' && <><p className="instructions">{'<Spanish>'}Adjust the information below so it matches your exact prescription. You can also adjust the details later.</p></>}
+
+            <form id="rx" className="rx">
+                <h4> {(prescriptionFromRoute !== undefined ? prescriptionFromRoute.search_name : (dataFromServer === undefined ? "" : dataFromServer[0].search_name))}</h4>
+
+                <p>
+                    {(language === 'english' || language === undefined) && <><label htmlFor="mfg">Manufacturer</label></>}
+                    {language === 'spanish' && <>{'<Spanish>'}<label htmlFor="mfg">Manufacturer</label></>}
+
+                    <select
+                        disabled={disabled}
+                        name="mfg"
+                        onChange={onChange}
+                        defaultValue={prescriptionFromRoute && manufacturer}
+                        id="mfg"
+                    >
+                        {
+                            dataFromServer && dataFromServer.map((element, index) =>
+                                <option key={`manufactor${index}`} value={element.manufacturer}>{element.manufacturer}</option>
+
+                            )
+                        }
+                        {dataFromServer === undefined && <option value={manufacturer}>{manufacturer}</option>}
+
+                    </select>
+                </p>
+
+                <p>
+                    {(language === 'english' || language === undefined) && <><label htmlFor="form">Form</label></>}
+                    {language === 'spanish' && <>{'<Spanish>'}<label htmlFor="form">Form</label></>}
+
+                    <select
+                        disabled={disabled}
+                        name="form"
+                        onChange={onChange}
+                        defaultValue={prescriptionFromRoute && form}
+                        id="form"
+                    >
+                        {
+                            dataFromServer && dataFromServer.map(element =>
+                                element.form.map((e, index) =>
+                                    <option key={`form${index}`} value={e}>{e}</option>
+
+                                )
+
+
+                            )
+                        }
+                        {dataFromServer === undefined && <option value={form} >{form} </option>}
+                    </select>
+                </p>
+
+                <p>
+                    {(language === 'english' || language === undefined) && <><label htmlFor="dosage">Dosage</label></>}
+                    {language === 'spanish' && <>{'<Spanish>'}<label htmlFor="dosage">Dosage</label></>}
+
+                    <select
+                        name="dosage"
+                        id="dosage"
+                        disabled={disabled}
+                        onChange={onChange}
+                        defaultValue={prescriptionFromRoute && dosage}
+                    >
+                        {
+                            dataFromServer && dataFromServer.map(element =>
+                                element.dosage.map((e, index) =>
+                                    <option key={`dosage${index}`} value={e.dosage}>{e.dosage}</option>
+
+                                )
+
+                            )
+                        }
+                        {dataFromServer === undefined && <option value={dosage} > {dosage} </option>}
+
+                    </select>
+                </p>
+
+                <p>
+                    {(language === 'english' || language === undefined) && <><label htmlFor="qty">Quantity</label></>}
+                    {language === 'spanish' && <>{'<Spanish>'}<label htmlFor="qty">Quantity</label></>}
+
+                    <select
+                        name="qty"
+                        id="qty"
+                        disabled={disabled}
+                        onChange={onChange}
+                        defaultValue={prescriptionFromRoute && quantity}
+                    >
+                        {
+                            dataFromServer && dataFromServer.map(element =>
+                                element.dosage.map((e, index) =>
+                                    <option key={`quantity${index}`} value={e.quantity}>{e.quantity}</option>
+
+                                )
+
+                            )
+                        }
+
+
+                    </select>
+                </p>
+            </form>
+
+
+
+
+
+
+
+
+
+
+
+            {/* 
+            
+             
+             // version 1 from wire frames
+            // https://www.figma.com/proto/f1Af0b6joE7OVyo4R4hb7i/FirstRx-Design?node-id=25%3A1&viewport=520%2C440%2C0.5&scaling=min-zoom
+            // https://www.figma.com/proto/f1Af0b6joE7OVyo4R4hb7i/FirstRx-Design?node-id=102%3A1390&viewport=212%2C389%2C0.5&scaling=min-zoom
+            // https://www.figma.com/proto/f1Af0b6joE7OVyo4R4hb7i/FirstRx-Design?node-id=349%3A797&viewport=317%2C508%2C0.5&scaling=scale-down 
+
+
             <div className={styles.prescription_detailed_form_container}>
                 <div className={styles.main_desktop_left_prescription_form_description}>
 
@@ -143,7 +293,7 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
                         </select>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </>
 
     );

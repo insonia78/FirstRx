@@ -67,6 +67,13 @@ export default function Home() {
 
     return (
         <>
+            {
+            /**
+              * refrencing version of: 1/28/2021
+              * source: https://github.com/emilynorton?tab=repositories
+              */
+            }
+  
             <main>
                 <h2>Save on Prescriptions!</h2>
 
@@ -97,12 +104,22 @@ export default function Home() {
 
 
 
-
-            {/* {(windowWidth <= 550 && container === 'coupon') &&                  
-                    <CouponDetails language={language} windowWidth={windowWidth} prescription={prescriptions} coupon={coupon} />
-                
-                } */}
-            {/* { (windowWidth > 1440 || (windowWidth <= 550 && container !== 'coupon' )) &&
+             
+             
+                  
+            {/* 
+            
+                  // version 1 from wire frames
+                  // https://www.figma.com/proto/f1Af0b6joE7OVyo4R4hb7i/FirstRx-Design?node-id=25%3A1&viewport=520%2C440%2C0.5&scaling=min-zoom
+                  // https://www.figma.com/proto/f1Af0b6joE7OVyo4R4hb7i/FirstRx-Design?node-id=102%3A1390&viewport=212%2C389%2C0.5&scaling=min-zoom
+                  // https://www.figma.com/proto/f1Af0b6joE7OVyo4R4hb7i/FirstRx-Design?node-id=349%3A797&viewport=317%2C508%2C0.5&scaling=scale-down 
+   
+            
+                {(windowWidth <= 550 && container === 'coupon') &&                  
+                <CouponDetails language={language} windowWidth={windowWidth} prescription={prescriptions} coupon={coupon} />
+            
+            }
+            { (windowWidth > 1440 || (windowWidth <= 550 && container !== 'coupon' )) &&
                  <>    
                      <div className={styles.main_desktop_container}>
                      {(language === 'english' ||  language === undefined) && <> <div className={styles.main_desktop_title}>Check here <b>First</b> for your <b>Rx</b> savings!</div></>}
@@ -141,8 +158,8 @@ export default function Home() {
                     pharmacy near you. Get texted a coupon. Bring to your pharmacist. Save $.</span>}
                     
                     </div>
-                </>} */}
-            {/* { (windowWidth > 550 && windowWidth <= 1440 ) &&
+                </>}
+            { (windowWidth > 550 && windowWidth <= 1440 ) &&
                  <>    
                      
                      {(language === 'english' ||  language === undefined) &&   <><div className={styles.main_desktop_title}>Check here <b>First</b> for your <b>Rx</b> savings!</div></>}
@@ -180,9 +197,9 @@ export default function Home() {
                     pharmacy near you. Get texted a coupon. Bring to your pharmacist. Save $.</span>}
                     </div>
                 </>} 
-                </main>
+                </main> */}
                 
-                */}
+               
 
         
 

@@ -24,14 +24,17 @@ mutation  prescription($prescription:String){
 `;
 
 /**
+ * 
  * It does a search of the prescirption wanted by entering key words
  * 
+ * refrencing version of: 1/28/2021
+ * source: https://github.com/emilynorton?tab=repositories
  * 
  * @param language // the languages selected English|Spanish
  * @param location //the location where to find the prescription
  * @param prescriptionFromRoute // the prescription passed in when using the route function
  * @useState getPrescriptionDetails // prescrition set from the setPrescriptionsDetails
- * @useState getPrescriptionDetails // sets the prescription chosen 
+ * @useState setPrescriptionDetails // sets the prescription chosen 
  */
 
 export default function FindPrescriptionHome({ language, location = undefined, prescriptionFromRoute, getPrescriptionDetails, setPrescriptionDetails }) {
@@ -144,6 +147,10 @@ export default function FindPrescriptionHome({ language, location = undefined, p
 
   return (
     <div>
+      {/**
+       * refrencing version of: 1/28/2021
+       * source: https://github.com/emilynorton?tab=repositories
+       */}
       {resetDataFromRoute && (prescriptionFromRoute = undefined)}
       <form id="find_rx" className="find_rx">
         {(language === 'english' || language === undefined) && <label htmlFor="find_rx">Enter Drug Name</label>}
@@ -229,6 +236,12 @@ export default function FindPrescriptionHome({ language, location = undefined, p
       {/* 
         
         used in version 1 with wire frames
+        // version 1 from wire frames
+        // https://www.figma.com/proto/f1Af0b6joE7OVyo4R4hb7i/FirstRx-Design?node-id=25%3A1&viewport=520%2C440%2C0.5&scaling=min-zoom
+        // https://www.figma.com/proto/f1Af0b6joE7OVyo4R4hb7i/FirstRx-Design?node-id=102%3A1390&viewport=212%2C389%2C0.5&scaling=min-zoom
+        // https://www.figma.com/proto/f1Af0b6joE7OVyo4R4hb7i/FirstRx-Design?node-id=349%3A797&viewport=317%2C508%2C0.5&scaling=scale-down 
+
+
       {(language === 'english' || language === undefined) && <span className={styles.desktop_main_left_find_prescription_home_title} >Step 1: Your Prescription</span>}
       {language === 'spanish'  && <span className={styles.desktop_main_left_find_prescription_home_title} >{'<Spanish>'} Step 1: Your Prescription</span>}
        
