@@ -26,8 +26,9 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
         manufacturer = prescriptionFromRoute.manufacturer;
         form = prescriptionFromRoute.form;
         dosage = prescriptionFromRoute.dosage;
-        quantity = prescriptionFromRoute.quantity
+        quantity = prescriptionFromRoute.quantity;
     }
+    
     /**
      * Sets the values from the select tag
      * 
@@ -48,9 +49,14 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
                 * source: https://github.com/emilynorton?tab=repositories
                 */
             }
-            {(language === 'english' || language === undefined) && <><p className="instructions">Adjust the information below so it matches your exact prescription. You can also adjust the details later.</p></>}
-            {language === 'spanish' && <><p className="instructions">{'<Spanish>'}Adjust the information below so it matches your exact prescription. You can also adjust the details later.</p></>}
 
+            {/**@param disabled used when passed by Choose your coupon component*/
+            !disabled && <>
+                {(language === 'english' || language === undefined) && <><p className="instructions">Adjust the information below so it matches your exact prescription. You can also adjust the details later.</p></>}
+                {language === 'spanish' && <><p className="instructions">{'<Spanish>'}Adjust the information below so it matches your exact prescription. You can also adjust the details later.</p></>}
+                
+                </>
+            }
             <form id="rx" className="rx">
                 <h4> {(prescriptionFromRoute !== undefined ? prescriptionFromRoute.search_name : (dataFromServer === undefined ? "" : dataFromServer[0].search_name))}</h4>
 
@@ -137,13 +143,12 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
                         onChange={onChange}
                         defaultValue={prescriptionFromRoute && quantity}
                     >
+                        
                         {
-                            dataFromServer && dataFromServer.map(element =>
-                                element.dosage.map((e, index) =>
-                                    <option key={`quantity${index}`} value={e.quantity}>{e.quantity}</option>
-
-                                )
-
+                            dataFromServer && dataFromServer.map(element =>                                
+                                element.quantity.map((e, index) =>
+                                    <option key={`qty${index}`} value={e}>{e}</option>
+                               )
                             )
                         }
 
@@ -282,7 +287,7 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
                             className={(disabled ? styles.disabled_fonts_weight : "") + ` ${styles.main_desktop_left_prescription_form_select} ${styles.main_desktop_left_prescription_form_quantity_select}`}>
                             {
                                 dataFromServer && dataFromServer.map(element =>
-                                    element.dosage.map((e, index) =>
+                                    element.quantity.map((e, index) =>
                                         <option key={`quantity${index}`} value={e.quantity}>{e.quantity}</option>
 
                                     )

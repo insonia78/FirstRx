@@ -3,9 +3,19 @@ import { IconContext } from 'react-icons';
 import { MdPrint } from 'react-icons/Md';
 import Coupon from '../../component/Coupon';
 import Link from 'next/link';
-import styles from './../../../../../styles/CouponDetails.module.scss';
+//import styles from './../../../../../styles/CouponDetails.module.scss'; used inversion 1
 import { useMutation, gql } from '@apollo/client';
 import { useAlert } from 'react-alert';
+
+/**
+ * @context textMessage
+ * 
+ * uses 
+ * 
+ * @serviceApi text_messages
+ *  
+ * 
+ * */
 
 const SEND_PHONENUMBER_AND_COUPON = gql`
 mutation  SendTextMessageMutation($value:String){
@@ -18,21 +28,60 @@ mutation  SendTextMessageMutation($value:String){
 }
 `;
 
-
-
+/**
+ * @Pages
+ * 
+ * Details of the coupon 
+ * 
+ * refrencing version of: 1/28/2021
+ * source: https://github.com/emilynorton?tab=repositories
+ * 
+ * @param language the language to display the data 
+ * @param prescription the prescription details 
+ * @param coupon the data for the Coupon
+ * 
+ * uses
+ * 
+ * @component Coupon
+ */
 
 const CouponDetails = ({ language, windowWidth, prescription, coupon }) => {
 
    
-
+    /** @gets @sets @type String  //the phone number to be sent to the service */ 
     const [phoneNumber, setPhoneNumber] = useState("");
 
-    const printCoupon = () => {
-        window.print();
-    }
+    
+    /**
+     * Used on version 
+     * print's the coupon
+     */    
+    // const printCoupon = () => {
+    //     window.print();        
+    // }
+
+      
+    /**
+     * gets the phone number from the input box
+     * 
+     * @param e 
+     * @useState setPhoneNumber
+     * 
+     */   
     const getPhoneNumberEvent = (e) => {        
         setPhoneNumber(e.target.value);
     }
+    
+    /**
+     * value check and trigers the mutation to send phone number and coupon details 
+     *  to the service
+     * 
+     * 
+     * @param e 
+     * 
+     * @mutatio sendPhobneNumberAndCoupon 
+     *  
+     */
 
     const sendCouponAndPhoneNumber = (e) => {
         
@@ -46,6 +95,7 @@ const CouponDetails = ({ language, windowWidth, prescription, coupon }) => {
         sendPhobneNumberAndCoupon({ variables: { value: phoneNumber }, context: { clientName: 'textMessage' } });
 
     }
+
     const [sendPhobneNumberAndCoupon] = useMutation(SEND_PHONENUMBER_AND_COUPON, {
         onError(err) {
             console.log(err);
@@ -62,6 +112,11 @@ const CouponDetails = ({ language, windowWidth, prescription, coupon }) => {
             alert(`Message succesfully sent` );
         }
     });
+    /**
+     * clears the input box
+     * 
+     * @useState setPhoneNumber
+     */
     const clearInput = ()=>{
 
         setPhoneNumber("");
@@ -69,6 +124,78 @@ const CouponDetails = ({ language, windowWidth, prescription, coupon }) => {
 
     return (
         <>
+           {/**
+             * refrencing version of: 1/28/2021
+             * source: https://github.com/emilynorton?tab=repositories
+             */}
+              
+              <Link href={
+                        {
+                            pathname: '/',
+                            query: { language: language }
+                        }
+                    } as='/'>
+                        <p className="start_over">
+                            <u>
+                                {(language === 'english' || language === undefined) && 'New Search'}
+                                {language === 'spanish' && '<Spanish> New Search'}
+                            </u>
+
+                        </p>
+                        
+                    </Link>
+					
+					<h3>
+                        {(language === 'english' || language === undefined) && 'Your Coupon'}
+                        {language === 'spanish' && '<Spanish> Your Coupon'}                        
+                    </h3>
+					
+					<h4 className='coupon'>
+                    {(language === 'english' || language === undefined) && 'Show this coupon to the pharmacist at:'}
+                    {language === 'spanish' && '<Spanish> Show this coupon to the pharmacist at:'}                        
+                        <address><strong>Walgreens</strong> 1201 E. Superior Street, Duluth, MN 55805 </address><a href="https://maps.google.com" target="_blank">Map</a>
+                    </h4>
+                    <Coupon language={language} windowWidth={windowWidth} prescription={prescription} coupon={coupon} />
+					
+					
+						<form id="text_coupon" className="text_coupon">
+							<label htmlFor="text_coupon">Enter Mobile Number</label>
+                            <input
+                            type="tel"
+                            onFocus={clearInput}
+                            value={phoneNumber}
+                            onChange={getPhoneNumberEvent}                            
+                            placeholder='Type your phone number'
+                            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
+							<button type="submit" form="text_coupon">Text Me The Coupon</button>
+							<div>
+                                <div onClick={sendCouponAndPhoneNumber}>
+                                    {(language === 'english' || language === undefined) && 'Text Me The Coupon'}
+                                    {language === 'spanish' && '<Spanish> Text Me The Coupon'}                                
+                                </div>
+							</div>
+						</form>		
+						
+								
+						<div className="clickthrough_hide">
+							<div className="back">{'< Back>'}</div>
+							<div>Start Over</div>
+						</div>		
+            
+
+
+
+
+
+
+
+            {/*            
+             
+            // version 1 from wire frames
+            // https://www.figma.com/proto/f1Af0b6joE7OVyo4R4hb7i/FirstRx-Design?node-id=25%3A1&viewport=520%2C440%2C0.5&scaling=min-zoom
+            // https://www.figma.com/proto/f1Af0b6joE7OVyo4R4hb7i/FirstRx-Design?node-id=102%3A1390&viewport=212%2C389%2C0.5&scaling=min-zoom
+            // https://www.figma.com/proto/f1Af0b6joE7OVyo4R4hb7i/FirstRx-Design?node-id=349%3A797&viewport=317%2C508%2C0.5&scaling=scale-down 
+               
             {windowWidth > 550 ?
                 <div className={styles.main_desktop_home_coupon_container}>
                     <Link href={
@@ -176,7 +303,7 @@ const CouponDetails = ({ language, windowWidth, prescription, coupon }) => {
                         </div>
                     </div>
                 </div>
-            }
+            } */}
         </>
 
 

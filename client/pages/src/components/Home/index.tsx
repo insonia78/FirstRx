@@ -9,8 +9,22 @@ import CouponDetails from './CouponDetails';
 //import styles from './../../../../styles/Home.module.scss'; used for version 1
 
 /**
- * Home page 
+ * @Pages
+ * 
+ * Home page
+ * 
+ * refrencing version of: 1/28/2021
+ * source: https://github.com/emilynorton?tab=repositories 
+ * 
+ * uses
+ * 
+ * @pages ChooseYourCoupon
+ * @pages FindPrescriptionHome
+ * @pages Location
+ * @pages CouponDetails
+ * 
  */
+
 export default function Home() {
     let data = {
         search_name: "",
@@ -78,8 +92,7 @@ export default function Home() {
                 <h2>Save on Prescriptions!</h2>
 
                 <section className="stepped_process">
-                    {(language === 'english' || language === undefined) && <> <h3><span>Start Here: Step 1 of 3: </span>Your Prescription</h3></>}
-                    {language === 'spanish' && <><h3><span>{'<Spanish>'} Start Here: Step 1 of 3: </span>Your Prescription</h3></>}
+                   
                     {(container === undefined || container === '' || container === null) &&
                         <>
                             {/** first component when the page   */}
@@ -95,9 +108,10 @@ export default function Home() {
 
 
                             {component === 'location' && <Location language={language} prescriptionFromRoute={prescriptions} location={location} />}
-                            {container === 'coupon' && <CouponDetails language={language} windowWidth={windowWidth} prescription={prescriptions} coupon={coupon} />}
-                        
+                            
                         </>}
+                        {container === 'coupon' && <CouponDetails language={language} windowWidth={windowWidth} prescription={prescriptions} coupon={coupon} />}
+                        
                 </section>
 
             </main>

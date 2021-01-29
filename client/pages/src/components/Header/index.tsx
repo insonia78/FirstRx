@@ -4,19 +4,22 @@ import React, { useEffect, useState } from "react";
 import SlidingHamburgerMenu from "../component/SlidingHamburgerMenu";
 import styles from './../../../../styles/Header.module.scss';
 import { useRouter } from "next/router";
+
+
 /**
+ * @Header
+ * 
  * Header of the application
+ * 
  * refrencing version of: 1/28/2021
  * source: https://github.com/emilynorton?tab=repositories   
  * 
  * @param props 
  */
-
-
 const Header = (props) => {
 
     const [windowWidth, setWindowWidth] = useState(0);
-
+    /**@gets @sets the open hamburger menu used for version 1 */
     const [menuOpen, setOpenMenu] = useState(false);
 
     /**@gets @sets language type */
@@ -63,10 +66,20 @@ const Header = (props) => {
             });
 
     }
+    /**
+     * Uset for hamburger menu for version 1
+     * @useState setOpenMenu
+     */
     const openMenu = () => {
         setOpenMenu(!menuOpen);
 
     }
+    /**
+     * set's the width of the window
+     * used in version 1
+     *      
+     */
+
     useEffect(() => {
         setWindowWidth(window.innerWidth);
         window.addEventListener(
@@ -78,7 +91,10 @@ const Header = (props) => {
 
     return (
         <>
-            {/** Header Version2 from html and css from repository  https://github.com/emilynorton?tab=repositories */}
+             {/**
+             * refrencing version of: 1/28/2021
+             * source: https://github.com/emilynorton?tab=repositories
+             */}
             <header>
                 <div className='flexcontainer'>
                     <div className='left'>
@@ -96,18 +112,14 @@ const Header = (props) => {
                     </div>
                     <div className="right">
                         <form id="language" className="language">
-                            <label htmlFor="language">Language</label>
-                            <button type="submit" form="language">Select</button>  </form>
-                        <div>
-                            <div className={styles.header_desktop_select_language_label_container}>
-                                {(selectedLanguage === 'english' || selectedLanguage === undefined) && 'Select Language'}
-                                {selectedLanguage === 'spanish' && '<Spanish>Select Language'}
-                            </div>
-                            <select value={selectedLanguage} onChange={selecteLanguage} name="language" className={styles.header_desktop_select_language}>
+                            {(selectedLanguage === 'english' || selectedLanguage === undefined) && <><label htmlFor="language">Language</label></>}
+                            {selectedLanguage === 'spanish' && <>{'<Spanish>'}<label htmlFor="language">Language</label></>}
+                             <button type="submit" form="language">Select</button>  </form>
+                             <select value={selectedLanguage} onChange={selecteLanguage} className='language-select' name="language" id='language'>
                                 <option value="english">English</option>
                                 <option value="spanish">Spanish</option>
                             </select>
-                        </div>
+                        
                         <nav className="primary" aria-label="main navigation">
                             <ul>
                                 <li className="homelink"><a className="selected" href="/">Home</a></li>
@@ -119,7 +131,11 @@ const Header = (props) => {
                                 }}><li><a href="./help/">
                                     {(selectedLanguage === 'english' || selectedLanguage === undefined) && 'Help'}
                                     {selectedLanguage === 'spanish' && '<Spanish>Help'}</a></li></Link>
-                                <li><a href="./about/">About FirstRx</a></li>
+                                    <Link 
+                                href={{
+                                    pathname: '/src/components/Header/AboutFirstRx',
+                                    query: { language: selectedLanguage }
+                                }}><li><a href="./about/">About FirstRx</a></li></Link>
                             </ul>
                         </nav>
                     </div>

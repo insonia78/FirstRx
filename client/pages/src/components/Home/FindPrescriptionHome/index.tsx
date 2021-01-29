@@ -3,6 +3,17 @@ import { useMutation, gql } from "@apollo/client";
 import PrescriptionDetailedForm from '../../component/PrescriptionDetailedForm';
 import { useRouter } from 'next/router';
 //import styles from './../../../../../styles/FindPrescriptionHome.module.scss'; used for version 1
+
+/**
+ * @context prescription
+ * 
+ * uses 
+ * 
+ * @serviceApi prescription
+ *  
+ * 
+ * */
+
 const GET_PRESCRIPTIONS = gql`
 mutation  prescription($prescription:String){
       prescription(prescription:$prescription)
@@ -24,6 +35,7 @@ mutation  prescription($prescription:String){
 `;
 
 /**
+ * @Pages
  * 
  * It does a search of the prescirption wanted by entering key words
  * 
@@ -152,6 +164,9 @@ export default function FindPrescriptionHome({ language, location = undefined, p
        * source: https://github.com/emilynorton?tab=repositories
        */}
       {resetDataFromRoute && (prescriptionFromRoute = undefined)}
+      {(language === 'english' || language === undefined) && <> <h3><span>Start Here: Step 1 of 3: </span>Your Prescription</h3></>}
+      {language === 'spanish' && <><h3><span>{'<Spanish>'} Start Here: Step 1 of 3: </span>Your Prescription</h3></>}
+      
       <form id="find_rx" className="find_rx">
         {(language === 'english' || language === undefined) && <label htmlFor="find_rx">Enter Drug Name</label>}
         {language === 'spanish' && <label htmlFor="find_rx">{'<Spanish>'}Enter Drug Name</label>}

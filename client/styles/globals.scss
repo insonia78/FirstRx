@@ -201,7 +201,7 @@ h1 span {
 	display: none;
 }
 
-h1 span.tagline {
+.tagline {
 	display: block;
 	font-size: .5em;
 	font-weight: 300;
@@ -249,7 +249,7 @@ footer {
 
 div {}
 section {}
-article {}
+.article {}
 aside {}	
 
 hr {display: none;}
@@ -436,7 +436,7 @@ form.language label {
 	margin: 1em 0 0.3em 0;
 }
 
-form.language select {
+.language-select {
 	width: 100%;
 	border: 1px solid #333;
 	border-radius: 5px;
@@ -607,7 +607,7 @@ section.results p.location a:link {
 	border-bottom: 1px solid #333;
 }
 
-section.results article.coupon {
+.article.coupon {
 	border: 1px solid #333;
 	font-size: 1.2em;
 	border-radius: 8px;
@@ -619,26 +619,26 @@ section.results article.coupon {
 	align-items: flex-start;
 }
 
-section.results article.coupon div.price {
+.article.coupon .price {
 	margin: 0;
 	padding: 0;
 }
 
-section.results article.coupon div.price div {
+.article.coupon .price div {
 	margin: 0.1em 0 0 0;
 	font-size: 2em;
 	color: #009245;
 	width: 100px;
 }
 
-section.results article.coupon div.coupon_button {
+.article.coupon .coupon_button {
 	border: 1px solid #E9EDE9;
 	margin: 0;
 	padding: 0;
 	text-align: center;
 }
 
-section.results article.coupon div.coupon_button div {
+.article.coupon .coupon_button  {
 	border: 1px solid #009245;
 	background-color: #009245;
 	border-radius: 8px;
@@ -649,47 +649,47 @@ section.results article.coupon div.coupon_button div {
 	color: #fff;
 }
 
-section.results article.coupon div.coupon_button div:hover {
+.article.coupon div.coupon_button:hover {
 	border: 1px solid #009245;
 	background-color: #fff;
 	color: #009245;
 	cursor: pointer;
 }
 
-section.results article.coupon div.coupon_button a:link {
+.article.coupon .coupon_button a:link {
 	color: #000;
   	text-decoration: none;
 }
-section.results article.coupon div.coupon_button a:visited {
+.article.coupon .coupon_button a:visited {
 	color: #000;
 	text-decoration: none;
 }
-section.results article.coupon div.coupon_button a:hover {
+.article.coupon .coupon_button a:hover {
 	color: #000;
 	border-bottom: 0;
 }
-section.results article.coupon div.coupon_button a:active {
+.article.coupon .coupon_button a:active {
 	color: #000;
 	border-bottom: 0;
 }
 
-section.results article.coupon div.pharmacy {
+.article.coupon .pharmacy {
 	margin: 0;
 	padding: 0;
 }
 
-section.results article.coupon div.pharmacy div {
+.article.coupon .pharmacy div {
 	font-size: 0.8em;
 	margin: 0.2em 0 0 0;
 	padding: 0;
 	max-width: 300px;
 }
 
-section.results article.coupon div.pharmacy address {
+.article.coupon .pharmacy address {
 	display: inline;
 }
 
-section.results article.coupon div.pharmacy address strong {
+.article.coupon div.pharmacy address strong {
 	font-size: 1.2em;
 	display: block;
 }
@@ -782,34 +782,33 @@ article.single_coupon dl dd {
 }
 
 
-body#Coupon h4 {
+h4.coupon {
 	margin: 0.6em 0 1em 0;
 	padding: 0;
 	font-size: 1.1em;
 	color: #009245;
 }
-
-body#Coupon h4 address {
+h4.coupon address {
 	display: inline;
 	margin: 0 0 0 0.5em;
 	color: #333;
 }
 
-body#Coupon h4 a:link {
+h4.coupon a:link {
 	border-bottom: 1px solid #333;
 }
 
-body#Coupon form#text_coupon {
+form#text_coupon {
 	margin: 1em 0;
 }
 
-body#Coupon form#text_coupon label {
+form#text_coupon label {
 	display: none;
 }
-body#Coupon form#text_coupon button {
+form#text_coupon button {
 	display: none;
 }
-body#Coupon form#text_coupon input {
+form#text_coupon input {
 	border: 3px solid #333;
 	border-radius: 4px;
 	margin: 0;
@@ -819,7 +818,7 @@ body#Coupon form#text_coupon input {
 	color: #536553;
 	width: 100%;
 }
-body#Coupon form#text_coupon div {
+form#text_coupon div {
 	border: 1px solid #009245;
 	background-color: #009245;
 	border-radius: 8px;
@@ -890,16 +889,16 @@ body#Help ol li {
 
 /*h2 {color: cyan;}*/
 	
-section.results article.coupon {
+.article.coupon {
 	flex-wrap: nowrap;
 	align-items: center;
 }
 
-section.results article.coupon div.price {
+.article.coupon div.price {
 	text-align: center;
 }
 
-section.results article.coupon div.pharmacy div {
+.article.coupon div.pharmacy div {
 	max-width: 160px;
 }
 
@@ -932,15 +931,15 @@ div.clickthrough div.back {
 	max-width: 160px;
 }
 
-section.results article.coupon div.pharmacy div {
+.article.coupon div.pharmacy div {
 	max-width: 200px;
 }
 
-body#Coupon form#text_coupon input {
+form#text_coupon input {
 	width: 50%;
 }
 
-body#Coupon form#text_coupon div {
+form#text_coupon div {
 	display: inline;
 	padding: 0.4em 0.6em;
 }
@@ -1016,12 +1015,12 @@ section.help {
 section.results {
 }
 
-section.results article.coupon {
+ .article.coupon {
 	margin: 0.7em auto;
 	max-width: 500px;
 }
 
-section.results article.coupon div.pharmacy div {
+.article.coupon div.pharmacy div {
 	font-size: 0.75em;
 }
 
