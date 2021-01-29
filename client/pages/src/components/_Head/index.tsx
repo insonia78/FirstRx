@@ -11,8 +11,12 @@ export default function _Head() {
       <meta httpEquiv='pragma' content='no-cache' />
       <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"></meta>
       <link rel="icon" href="/favicon.ico" />
+      <meta name="description" content="FirstRx" />
+      <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
+      <link rel="preconnect" href="https://fonts.gstatic.com" />
+      <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;1,300;1,400&display=swap" rel="stylesheet"></link>
       <link href='http://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'></link>
-      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhJjZH6lxSraVwcjLBB9O2DfHF0PFJD5Q&libraries=places"></script>          
+      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAhJjZH6lxSraVwcjLBB9O2DfHF0PFJD5Q&libraries=places"></script>
     </Head>
 
   );
