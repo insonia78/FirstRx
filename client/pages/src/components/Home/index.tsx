@@ -25,7 +25,22 @@ import CouponDetails from './CouponDetails';
  * 
  */
 
-export default function Home() {
+const Home = ({render}) => {
+    const router = useRouter();
+    
+    const {
+        query: { component,
+            prescriptions,
+            location,
+            coupon,
+            container,
+            language = 'english' },
+    } = router;    
+    
+    
+    /**@gets @sets  sets the has path for reload page in order not to flicker beteween components */
+    const [routerHasPath, setRouterHasPath] = useState((router.asPath === '/' ? false : true));    
+    
     let data = {
         search_name: "",
         name: "",
@@ -60,7 +75,7 @@ export default function Home() {
     
 
     
-    const router = useRouter();
+    
     
     const setPrescription = (value) => {
 
@@ -70,14 +85,7 @@ export default function Home() {
 
     }
 
-    const {
-        query: { component,
-            prescriptions,
-            location,
-            coupon,
-            container,
-            language = 'english' },
-    } = router
+    
 
     return (
         <>
@@ -95,8 +103,9 @@ export default function Home() {
                    
                     {(container === undefined || container === '' || container === null) &&
                         <>
-                            {/** first component when the page   */}
-                            {(component === undefined || component === '' || component === null) && <FindPrescriptionHome language={language} prescriptionFromRoute={prescriptions} getPrescriptionDetails={getPrescription} setPrescriptionDetails={setPrescription} />}
+                           
+                            {/** first component when the page   loads*/}
+                            {((component === undefined || component === '' || component === null) && !routerHasPath) && <FindPrescriptionHome language={language} prescriptionFromRoute={prescriptions} getPrescriptionDetails={getPrescription} setPrescriptionDetails={setPrescription} />}
                             {component === 'choose-your-coupon' && < ChooseYourCoupon language={language} prescriptionFromRoute={prescriptions} location={location} />}
                             {component === 'prescription' &&
                                 <FindPrescriptionHome
@@ -222,37 +231,16 @@ export default function Home() {
     );
 }
 
+export async function getStaticProps() {
+    
+    // By returning { props: posts }, the Blog component
+    // will receive `posts` as a prop at build time
+    return {
+      props: {
+        render:{},
+      },
+    }
+  }
 
 
-
-// export async function getStaticProps(){
-
-//     return {};
-// }
-
-// <Head>
-// <title>FirstRx</title>
-// <link rel="icon" href="/favicon.ico" />
-// </Head>  
- // <footer>
-      //   <a
-      //     href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-      //     target="_blank"
-      //     rel="noopener noreferrer"
-      //   >
-      //     Powered by{' '}
-      //     <img src="/vercel.svg" alt="Vercel Logo"/>
-      //   </a>
-      // </footer>
-// export async function getStaticProps(){
-//   const apolloClient = initializeApollo();
-
-//   // await apolloClient.query({
-//   //   query:"",
-//   // });
-//   // return{
-//   //   props:{
-//   //     intialApolloState: apolloClient.cache.extract(),
-//   //   }
-//   // }
-// }
+export default Home;

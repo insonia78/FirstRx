@@ -16,7 +16,9 @@
 
 const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer = undefined, prescriptionFromRoute = undefined, setPrescriptionDetails = undefined }) => {
     
-   
+
+
+    console.log('language',language);
     let manufacturer = "";
     let form = "";
     let dosage = "";
@@ -57,8 +59,8 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
                 
                 </>
             }
-            <form id="rx" className="rx">
-                <h4> {(prescriptionFromRoute !== undefined ? prescriptionFromRoute.search_name : (dataFromServer === undefined ? "" : dataFromServer[0].search_name))}</h4>
+            <div id="rx" className="rx">
+                <h4> {(prescriptionFromRoute !== undefined ? prescriptionFromRoute.search_name : (dataFromServer === undefined  ? "" : dataFromServer.length === 0 ? "" : dataFromServer[0].search_name))}</h4>
 
                 <p>
                     {(language === 'english' || language === undefined) && <><label htmlFor="mfg">Manufacturer</label></>}
@@ -151,11 +153,11 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
                                )
                             )
                         }
-
+                        {dataFromServer === undefined && <option value={quantity} > {quantity} </option>}
 
                     </select>
                 </p>
-            </form>
+            </div>
 
 
 

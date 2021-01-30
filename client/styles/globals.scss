@@ -492,8 +492,10 @@ body#Home section.help ol li {
 }
 
 /* ==Drug Information Form == */
-
-form.rx {
+.rx label{
+	display:block !important;
+}
+.rx {
 	border: 3px solid #009245;
 	border-radius: 4px;
 	margin: 0 0 1em 0;
@@ -501,14 +503,14 @@ form.rx {
 	background-color: #fff;
 }
 
-form.rx p {
+.rx p {
 	margin: 0 0 0.3em 0;
 	padding: 0;
 	display: flex;
 	align-items: center;
 }
 
-form.rx label { 
+.rx label { 
 	margin: 0 0.5em 0 0;
 	padding: 0;
 	flex: auto;
@@ -517,7 +519,7 @@ form.rx label {
 	font-size: 1em;
 }
 
-form.rx select {
+.rx select {
 	border: 1px solid #536553;
 	border-radius: 5px;
 	padding: 0.2em;
@@ -526,7 +528,7 @@ form.rx select {
 	font-size: 0.9em;
 }
 
-form.rx button {
+.rx button {
 	display: none;
 }
 
@@ -979,20 +981,24 @@ header div.flexcontainer > div.right {
 
 /* ==Rx Display Form is larger font but smaller constrained width== */
 
-form.rx {
+.rx label{
+	display:contents;
+}
+
+.rx {
 	font-size: 16px;	
 }
 
-form.rx p {
+.rx p {
 	max-width: 500px;
 	margin: 0 auto 0.4em auto;
 }
 
-form.rx label { 
+.rx label { 
 	width: 25%;
 }
 
-form.rx select {
+.rx select {
 	width: 75%;
 }
 

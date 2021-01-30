@@ -7,20 +7,28 @@ metadata:
      nginx.ingress.kubernetes.io/use-regex: 'true'
 spec:
   rules:
-    - host: firstrx.dex
+    - host: firstrx.dev
       http:
         paths:
-          - path: location/graphql
-            backend:
-              serviceName: location-srv
-              servicePort: 5000
-          - path: 
-            backend:
-              serviceName: client-srv
-              servicePort: 3000
-          - path: text-message/graphql
+          - path: /text-message/graphql
             backend:
               serviceName: text-messages-srv
               servicePort: 7000
+          # - path: /coupon/graphql
+          #   backend:
+          #     serviceName: location-srv
+          #     servicePort: 6000  
+          - path: /location/graphql
+            backend:
+              serviceName: location-srv
+              servicePort: 5000
+          - path: /prescriptions/graphql
+            backend:
+              serviceName: prescritpions-srv
+              servicePort: 4000          
+          - path: /?(.*)
+            backend:
+              serviceName: client-srv
+              servicePort: 3000
          
              

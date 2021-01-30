@@ -62,6 +62,11 @@ export default function FindPrescriptionHome({ language, location = undefined, p
 
     /**@gets @sets the value from the input field */  
   const [valueForInputValue, setValueForInputValue] = useState("");
+
+  /**@gets @sets the value from the input field */  
+  const [ifPrescriptionDetailsExists, setIfPrescriptionDetailsExists] = useState((prescriptionFromRoute !== undefined ? true:false));
+  
+ 
   
   const router = useRouter();
 
@@ -76,11 +81,11 @@ export default function FindPrescriptionHome({ language, location = undefined, p
   const [getPrescriptions, { loading: mutationLoading, error: mutationError },] = useMutation(GET_PRESCRIPTIONS, {
     onError(err) {
       console.log(err);
-
+      alert(err); 
     },
     update(proxy, result) {
       if (result.data.prescription.length === 1) {
-
+        setIfPrescriptionDetailsExists(true);
         console.log('result.data', result.data.prescription);
         setPrescriptionDetailsForPrescriptionDetailComponent(result.data.prescription);
         let data = {
@@ -131,6 +136,7 @@ export default function FindPrescriptionHome({ language, location = undefined, p
     setValueForInputValue("");
     setPrescriptionDetailsForPrescriptionDetailComponent([]);
     setResetDataFromRoute(true);
+    setIfPrescriptionDetailsExists(false);
   }
 
   /**
@@ -140,7 +146,10 @@ export default function FindPrescriptionHome({ language, location = undefined, p
   useEffect(() => {
 
     if (prescriptionFromRoute !== undefined)
+    {
       setPrescriptionsDataFromRoute();
+      setIfPrescriptionDetailsExists(true);
+    }
   }, []);
 
   /**
@@ -187,9 +196,30 @@ export default function FindPrescriptionHome({ language, location = undefined, p
           {prescriptionsforDataList}
         </datalist>
 
+        {ifPrescriptionDetailsExists &&
+        <>
+          <PrescriptionDetailedForm language={language} dataFromServer={prescriptionDetailsForPrescriptionDetailComponent} prescriptionFromRoute={prescriptionFromRoute} setPrescriptionDetails={setPrescriptionDetails} />
+          <div className="clickthrough">
+            <div onClick={() => router.push
+              (
+                {
+                  pathname: '/src/components/Home',
+                  query: {
+                    component: 'location',
+                    prescriptions: JSON.stringify(getPrescriptionDetails),
+                    location: location,
+                    language: language
+                  }
+                }
+              )
+            }> {(language === 'english' || language === undefined) && 'Next: Step2 >>'} {language === 'spanish' && '<Spanish>Next: Step2 >>'}
+            </div>
+          </div>
+          {mutationLoading && <p>Loading...</p>}
+          {mutationError && <p>Error :( Please try again</p>}
+        </>} 
 
-
-        {prescriptionDetailsForPrescriptionDetailComponent.length !== 1 && <section className="help">
+        {!ifPrescriptionDetailsExists && <section className="help">
           {(language === 'english' || language === undefined) &&
             <>
               <p>FirstRx is a free service. No login or account is needed.</p>
@@ -220,28 +250,7 @@ export default function FindPrescriptionHome({ language, location = undefined, p
 
       </form>
 
-      {prescriptionDetailsForPrescriptionDetailComponent.length === 1 &&
-        <>
-          <PrescriptionDetailedForm language={language} dataFromServer={prescriptionDetailsForPrescriptionDetailComponent} prescriptionFromRoute={prescriptionFromRoute} setPrescriptionDetails={setPrescriptionDetails} />
-          <div className="clickthrough">
-            <div onClick={() => router.push
-              (
-                {
-                  pathname: '/src/components/Home',
-                  query: {
-                    component: 'location',
-                    prescriptions: JSON.stringify(getPrescriptionDetails),
-                    location: location,
-                    language: language
-                  }
-                }
-              )
-            }> {(language === 'english' || language === undefined) && 'Next: Step2 >>'} {language === 'spanish' && '<Spanish>Next: Step2 >>'}
-            </div>
-          </div>
-          {mutationLoading && <p>Loading...</p>}
-          {mutationError && <p>Error :( Please try again</p>}
-        </>}
+      
 
 
 

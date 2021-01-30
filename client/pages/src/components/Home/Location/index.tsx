@@ -71,7 +71,7 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
   const router = useRouter();
 
   /** for alert message box */
-  const alert = useAlert();
+  //const alert = useAlert();
 
 
 
@@ -95,13 +95,13 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
   const [getLocations] = useMutation(GET_LOCATION, {
     onError(err) {
       console.log(err);
-      alert.show(err);
+      alert(err);
 
     },
     update(proxy, result) {
       try {
         if (result.data.GetLocationFromZipOrCity.code !== 200) {
-          alert.show(result.data.GetLocationFromZipOrCity.message);
+          alert(result.data.GetLocationFromZipOrCity.message);
           return;
         }
 
@@ -115,7 +115,7 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
         setLocationsFromMutation(result.data.GetLocationFromZipOrCity.predictions)
       }
       catch (e) {
-        alert.show(e);
+        alert(e);
       }
     }
   });

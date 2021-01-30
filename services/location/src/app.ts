@@ -10,7 +10,7 @@ const server = new ApolloServer({ typeDefs, resolvers,playground:true});
 const app = express();
 app.set('trust proxy', true);
 app.use(json());
-server.applyMiddleware({ app });
+server.applyMiddleware({ app, path:'/location/graphql'});
 app.all('*', async (req:any, res:any) => {
   throw new Error();
 });

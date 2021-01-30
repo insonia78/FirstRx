@@ -99,7 +99,7 @@ const CouponDetails = ({ language, windowWidth, prescription, coupon }) => {
     const [sendPhobneNumberAndCoupon] = useMutation(SEND_PHONENUMBER_AND_COUPON, {
         onError(err) {
             console.log(err);
-            //alert.show(err);
+            alert(err);
 
         },
         update(proxy, result) {
@@ -112,6 +112,7 @@ const CouponDetails = ({ language, windowWidth, prescription, coupon }) => {
             alert(`Message succesfully sent` );
         }
     });
+    
     /**
      * clears the input box
      * 
