@@ -1,10 +1,17 @@
-
+import Link from "next/link";
+import React from "react";
+import { useRouter } from 'next/router';
 
 
 
 
 
 export default function Footer() {
+
+    const router = useRouter();
+    const {
+        query: { language },
+    } = router
 
     return (
         <footer>
@@ -17,9 +24,46 @@ export default function Footer() {
 
                 <nav className="primary" aria-label="main navigation">
                     <ul>
-                        <li className="homelink"><a className="selected" href="/">Home</a></li>
-                        <li><a href="/help/">Help</a></li>
-                        <li><a href="/about/">About FirstRx</a></li>
+                        <Link
+                            href={{
+                                pathname: '/src/components/Home',
+                                query: { language: language,
+                                         component:'prescription'  
+                                        }
+                            }}>
+                            <li className="homelink cursor"><a className="selected">
+                                {(language === 'english' || language === undefined) && <>Home</>}
+                                {(language === 'spanish') && <>{'<Spanish>'}Home</>}
+                            </a>
+                            </li>
+                        </Link>
+
+                        <Link
+                            href={{
+                                pathname: '/src/components/Header/Help',
+                                query: { language: language }
+                            }}>
+                            <li className='cursor'>
+                                <a>
+                                    {(language === 'english' || language === undefined) && <>Help</>}
+                                    {(language === 'spanish') && <>{'<Spanish>'}Help</>}
+
+                                </a>
+                            </li>
+                        </Link>
+                        <Link
+                            href={{
+                                pathname: '/src/components/Header/AboutFirstRx',
+                                query: { language: language }
+                            }}><li className='cursor'><a>
+                                {(language === 'english' || language === undefined) && <>About FirstRx</>}
+                                {(language === 'spanish') && <>{'<Spanish>'}About FirstRx</>}
+
+
+
+                            </a>
+                            </li>
+                        </Link>
                     </ul>
                 </nav>
 

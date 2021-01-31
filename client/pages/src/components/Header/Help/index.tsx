@@ -44,7 +44,7 @@ export default function Help() {
 
         <article>
 
-          <h2>FirstRx Help</h2>
+         {(language === 'english' || language === undefined) && <>  <h2>FirstRx Help</h2>
 
           <p>FirstRx is a free service. No login or account is needed.</p>
 
@@ -55,6 +55,19 @@ export default function Help() {
           </ol>
 
           <p>Then FirstRx will text you a coupon that you can show to the pharmacist.</p>
+          </>}
+          {(language === 'spanish') && <> {'<Spanish>'} <h2>FirstRx Help</h2>
+
+          <p>FirstRx is a free service. No login or account is needed.</p>
+
+          <ol>
+            <li>Enter Your Prescription information (Step 1)</li>
+            <li>Indicate your location (Step 2)</li>
+            <li>Pick a coupon from the pharmacy where you’d like to go. Pharmacies might have different prices but we’ll show show you the lowest priced pharmacies first. (Step 3)</li>
+          </ol>
+
+          <p>Then FirstRx will text you a coupon that you can show to the pharmacist.</p>
+          </>}
         </article>
 
 

@@ -46,7 +46,7 @@ const CouponsTiles = ({ language, prescription, couponsData }) => {
                     <a href="#"><div>$8.09</div></a>
                 </div>
 
-                <div onClick={sendToCoupon} className="coupon_button">
+                <div onClick={sendToCoupon} className="coupon_button cursor">
                     <u>  {(language === 'english' || language === undefined) && 'Get Coupon'}
                         {(language === 'spanish') && '<Spanish>Get Coupon'}
                     </u>

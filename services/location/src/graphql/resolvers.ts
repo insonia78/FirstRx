@@ -19,9 +19,11 @@ module.exports = {
 
                 request(url, (error: any, response: any, body: any) => {
                     if (error)
-                    {
-                        console.log(error);
-                        throw { code: '500', error: 'Internal Server Error', message: 'Something went wrong' };
+                    {                        
+                        resolve({ code: '500', 
+                                  error: 'Internal Server Error', 
+                                  message: 'Something went wrong' }
+                                  );
 
                     }    
                     else {
@@ -43,7 +45,7 @@ module.exports = {
                         else{
                           b = new Error("there is an error");                                      
                         }
-                        console.log("inside geo",body);
+                       
                         resolve(body);
                     }
 

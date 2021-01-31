@@ -76,7 +76,7 @@ const ChooseYourCoupon = ({ language, prescriptionFromRoute, location }) => {
 
           {(language === 'english' || language === undefined) && <> <h3><span>Step 3 of 3: </span>Choose Your Coupon</h3></>}
           {language === 'spanish' && <><h3><span>{'<Spanish>'} Step 3 of 3: </span>Choose Your Coupon</h3></>}
-          <div className='location'>
+          <div  className='location cursor'>
             {(language === 'english' || language === undefined) &&
               <>
                 Location: {location} <u onClick={returnToLocation}>Clear</u>

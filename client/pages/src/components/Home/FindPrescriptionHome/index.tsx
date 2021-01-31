@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useMutation, gql } from "@apollo/client";
 import PrescriptionDetailedForm from '../../component/PrescriptionDetailedForm';
 import { useRouter } from 'next/router';
+import Fade from '@material-ui/core/Fade';
+import CircularProgress from '@material-ui/core/CircularProgress';
 //import styles from './../../../../../styles/FindPrescriptionHome.module.scss'; used for version 1
 
 /**
@@ -159,11 +161,11 @@ export default function FindPrescriptionHome({ language, location = undefined, p
    * @mutation getPrescriptions  
    */
   const setPrescriptionsDataFromRoute = () => {
-    prescriptionFromRoute = JSON.parse(prescriptionFromRoute);
+    let value = JSON.parse(prescriptionFromRoute);
     
-    setPrescriptionDetails(prescriptionFromRoute);
-    setValueForInputValue(prescriptionFromRoute.search_name);
-    getPrescriptions({ variables: { prescription: prescriptionFromRoute.search_name } });
+    setPrescriptionDetails(value);
+    setValueForInputValue(value.search_name);
+    //getPrescriptions({ variables: { prescription: prescriptionFromRoute.search_name } });
   }
 
   return (
@@ -176,6 +178,12 @@ export default function FindPrescriptionHome({ language, location = undefined, p
       {(language === 'english' || language === undefined) && <> <h3><span>Start Here: Step 1 of 3: </span>Your Prescription</h3></>}
       {language === 'spanish' && <><h3><span>{'<Spanish>'} Start Here: Step 1 of 3: </span>Your Prescription</h3></>}
       
+      {<Fade
+          in={mutationLoading}
+          unmountOnExit
+        >
+          <CircularProgress />
+        </Fade>}
       <form id="find_rx" className="find_rx">
         {(language === 'english' || language === undefined) && <label htmlFor="find_rx">Enter Drug Name</label>}
         {language === 'spanish' && <label htmlFor="find_rx">{'<Spanish>'}Enter Drug Name</label>}
@@ -195,12 +203,14 @@ export default function FindPrescriptionHome({ language, location = undefined, p
           id="prescriptions">
           {prescriptionsforDataList}
         </datalist>
+            
 
         {ifPrescriptionDetailsExists &&
         <>
           <PrescriptionDetailedForm language={language} dataFromServer={prescriptionDetailsForPrescriptionDetailComponent} prescriptionFromRoute={prescriptionFromRoute} setPrescriptionDetails={setPrescriptionDetails} />
           <div className="clickthrough">
-            <div onClick={() => router.push
+            <a><div className="back cursor" onClick={clearInput}>Start Over</div></a>
+            <div className='cursor' onClick={() => router.push
               (
                 {
                   pathname: '/src/components/Home',
@@ -215,11 +225,10 @@ export default function FindPrescriptionHome({ language, location = undefined, p
             }> {(language === 'english' || language === undefined) && 'Next: Step2 >>'} {language === 'spanish' && '<Spanish>Next: Step2 >>'}
             </div>
           </div>
-          {mutationLoading && <p>Loading...</p>}
-          {mutationError && <p>Error :( Please try again</p>}
+         
         </>} 
 
-        {!ifPrescriptionDetailsExists && <section className="help">
+        {(!ifPrescriptionDetailsExists && !mutationLoading) && <section className="help">
           {(language === 'english' || language === undefined) &&
             <>
               <p>FirstRx is a free service. No login or account is needed.</p>
