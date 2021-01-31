@@ -18,7 +18,7 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
     
 
 
-    console.log('language',language);
+    console.log('prescriptionFromRoute',prescriptionFromRoute, dataFromServer,dataFromServer  );
     let manufacturer = "";
     let form = "";
     let dosage = "";
@@ -79,8 +79,8 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
 
                             )
                         }
-                        {dataFromServer === undefined && <option value={manufacturer}>{manufacturer}</option>}
-
+                        {dataFromServer === undefined ? <option value={manufacturer}>{manufacturer}</option> : dataFromServer.length === 0 ? <option value={manufacturer}>{manufacturer}</option> : undefined}
+                    
                     </select>
                 </p>
 
@@ -105,7 +105,8 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
 
                             )
                         }
-                        {dataFromServer === undefined && <option value={form} >{form} </option>}
+                        {dataFromServer === undefined ? <option value={form} >{form} </option> : dataFromServer.length === 0 ? <option value={form}>{form} </option> : undefined}
+                    
                     </select>
                 </p>
 
@@ -129,8 +130,8 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
 
                             )
                         }
-                        {dataFromServer === undefined && <option value={dosage} > {dosage} </option>}
-
+                        {dataFromServer === undefined ? <option value={dosage} > {dosage} </option> : dataFromServer.length === 0 ? <option value={dosage} > {dosage} </option> : undefined}
+                    
                     </select>
                 </p>
 
@@ -153,8 +154,8 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
                                )
                             )
                         }
-                        {dataFromServer === undefined && <option value={quantity} > {quantity} </option>}
-
+                        {dataFromServer === undefined ? <option value={quantity} > {quantity} </option> : dataFromServer.length === 0 ? <option value={quantity} > {quantity} </option> : undefined}
+                    
                     </select>
                 </p>
             </div>

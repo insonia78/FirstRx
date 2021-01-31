@@ -1,8 +1,7 @@
 import Link from "next/link";
-//import Image from 'next/image';
 import React, { useEffect, useState } from "react";
-import SlidingHamburgerMenu from "../component/SlidingHamburgerMenu";
-import styles from './../../../../styles/Header.module.scss';
+//import SlidingHamburgerMenu from "../component/SlidingHamburgerMenu"; used on version 1
+//import styles from './../../../../styles/Header.module.scss'; used on version 1
 import { useRouter } from "next/router";
 
 
@@ -91,7 +90,7 @@ const Header = (props) => {
 
     return (
         <>
-             {/**
+            {/**
              * refrencing version of: 1/28/2021
              * source: https://github.com/emilynorton?tab=repositories
              */}
@@ -99,43 +98,73 @@ const Header = (props) => {
                 <div className='flexcontainer'>
                     <div className='left'>
                         <div id="logo" className="logo">
-                            <a href="/">
-                                <img src="/_images/FirstRX_logo.svg" alt="FirstRx Logo" />
-                            </a>
+                            <Link
+                                href={{
+                                    pathname: '/',
+                                    query: { language: selectedLanguage,component:'prescription'}
+                                }}><a className='cursor'>
+                                    <img src="/_images/FirstRX_logo.svg" alt="FirstRx Logo" />
+                                </a></Link>
                         </div>
                         <h1>
-                            <a href="/">
-                                <span>First Rx: </span>
-                                <span className="tagline">Low Cash Prices for Prescriptions</span>
-                            </a>
+                            <Link
+                                href={{
+                                    pathname: '/src/components/Home',
+                                    query: { language: selectedLanguage,component:'prescription'}
+                                }}><a className='cursor'>
+                                    {(selectedLanguage === 'english' || selectedLanguage === undefined) && <>
+                                        <span>First Rx: </span>
+                                        <span className="tagline">Low Cash Prices for Prescriptions</span></>}
+                                    {(selectedLanguage === 'spanish') && <>{'<Spanish>'}
+                                        <span>First Rx: </span>
+                                        <span className="tagline">Low Cash Prices for Prescriptions</span></>}
+                                </a>
+                            </Link>
                         </h1>
                     </div>
                     <div className="right">
                         <form id="language" className="language">
                             {(selectedLanguage === 'english' || selectedLanguage === undefined) && <><label htmlFor="language">Language</label></>}
                             {selectedLanguage === 'spanish' && <>{'<Spanish>'}<label htmlFor="language">Language</label></>}
-                             <button type="submit" form="language">Select</button>  </form>
-                             <select value={selectedLanguage} onChange={selecteLanguage} className='language-select' name="language" id='language'>
-                                <option value="english">English</option>
-                                <option value="spanish">Spanish</option>
-                            </select>
-                        
+                            <button type="submit" form="language">Select</button>  </form>
+                        <select value={selectedLanguage} onChange={selecteLanguage} className='language-select cursor' name="language" id='language'>
+                            <option value="english">English</option>
+                            <option value="spanish">Spanish</option>
+                        </select>
+
                         <nav className="primary" aria-label="main navigation">
                             <ul>
-                                <li className="homelink"><a className="selected" href="/">Home</a></li>
+                                <Link
+                                    href={{
+                                        pathname: '/src/components/Home',
+                                        query: { language: language }
+                                    }}>
+                                    <li className="homelink cursor"><a className="selected">
+                                        {(language === 'english' || language === undefined) && <>Home</>}
+                                        {(language === 'spanish') && <>{'<Spanish>'}Home</>}
+                                    </a>
+                                    </li>
+                                </Link>
 
-                                <Link 
-                                href={{
-                                    pathname: '/src/components/Header/Help',
-                                    query: { language: selectedLanguage }
-                                }}><li><a href="./help/">
-                                    {(selectedLanguage === 'english' || selectedLanguage === undefined) && 'Help'}
-                                    {selectedLanguage === 'spanish' && '<Spanish>Help'}</a></li></Link>
-                                    <Link 
-                                href={{
-                                    pathname: '/src/components/Header/AboutFirstRx',
-                                    query: { language: selectedLanguage }
-                                }}><li><a href="./about/">About FirstRx</a></li></Link>
+                                <Link
+                                    href={{
+                                        pathname: '/src/components/Header/Help',
+                                        query: { language: selectedLanguage }
+                                    }}><li className='cursor'><a>
+                                        {(selectedLanguage === 'english' || selectedLanguage === undefined) && 'Help'}
+                                        {selectedLanguage === 'spanish' && '<Spanish>Help'}</a></li></Link>
+                                <Link
+                                    href={{
+                                        pathname: '/src/components/Header/AboutFirstRx',
+                                        query: { language: selectedLanguage }
+                                    }}><li className='cursor'><a>
+                                        {(language === 'english' || language === undefined) && <>About FirstRx</>}
+                                        {(language === 'spanish') && <>{'<Spanish>'}About FirstRx</>}
+
+
+                                    </a>
+                                    </li>
+                                </Link>
                             </ul>
                         </nav>
                     </div>

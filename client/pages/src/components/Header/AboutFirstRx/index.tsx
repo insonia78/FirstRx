@@ -16,22 +16,13 @@ import { useRouter } from 'next/router';
 export default function AboutFirstRx() {
 
 
-  const [windowWidth, setWindowWidth] = useState(0);
-  const getSizes = () => {
-    setWindowWidth(window.innerWidth);
-  }
-
-  useEffect(() => {
-    setWindowWidth(window.innerWidth);
-    window.addEventListener(
-      "resize", getSizes, false);
-
-  });
+  // 
+  
   const router = useRouter();
   const {
     query: { language },
   } = router
-
+   
   return (
     <>
        {/**
@@ -41,9 +32,14 @@ export default function AboutFirstRx() {
       <main>
 
         <article>
+        {(language === 'english' || language === undefined) && <> 
           <h2>About First Rx</h2>
           <p>About information goes here...</p>
-
+         </>}
+         {(language === 'spanish') && <>{'<Spanish>'} 
+          <h2>About First Rx</h2>
+          <p>About information goes here...</p>
+         </>}  
         </article>
 
       </main>

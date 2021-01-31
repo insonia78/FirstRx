@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { useMutation, gql } from '@apollo/client';
 import { useRouter } from 'next/router';
-import { makeStyles } from '@material-ui/core/styles';
 import Fade from '@material-ui/core/Fade';
-import Button from '@material-ui/core/Button';
 import CircularProgress from '@material-ui/core/CircularProgress';
-import Typography from '@material-ui/core/Typography';
 //import styles from '../../../../../styles/Location.module.scss'; used on version 1
-import { useAlert } from 'react-alert';
+
 
 /**
  * @context location
@@ -220,10 +217,7 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
       getAddressFromLatAndLng(latitude, longitude);
     });
   }
-
-  const stopSetLoading = () =>{
-    setLoading(false);
-  }
+  
   /**
    * set the location passed from useRoute 
    */
@@ -253,7 +247,7 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
        
         {((Object.keys(getLocation).length !== 0 && valueForInputValue !== undefined) ?
           <div className="results">
-            {valueForInputValue} <u onClick={clearInput}>
+            {valueForInputValue} <u className='cursor' onClick={clearInput}>
               {(language === 'english' || language === undefined) && 'Clear'}
               {language === 'spanish' && '<Spanish>Clear'}
             </u>
@@ -277,10 +271,10 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
         {(Object.keys(getLocation).length === 0) && <><div onClick={getCurrentPosition}>
           {(language === 'english' || language === undefined) &&
             <>
-              Or...<u>Detect Location</u>
+              Or...<u className='cursor'>Detect Location</u>
             </>}
           {language === 'spanish' && <>{'<Spanish>'}
-              Or...<u>Detect Location</u>
+              Or...<u className='cursor'>Detect Location</u>
           </>}
         </div></>}
 
@@ -290,7 +284,7 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
       <p className="instructions">Enter a location close to where you'd like to pick up your prescription.</p>
 
       <div className="clickthrough">
-        <div className="back" onClick={() => router.push
+        <div className="back cursor" onClick={() => router.push
           (
             {
               pathname: '/src/components/Home',
@@ -310,7 +304,7 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
 
         {((Object.keys(getLocation).length !== 0) || location) &&
 
-          <div onClick={() => router.push
+          <div className='cursor' onClick={() => router.push
             (
               {
                 pathname: '/src/components/Home',

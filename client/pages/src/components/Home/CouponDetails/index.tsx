@@ -133,10 +133,10 @@ const CouponDetails = ({ language, windowWidth, prescription, coupon }) => {
               <Link href={
                         {
                             pathname: '/',
-                            query: { language: language }
+                            query: { language: language,component:'prescription' }
                         }
                     } as='/'>
-                        <p className="start_over">
+                        <p className="start_over cursor">
                             <u>
                                 {(language === 'english' || language === undefined) && 'New Search'}
                                 {language === 'spanish' && '<Spanish> New Search'}
@@ -170,7 +170,7 @@ const CouponDetails = ({ language, windowWidth, prescription, coupon }) => {
                             pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
 							<button type="submit" form="text_coupon">Text Me The Coupon</button>
 							<div>
-                                <div onClick={sendCouponAndPhoneNumber}>
+                                <div className='cursor' onClick={sendCouponAndPhoneNumber}>
                                     {(language === 'english' || language === undefined) && 'Text Me The Coupon'}
                                     {language === 'spanish' && '<Spanish> Text Me The Coupon'}                                
                                 </div>
