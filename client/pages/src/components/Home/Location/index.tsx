@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useMutation, gql } from '@apollo/client';
 import { useRouter } from 'next/router';
+import { makeStyles } from '@material-ui/core/styles';
+import Fade from '@material-ui/core/Fade';
+import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import Typography from '@material-ui/core/Typography';
 //import styles from '../../../../../styles/Location.module.scss'; used on version 1
 import { useAlert } from 'react-alert';
 
@@ -52,6 +57,9 @@ mutation GetLocationFromZipOrCity($value:String){
 
 const Location = ({ language, prescriptionFromRoute, location }) => {
 
+
+  const [loading, setLoading] = useState(false);
+
   /**@gets @sets the locations array from the mutation */
   const [locationsFromMutation, setLocationsFromMutation] = useState([]);
 
@@ -69,6 +77,14 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
 
 
   const router = useRouter();
+
+
+
+
+  const handleClickLoading = () => {
+    setLoading((prevLoading) => !prevLoading);
+  };
+
 
   /** for alert message box */
   //const alert = useAlert();
@@ -92,7 +108,7 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
    * @variable event.target.value
    * @context location  for Apollo.Link     
    */
-  const [getLocations] = useMutation(GET_LOCATION, {
+  const [getLocations,{loading:mutationLoading}] = useMutation(GET_LOCATION, {
     onError(err) {
       console.log(err);
       alert(err);
@@ -104,12 +120,15 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
           alert(result.data.GetLocationFromZipOrCity.message);
           return;
         }
-
+         
         if (result.data.GetLocationFromZipOrCity.results !== null) {
-
+          setValueForInputValue(undefined); 
           const location = result.data.GetLocationFromZipOrCity.results[0].geometry.location;
           getAddressFromLatAndLng(location.lat, location.lng);
           setLocationsFromMutation(result.data.GetLocationFromZipOrCity.results);
+          window.setTimeout(() => {
+            setLoading(false);
+          }, 2000);
           return;
         }
         setLocationsFromMutation(result.data.GetLocationFromZipOrCity.predictions)
@@ -132,6 +151,7 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
 
     setValueForInputValue(e.target.value);
     getLocations({ variables: { value: e.target.value }, context: { clientName: 'location' } });
+    setLoading(mutationLoading);
 
   }
 
@@ -184,8 +204,8 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
         state: obj.principalSubdivisionCode.split('-')[1],
       };
       setLocation(myLocation);
-      myLocation = ` ${myLocation.postCode}, ${myLocation.city}, ${myLocation.state}`;
-      setValueForInputValue(myLocation);
+      let valueMyLocation = ` ${myLocation.postCode}, ${myLocation.city}, ${myLocation.state}`;
+      setValueForInputValue(valueMyLocation);
     }
     var handleError = function (err) {
       console.warn(err);
@@ -209,6 +229,9 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
     });
   }
 
+  const stopSetLoading = () =>{
+    setLoading(false);
+  }
   /**
    * set the location passed from useRoute 
    */
@@ -234,8 +257,9 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
       <form id="location" className="location">
         {(language === 'english' || language === undefined) && <><label htmlFor="find_rx">Enter Your location</label></>}
         {(language === 'spanish') && <>{'<Spanish>'}<label htmlFor="find_rx">Enter Your location</label></>}
-
-        {(locationsFromMutation.length === 1 ?
+        
+       
+        {((Object.keys(getLocation).length !== 0 && valueForInputValue !== undefined) ?
           <div className="results">
             {valueForInputValue} <u onClick={clearInput}>
               {(language === 'english' || language === undefined) && 'Clear'}
@@ -252,8 +276,13 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
             </datalist>
           </>)
         }
-
-        {locationsFromMutation.length !== 1 && <><div onClick={getCurrentPosition}>
+        {<Fade
+          in={mutationLoading}
+          unmountOnExit
+        >
+          <CircularProgress />
+        </Fade>}
+        {(Object.keys(getLocation).length === 0) && <><div onClick={getCurrentPosition}>
           {(language === 'english' || language === undefined) &&
             <>
               Or...<u>Detect Location</u>
@@ -287,7 +316,7 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
 
         </div>
 
-        {((Object.keys(getLocation).length !== 0 && getLocation.constructor === Object) || location) &&
+        {((Object.keys(getLocation).length !== 0) || location) &&
 
           <div onClick={() => router.push
             (
@@ -301,6 +330,7 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
                 },
               })
           }>
+            
             {(language === 'english' || language === undefined) && 'Next: Step3'}
             {language === 'spanish' && '<Spanish>Next: Step3'}
             {'>>'}
