@@ -1,6 +1,9 @@
 const request = require('postman-request');
-
 const { response } = require('express');
+
+//https://developers.google.com/maps/documentation/geocoding/overview#ReverseGeocoding
+//https://developers.google.com/places/web-service/autocomplete#location_biasing
+
 
 module.exports = {
     Mutation: {

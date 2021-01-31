@@ -1,10 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { useMutation, gql } from '@apollo/client';
 import { useRouter } from 'next/router';
-import styles from '../../../../../styles/Location.module.scss';
+//import styles from '../../../../../styles/Location.module.scss'; used on version 1
 import { useAlert } from 'react-alert';
 
-/** uses Location service api*/
+/**
+ * @context location
+ * 
+ * uses 
+ * 
+ * @serviceApi location
+ *  
+ * 
+ */
 const GET_LOCATION = gql`
 mutation GetLocationFromZipOrCity($value:String){
       GetLocationFromZipOrCity(value:$value)
@@ -29,17 +37,23 @@ mutation GetLocationFromZipOrCity($value:String){
 `;
 
 /**
+ * @Pages
+ * 
  * Location page to detect current position or find loation
  * uses location service
+ * 
+ * refrencing version of: 1/28/2021
+ * source: https://github.com/emilynorton?tab=repositories
  * 
  * @param language the language to display the data 
  * @param prescriptionFromRoute the prescription been pased when useRoute is used
  * @param location the location passed from the route
  */
+
 const Location = ({ language, prescriptionFromRoute, location }) => {
 
-  /**@gets @sets the locations array from the mutation */ 
-  const [locationsFromMutation,setLocationsFromMutation] = useState([]);
+  /**@gets @sets the locations array from the mutation */
+  const [locationsFromMutation, setLocationsFromMutation] = useState([]);
 
   /** @gets @sets the selected location  */
   const [getLocation, setLocation] = useState({});
@@ -55,9 +69,9 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
 
 
   const router = useRouter();
-  
- /** for alert message box */
-  const alert = useAlert();
+
+  /** for alert message box */
+  //const alert = useAlert();
 
 
 
@@ -80,46 +94,47 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
    */
   const [getLocations] = useMutation(GET_LOCATION, {
     onError(err) {
-      
-      alert.error(err);
+      console.log(err);
+      alert(err);
 
     },
     update(proxy, result) {
       try {
         if (result.data.GetLocationFromZipOrCity.code !== 200) {
-          alert.show(result.data.GetLocationFromZipOrCity.message);
+          alert(result.data.GetLocationFromZipOrCity.message);
           return;
         }
 
         if (result.data.GetLocationFromZipOrCity.results !== null) {
 
           const location = result.data.GetLocationFromZipOrCity.results[0].geometry.location;
-
           getAddressFromLatAndLng(location.lat, location.lng);
+          setLocationsFromMutation(result.data.GetLocationFromZipOrCity.results);
           return;
         }
         setLocationsFromMutation(result.data.GetLocationFromZipOrCity.predictions)
       }
       catch (e) {
-        alert.show(e);
+        alert(e);
       }
     }
   });
- 
+
   /**
    * Respondes to onChange function from input box
    * set the value and context for the GraphQl call 
+   * 
    * @useState setValueForInputValue
    * @mutation getLocations
    * @event e
-   */  
+   */
   const searchLocation = (e) => {
 
     setValueForInputValue(e.target.value);
     getLocations({ variables: { value: e.target.value }, context: { clientName: 'location' } });
 
   }
-  
+
   /**
    * Clears and resets the values from the input box 
    * 
@@ -132,6 +147,7 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
     setValueForInputValue("");
     setReset(true);
     setLocation({});
+    setLocationsFromMutation([]);
   }
 
   /**
@@ -179,7 +195,7 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
       }));
     };
   }
-  
+
   /**
    * Get's the Current position of the user
    * 
@@ -204,11 +220,103 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
   }, []);
 
 
- 
+
   return (
     <div>
-      {reset && (location = undefined)}
+      {/**
+       * refrencing version of: 1/28/2021
+       * source: https://github.com/emilynorton?tab=repositories
+       */}
 
+      {reset && (location = undefined)}
+      {(language === 'english' || language === undefined) && <> <h3><span>Step 2 of 3: </span>Your Location</h3></>}
+      {language === 'spanish' && <><h3><span>{'<Spanish>'} Step 2 of 3: </span>Your Prescription</h3></>}
+      <form id="location" className="location">
+        {(language === 'english' || language === undefined) && <><label htmlFor="find_rx">Enter Your location</label></>}
+        {(language === 'spanish') && <>{'<Spanish>'}<label htmlFor="find_rx">Enter Your location</label></>}
+
+        {(locationsFromMutation.length === 1 ?
+          <div className="results">
+            {valueForInputValue} <u onClick={clearInput}>
+              {(language === 'english' || language === undefined) && 'Clear'}
+              {language === 'spanish' && '<Spanish>Clear'}
+            </u>
+          </div>
+          :
+          <>
+            <input value={valueForInputValue} autoComplete="off" onFocus={(e) => clearInput(e)} placeholder="Type City or Zip Code" type="text" list="Locations" onChange={searchLocation} id="location" />
+            <datalist id="Locations">
+              {locationsFromMutation.map((element, index) =>
+                <option key={`location${index}`} value={element.description} />
+              )}
+            </datalist>
+          </>)
+        }
+
+        {locationsFromMutation.length !== 1 && <><div onClick={getCurrentPosition}>
+          {(language === 'english' || language === undefined) &&
+            <>
+              Or...<u>Detect Location</u>
+            </>}
+          {language === 'spanish' && <>{'<Spanish>'}
+              Or...<u>Detect Location</u>
+          </>}
+        </div></>}
+
+        <button type="submit" form="location">Map My Location</button>
+
+      </form>
+      <p className="instructions">Enter a location close to where you'd like to pick up your prescription.</p>
+
+      <div className="clickthrough">
+        <div className="back" onClick={() => router.push
+          (
+            {
+              pathname: '/src/components/Home',
+              query: {
+                component: 'prescription',
+                prescriptions: prescriptionFromRoute,
+                location: valueForInputValue.trim(),
+                language: language
+
+              }
+            })
+        }>{'<<'}
+          {(language === 'english' || language === 'undefined') && "Step 1"}
+          {(language === 'spanish') && "<Spanish>Step 1"}`
+
+        </div>
+
+        {((Object.keys(getLocation).length !== 0 && getLocation.constructor === Object) || location) &&
+
+          <div onClick={() => router.push
+            (
+              {
+                pathname: '/src/components/Home',
+                query: {
+                  component: 'choose-your-coupon',
+                  prescriptions: prescriptionFromRoute,
+                  location: valueForInputValue.trim(),
+                  language: language
+                },
+              })
+          }>
+            {(language === 'english' || language === undefined) && 'Next: Step3'}
+            {language === 'spanish' && '<Spanish>Next: Step3'}
+            {'>>'}
+          </div>}
+      </div>
+
+
+
+      {/*
+        used in version 1 with wire frames
+        // version 1 from wire frames
+        // https://www.figma.com/proto/f1Af0b6joE7OVyo4R4hb7i/FirstRx-Design?node-id=25%3A1&viewport=520%2C440%2C0.5&scaling=min-zoom
+        // https://www.figma.com/proto/f1Af0b6joE7OVyo4R4hb7i/FirstRx-Design?node-id=102%3A1390&viewport=212%2C389%2C0.5&scaling=min-zoom
+        // https://www.figma.com/proto/f1Af0b6joE7OVyo4R4hb7i/FirstRx-Design?node-id=349%3A797&viewport=317%2C508%2C0.5&scaling=scale-down 
+
+      
       <span className={styles.desktop_main_left_find_prescription_home_title}>
         {console.log('language', language)}
         {(language === 'english' || language === undefined) && 'Step 2: Your Location'}
@@ -287,7 +395,7 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
           {(language === 'english' || language === 'undefined') && ` ${(windowWidth > 520 ? "Step 1: Your Prescription" : "Step 1")}`}
           {(language === 'spanish') && `${(windowWidth > 520 ? "<Spanish>Step 1: Your Prescription" : "<Spanish>Step 1")}`}
         </u>
-      </div>
+      </div> */}
 
     </div>
 

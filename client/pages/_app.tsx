@@ -55,7 +55,7 @@ function MyApp({ Component, pageProps }) {
       <_Head />
       < Header />
       <Component {...pageProps} />
-      {/* <Footer /> */}
+      <Footer />
       </AlertProvider>
     </ApolloProvider>
 

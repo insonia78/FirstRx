@@ -1,61 +1,161 @@
 import Link from "next/link";
+//import Image from 'next/image';
 import React, { useEffect, useState } from "react";
 import SlidingHamburgerMenu from "../component/SlidingHamburgerMenu";
 import styles from './../../../../styles/Header.module.scss';
 import { useRouter } from "next/router";
 
+
+/**
+ * @Header
+ * 
+ * Header of the application
+ * 
+ * refrencing version of: 1/28/2021
+ * source: https://github.com/emilynorton?tab=repositories   
+ * 
+ * @param props 
+ */
 const Header = (props) => {
-   const[windowWidth, setWindowWidth] = useState(0);
-   const [menuOpen,setOpenMenu] = useState(false);
-   const[selectedLanguage,setSelectedLanguage] = useState('english'); 
-   const router = useRouter(); 
-   const {
-    query: { component,
-        prescriptions,
-        location,
-        coupon,
-        container,
-        language  },
-} = router;
-   const getSizes = () => { 
-    setWindowWidth(window.innerWidth);
-       
-  }
-  const selecteLanguage = (e) =>{
-      console.log(e.target.value);
-      setSelectedLanguage(e.target.value);
-      router.push(
-        {
-          pathname: router.pathname,
-          query: { component: component, 
-          prescriptions:prescriptions,
-          location:location, 
-          coupon:coupon,
-          container:container,
-          language:e.target.value  
 
-        },
-        });
+    const [windowWidth, setWindowWidth] = useState(0);
+    /**@gets @sets the open hamburger menu used for version 1 */
+    const [menuOpen, setOpenMenu] = useState(false);
 
-  }
-  const openMenu = ()=>{
-      setOpenMenu(!menuOpen);
+    /**@gets @sets language type */
+    const [selectedLanguage, setSelectedLanguage] = useState('english');
 
-  }
-   useEffect(()=>{
-       setWindowWidth(window.innerWidth);
-       window.addEventListener(
-        "resize", getSizes, false);
-        console.log('width', window.innerWidth);      
-  
+    const router = useRouter();
+
+    const {
+        query: { component,
+            prescriptions,
+            location,
+            coupon,
+            container,
+            language },
+    } = router;
+
+    const getSizes = () => {
+        setWindowWidth(window.innerWidth);
+
+    }
+
+    /**
+     * Selects the lanugage for which to diplay the data
+     * options: English, Spanish
+     * 
+     * @useState setSetectedLanugage
+     * @event e 
+     */
+    const selecteLanguage = (e) => {
+        console.log(e.target.value);
+        setSelectedLanguage(e.target.value);
+        router.push(
+            {
+                pathname: router.pathname,
+                query: {
+                    component: component,
+                    prescriptions: prescriptions,
+                    location: location,
+                    coupon: coupon,
+                    container: container,
+                    language: e.target.value
+
+                },
+            });
+
+    }
+    /**
+     * Uset for hamburger menu for version 1
+     * @useState setOpenMenu
+     */
+    const openMenu = () => {
+        setOpenMenu(!menuOpen);
+
+    }
+    /**
+     * set's the width of the window
+     * used in version 1
+     *      
+     */
+
+    useEffect(() => {
+        setWindowWidth(window.innerWidth);
+        window.addEventListener(
+            "resize", getSizes, false);
+        console.log('width', window.innerWidth);
+
     });
-    
-    
+
+
     return (
-        <>        
-        <header className={styles.header_desktop_container}>
+        <>
+             {/**
+             * refrencing version of: 1/28/2021
+             * source: https://github.com/emilynorton?tab=repositories
+             */}
+            <header>
+                <div className='flexcontainer'>
+                    <div className='left'>
+                        <div id="logo" className="logo">
+                            <a href="/">
+                                <img src="/_images/FirstRX_logo.svg" alt="FirstRx Logo" />
+                            </a>
+                        </div>
+                        <h1>
+                            <a href="/">
+                                <span>First Rx: </span>
+                                <span className="tagline">Low Cash Prices for Prescriptions</span>
+                            </a>
+                        </h1>
+                    </div>
+                    <div className="right">
+                        <form id="language" className="language">
+                            {(selectedLanguage === 'english' || selectedLanguage === undefined) && <><label htmlFor="language">Language</label></>}
+                            {selectedLanguage === 'spanish' && <>{'<Spanish>'}<label htmlFor="language">Language</label></>}
+                             <button type="submit" form="language">Select</button>  </form>
+                             <select value={selectedLanguage} onChange={selecteLanguage} className='language-select' name="language" id='language'>
+                                <option value="english">English</option>
+                                <option value="spanish">Spanish</option>
+                            </select>
+                        
+                        <nav className="primary" aria-label="main navigation">
+                            <ul>
+                                <li className="homelink"><a className="selected" href="/">Home</a></li>
+
+                                <Link 
+                                href={{
+                                    pathname: '/src/components/Header/Help',
+                                    query: { language: selectedLanguage }
+                                }}><li><a href="./help/">
+                                    {(selectedLanguage === 'english' || selectedLanguage === undefined) && 'Help'}
+                                    {selectedLanguage === 'spanish' && '<Spanish>Help'}</a></li></Link>
+                                    <Link 
+                                href={{
+                                    pathname: '/src/components/Header/AboutFirstRx',
+                                    query: { language: selectedLanguage }
+                                }}><li><a href="./about/">About FirstRx</a></li></Link>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+            </header>
+
+
+
+            {/* Version 1 of the application referincing wire frames 
+               version 1 
+               // https://www.figma.com/proto/f1Af0b6joE7OVyo4R4hb7i/FirstRx-Design?node-id=25%3A1&viewport=520%2C440%2C0.5&scaling=min-zoom
+               // https://www.figma.com/proto/f1Af0b6joE7OVyo4R4hb7i/FirstRx-Design?node-id=102%3A1390&viewport=212%2C389%2C0.5&scaling=min-zoom
+               // https://www.figma.com/proto/f1Af0b6joE7OVyo4R4hb7i/FirstRx-Design?node-id=349%3A797&viewport=317%2C508%2C0.5&scaling=scale-down 
+
+                
+            <header className={styles.header_desktop_container}>
+
             
-            <div className={styles.header_desktop}>                
+              
+             <div className={styles.header_desktop}>                
                 <div className={styles.header_desktop_title_container} >
                     FirstRx
                     </div>
@@ -121,8 +221,9 @@ const Header = (props) => {
                 </nav>}    
                 
             </div>
-        </header>
-         <SlidingHamburgerMenu language={selectedLanguage} menuOpen={menuOpen} setOpenMenu={ openMenu}/>
+            </header>
+            <SlidingHamburgerMenu language={selectedLanguage} menuOpen={menuOpen} setOpenMenu={ openMenu}/>
+         */}
         </>
 
     );

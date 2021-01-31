@@ -22,7 +22,7 @@
     "graphql": "^15.4.0",
     "graphql-scalars": "^1.6.1",
     "micro": "^9.3.4",
-    "next": "^9.4.4",
+    "next": "^10.0.5",
     "nextjs-fonts": "^0.22.0",
     "node-nats-streaming": "^0.3.2",
     "qs": "^6.5.2",

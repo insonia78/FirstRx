@@ -28,13 +28,16 @@ const baseUri = new HttpLink({
     uri: "/api/graphql"
 })
 const locationUri = new HttpLink({
-    uri: "http://localhost:5000/graphql"
+    uri: `${process.env.LOCATION_SERVICE_API_URL}/graphql`
 })
 const prescriptionsUri = new HttpLink({
-    uri: "http://locahost:4000/graphql"
+    uri: `${process.env.PRESCRIPTIONS_SERVICE_API_URL}/graphql`
 })
 const couponUri = new HttpLink({
-    uri: "http://locahost:4000/graphql"
+    uri: `${process.env.COUPON_SERVICE_API_URL}/graphql`
+})
+const textMessageUri = new HttpLink({
+    uri: `${process.env.TEXT_MESSAGE_SERVICE_API_URL}/graphql`
 })
 
 let helperValue= new HelperValue();;
@@ -51,10 +54,6 @@ function createIsomorphicLink() {
     //return new HttpLink({ uri: "/api/graphql" });
     return undefined;
 }
-function Check(operation){
-    return operation.getContext().clientName === 'coupon'? couponUri:baseUri;
-}
-
 function createApolloClient() {
 
     return new ApolloClient({
@@ -70,7 +69,10 @@ function createApolloClient() {
                     locationUri,                    
                     ApolloLink.split(operation => operation.getContext().clientName === 'coupon',                        
                     couponUri,
+                    ApolloLink.split(operation => operation.getContext().clientName === 'textMessage',                        
+                    textMessageUri,
                     baseUri
+                      )
                     
                     )
             
