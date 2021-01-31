@@ -56,9 +56,7 @@ mutation GetLocationFromZipOrCity($value:String){
  */
 
 const Location = ({ language, prescriptionFromRoute, location }) => {
-
-
-  const [loading, setLoading] = useState(false);
+ 
 
   /**@gets @sets the locations array from the mutation */
   const [locationsFromMutation, setLocationsFromMutation] = useState([]);
@@ -81,10 +79,7 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
 
 
 
-  const handleClickLoading = () => {
-    setLoading((prevLoading) => !prevLoading);
-  };
-
+  
 
   /** for alert message box */
   //const alert = useAlert();
@@ -125,10 +120,7 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
           setValueForInputValue(undefined); 
           const location = result.data.GetLocationFromZipOrCity.results[0].geometry.location;
           getAddressFromLatAndLng(location.lat, location.lng);
-          setLocationsFromMutation(result.data.GetLocationFromZipOrCity.results);
-          window.setTimeout(() => {
-            setLoading(false);
-          }, 2000);
+          setLocationsFromMutation(result.data.GetLocationFromZipOrCity.results);         
           return;
         }
         setLocationsFromMutation(result.data.GetLocationFromZipOrCity.predictions)
@@ -151,7 +143,7 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
 
     setValueForInputValue(e.target.value);
     getLocations({ variables: { value: e.target.value }, context: { clientName: 'location' } });
-    setLoading(mutationLoading);
+    
 
   }
 
