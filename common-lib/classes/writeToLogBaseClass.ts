@@ -1,7 +1,7 @@
 import path from 'path';
 import fs from 'fs';
 
-module.exports =  class  WriteToLogBaseClass{
+export default class  WriteToLogBaseClass{
       private file:string;
       private iterationTimes = 0;
       private setTimeOutReference:any;

@@ -12,6 +12,7 @@
   "dependencies": {
     "@types/node": "^14.14.21",
     "apollo-server-express": "^2.19.2",
+    "common-lib": "file:..\\..\\common-lib",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-async-errors": "^3.1.1",

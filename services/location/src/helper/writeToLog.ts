@@ -1,4 +1,4 @@
-const { WriteToLogBaseClass } = require('./../../../../common/');
+const { WriteToLogBaseClass } = require('common-lib');
 const json_p  = require('./../../package.json');
 
 
