@@ -1,4 +1,4 @@
-import   WriteToLogBaseClass  from './classes/writeToLogBaseClass';
+//import   WriteToLogBaseClass  from './classes/writeToLogBaseClass';
 
 
 // export * from './enum/subjects.enum';
@@ -13,4 +13,5 @@ import   WriteToLogBaseClass  from './classes/writeToLogBaseClass';
 // export * from './events/base-listener';
 // export * from './events/base-publisher';
 
-module.exports.WriteToLogBaseClass =  WriteToLogBaseClass ;
+
+export * as WriteToLogBaseClass from './classes/writeToLogBaseClass';

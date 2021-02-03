@@ -1,16 +1,19 @@
 import path from 'path';
 import fs from 'fs';
 
-export default class  WriteToLogBaseClass{
+
+ class  WriteToLogBaseClass{
       private file:string;
       private iterationTimes = 0;
       private setTimeOutReference:any;
       private serviceName:string;
+
      constructor(filename:string,serviceName:string){
            this.file = `${process.cwd()}/${filename}`;
            this.serviceName = serviceName
      }
-     public writeToLog(value:any){
+
+      public writeToLog(value:any){
       let time =  new Date().toISOString();
       fs.appendFile(this.file, `${time}:${this.serviceName} ${value}`, (err) => {
             if (err){
@@ -38,3 +41,4 @@ export default class  WriteToLogBaseClass{
       
 }
 
+export { WriteToLogBaseClass}

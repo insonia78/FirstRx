@@ -1,6 +1,6 @@
 const request = require('postman-request');
 import { response } from 'express';
-import  writeToLog  from './../../src/helper/writeToLog';
+import  {writeToLog}  from './../../src/helper/writeToLog';
 
 
 //https://developers.google.com/maps/documentation/geocoding/overview#ReverseGeocoding

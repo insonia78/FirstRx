@@ -1,21 +1,23 @@
-const { WriteToLogBaseClass } = require('common-lib');
+import { WriteToLogBaseClass } from 'first-rx-common-lib';
 const json_p  = require('./../../package.json');
 
 
-class writeToLog extends WriteToLogBaseClass {
+class writeToLogClass extends WriteToLogBaseClass.WriteToLogBaseClass {
 
             constructor(fileName:string,serviceName:string){
-                super(fileName,serviceName)
+                  super(fileName,serviceName)
                 
             }
-            public writeToLog(value:string)
-            {
-                      super.writeToLog(value);
-            }
-            public getServiceName(){
+            // public writeToLog(value:string)
+            // {
+            //           super.writeToLog(value);
+            // }
+            // public getServiceName(){
                    
-                return super.getServiceName();
-            }
+            //     return super.getServiceName();
+            // }
 }
 
-export default new writeToLog('log',json_p.name);
+const writeToLog  = new writeToLogClass('log',json_p.name);
+console.log(writeToLog.getServiceName());
+export {writeToLog }
