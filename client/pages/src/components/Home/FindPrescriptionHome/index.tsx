@@ -4,7 +4,7 @@ import PrescriptionDetailedForm from '../../component/PrescriptionDetailedForm';
 import { useRouter } from 'next/router';
 import Fade from '@material-ui/core/Fade';
 import CircularProgress from '@material-ui/core/CircularProgress';
-//import styles from './../../../../../styles/FindPrescriptionHome.module.scss'; used for version 1
+import styles from './../../../../../styles/FindPrescriptionHome.module.scss';
 
 /**
  * @context prescription
@@ -53,23 +53,23 @@ mutation  prescription($prescription:String){
 
 export default function FindPrescriptionHome({ language, location = undefined, prescriptionFromRoute, getPrescriptionDetails, setPrescriptionDetails }) {
 
- /**@gets @sets the prescriptions array passed in from the mutation used for datalist */
+  /**@gets @sets the prescriptions array passed in from the mutation used for datalist */
   const [prescriptionsforDataList, setPrescriptionsForDataList] = useState([]);
-  
+
   /**@gets @sets The prescriptionDetails to be passed in the Prescriptions Detail component */
   const [prescriptionDetailsForPrescriptionDetailComponent, setPrescriptionDetailsForPrescriptionDetailComponent] = useState([]);
- 
+
   /** @gets @sets resets a flag to set prescritpionFromRoute to null */
   const [resetDataFromRoute, setResetDataFromRoute] = useState(false);
 
-    /**@gets @sets the value from the input field */  
+  /**@gets @sets the value from the input field */
   const [valueForInputValue, setValueForInputValue] = useState("");
 
-  /**@gets @sets the value from the input field */  
-  const [ifPrescriptionDetailsExists, setIfPrescriptionDetailsExists] = useState((prescriptionFromRoute !== undefined ? true:false));
-  
- 
-  
+  /**@gets @sets the value from the input field */
+  const [ifPrescriptionDetailsExists, setIfPrescriptionDetailsExists] = useState((prescriptionFromRoute !== undefined ? true : false));
+
+
+
   const router = useRouter();
 
 
@@ -83,7 +83,7 @@ export default function FindPrescriptionHome({ language, location = undefined, p
   const [getPrescriptions, { loading: mutationLoading, error: mutationError },] = useMutation(GET_PRESCRIPTIONS, {
     onError(err) {
       console.log(err);
-      alert(err); 
+      alert(err);
     },
     update(proxy, result) {
       if (result.data.prescription.length === 1) {
@@ -108,8 +108,8 @@ export default function FindPrescriptionHome({ language, location = undefined, p
       result.data.prescription.forEach((element, index) => {
         options.push(<option key={`prescription${index}`} value={element.search_name} />);
 
-      }) 
-      console.log('options',options);   
+      })
+      console.log('options', options);
       setPrescriptionsForDataList(options);
     }
   });
@@ -147,8 +147,7 @@ export default function FindPrescriptionHome({ language, location = undefined, p
    */
   useEffect(() => {
 
-    if (prescriptionFromRoute !== undefined)
-    {
+    if (prescriptionFromRoute !== undefined) {
       setPrescriptionsDataFromRoute();
       setIfPrescriptionDetailsExists(true);
     }
@@ -162,28 +161,27 @@ export default function FindPrescriptionHome({ language, location = undefined, p
    */
   const setPrescriptionsDataFromRoute = () => {
     let value = JSON.parse(prescriptionFromRoute);
-    
+
     setPrescriptionDetails(value);
     setValueForInputValue(value.search_name);
     //getPrescriptions({ variables: { prescription: prescriptionFromRoute.search_name } });
   }
 
   return (
-    <div>
+    <div className={`${mutationLoading ? 'circular_progress_container' : ''}`}>
       {/**
        * refrencing version of: 1/28/2021
        * source: https://github.com/emilynorton?tab=repositories
        */}
+      {mutationLoading && < div className='circular_progress'>
+        <CircularProgress style={{ width: '6vmax', height: '6vmax' }} />
+      </div>}
+
       {resetDataFromRoute && (prescriptionFromRoute = undefined)}
       {(language === 'english' || language === undefined) && <> <h3><span>Start Here: Step 1 of 3: </span>Your Prescription</h3></>}
       {language === 'spanish' && <><h3><span>{'<Spanish>'} Start Here: Step 1 of 3: </span>Your Prescription</h3></>}
-      
-      {<Fade
-          in={mutationLoading}
-          unmountOnExit
-        >
-          <CircularProgress />
-        </Fade>}
+
+
       <form id="find_rx" className="find_rx">
         {(language === 'english' || language === undefined) && <label htmlFor="find_rx">Enter Drug Name</label>}
         {language === 'spanish' && <label htmlFor="find_rx">{'<Spanish>'}Enter Drug Name</label>}
@@ -202,33 +200,33 @@ export default function FindPrescriptionHome({ language, location = undefined, p
           className="desktop-main-left-find-prescription-home-datalist"
           id="prescriptions">
           {prescriptionsforDataList}
-        </datalist>
-            
+        </datalist>     
+
 
         {ifPrescriptionDetailsExists &&
-        <>
-          <PrescriptionDetailedForm language={language} dataFromServer={prescriptionDetailsForPrescriptionDetailComponent} prescriptionFromRoute={prescriptionFromRoute} setPrescriptionDetails={setPrescriptionDetails} />
-          <div className="clickthrough">
-            <a><div className="back cursor" onClick={clearInput}>Start Over</div></a>
-            <div className='cursor' onClick={() => router.push
-              (
-                {
-                  pathname: '/src/components/Home',
-                  query: {
-                    component: 'location',
-                    prescriptions: JSON.stringify(getPrescriptionDetails),
-                    location: location,
-                    language: language
+          <>
+            <PrescriptionDetailedForm language={language} dataFromServer={prescriptionDetailsForPrescriptionDetailComponent} prescriptionFromRoute={prescriptionFromRoute} setPrescriptionDetails={setPrescriptionDetails} />
+            <div className="clickthrough">
+              <a><div className="back cursor" onClick={clearInput}>Start Over</div></a>
+              <div className='cursor' onClick={() => router.push
+                (
+                  {
+                    pathname: '/src/components/Home',
+                    query: {
+                      component: 'location',
+                      prescriptions: JSON.stringify(getPrescriptionDetails),
+                      location: location,
+                      language: language
+                    }
                   }
-                }
-              )
-            }> {(language === 'english' || language === undefined) && 'Next: Step2 >>'} {language === 'spanish' && '<Spanish>Next: Step2 >>'}
+                )
+              }> {(language === 'english' || language === undefined) && 'Next: Step2 >>'} {language === 'spanish' && '<Spanish>Next: Step2 >>'}
+              </div>
             </div>
-          </div>
-         
-        </>} 
 
-        {(!ifPrescriptionDetailsExists && !mutationLoading) && <section className="help">
+          </>}
+
+        {(!ifPrescriptionDetailsExists) && <section className="help">
           {(language === 'english' || language === undefined) &&
             <>
               <p>FirstRx is a free service. No login or account is needed.</p>
@@ -241,7 +239,7 @@ export default function FindPrescriptionHome({ language, location = undefined, p
 
               <p>Then FirstRx will text you a coupon that you can show to the pharmacist.</p>
             </>}
-            {(language === 'spanish') &&
+          {(language === 'spanish') &&
             <>
               {'<Spanish>'}
               <p>FirstRx is a free service. No login or account is needed.</p>
@@ -259,7 +257,7 @@ export default function FindPrescriptionHome({ language, location = undefined, p
 
       </form>
 
-      
+
 
 
 

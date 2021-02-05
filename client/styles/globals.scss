@@ -238,6 +238,7 @@ header div.flexcontainer > div.right {
 }
 
 main {
+	position:relative;
 	width: 90%;
 	margin: 0 auto;
 	padding: 0.6em 1em 1em 1em;
@@ -293,6 +294,7 @@ nav.primary ul li.homelink {
 /* ==Main Stepped Process== */
 
 section.stepped_process {
+	position:relative;	
 	margin: 0.5em 0 0 0;
 	padding: 1em;
 	background-color: #E9EDE9;
@@ -469,6 +471,20 @@ form.find_rx input{
 	font-size: 1.3em;
 	color: #536553;
 }
+
+.circular_progress_container{
+	
+	opacity:0.4;	
+	
+}
+.circular_progress{
+	display:flex;
+	align-items: center;
+	justify-content: center;
+	position:absolute;		
+	top:30%;
+	width:96%;	
+  }
 
 form.find_rx input.error {
 	border: 3px solid #C42021;
@@ -878,6 +894,11 @@ body#Help ol li {
 
 @media screen and (min-width: 320px) {
 
+.circular_progress{		
+	top:30%;
+		
+}
+
 /* ==Debugging== */
 	
 /*h2 {color: red;}*/
@@ -890,6 +911,11 @@ body#Help ol li {
 /* ============================================================ */
 
 @media screen and (min-width: 500px) {
+
+section.stepped_process > .circular_progress{		
+	top:30%;
+		
+}
 	
 /* ==Debugging== */
 
@@ -916,6 +942,8 @@ body#Help ol li {
 /* ============================================================ */
 
 @media screen and (min-width: 600px) {
+
+
 		
 /* ==Debugging== */
 
@@ -958,7 +986,9 @@ form#text_coupon div {
 /* ============================================================ */
 
 @media screen and (min-width: 768px) {
-	
+
+
+
 /* ==Debugging== */
 
 /*h2 {color: green;}*/
@@ -1048,6 +1078,8 @@ div.list_info {
 /* ============================================================ */
 
 @media screen and (min-width: 992px) {
+
+
 
 /* ==Debugging== */
 
