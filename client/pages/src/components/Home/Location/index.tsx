@@ -108,11 +108,17 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
     },
     update(proxy, result) {
       try {
+        console.log(result);
         if (result.data.GetLocationFromZipOrCity.code !== 200) {
           alert(result.data.GetLocationFromZipOrCity.message);
           return;
+        }        
+        if (result.data.GetLocationFromZipOrCity.predictions !== null && result.data.GetLocationFromZipOrCity.predictions !== undefined) {
+          if (result.data.GetLocationFromZipOrCity.predictions.length === 0) {
+            alert("No Location Retreved");
+            return;
+          }
         }
-
         if (result.data.GetLocationFromZipOrCity.results !== null) {
           setValueForInputValue(undefined);
           const location = result.data.GetLocationFromZipOrCity.results[0].geometry.location;
@@ -120,6 +126,7 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
           setLocationsFromMutation(result.data.GetLocationFromZipOrCity.results);
           return;
         }
+
         setLocationsFromMutation(result.data.GetLocationFromZipOrCity.predictions)
       }
       catch (e) {
@@ -263,13 +270,13 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
           <>
             <input value={valueForInputValue} autoComplete="off" onFocus={(e) => clearInput(e)} placeholder="Type City or Zip Code" type="text" list="Locations" onChange={searchLocation} id="location" />
             <datalist id="Locations">
-              {locationsFromMutation.map((element, index) =>
-                <option key={`location${index}`} value={element.description} />
-              )}
+              {
+                locationsFromMutation.map((element, index) => <option key={`${Math.random().toString(36).substr(16)}${new Date().toISOString()}${Math.random() * index}`} value={element.description} />
+                )}
             </datalist>
           </>)
         }
-        
+
         {(Object.keys(getLocation).length === 0) && <><div onClick={getCurrentPosition}>
           {(language === 'english' || language === undefined) &&
             <>
