@@ -10,7 +10,8 @@ import Dosage  from "./Dosage";
         t.list.string('form');
         t.list.field('dosage', {
             type:Dosage,
-            resolve(dosage) {                
+            resolve(dosage) { 
+                console.log('dosage',dosage.dosage);               
                 return dosage.dosage;                
             }
         });

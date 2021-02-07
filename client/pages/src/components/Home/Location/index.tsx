@@ -114,6 +114,8 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
           return;
         }        
         if (result.data.GetLocationFromZipOrCity.predictions !== null && result.data.GetLocationFromZipOrCity.predictions !== undefined) {
+          if(location === undefined)
+             return;
           if (result.data.GetLocationFromZipOrCity.predictions.length === 0) {
             alert("No Location Retreved");
             return;
@@ -271,7 +273,7 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
             <input value={valueForInputValue} autoComplete="off" onFocus={(e) => clearInput(e)} placeholder="Type City or Zip Code" type="text" list="Locations" onChange={searchLocation} id="location" />
             <datalist id="Locations">
               {
-                locationsFromMutation.map((element, index) => <option key={`${Math.random().toString(36).substr(16)}${new Date().toISOString()}${Math.random() * index}`} value={element.description} />
+                locationsFromMutation.map((element, index) => <option key={`${Math.random().toString(36).substr(16)}${new Date().toISOString()}${Math.random() * index}`}>{element.description}</option>
                 )}
             </datalist>
           </>)
