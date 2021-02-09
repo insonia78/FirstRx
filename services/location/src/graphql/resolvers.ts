@@ -1,5 +1,7 @@
 const request = require('postman-request');
-const { response } = require('express');
+import { response } from 'express';
+import  {writeToLog}  from './../../src/helper/writeToLog';
+
 
 //https://developers.google.com/maps/documentation/geocoding/overview#ReverseGeocoding
 //https://developers.google.com/places/web-service/autocomplete#location_biasing
@@ -10,7 +12,9 @@ module.exports = {
         GetLocationFromZipOrCity: async (parent: any, args: any, context: any, info: any) => {
 
              const getAddressByGeoLocation = (bodyfromplaces:any,place_id:string,resolve:any)=>{
+                 
 
+                
                 let url="https://maps.googleapis.com/maps/api/geocode/json?";   
 
                 url += 'place_id=';
@@ -19,7 +23,8 @@ module.exports = {
 
                 request(url, (error: any, response: any, body: any) => {
                     if (error)
-                    {                        
+                    {
+                        writeToLog.writeToLog(`code:500, error:InternalServerError message:${error}`);                        
                         resolve({ code: '500', 
                                   error: 'Internal Server Error', 
                                   message: 'Something went wrong' }
@@ -74,8 +79,9 @@ module.exports = {
                     url += '&key= AIzaSyAhJjZH6lxSraVwcjLBB9O2DfHF0PFJD5Q'   //`&key=${process.env.GOOGLE_API_MAPS_KEY}`;
                     request(url, (error: any, response: any, body: any) => {
                         if (error) {
-                            console.log(error);
-                            throw { code: '500', error: 'Internal Server Error', message: 'Something went wrong' };
+                            console.log(`${writeToLog.getServiceName()} = ${error}`);
+                            writeToLog.writeToLog(`code:500, error:InternalServerError, message:${error}`);
+                            resolve({ code: '500', error: 'Internal Server Error', message: 'Something went wrong' });
 
                         }
                         else {
@@ -92,6 +98,8 @@ module.exports = {
                                 else {
 
                                     if (body.error !== undefined) {
+                                        console.log(`${writeToLog.getServiceName()} = ${body.error}`);
+                                        writeToLog.writeToLog(`code:400, error:InternalServerError, message:${body.error}`);
                                         Object.assign(body, { code: 400, message: body.error });
                                     }
                                     else {
@@ -103,6 +111,8 @@ module.exports = {
 
                             }
                             else {
+                                console.log(`${writeToLog.getServiceName()} = Returned no response`);
+                                writeToLog.writeToLog(`code:400, message: ${url} returned no response`);
                                 resolve({ code: 400, message: 'Returned no response' });
                             }
 
@@ -119,6 +129,8 @@ module.exports = {
 
                 }
                 catch (e) {
+                    console.log(`${writeToLog.getServiceName()} =${e.message}`);
+                    writeToLog.writeToLog(`code:500, error:'Internal Server Error' messase:${e.message}`);
                     resolve({ code: '500', error: 'Internal Server Error', message: e.message });
                 }
 
