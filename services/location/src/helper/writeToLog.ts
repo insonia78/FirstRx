@@ -19,5 +19,4 @@ class writeToLogClass extends WriteToLogBaseClass.WriteToLogBaseClass {
 }
 
 const writeToLog  = new writeToLogClass('log',json_p.name);
-console.log(writeToLog.getServiceName());
 export {writeToLog }
