@@ -63,9 +63,10 @@ phases:
     commands:
       - printf "{\"ImageURI\":\"$CLIENT_IMAGE_URI\"}" > imageDetail.json
       - printf "[{\"name\":\"client\", \"imageUri\":\"$CLIENT_IMAGE_URI\"}]" > imagedefinitions-client.json
-      - printf "[{\"name\":\"prescriptions\", \"imageUri\":\"$CLIENT_IMAGE_URI\"}]" > imagedefinitions-prescriptions.json
-      - printf "[{\"name\":\"location\", \"imageUri\":\"$CLIENT_IMAGE_URI\"}]" > imagedefinitions-location.json
-      - printf "[{\"name\":\"textmessage\", \"imageUri\":\"$CLIENT_IMAGE_URI\"}]" > imagedefinitions-textmessage.json
+      - cat imagedefinitions-client.json
+      - printf "[{\"name\":\"prescriptions\", \"imageUri\":\"$PRESCRIPTIONS_IMAGE_URI\"}]" > imagedefinitions-prescriptions.json
+      - printf "[{\"name\":\"location\", \"imageUri\":\"$LOCATION_IMAGE_URI\"}]" > imagedefinitions-location.json
+      - printf "[{\"name\":\"textmessage\", \"imageUri\":\"$TEXTMESSAGE_IMAGE_URI\"}]" > imagedefinitions-textmessage.json
       - echo Build completed on `date`
 
 artifacts:
