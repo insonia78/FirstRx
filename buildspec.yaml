@@ -61,21 +61,21 @@ phases:
       - envsubst < /tmp/appspec_envsub.yaml | tee /tmp/appspec.yaml 
   post_build:
     commands:
-      - printf "{\"ImageURI\":\"$CLIENT_IMAGE_URI\"}" > imageDetail.json
-      - printf "[{\"name\":\"client\", \"imageUri\":\"$CLIENT_IMAGE_URI\"}]" > imagedefinitions-client.json
-      - cat imagedefinitions-client.json
-      - printf "[{\"name\":\"prescriptions\", \"imageUri\":\"$PRESCRIPTIONS_IMAGE_URI\"}]" > imagedefinitions-prescriptions.json
-      - printf "[{\"name\":\"location\", \"imageUri\":\"$LOCATION_IMAGE_URI\"}]" > imagedefinitions-location.json
-      - printf "[{\"name\":\"textmessage\", \"imageUri\":\"$TEXTMESSAGE_IMAGE_URI\"}]" > imagedefinitions-textmessage.json
+      - printf "{\"ImageURI\":\"$CLIENT_IMAGE_URI\"}" > /tmp/imageDetail.json
+      - printf "[{\"name\":\"client\", \"imageUri\":\"$CLIENT_IMAGE_URI\"}]" > /tmp/imagedefinitions-client.json
+      - cat /tmp/imagedefinitions-client.json
+      - printf "[{\"name\":\"prescriptions\", \"imageUri\":\"$PRESCRIPTIONS_IMAGE_URI\"}]" > /tmp/imagedefinitions-prescriptions.json
+      - printf "[{\"name\":\"location\", \"imageUri\":\"$LOCATION_IMAGE_URI\"}]" > /tmp/imagedefinitions-location.json
+      - printf "[{\"name\":\"textmessage\", \"imageUri\":\"$TEXTMESSAGE_IMAGE_URI\"}]" > /tmp/imagedefinitions-textmessage.json
       - echo Build completed on `date`
 
 artifacts:
   files: 
     - /tmp/taskdefinition.json
     - /tmp/appspec.yaml
-    - imageDetail.json
-    - imagedefinitions-client.json
-    - imagedefinitions-prescriptions.json
-    - imagedefinitions-location.json
-    - imagedefinitions-textmessage.json
+    - /tmp/imageDetail.json
+    - /tmp/imagedefinitions-client.json
+    - /tmp/imagedefinitions-prescriptions.json
+    - /tmp/imagedefinitions-location.json
+    - /tmp/imagedefinitions-textmessage.json
   discard-paths: yes
