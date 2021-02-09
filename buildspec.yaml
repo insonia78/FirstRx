@@ -11,18 +11,18 @@ phases:
       - export PREV_BUILD_VERSION=$(aws ssm get-parameter --name "$ARTIFACT_VERSION_PARAMETER_NAME" --output text --query Parameter.Value)
       - export INC_BUILD_VERSION=$(( $PREV_BUILD_VERSION + 1 ))
       - export THIS_BUILD_VERSION=$RELEASE_VERSION.$INC_BUILD_VERSION
-      - export FIRSTRX_LATEST_CONTAINER_URI=$ECR_REPOSITORY_BASE_URL/$FIRSTRX_ECR_REPOSITORY_NAME:latest
+      - export CLIENT_LATEST_CONTAINER_URI=$ECR_REPOSITORY_BASE_URL/$CLIENT_ECR_REPOSITORY_NAME:latest
       - export PRESCRIPTIONS_LATEST_CONTAINER_URI=$ECR_REPOSITORY_BASE_URL/$PRESCRIPTIONS_ECR_REPOSITORY_NAME:latest
       - export LOCATION_LATEST_CONTAINER_URI=$ECR_REPOSITORY_BASE_URL/$LOCATION_ECR_REPOSITORY_NAME:latest
-      - export TEXT_MESSAGES_LATEST_CONTAINER_URI=$ECR_REPOSITORY_BASE_URL/$TEXT_MESSAGES_ECR_REPOSITORY_NAME:latest
-      - export FIRSTRX_IMAGE_URI=$ECR_REPOSITORY_BASE_URL/$FIRSTRX_ECR_REPOSITORY_NAME:$THIS_BUILD_VERSION
+      - export TEXTMESSAGE_LATEST_CONTAINER_URI=$ECR_REPOSITORY_BASE_URL/$TEXTMESSAGE_ECR_REPOSITORY_NAME:latest
+      - export CLIENT_IMAGE_URI=$ECR_REPOSITORY_BASE_URL/$CLIENT_ECR_REPOSITORY_NAME:$THIS_BUILD_VERSION
       - export PRESCRIPTIONS_IMAGE_URI=$ECR_REPOSITORY_BASE_URL/$PRESCRIPTIONS_ECR_REPOSITORY_NAME:$THIS_BUILD_VERSION
       - export LOCATION_IMAGE_URI=$ECR_REPOSITORY_BASE_URL/$LOCATION_ECR_REPOSITORY_NAME:$THIS_BUILD_VERSION
-      - export TEXT_MESSAGES_IMAGE_URI=$ECR_REPOSITORY_BASE_URL/$TEXT_MESSAGES_ECR_REPOSITORY_NAME:$THIS_BUILD_VERSION
-      - export FIRSTRX_ENV_CONTAINER_URI=$ECR_REPOSITORY_BASE_URL/$FIRSTRX_ECR_REPOSITORY_NAME:$ENV
+      - export TEXTMESSAGE_IMAGE_URI=$ECR_REPOSITORY_BASE_URL/$TEXTMESSAGE_ECR_REPOSITORY_NAME:$THIS_BUILD_VERSION
+      - export CLIENT_ENV_CONTAINER_URI=$ECR_REPOSITORY_BASE_URL/$CLIENT_ECR_REPOSITORY_NAME:$ENV
       - export PRESCRIPTIONS_ENV_CONTAINER_URI=$ECR_REPOSITORY_BASE_URL/$PRESCRIPTIONS_ECR_REPOSITORY_NAME:$ENV
       - export LOCATION_ENV_CONTAINER_URI=$ECR_REPOSITORY_BASE_URL/$LOCATION_ECR_REPOSITORY_NAME:$ENV
-      - export TEXT_MESSAGES_ENV_CONTAINER_URI=$ECR_REPOSITORY_BASE_URL/$TEXT_MESSAGES_ECR_REPOSITORY_NAME:$ENV
+      - export TEXTMESSAGE_ENV_CONTAINER_URI=$ECR_REPOSITORY_BASE_URL/$TEXTMESSAGE_ECR_REPOSITORY_NAME:$ENV
       - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REPOSITORY_BASE_URL
   build:
     commands:
@@ -43,28 +43,29 @@ phases:
       - docker push $LOCATION_IMAGE_URI
       - docker push $LOCATION_ENV_CONTAINER_URI
       - cd ../text_messages
-      - docker build -f "Dockerfile" -t "$TEXT_MESSAGES_LATEST_CONTAINER_URI" .
-      - docker tag $TEXT_MESSAGES_LATEST_CONTAINER_URI $TEXT_MESSAGES_IMAGE_URI
-      - docker tag $TEXT_MESSAGES_LATEST_CONTAINER_URI $TEXT_MESSAGES_ENV_CONTAINER_URI
-      - docker push $TEXT_MESSAGES_LATEST_CONTAINER_URI
-      - docker push $TEXT_MESSAGES_IMAGE_URI
-      - docker push $TEXT_MESSAGES_ENV_CONTAINER_URI
+      - docker build -f "Dockerfile" -t "$TEXTMESSAGE_LATEST_CONTAINER_URI" .
+      - docker tag $TEXTMESSAGE_LATEST_CONTAINER_URI $TEXTMESSAGE_IMAGE_URI
+      - docker tag $TEXTMESSAGE_LATEST_CONTAINER_URI $TEXTMESSAGE_ENV_CONTAINER_URI
+      - docker push $TEXTMESSAGE_LATEST_CONTAINER_URI
+      - docker push $TEXTMESSAGE_IMAGE_URI
+      - docker push $TEXTMESSAGE_ENV_CONTAINER_URI
       - cd ../../client
-      - docker build -f "Dockerfile" -t "$FIRSTRX_LATEST_CONTAINER_URI" .
-      - docker tag $FIRSTRX_LATEST_CONTAINER_URI $FIRSTRX_IMAGE_URI
-      - docker tag $FIRSTRX_LATEST_CONTAINER_URI $FIRSTRX_ENV_CONTAINER_URI
-      - docker push $FIRSTRX_LATEST_CONTAINER_URI
-      - docker push $FIRSTRX_IMAGE_URI
-      - docker push $FIRSTRX_ENV_CONTAINER_URI
+      - docker build -f "Dockerfile" -t "$CLIENT_LATEST_CONTAINER_URI" .
+      - docker tag $CLIENT_LATEST_CONTAINER_URI $CLIENT_IMAGE_URI
+      - docker tag $CLIENT_LATEST_CONTAINER_URI $CLIENT_ENV_CONTAINER_URI
+      - docker push $CLIENT_LATEST_CONTAINER_URI
+      - docker push $CLIENT_IMAGE_URI
+      - docker push $CLIENT_ENV_CONTAINER_URI
       - aws ssm put-parameter --name $ARTIFACT_VERSION_PARAMETER_NAME --value $INC_BUILD_VERSION --overwrite
       - envsubst <  /tmp/taskdefinition_envsub.json | tee /tmp/taskdefinition.json 
       - envsubst < /tmp/appspec_envsub.yaml | tee /tmp/appspec.yaml 
   post_build:
     commands:
-      - printf "{\"ImageURI\":\"$FIRSTRX_IMAGE_URI\"}" > imageDetail.json
-      - cat imageDetail.json
-      - printf "[{\"name\":\"firstrx\", \"imageUri\":\"$FIRSTRX_IMAGE_URI\"}]" > imagedefinitions.json
-      - cat imagedefinitions.json
+      - printf "{\"ImageURI\":\"$CLIENT_IMAGE_URI\"}" > imageDetail.json
+      - printf "[{\"name\":\"client\", \"imageUri\":\"$CLIENT_IMAGE_URI\"}]" > imagedefinitions-client.json
+      - printf "[{\"name\":\"prescriptions\", \"imageUri\":\"$CLIENT_IMAGE_URI\"}]" > imagedefinitions-prescriptions.json
+      - printf "[{\"name\":\"location\", \"imageUri\":\"$CLIENT_IMAGE_URI\"}]" > imagedefinitions-location.json
+      - printf "[{\"name\":\"textmessage\", \"imageUri\":\"$CLIENT_IMAGE_URI\"}]" > imagedefinitions-textmessage.json
       - echo Build completed on `date`
 
 artifacts:
@@ -72,5 +73,8 @@ artifacts:
     - /tmp/taskdefinition.json
     - /tmp/appspec.yaml
     - imageDetail.json
-    - imagedefinitions.json
+    - imagedefinitions-client.json
+    - imagedefinitions-prescriptions.json
+    - imagedefinitions-location.json
+    - imagedefinitions-textmessage.json
   discard-paths: yes
