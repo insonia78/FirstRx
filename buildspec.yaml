@@ -24,11 +24,14 @@ phases:
       - export LOCATION_ENV_CONTAINER_URI=$ECR_REPOSITORY_BASE_URL/$LOCATION_ECR_REPOSITORY_NAME:$ENV
       - export TEXTMESSAGE_ENV_CONTAINER_URI=$ECR_REPOSITORY_BASE_URL/$TEXTMESSAGE_ECR_REPOSITORY_NAME:$ENV
       - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REPOSITORY_BASE_URL
+      - aws s3 cp s3://firstrx-artifacts-us-east-1/certificates/firstrx.keys.tbz ./firstrx.keys.tbz
+      - tar -zxvf firstrx.keys.tbz -C services/prescriptions
   build:
     commands:
       - cp taskdefinition.json /tmp/taskdefinition_envsub.json 
       - cp appspec.yaml /tmp/appspec_envsub.yaml 
       - cd services/prescriptions
+      - ls
       - docker build -f "Dockerfile" -t "$PRESCRIPTIONS_LATEST_CONTAINER_URI" .
       - docker tag $PRESCRIPTIONS_LATEST_CONTAINER_URI $PRESCRIPTIONS_IMAGE_URI
       - docker tag $PRESCRIPTIONS_LATEST_CONTAINER_URI $PRESCRIPTIONS_ENV_CONTAINER_URI
