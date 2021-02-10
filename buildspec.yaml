@@ -93,4 +93,5 @@ artifacts:
     - /tmp/imagedefinitions-prescriptions.json
     - /tmp/imagedefinitions-location.json
     - /tmp/imagedefinitions-textmessage.json
+    - /tmp/imagedefinitions-coupon.json
   discard-paths: yes
