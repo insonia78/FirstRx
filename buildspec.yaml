@@ -15,17 +15,21 @@ phases:
       - export PRESCRIPTIONS_LATEST_CONTAINER_URI=$ECR_REPOSITORY_BASE_URL/$PRESCRIPTIONS_ECR_REPOSITORY_NAME:latest
       - export LOCATION_LATEST_CONTAINER_URI=$ECR_REPOSITORY_BASE_URL/$LOCATION_ECR_REPOSITORY_NAME:latest
       - export TEXTMESSAGE_LATEST_CONTAINER_URI=$ECR_REPOSITORY_BASE_URL/$TEXTMESSAGE_ECR_REPOSITORY_NAME:latest
+      - export COUPON_LATEST_CONTAINER_URI=$ECR_REPOSITORY_BASE_URL/$COUPON_ECR_REPOSITORY_NAME:latest
       - export CLIENT_IMAGE_URI=$ECR_REPOSITORY_BASE_URL/$CLIENT_ECR_REPOSITORY_NAME:$THIS_BUILD_VERSION
       - export PRESCRIPTIONS_IMAGE_URI=$ECR_REPOSITORY_BASE_URL/$PRESCRIPTIONS_ECR_REPOSITORY_NAME:$THIS_BUILD_VERSION
       - export LOCATION_IMAGE_URI=$ECR_REPOSITORY_BASE_URL/$LOCATION_ECR_REPOSITORY_NAME:$THIS_BUILD_VERSION
       - export TEXTMESSAGE_IMAGE_URI=$ECR_REPOSITORY_BASE_URL/$TEXTMESSAGE_ECR_REPOSITORY_NAME:$THIS_BUILD_VERSION
+      - export COUPON_IMAGE_URI=$ECR_REPOSITORY_BASE_URL/$COUPON_ECR_REPOSITORY_NAME:$THIS_BUILD_VERSION
       - export CLIENT_ENV_CONTAINER_URI=$ECR_REPOSITORY_BASE_URL/$CLIENT_ECR_REPOSITORY_NAME:$ENV
       - export PRESCRIPTIONS_ENV_CONTAINER_URI=$ECR_REPOSITORY_BASE_URL/$PRESCRIPTIONS_ECR_REPOSITORY_NAME:$ENV
       - export LOCATION_ENV_CONTAINER_URI=$ECR_REPOSITORY_BASE_URL/$LOCATION_ECR_REPOSITORY_NAME:$ENV
       - export TEXTMESSAGE_ENV_CONTAINER_URI=$ECR_REPOSITORY_BASE_URL/$TEXTMESSAGE_ECR_REPOSITORY_NAME:$ENV
+      - export COUPON_ENV_CONTAINER_URI=$ECR_REPOSITORY_BASE_URL/$COUPON_ECR_REPOSITORY_NAME:$ENV
       - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REPOSITORY_BASE_URL
       - aws s3 cp s3://firstrx-artifacts-us-east-1/certificates/firstrx.keys.tbz ./firstrx.keys.tbz
       - tar -zxvf firstrx.keys.tbz -C services/prescriptions
+      - tar -zxvf firstrx.keys.tbz -C services/coupon
   build:
     commands:
       - cp taskdefinition.json /tmp/taskdefinition_envsub.json 
@@ -38,6 +42,13 @@ phases:
       - docker push $PRESCRIPTIONS_LATEST_CONTAINER_URI
       - docker push $PRESCRIPTIONS_IMAGE_URI
       - docker push $PRESCRIPTIONS_ENV_CONTAINER_URI
+      - cd ../coupon
+      - docker build -f "Dockerfile" -t "$COUPON_LATEST_CONTAINER_URI" .
+      - docker tag $COUPON_LATEST_CONTAINER_URI $COUPON_IMAGE_URI
+      - docker tag $COUPON_LATEST_CONTAINER_URI $COUPON_ENV_CONTAINER_URI
+      - docker push $COUPON_LATEST_CONTAINER_URI
+      - docker push $COUPON_IMAGE_URI
+      - docker push $COUPON_ENV_CONTAINER_URI
       - cd ../location
       - docker build -f "Dockerfile" -t "$LOCATION_LATEST_CONTAINER_URI" .
       - docker tag $LOCATION_LATEST_CONTAINER_URI $LOCATION_IMAGE_URI
@@ -70,6 +81,7 @@ phases:
       - printf "[{\"name\":\"prescriptions\", \"imageUri\":\"$PRESCRIPTIONS_IMAGE_URI\"}]" > /tmp/imagedefinitions-prescriptions.json
       - printf "[{\"name\":\"location\", \"imageUri\":\"$LOCATION_IMAGE_URI\"}]" > /tmp/imagedefinitions-location.json
       - printf "[{\"name\":\"textmessage\", \"imageUri\":\"$TEXTMESSAGE_IMAGE_URI\"}]" > /tmp/imagedefinitions-textmessage.json
+      - printf "[{\"name\":\"coupon\", \"imageUri\":\"$TEXTMESSAGE_IMAGE_URI\"}]" > /tmp/imagedefinitions-coupon.json
       - echo Build completed on `date`
 
 artifacts:
