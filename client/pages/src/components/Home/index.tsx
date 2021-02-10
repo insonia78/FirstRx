@@ -5,7 +5,8 @@ import FindPrescriptionHome from './FindPrescriptionHome';
 import Location from './Location';
 import { useRouter } from "next/router"
 import ChooseYourCoupon from './ChooseYourCoupon';
-import CouponDetails from './CouponDetails'; 
+import CouponDetails from './CouponDetails';
+import CircularProgress from '@material-ui/core/CircularProgress';
 //import styles from './../../../../styles/Home.module.scss'; used for version 1
 
 /**
@@ -25,9 +26,9 @@ import CouponDetails from './CouponDetails';
  * 
  */
 
-const Home = ({render}) => {
+const Home = ({ render }) => {
     const router = useRouter();
-    
+
     const {
         query: { component,
             prescriptions,
@@ -35,12 +36,12 @@ const Home = ({render}) => {
             coupon,
             container,
             language = 'english' },
-    } = router;    
-    
-    
+    } = router;
+
+
     /**@gets @sets  sets the has path for reload page in order not to flicker beteween components */
-    const [routerHasPath, setRouterHasPath] = useState((router.asPath === '/' ? false : true));    
-    
+    const [routerHasPath, setRouterHasPath] = useState((router.asPath === '/' ? false : true));
+
     let data = {
         search_name: "",
         name: "",
@@ -50,10 +51,10 @@ const Home = ({render}) => {
         quantity: "",
         dosage: [],
     }
-    
+
     /**@gets @sets    sthe size of the window used in version 1*/
     const [windowWidth, setWindowWidth] = useState(0);
-   
+
     /** @gets @sets prescription used when using the back button to pass the pescription*/
     const [getPrescription, setPrescriptionUseState] = useState({ ...data });
 
@@ -71,12 +72,6 @@ const Home = ({render}) => {
 
     // });
 
-
-    
-
-    
-    
-    
     const setPrescription = (value) => {
 
         setPrescriptionUseState(getPrescription => ({
@@ -85,27 +80,28 @@ const Home = ({render}) => {
 
     }
 
-    
+
 
     return (
         <>
             {
-            /**
-              * refrencing version of: 1/28/2021
-              * source: https://github.com/emilynorton?tab=repositories
-              */
+                /**
+                  * refrencing version of: 1/28/2021
+                  * source: https://github.com/emilynorton?tab=repositories
+                  */
             }
-  
+
             <main>
                 <h2>Save on Prescriptions!</h2>
 
-                <section className="stepped_process">
-                   
+                <section className={`stepped_process`}>
+
+                    
                     {(container === undefined || container === '' || container === null) &&
                         <>
-                           
+
                             {/** first component when the page   loads*/}
-                            {((component === undefined || component === '' || component === null) && !routerHasPath) && <FindPrescriptionHome language={language} prescriptionFromRoute={prescriptions} getPrescriptionDetails={getPrescription} setPrescriptionDetails={setPrescription} />}
+                            {((component === undefined || component === '' || component === null) && !routerHasPath) && <FindPrescriptionHome  language={language} prescriptionFromRoute={prescriptions} getPrescriptionDetails={getPrescription} setPrescriptionDetails={setPrescription} />}
                             {component === 'choose-your-coupon' && < ChooseYourCoupon language={language} prescriptionFromRoute={prescriptions} location={location} />}
                             {component === 'prescription' &&
                                 <FindPrescriptionHome
@@ -116,20 +112,20 @@ const Home = ({render}) => {
                                     setPrescriptionDetails={setPrescription} />}
 
 
-                            {component === 'location' && <Location language={language} prescriptionFromRoute={prescriptions} location={location} />}
-                            
+                            {component === 'location' && <Location  language={language} prescriptionFromRoute={prescriptions} location={location} />}
+
                         </>}
-                        {container === 'coupon' && <CouponDetails language={language} windowWidth={windowWidth} prescription={prescriptions} coupon={coupon} />}
-                        
+                    {container === 'coupon' && <CouponDetails language={language} windowWidth={windowWidth} prescription={prescriptions} coupon={coupon} />}
+
                 </section>
 
             </main>
 
 
 
-             
-             
-                  
+
+
+
             {/* 
             
                   // version 1 from wire frames
@@ -221,26 +217,26 @@ const Home = ({render}) => {
                     </div>
                 </>} 
                 </main> */}
-                
-               
 
-        
+
+
+
 
         </>
-     
+
     );
 }
 
 export async function getStaticProps() {
-    
+
     // By returning { props: posts }, the Blog component
     // will receive `posts` as a prop at build time
     return {
-      props: {
-        render:{},
-      },
+        props: {
+            render: {},
+        },
     }
-  }
+}
 
 
 export default Home;
