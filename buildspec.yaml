@@ -27,7 +27,7 @@ phases:
       - export TEXTMESSAGE_ENV_CONTAINER_URI=$ECR_REPOSITORY_BASE_URL/$TEXTMESSAGE_ECR_REPOSITORY_NAME:$ENV
       - export COUPON_ENV_CONTAINER_URI=$ECR_REPOSITORY_BASE_URL/$COUPON_ECR_REPOSITORY_NAME:$ENV
       - aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REPOSITORY_BASE_URL
-      - aws s3 cp s3://firstrx-artifacts-us-east-1/certificates/firstrx.keys.tbz ./firstrx.keys.tbz
+      - aws s3 cp s3://firstrx-artifacts-us-east-1/certificates/firstrx.keys.tbz firstrx.keys.tbz
       - tar -zxvf firstrx.keys.tbz -C services/prescriptions
       - tar -zxvf firstrx.keys.tbz -C services/coupon
   build:
