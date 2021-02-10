@@ -81,7 +81,7 @@ phases:
       - printf "[{\"name\":\"prescriptions\", \"imageUri\":\"$PRESCRIPTIONS_IMAGE_URI\"}]" > /tmp/imagedefinitions-prescriptions.json
       - printf "[{\"name\":\"location\", \"imageUri\":\"$LOCATION_IMAGE_URI\"}]" > /tmp/imagedefinitions-location.json
       - printf "[{\"name\":\"textmessage\", \"imageUri\":\"$TEXTMESSAGE_IMAGE_URI\"}]" > /tmp/imagedefinitions-textmessage.json
-      - printf "[{\"name\":\"coupon\", \"imageUri\":\"$TEXTMESSAGE_IMAGE_URI\"}]" > /tmp/imagedefinitions-coupon.json
+      - printf "[{\"name\":\"coupon\", \"imageUri\":\"$COUPON_IMAGE_URI\"}]" > /tmp/imagedefinitions-coupon.json
       - echo Build completed on `date`
 
 artifacts:
