@@ -54,6 +54,7 @@ mutation GetLocationFromZipOrCity($value:String){
 
 const Location = ({ language, prescriptionFromRoute, location }) => {
 
+  let locationWithOutComas = "";
 
   /**@gets @sets the locations array from the mutation */
   const [locationsFromMutation, setLocationsFromMutation] = useState([]);
@@ -114,7 +115,8 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
           return;
         }        
         if (result.data.GetLocationFromZipOrCity.predictions !== null && result.data.GetLocationFromZipOrCity.predictions !== undefined) {
-          if(location === undefined)
+           
+          if(location === undefined && result.data.GetLocationFromZipOrCity.predictions.length === 0)
              return;
           if (result.data.GetLocationFromZipOrCity.predictions.length === 0) {
             alert("No Location Retreved");
@@ -122,13 +124,14 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
           }
         }
         if (result.data.GetLocationFromZipOrCity.results !== null) {
+        
           setValueForInputValue(undefined);
           const location = result.data.GetLocationFromZipOrCity.results[0].geometry.location;
           getAddressFromLatAndLng(location.lat, location.lng);
           setLocationsFromMutation(result.data.GetLocationFromZipOrCity.results);
           return;
         }
-
+     
         setLocationsFromMutation(result.data.GetLocationFromZipOrCity.predictions)
       }
       catch (e) {
@@ -148,6 +151,7 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
   const searchLocation = (e) => {
 
     setValueForInputValue(e.target.value);
+    setLocationsFromMutation([]);
     getLocations({ variables: { value: e.target.value }, context: { clientName: 'location' } });
 
 
@@ -234,7 +238,8 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
    */
   useEffect(() => {
 
-    if (location !== undefined) {
+    if (location !== undefined && location !== '') {
+      console.log(location);
       getLocations({ variables: { value: location }, context: { clientName: 'location' } });
 
 
@@ -242,7 +247,17 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
 
   }, []);
 
-
+const createLocationWithOutCommas = (value) =>{
+  if(value === undefined)
+     return;
+  let s = "";
+  let array = value.split(',');
+  array.forEach(element => {
+         s += element ;
+         s += ' '; 
+  });
+  return s; 
+}
 
   return (
     <div className={`${mutationLoading ? 'circular_progress_container' : ''}`}>
@@ -271,9 +286,12 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
           :
           <>
             <input value={valueForInputValue} autoComplete="off" onFocus={(e) => clearInput(e)} placeholder="Type City or Zip Code" type="text" list="Locations" onChange={searchLocation} id="location" />
-            <datalist id="Locations">
+            <datalist id="Locations" className='location-datalist'>
               {
-                locationsFromMutation.map((element, index) => <option key={`${Math.random().toString(36).substr(16)}${new Date().toISOString()}${Math.random() * index}`}>{element.description}</option>
+                
+                locationsFromMutation.map((element, index) => {
+                  
+                return <option key={`${Math.random().toString(36).substr(16)}${new Date().toISOString()}${Math.random() * index}`}>{createLocationWithOutCommas(element.description)}</option>}
                 )}
             </datalist>
           </>)
