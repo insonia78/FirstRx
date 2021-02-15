@@ -123,7 +123,7 @@ export default function FindPrescriptionHome({ language, location = undefined, p
    */
   const searchPrescription = (e) => {
     setValueForInputValue(e.target.value);
-    getPrescriptions({ variables: { prescription: e.target.value }, context: { clientName: 'baseUri' } });
+    getPrescriptions({ variables: { prescription: e.target.value }, context: { clientName: 'prescriptions' } });
 
 
   }

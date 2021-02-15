@@ -2,20 +2,19 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql(`
         
-        type GetLocationPrescriptionsMutation{
-             results:[ResultsFromGeoLocationApi]
-             predictions:[PredictionsFromPlaceApi] 
-             code:Int
-             message:String
-             country: String
-             state: String
-             city: String
+        type GetPrescriptionDetails{
+            search_name
+            name
+            generic_name
+            manufacturer
+            form
+            quantity
         }
         type Query{            
             hello:String
         } 
         type Mutation{            
-            GetLocationPrescriptions(value:String):GetLocationPrescriptionsMutation
+            prescription(value:String):GetPrescriptionDetails
         } 
         schema{
             query:Query
