@@ -5,15 +5,15 @@ import { natsWrapper } from './nats-wrapper';
 const start = async () => { 
     
     try {
-        await natsWrapper.connect(
-          process.env.NATS_CLUSTER_ID,
-          process.env.NATS_CLIENT_ID,
-          process.env.NATS_URL
-        );
-        natsWrapper.client.on('close', () => {
-          console.log('NATS connection closed!');
-          process.exit();
-        });               
+        // await natsWrapper.connect(
+        //   process.env.NATS_CLUSTER_ID,
+        //   process.env.NATS_CLIENT_ID,
+        //   process.env.NATS_URL
+        // );
+        // natsWrapper.client.on('close', () => {
+        //   console.log('NATS connection closed!');
+        //   process.exit();
+        // });               
       } catch (err) {
         console.error(err);
       }

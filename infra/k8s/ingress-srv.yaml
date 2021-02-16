@@ -24,7 +24,7 @@ spec:
               servicePort: 5000
           - path: /prescriptions/graphql
             backend:
-              serviceName: prescritpions-srv
+              serviceName: prescriptions-srv
               servicePort: 4000          
           - path: /?(.*)
             backend:
