@@ -9,9 +9,54 @@ import  {writeToLog}  from './../../src/helper/writeToLog';
 
 module.exports = {
     Mutation: {
-        prescription: async (parent: any, args: any, context: any, info: any) => {
+        GetLocationFromZipOrCity: async (parent: any, args: any, context: any, info: any) => {
 
-            
+             const getAddressByGeoLocation = (bodyfromplaces:any,place_id:string,resolve:any)=>{
+                 
+
+                
+                let url="https://maps.googleapis.com/maps/api/geocode/json?";   
+
+                url += 'place_id=';
+                url += place_id;
+                 url +=  '&key= AIzaSyAhJjZH6lxSraVwcjLBB9O2DfHF0PFJD5Q'
+
+                request(url, (error: any, response: any, body: any) => {
+                    if (error)
+                    {
+                        writeToLog.writeToLog(`code:500, error:InternalServerError message:${error}`);                        
+                        resolve({ code: '500', 
+                                  error: 'Internal Server Error', 
+                                  message: 'Something went wrong' }
+                                  );
+
+                    }    
+                    else {
+                        let b;
+
+                        if(Object.keys(body).length !== 0)
+                        {                                        
+
+                            body = JSON.parse(body);
+                            if (body.error !== undefined) {
+                                Object.assign(body, { code: 400, message: body.error });
+                            }
+                            else {
+                                Object.assign(body, { code: 200 });
+                            }
+                            
+
+                        }
+                        else{
+                          b = new Error("there is an error");                                      
+                        }
+                       
+                        resolve(body);
+                    }
+
+                });
+
+             }  
 
 
             return await new Promise((resolve, reject) => {
@@ -24,11 +69,14 @@ module.exports = {
 
 
 
-                    let url = process.env.MEDIMPACT_URL;
+                    let url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json';   //process.env.CITY_AUTO_COMPLETE;
 
-                    console.log('url', url);
-
-                    
+                    url += '?';
+                    url += `input=${value}`;
+                    url += '&types=(regions)';
+                    url += '&components=country:us';
+                    url += '&radius=500';
+                    url += '&key= AIzaSyAhJjZH6lxSraVwcjLBB9O2DfHF0PFJD5Q'   //`&key=${process.env.GOOGLE_API_MAPS_KEY}`;
                     request(url, (error: any, response: any, body: any) => {
                         if (error) {
                             console.log(`${writeToLog.getServiceName()} = ${error}`);
