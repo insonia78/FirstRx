@@ -10,6 +10,7 @@ const server = new ApolloServer({ typeDefs, resolvers,playground:true});
 const app = express();
 app.set('trust proxy', true);
 app.use(json());
+console.log('medimapctkey', process.env.APIKEY);
 server.applyMiddleware({ app, path:'/prescriptions/graphql'});
 app.all('*', async (req:any, res:any) => {
   throw new Error();

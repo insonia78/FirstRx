@@ -13,11 +13,12 @@ const start = async () => {
         // natsWrapper.client.on('close', () => {
         //   console.log('NATS connection closed!');
         //   process.exit();
-        // });               
+        // });  
+        console.log('medimapctkey', process.env.APIKEY);             
       } catch (err) {
         console.error(err);
       }
-
+     
   app.listen(4000, () => {
     console.log('Listening on port 4000!!!!!!!!');
   });

@@ -12,8 +12,8 @@ module.exports = {
         prescription: async (parent: any, args: any, context: any, info: any) => {
 
              
-          console.log(process.env.MEDIMPACT_URL);
-          console.log('medimapctkey', process.env.MEDIMPACT_APIKEY);
+         
+          console.log('medimapctkey', process.env.APIKEY);
           console.log('medimapctkey1', process.env.MEDIMPACT_APIKEY1);
 
             return await new Promise((resolve, reject) => {
