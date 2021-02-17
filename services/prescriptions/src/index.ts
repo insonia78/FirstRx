@@ -14,7 +14,7 @@ const start = async () => {
         //   console.log('NATS connection closed!');
         //   process.exit();
         // });  
-        console.log('medimapctkey', process.env.APIKEY);             
+        console.log('medimapctkey', process.env.APIKEYS);             
       } catch (err) {
         console.error(err);
       }
