@@ -13,6 +13,8 @@ module.exports = {
 
              
           console.log(process.env.MEDIMPACT_URL);
+          console.log('medimapctkey', process.env.MEDIMPACT_APIKEY);
+          console.log('medimapctkey1', process.env.MEDIMPACT_APIKEY1);
 
             return await new Promise((resolve, reject) => {
                 
@@ -22,11 +24,13 @@ module.exports = {
 
                     //if(!(value.match(/[~`!#$%@\^&*+=\-\[\]\\';,/{}|\\":<>\?]/g) !== null || !(value.match(/[A-Za-z]/) === null || value.match(/[0-9]/) === null )))
 
-
-
+                    let envVariables = process.env.APIKEYS;
+                    envVariables = JSON.parse(JSON.stringify(envVariables));
+                    console.log('envVariables',envVariables);    
                     let url = process.env.MEDIMPACT_URL;    //`&key=${process.env.GOOGLE_API_MAPS_KEY}`;
                     
-                    console.log(url);
+                    console.log('url',url);
+                    return 'error';
                     // request(url, (error: any, response: any, body: any) => {
                     //     if (error) {
                     //         // console.log(`${writeToLog.getServiceName()} = ${error}`);
