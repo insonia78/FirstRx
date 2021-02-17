@@ -1,7 +1,7 @@
 FROM 658310991765.dkr.ecr.us-east-1.amazonaws.com/node:alpine
 
 WORKDIR /prescriptions
-COPY test.json ./data/
+
 ARG MEDIMPACT_URL_ARGS=https://rxsavings-ws.medimpact.com/cashcard-ws-v1_0/soap/cashcard
 
 ENV MEDIMPACT_URL $MEDIMPACT_URL_ARGS
