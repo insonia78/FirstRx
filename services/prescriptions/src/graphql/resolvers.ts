@@ -45,52 +45,52 @@ module.exports = {
                    }
                     
                     
-                    request(options, (error: any, response: any, body: any) => {
-                        if (error) {
-                            console.log(`${writeToLog.getServiceName()} = ${error}`);
-                            writeToLog.writeToLog(`code:500, error:InternalServerError, message:${error}`);
-                            resolve({ code: '500', error: 'Internal Server Error', message: 'Something went wrong' });
+                    // request(options, (error: any, response: any, body: any) => {
+                    //     if (error) {
+                    //         console.log(`${writeToLog.getServiceName()} = ${error}`);
+                    //         writeToLog.writeToLog(`code:500, error:InternalServerError, message:${error}`);
+                    //         resolve({ code: '500', error: 'Internal Server Error', message: 'Something went wrong' });
 
-                        }
-                        else {
+                    //     }
+                    //     else {
 
-                            console.log(body); 
-                            if (Object.keys(body = JSON.parse(body)).length !== 0 || body['predictions'].length > 0) {
-                                // console.log(body);
-                                // console.log('inside predictions',body['predictions']);
-                                // console.log('inside predictions1',body.predictions);
-                                // console.log('inside predictions1',body.predictions.length);
-                                if (body['predictions'].length === 1) {                                    
-                                    getAddressByGeoLocation(body,body.predictions[0].place_id,resolve)    
-                                }
-                                else {
+                    //         console.log(body); 
+                    //         if (Object.keys(body = JSON.parse(body)).length !== 0 || body['predictions'].length > 0) {
+                    //             // console.log(body);
+                    //             // console.log('inside predictions',body['predictions']);
+                    //             // console.log('inside predictions1',body.predictions);
+                    //             // console.log('inside predictions1',body.predictions.length);
+                    //             if (body['predictions'].length === 1) {                                    
+                    //                 getAddressByGeoLocation(body,body.predictions[0].place_id,resolve)    
+                    //             }
+                    //             else {
 
-                                    if (body.error !== undefined) {
-                                        console.log(`${writeToLog.getServiceName()} = ${body.error}`);
-                                        writeToLog.writeToLog(`code:400, error:InternalServerError, message:${body.error}`);
-                                        Object.assign(body, { code: 400, message: body.error });
-                                    }
-                                    else {
-                                        Object.assign(body, { code: 200 });
-                                    }
-                                    resolve(body);
-                                }
+                    //                 if (body.error !== undefined) {
+                    //                     console.log(`${writeToLog.getServiceName()} = ${body.error}`);
+                    //                     writeToLog.writeToLog(`code:400, error:InternalServerError, message:${body.error}`);
+                    //                     Object.assign(body, { code: 400, message: body.error });
+                    //                 }
+                    //                 else {
+                    //                     Object.assign(body, { code: 200 });
+                    //                 }
+                    //                 resolve(body);
+                    //             }
                                 
 
-                            }
-                            else {
-                                console.log(`${writeToLog.getServiceName()} = Returned no response`);
-                                writeToLog.writeToLog(`code:400, message: ${url} returned no response`);
-                                resolve({ code: 400, message: 'Returned no response' });
-                            }
+                    //         }
+                    //         else {
+                    //             console.log(`${writeToLog.getServiceName()} = Returned no response`);
+                    //             writeToLog.writeToLog(`code:400, message: ${url} returned no response`);
+                    //             resolve({ code: 400, message: 'Returned no response' });
+                    //         }
 
-                        }
+                    //     }
 
-                    });
-                    }
-                    else{
-                        resolve({code:'404',error:'Not Found',message:'Value not found'});
-                    }
+                    // });
+                    // }
+                    // else{
+                    //     resolve({code:'404',error:'Not Found',message:'Value not found'});
+                    // }
 
 
 
