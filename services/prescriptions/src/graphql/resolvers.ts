@@ -3,27 +3,46 @@ import { response } from 'express';
 import  {writeToLog}  from './../../src/helper/writeToLog';
 const soapRequest = require('easy-soap-request');
 const fs = require('fs');
+import path from 'path';
 
+console.log("reading file ouside ")
 fs.readFile('/prescriptions/firstrx.key',(err:any,data:any)=>{
    // private_key = data;
 
     console.log('private_key', data);
 
 });
-
-
+fs.readFile('./prescriptions/firstrx.key',(err:any,data:any)=>{
+    // private_key = data;
+ 
+     console.log('private_key2', data);
+ 
+ });
+ fs.readFile(path.join(process.cwd(),"firstrx.key"),(err:any,data:any)=>{
+    // private_key = data;
+ 
+     console.log('private_key3', data);
+ 
+ });
+ 
 module.exports = {
     Mutation: {
         prescription: async (parent: any, args: any, context: any, info: any) => {
          
             let private_key;
+            console.log("reading file inside ")
             fs.readFile('/prescriptions/firstrx.key',(err:any,data:any)=>{
                 private_key = data;
             
                 console.log('private_key', data);
             
             });
-         
+            fs.readFile(path.join(process.cwd(),"firstrx.key"),(err:any,data:any)=>{
+                // private_key = data;
+             
+                 console.log('private_key3', data);
+             
+             });      
             const xml =`
             <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
             <soapenv:Header>
