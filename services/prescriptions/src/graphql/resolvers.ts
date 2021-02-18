@@ -12,7 +12,7 @@ module.exports = {
         prescription: async (parent: any, args: any, context: any, info: any) => {
          
             let private_key;
-            fs.readFile('./../../firstrx.key',(err:any,data:any)=>{
+            fs.readFile('/prescriptions/firstrx.key',(err:any,data:any)=>{
                 private_key = data;
             
                 console.log('private_key', data);
