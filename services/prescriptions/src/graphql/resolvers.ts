@@ -4,7 +4,12 @@ import  {writeToLog}  from './../../src/helper/writeToLog';
 const soapRequest = require('easy-soap-request');
 const fs = require('fs');
 
+fs.readFile('/prescriptions/firstrx.key',(err:any,data:any)=>{
+   // private_key = data;
 
+    console.log('private_key', data);
+
+});
 
 
 module.exports = {
