@@ -13,12 +13,14 @@ fs.readFile('/prescriptions/firstrx.key',(err:any,data:any)=>{
     console.log('private_key', data);
 
 });
+console.log('private_key2');
 fs.readFile('./prescriptions/firstrx.key',(err:any,data:any)=>{
-    // private_key = data;
+     private_key = data;
  
      console.log('private_key2', data,"data",private_key.toString());
  
  });
+ console.log('private_key3');
  fs.readFile(path.join(process.cwd(),"firstrx.key"),(err:any,data:any)=>{
      private_key = data;
      console.log('private_key3', data, "data",private_key.toString());
@@ -29,7 +31,7 @@ module.exports = {
     Mutation: {
         prescription: async (parent: any, args: any, context: any, info: any) => {
          
-            let private_key;
+         
             console.log("reading file inside ")
             fs.readFile('/prescriptions/firstrx.key',(err:any,data:any)=>{
                 private_key = data;
@@ -37,6 +39,17 @@ module.exports = {
                 console.log('private_key', data);
             
             });
+            fs.readFile('./prescriptions/firstrx.key',(err:any,data:any)=>{
+                // private_key = data;
+             
+                 console.log('private_key2', data,"data",private_key.toString());
+             
+             });
+             fs.readFile(path.join(process.cwd(),"firstrx.key"),(err:any,data:any)=>{
+                 private_key = data;
+                 console.log('private_key3', data, "data",private_key.toString());
+             
+             });
            
             const xml =`
             <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
