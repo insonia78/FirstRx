@@ -21,12 +21,17 @@ module.exports = {
             signer.end();
             const signature = signer.sign(private_key, 'base64')
             const xml = `
-            <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/">
+            <soapenv:Envelope 
+            xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+            xmlns:xsi="http://www.w3.org/1999/XMLSchema-instance" 
+            xmlns:xsd="http://www.w3.org/1999/XMLSchema"
+            xmlns:v1="urn:https://rxsavings-ws.medimpact.com/cashcard-ws-v1_0/soap/cashcard">
+            >
             <soapenv:Header/> 
             <soapenv:Body>
-                <opFindDrugByName>
-                       <prefixText>ATT</prefixText>
-                <opFindDrugByName>
+                <v1:opFindDrugByName>
+                       <v1:prefixText>ATT</v1:prefixText>
+                </v1:opFindDrugByName>
               </soapenv:Body>
             </soapenv:Envelope>`;
             return await new Promise((resolve, reject) => {
