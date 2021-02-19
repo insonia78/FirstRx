@@ -5,51 +5,17 @@ const soapRequest = require('easy-soap-request');
 const fs = require('fs');
 import path from 'path';
 
-console.log("reading file ouside ");
 let private_key:string;
-fs.readFile('/prescriptions/firstrx.key',(err:any,data:any)=>{
-   // private_key = data;
-
-    console.log('private_key', data);
-
-});
-console.log('private_key2');
-fs.readFile('./prescriptions/firstrx.key',(err:any,data:any)=>{
-     private_key = data;
  
-     console.log('private_key2', data,"data",private_key.toString());
- 
- });
- console.log('private_key3');
  fs.readFile(path.join(process.cwd(),"firstrx.key"),(err:any,data:any)=>{
-     private_key = data;
-     console.log('private_key3', data, "data",private_key.toString());
+     private_key = data;   
  
  });
  
 module.exports = {
     Mutation: {
-        prescription: async (parent: any, args: any, context: any, info: any) => {
-         
-         
-            console.log("reading file inside ")
-            fs.readFile('/prescriptions/firstrx.key',(err:any,data:any)=>{
-                private_key = data;
+        prescription: async (parent: any, args: any, context: any, info: any) => {       
             
-                console.log('private_key', data);
-            
-            });
-            fs.readFile('./prescriptions/firstrx.key',(err:any,data:any)=>{
-                // private_key = data;
-             
-                 console.log('private_key2', data,"data",private_key.toString());
-             
-             });
-             fs.readFile(path.join(process.cwd(),"firstrx.key"),(err:any,data:any)=>{
-                 private_key = data;
-                 console.log('private_key3', data, "data",private_key.toString());
-             
-             });
            
             const xml =`
             <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
