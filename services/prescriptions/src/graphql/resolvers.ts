@@ -23,7 +23,9 @@ module.exports = {
             const xml = `
             <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
              <SOAP-ENV:Body>
-               <prefixText>ATT</prefixText>
+                <v1:opFindDrugByName>
+                       <v1:prefixText>ATT</v1:prefixText>
+                </v1:opFindDrugByName>
               </SOAP-ENV:Body>
             </SOAP-ENV:Envelope>`;
             return await new Promise((resolve, reject) => {
