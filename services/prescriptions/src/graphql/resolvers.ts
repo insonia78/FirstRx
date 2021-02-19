@@ -21,13 +21,14 @@ module.exports = {
             signer.end();
             const signature = signer.sign(private_key, 'base64')
             const xml = `
-            <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
-             <SOAP-ENV:Body>
+            <soapenv:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
+            <soapenv:Header/> 
+            <soapenv:Body>
                 <v1:opFindDrugByName>
                        <v1:prefixText>ATT</v1:prefixText>
                 </v1:opFindDrugByName>
-              </SOAP-ENV:Body>
-            </SOAP-ENV:Envelope>`;
+              </soapenv:Body>
+            </soapenv:Envelope>`;
             return await new Promise((resolve, reject) => {
                 try {
                     const value = args.value;
