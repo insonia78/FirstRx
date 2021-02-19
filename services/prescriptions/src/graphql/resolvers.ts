@@ -22,18 +22,9 @@ module.exports = {
             const signature = signer.sign(private_key, 'base64')
             const xml = `
             <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
-            <soapenv:Header>
-                <mkt:AuthenticationHeader>
-                    <mktowsUserId>mktodemoaccount881_536240405411DF5316D5C9</mktowsUserId>
-                    <requestSignature>3f4b21eb586063dc65774a2733713cac342e9c81</requestSignature>
-                    <requestTimestamp>2017-03-09T17:40:00-08:00</requestTimestamp>
-                </mkt:AuthenticationHeader>
-            </soapenv:Header>
-            <SOAP-ENV:Body>
-               <ns1:LatLonListZipCodeResponse xmlns:ns1="https://graphical.weather.gov/xml/DWMLgen/wsdl/ndfdXML.wsdl">
-                  <listLatLonOut xsi:type="xsd:string">&lt;?xml version='1.0'?&gt;&lt;dwml version='1.0' xmlns:xsd='http://www.w3.org/2001/XMLSchema' xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='https://graphical.weather.gov/xml/DWMLgen/schema/DWML.xsd'&gt;&lt;latLonList&gt;32.9612,-96.8372&lt;/latLonList&gt;&lt;/dwml&gt;</listLatLonOut>
-               </ns1:LatLonListZipCodeResponse>
-                </SOAP-ENV:Body>
+             <SOAP-ENV:Body>
+               <prefixText>ATT</prefixText>
+              </SOAP-ENV:Body>
             </SOAP-ENV:Envelope>`;
             return await new Promise((resolve, reject) => {
                 try {
@@ -45,8 +36,11 @@ module.exports = {
                         url: url,
                         headers: {
                             authorization: obj['medimpact-token'],
-                            'CC-Timestamp-Signature': signature
-                        }
+                            'CC-Timestamp-Signature': signature,
+                            'Content-Type': 'text/xml',
+
+                        },
+                        body:xml
                     }
 
 
