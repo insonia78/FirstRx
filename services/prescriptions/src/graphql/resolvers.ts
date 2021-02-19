@@ -1,4 +1,5 @@
 const request = require('postman-request');
+const crypto = require('crypto');
 import { response } from 'express';
 import  {writeToLog}  from './../../src/helper/writeToLog';
 const soapRequest = require('easy-soap-request');
@@ -15,8 +16,10 @@ let private_key:string;
 module.exports = {
     Mutation: {
         prescription: async (parent: any, args: any, context: any, info: any) => {       
-            
-           
+            const signer = crypto.createSign('RSA-SHA256'); 
+            signer.write(new Date().toISOString());
+            signer.end();
+            const signature = signer.sign(private_key, 'base64')
             const xml =`
             <SOAP-ENV:Envelope xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/" xmlns:SOAP-ENC="http://schemas.xmlsoap.org/soap/encoding/" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" SOAP-ENV:encodingStyle="http://schemas.xmlsoap.org/soap/encoding/">
             <soapenv:Header>
@@ -42,56 +45,57 @@ module.exports = {
                        url: url,
                        headers:{
                            authorization: obj['medimpact-token'],
+                           'CC-Timestamp-Signature':signature
                        }
                    }
                     
                     
-                    // request(options, (error: any, response: any, body: any) => {
-                    //     if (error) {
-                    //         console.log(`${writeToLog.getServiceName()} = ${error}`);
-                    //         writeToLog.writeToLog(`code:500, error:InternalServerError, message:${error}`);
-                    //         resolve({ code: '500', error: 'Internal Server Error', message: 'Something went wrong' });
+                    request(options, (error: any, response: any, body: any) => {
+                        if (error) {
+                            console.log(`${writeToLog.getServiceName()} = ${error}`);
+                            writeToLog.writeToLog(`code:500, error:InternalServerError, message:${error}`);
+                            resolve({ code: '500', error: 'Internal Server Error', message: 'Something went wrong' });
 
-                    //     }
-                    //     else {
+                        }
+                        else {
 
-                    //         console.log(body); 
-                    //         if (Object.keys(body = JSON.parse(body)).length !== 0 || body['predictions'].length > 0) {
-                    //             // console.log(body);
-                    //             // console.log('inside predictions',body['predictions']);
-                    //             // console.log('inside predictions1',body.predictions);
-                    //             // console.log('inside predictions1',body.predictions.length);
-                    //             if (body['predictions'].length === 1) {                                    
-                    //                 getAddressByGeoLocation(body,body.predictions[0].place_id,resolve)    
-                    //             }
-                    //             else {
+                            console.log('response from server',body); 
+                            // if (Object.keys(body = JSON.parse(body)).length !== 0 || body['predictions'].length > 0) {
+                            //     // console.log(body);
+                            //     // console.log('inside predictions',body['predictions']);
+                            //     // console.log('inside predictions1',body.predictions);
+                            //     // console.log('inside predictions1',body.predictions.length);
+                            //     if (body['predictions'].length === 1) {                                    
+                            //         getAddressByGeoLocation(body,body.predictions[0].place_id,resolve)    
+                            //     }
+                            //     else {
 
-                    //                 if (body.error !== undefined) {
-                    //                     console.log(`${writeToLog.getServiceName()} = ${body.error}`);
-                    //                     writeToLog.writeToLog(`code:400, error:InternalServerError, message:${body.error}`);
-                    //                     Object.assign(body, { code: 400, message: body.error });
-                    //                 }
-                    //                 else {
-                    //                     Object.assign(body, { code: 200 });
-                    //                 }
-                    //                 resolve(body);
-                    //             }
+                            //         if (body.error !== undefined) {
+                            //             console.log(`${writeToLog.getServiceName()} = ${body.error}`);
+                            //             writeToLog.writeToLog(`code:400, error:InternalServerError, message:${body.error}`);
+                            //             Object.assign(body, { code: 400, message: body.error });
+                            //         }
+                            //         else {
+                            //             Object.assign(body, { code: 200 });
+                            //         }
+                            //         resolve(body);
+                            //     }
                                 
 
-                    //         }
-                    //         else {
-                    //             console.log(`${writeToLog.getServiceName()} = Returned no response`);
-                    //             writeToLog.writeToLog(`code:400, message: ${url} returned no response`);
-                    //             resolve({ code: 400, message: 'Returned no response' });
-                    //         }
+                            }
+                            else {
+                                console.log(`${writeToLog.getServiceName()} = Returned no response`);
+                                writeToLog.writeToLog(`code:400, message: ${url} returned no response`);
+                                resolve({ code: 400, message: 'Returned no response' });
+                            }
 
-                    //     }
+                        }
 
-                    // });
-                    // }
-                    // else{
-                    //     resolve({code:'404',error:'Not Found',message:'Value not found'});
-                    // }
+                    });
+                    }
+                    else{
+                        resolve({code:'404',error:'Not Found',message:'Value not found'});
+                    }
 
 
 
