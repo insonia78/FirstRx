@@ -1,4 +1,4 @@
-FROM node:alpine
+FROM 658310991765.dkr.ecr.us-east-1.amazonaws.com/node:alpine
 WORKDIR /location
 ARG GOOGLE_GEOCODE_URL_ARGS=https://maps.googleapis.com/maps/api/geocode/json
 ARG GOOGLE_PLACE_URL_ARGS=https://maps.googleapis.com/maps/api/place/autocomplete/json
