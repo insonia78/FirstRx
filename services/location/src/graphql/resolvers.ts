@@ -10,16 +10,16 @@ import  {writeToLog}  from './../../src/helper/writeToLog';
 module.exports = {
     Mutation: {
         GetLocationFromZipOrCity: async (parent: any, args: any, context: any, info: any) => {
-
-             const getAddressByGeoLocation = (bodyfromplaces:any,place_id:string,resolve:any)=>{
-                 
-
-                
-                let url="https://maps.googleapis.com/maps/api/geocode/json?";   
-
+            let envVariables = process.env.APIKEYS;
+            let obj = JSON.parse(JSON.stringify(envVariables));
+            
+            const getAddressByGeoLocation = (bodyfromplaces:any,place_id:string,resolve:any)=>{
+              
+                let url=process.env.GOOGLE_GEOCODE_URL;  
+                url +='?'
                 url += 'place_id=';
                 url += place_id;
-                 url +=  '&key= AIzaSyAhJjZH6lxSraVwcjLBB9O2DfHF0PFJD5Q'
+                url +=  `&key=${obj['google-key']}`;
 
                 request(url, (error: any, response: any, body: any) => {
                     if (error)
@@ -69,14 +69,14 @@ module.exports = {
 
 
 
-                    let url = 'https://maps.googleapis.com/maps/api/place/autocomplete/json';   //process.env.CITY_AUTO_COMPLETE;
+                    let url = process.env.GOOGLE_PLACE_URL;   //process.env.CITY_AUTO_COMPLETE;
 
                     url += '?';
                     url += `input=${value}`;
                     url += '&types=(regions)';
                     url += '&components=country:us';
                     url += '&radius=500';
-                    url += '&key= AIzaSyAhJjZH6lxSraVwcjLBB9O2DfHF0PFJD5Q'   //`&key=${process.env.GOOGLE_API_MAPS_KEY}`;
+                    url +=  `&key=${obj['google-key']}`;   //`&key=${process.env.GOOGLE_API_MAPS_KEY}`;
                     request(url, (error: any, response: any, body: any) => {
                         if (error) {
                             console.log(`${writeToLog.getServiceName()} = ${error}`);

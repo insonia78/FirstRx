@@ -43,9 +43,10 @@ module.exports = {
                     const options = {
                         url: url,
                         headers: {
-                            authorization: obj['medimpact-token'],
+                            token: obj['medimpact-token'],
                             'CC-Timestamp-Signature': signature,
                             'Content-Type': 'text/xml',
+                             clientAccountCode:process.env.MEDIMPACT_CLIENT_CODE,
 
                         },
                         body:xml

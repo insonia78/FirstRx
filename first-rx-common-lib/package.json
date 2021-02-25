@@ -1,17 +1,23 @@
 {
   "name": "first-rx-common-lib",
-  "version": "1.0.0",
+  "version": "1.0.8",
   "description": "common-lib folder",
-  "main": "dist/index.js",
-  "types": "dist/index.d.ts",
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "files": [
+    "build/**/*"
+  ],
   "scripts": {
-    "build": "tsc",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },  
+    "clean": "del /build/*",
+    "build": "npm run clean && tsc",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "pub": "npm version patch && npmrun build && npm publish"
+  },
   "devDependencies": {
     "@types/node": "^14.14.22"
   },
   "dependencies": {
+    "del-cli": "^3.0.1",
     "path": "^0.12.7"
   }
 }

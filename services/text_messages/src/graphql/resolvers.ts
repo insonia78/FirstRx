@@ -3,13 +3,12 @@ const { response } = require('express');
 const dotenv = require('dotenv');
 dotenv.config();
 
-//https://developers.google.com/maps/documentation/geocoding/overview#ReverseGeocoding
-//https://developers.google.com/places/web-service/autocomplete#location_biasing
-
+let envVariables = process.env.APIKEYS;
+let obj = JSON.parse(JSON.stringify(envVariables));
 
 const client = require('twilio')(
-    process.env.TWILIO_ACCOUNT_SID,
-    process.env.TWILIO_AUTH_TOKEN
+    obj['twilio-key'],
+    obj['twilio-token']
   );
 
 module.exports = {
@@ -22,7 +21,7 @@ module.exports = {
             return await new Promise((resolve, reject) => {
                 client.messages
                     .create({
-                        from: process.env.TWILIO_PHONE_NUMBER,
+                        from: process.env.TWILLO_PHONENUMBER,
                         to: phone_number,
                         body: 'this is a test from FirstRx'
                     })
