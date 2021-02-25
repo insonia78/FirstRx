@@ -52,7 +52,7 @@ module.exports = {
                         body:xml
                     }
 
-
+                    console.log('date 2/24/2021',new Date().toISOString());
                     request(options, (error: any, response: any, body: any) => {
                         if (error) {
                             console.log(`${writeToLog.getServiceName()} = ${error}`);
