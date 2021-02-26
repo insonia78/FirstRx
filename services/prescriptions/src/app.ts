@@ -13,7 +13,8 @@ app.use(json());
 console.log('medimapctkey', process.env.APIKEYS);
 server.applyMiddleware({ app, path:'/prescriptions/graphql'});
 app.all('*', async (req:any, res:any) => {
-  throw new Error();
+   console.log('empty request');
+  //throw new Error();
 });
 
 //app.use(errorHandler);
