@@ -7,7 +7,7 @@ const json_p = require('/coupon/package.json');
 const start = async () => {
 
   const server_id = `${json_p.name}_${randomBytes(8).toString('hex')}`;
-
+  console.log('server_id',server_id);
   if (!process.env.NATS_URL) {
     throw new Error('NATS_URL must be defined');
   }
