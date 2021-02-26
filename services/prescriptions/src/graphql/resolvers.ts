@@ -55,11 +55,12 @@ module.exports = {
                         },
                     
                     }
-                    let args ={
-                        prefixText:'Att'
-                    }
+                    
                     soap.createClient(options, function(err:any, client:any) {
                         console.log('soaperror', err);
+                        let args ={
+                            prefixText:'Att'
+                        }
                         client.MyFunction(args, function(err:any, result:any) {
                             console.log('clientsoaperror', err);
                             console.log(result);
