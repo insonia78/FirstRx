@@ -34,13 +34,12 @@ module.exports = {
                     xmlns:xsd="http://www.w3.org/1999/XMLSchema"
                     xmlns:v1="urn:https://rxsavings-ws.medimpact.com/cashcard-ws-v1_0/soap/cashcard">
                     >
-                    <soapenv:Header>
-                     <v1:clientAccountCode>${process.env.MEDIMPACT_CLIENT_CODE}</v1:clientAccountCode>
-                     <v1:token>${obj['medimpact-token']}</v1:token>
-                     <v1:timeStamp>${new Date().toISOString()}</v1:timeStamp>
-                    </soapenv:Header> 
+                    <soapenv:Header />                   
                     <soapenv:Body>
                         <v1:opFindDrugByName>
+                                <v1:clientAccountCode>${process.env.MEDIMPACT_CLIENT_CODE}</v1:clientAccountCode>
+                                <v1:token>${obj['medimpact-token']}</v1:token>
+                                <v1:timeStamp>${new Date().toISOString()}</v1:timeStamp>
                                <v1:prefixText>ATT</v1:prefixText>
                         </v1:opFindDrugByName>
                       </soapenv:Body>

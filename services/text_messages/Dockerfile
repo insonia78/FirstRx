@@ -2,7 +2,7 @@ FROM 658310991765.dkr.ecr.us-east-1.amazonaws.com/node:alpine
 
 WORKDIR /text-messages
 ARG PORT_ARG=7000
-ARG NATS_URL_ARG=""
+ARG NATS_URL_ARG=http://localhost:4200
 ARG NATS_CLUSTER_ID_ARG=text-messages
 ARG TWILLO_PHONENUMBER_ARG=+17792446842
 

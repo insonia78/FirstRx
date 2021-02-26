@@ -4,7 +4,7 @@ WORKDIR /coupon
 ARG PORT_ARG=6000
 ARG MEDIMPACT_CLIENT_CODE_ARG=MIC61
 ARG MEDIMPACT_URL_ARGS=https://rxsavings-ws.medimpact.com/cashcard-ws-v1_0/soap/cashcard
-ARG NATS_URL_ARG=""
+ARG NATS_URL_ARG=http://localhost:4200
 ARG NATS_CLUSTER_ID_ARG=coupon
 
 ENV PORT $PORT_ARG
