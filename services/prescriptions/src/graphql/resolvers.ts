@@ -46,20 +46,17 @@ module.exports = {
                     //   </soapenv:Body>
                     // </soapenv:Envelope>`;
                     const options = {
-                        headers: {
+                       
                             clientAccountCode: process.env.MEDIMPACT_CLIENT_CODE,                            
                             'CC-Timestamp-Signature': signature,
                             'Content-Type': 'text/xml',
-                            token:obj['medimpact-token'],
-
-                        },
-                    
+                            token:obj['medimpact-token'],                    
                     }
                     console.log('starting Soap Request');
                     let _args ={
                         prefixText:'Att'
                     }
-                    soap.createClient(url, function(err:any, client:any) {
+                    soap.createClient(`${url}/wsdl`, function(err:any, client:any) {
                        console.log('soaperror', err);  
                        client.addSoapHeader(options,"","tns","Auth");
                        
