@@ -1,6 +1,6 @@
 {
   "name": "first-rx-common-lib",
-  "version": "1.0.15",
+  "version": "1.0.17",
   "description": "common-lib folder",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",

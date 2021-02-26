@@ -6,6 +6,7 @@ export * from './interfaces/prescritpion.interface';
 export * from './interfaces/events/coupon.interface';
 export * from './interfaces/events/location.interface';
 export * from './interfaces/events/prescription.interface';
+export * from './interfaces/events/text-message.interface';
 
 export * from './events/base-listener';
 export * from './events/base-publisher';

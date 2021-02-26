@@ -1,11 +1,8 @@
 import { Subjects } from '../../enum/subjects.enum';
 
-export interface PrescriptionCreatedEvent {
-  subject: Subjects.PrescriptionCreated;
+export interface PrescriptionHealthCheckdEvent {
+  subject: Subjects.ServicesHealthCheck;
   data: {
-    manufacture: string;
-    format: string;
-    dosage: number;
-    quantity: string;
+   
   };
 }

@@ -1,37 +1,38 @@
 import { app } from './app';
 import { natsWrapper } from './nats-wrapper';
-const json_p  = require('/coupon/package.json');
+import { randomBytes } from 'crypto';
+import { HealthCheckListener } from './events/listeners/health-check.listener';
+const json_p = require('/coupon/package.json');
 
-const start = async () => { 
-  
-  if (!process.env.NATS_CLIENT_ID) {
-    throw new Error('NATS_CLIENT_ID must be defined');
-  }
+const start = async () => {
+
+  const server_id = `${json_p.name}_${randomBytes(8).toString('hex')}`;
+
   if (!process.env.NATS_URL) {
     throw new Error('NATS_URL must be defined');
   }
   if (!process.env.NATS_CLUSTER_ID) {
     throw new Error('NATS_CLUSTER_ID must be defined');
   }
-    try {
-      await natsWrapper.connect(
-        process.env.NATS_CLUSTER_ID,
-        process.env.NATS_CLIENT_ID,
-        process.env.NATS_URL
-      );
-      natsWrapper.client.on('close', () => {
-        console.log('NATS connection closed!');
-        process.exit();
-      });
-      process.on('SIGINT', () => natsWrapper.client.close());
-      process.on('SIGTERM', () => natsWrapper.client.close());    
-        
-      } catch (err) {
-        console.error(err);
-      }
+  try {
+    await natsWrapper.connect(
+      process.env.NATS_CLUSTER_ID,
+      server_id,
+      process.env.NATS_URL
+    );
+    natsWrapper.client.on('close', () => {
+      console.log('NATS connection closed!');
+      process.exit();
+    });
+    process.on('SIGINT', () => natsWrapper.client.close());
+    process.on('SIGTERM', () => natsWrapper.client.close());
+    new HealthCheckListener(natsWrapper.client);
+  } catch (err) {
+    console.error(err);
+  }
 
-  app.listen(6000, () => {
-    console.log(json_p.name,'Listening on port 6000!!!!!!!!');
+  app.listen(process.env.PORT, () => {
+    console.log(server_id, `Listening on port ${process.env.PORT}!!!!!!!!`);
   });
 };
 

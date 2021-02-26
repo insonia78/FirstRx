@@ -1,6 +1,6 @@
 import { Subjects } from '../../enum/subjects.enum';
 
-export interface LocationHealthCheckEvent {
+export interface TextMessageHealthCheckdEvent {
   subject: Subjects.ServicesHealthCheck;
   data: {
    
