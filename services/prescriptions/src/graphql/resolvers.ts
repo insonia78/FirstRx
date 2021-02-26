@@ -20,34 +20,36 @@ module.exports = {
             signer.write(new Date().toISOString());
             signer.end();
             const signature = signer.sign(private_key, 'base64')
-            const xml = `
-            <soapenv:Envelope 
-            xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
-            xmlns:xsi="http://www.w3.org/1999/XMLSchema-instance" 
-            xmlns:xsd="http://www.w3.org/1999/XMLSchema"
-            xmlns:v1="urn:https://rxsavings-ws.medimpact.com/cashcard-ws-v1_0/soap/cashcard">
-            >
-            <soapenv:Header/> 
-            <soapenv:Body>
-                <v1:opFindDrugByName>
-                       <v1:prefixText>ATT</v1:prefixText>
-                </v1:opFindDrugByName>
-              </soapenv:Body>
-            </soapenv:Envelope>`;
+           
             return await new Promise((resolve, reject) => {
                 try {
                     const value = args.value;
                     let url = process.env.MEDIMPACT_URL;
                     let envVariables = process.env.APIKEYS;
                     let obj = JSON.parse(JSON.stringify(envVariables));
+                    const xml = `
+                    <soapenv:Envelope 
+                    xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/"
+                    xmlns:xsi="http://www.w3.org/1999/XMLSchema-instance" 
+                    xmlns:xsd="http://www.w3.org/1999/XMLSchema"
+                    xmlns:v1="urn:https://rxsavings-ws.medimpact.com/cashcard-ws-v1_0/soap/cashcard">
+                    >
+                    <soapenv:Header>
+                     <v1:clientAccountCode>${process.env.MEDIMPACT_CLIENT_CODE}</v1:clientAccountCode>
+                     <v1:token>${obj['medimpact-token']}</v1:token>
+                     <v1:timeStamp>${new Date().toISOString()}</v1:timeStamp>
+                    </soapenv:Header> 
+                    <soapenv:Body>
+                        <v1:opFindDrugByName>
+                               <v1:prefixText>ATT</v1:prefixText>
+                        </v1:opFindDrugByName>
+                      </soapenv:Body>
+                    </soapenv:Envelope>`;
                     const options = {
                         url: url,
-                        headers: {
-                            token: obj['medimpact-token'],
+                        headers: {                            
                             'CC-Timestamp-Signature': signature,
                             'Content-Type': 'text/xml',
-                             clientAccountCode:process.env.MEDIMPACT_CLIENT_CODE,
-
                         },
                         body:xml
                     }
