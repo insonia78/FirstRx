@@ -63,11 +63,21 @@ module.exports = {
                     }
                     let data={prefixText:'Att'}
                     soap.createClient(url, function(err:any, client:any) {
-                        console.log(err);
+                        console.log('error1',err);
+                        if(err)
+                        {
+                            resolve({ code: '500', error: 'Internal Server Error', message: err });
+                        }
                         client.addSoapHeader(soapOptions);
                         client.opFindDrugByName(data, function(err:any, result:any) {
-                            console.log(err);
-                            console.log(result);
+                            
+                            console.log('error2',err);
+                            console.log('result',result);
+                            if(err)
+                        {
+                            resolve({ code: '500', error: 'Internal Server Error', message: err });
+                        }
+
                         });
                     });
                     console.log('date 2/24/2021',new Date().toISOString());
