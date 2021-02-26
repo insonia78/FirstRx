@@ -56,7 +56,7 @@ module.exports = {
                     let _args ={
                         prefixText:'Att'
                     }
-                    soap.createClient(`${url}/wsdl`, function(err:any, client:any) {
+                    soap.createClient(`${url}?wsdl`, function(err:any, client:any) {
                        console.log('soaperror', err);  
                        client.addSoapHeader(options,"","tns","Auth");
                        
