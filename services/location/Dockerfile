@@ -3,7 +3,7 @@ WORKDIR /location
 ARG PORT_ARG=5000
 ARG GOOGLE_GEOCODE_URL_ARGS=https://maps.googleapis.com/maps/api/geocode/json
 ARG GOOGLE_PLACE_URL_ARGS=https://maps.googleapis.com/maps/api/place/autocomplete/json
-ARG NATS_URL_ARG=http://localhost:4200
+ARG NATS_URL_ARG=http://localhost:4222
 ARG NATS_CLUSTER_ID_ARG=location
 
 ENV PORT $PORT_ARG

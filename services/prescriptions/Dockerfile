@@ -4,7 +4,7 @@ WORKDIR /prescriptions
 ARG PORT_ARG=4000
 ARG MEDIMPACT_CLIENT_CODE_ARG=MIC61
 ARG MEDIMPACT_URL_ARGS=https://rxsavings-ws.medimpact.com/cashcard-ws-v1_0/soap/cashcard
-ARG NATS_URL_ARG=http://localhost:4200
+ARG NATS_URL_ARG=http://localhost:4222
 ARG NATS_CLUSTER_ID_ARG=prescriptions
 
 ENV PORT $PORT_ARG
