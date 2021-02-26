@@ -59,8 +59,9 @@ module.exports = {
                         prefixText:'Att'
                     }
                     soap.createClient(url, function(err:any, client:any) {
-                        client.addSoapHeader(options,"","tns","Auth");
-                        console.log('soaperror', err);
+                       console.log('soaperror', err);  
+                       client.addSoapHeader(options,"","tns","Auth");
+                       
                         
                         client.MyFunction(_args, function(err:any, result:any) {
                             console.log('clientsoaperror', err);
