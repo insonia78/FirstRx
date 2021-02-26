@@ -16,6 +16,7 @@ fs.readFile(path.join(process.cwd(), "firstrx.key"), (err: any, data: any) => {
 module.exports = {
     Mutation: {
         prescription: async (parent: any, args: any, context: any, info: any) => {
+            console.log('insertion');
             const signer = crypto.createSign('RSA-SHA256');
             signer.write(new Date().toISOString());
             signer.end();
