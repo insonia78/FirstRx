@@ -45,7 +45,6 @@ module.exports = {
                     //   </soapenv:Body>
                     // </soapenv:Envelope>`;
                     const options = {
-                        url: url,
                         headers: {
                             clientAccountCode: process.env.MEDIMPACT_CLIENT_CODE,                            
                             'CC-Timestamp-Signature': signature,
@@ -58,7 +57,8 @@ module.exports = {
                     let _args ={
                         prefixText:'Att'
                     }
-                    soap.createClient(options, function(err:any, client:any) {
+                    soap.createClient(url, function(err:any, client:any) {
+                        client.addSoapHeader(options,"","tns","Auth");
                         console.log('soaperror', err);
                         
                         client.MyFunction(_args, function(err:any, result:any) {
