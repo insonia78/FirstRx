@@ -64,7 +64,8 @@ module.exports = {
                             'Content-Type': 'text/xml',
                         
                     }
-                    let data={prefixText:"tyl"}
+                    let data={prefixText:"tyl"};
+                    let data2={opFindDrugByName:{prefixText:"tyl"}};
                     soap.createClient(url, function(err:any, client:any) {
                         console.log('error1',err);
                         if(err)
@@ -83,6 +84,17 @@ module.exports = {
                         }
 
                         });
+                        client.opFindDrugByName(data2, function(err:any, result:any) {
+                            
+                            console.log('error2',err);
+                            console.log('result',result);
+                            if(err)
+                        {
+                            resolve({ code: '500', error: 'Internal Server Error', message: err });
+                        }
+
+                        });
+
 
                     });
                     console.log('date 2/24/2021',new Date().toISOString());
