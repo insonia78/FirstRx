@@ -1,6 +1,6 @@
 FROM 658310991765.dkr.ecr.us-east-1.amazonaws.com/node:alpine
 
-WORKDIR /text-messages
+WORKDIR /text_messages
 ARG PORT_ARG=7000
 ARG NATS_URL_ARG=http://localhost:4222
 ARG NATS_CLUSTER_ID_ARG=text-messages
