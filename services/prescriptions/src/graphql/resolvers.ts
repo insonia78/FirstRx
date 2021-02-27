@@ -64,7 +64,7 @@ module.exports = {
                             'Content-Type': 'text/xml',
                         
                     }
-                    let data={prefixText:'Att'}
+                    let data={prefixText:"tyl"}
                     soap.createClient(url, function(err:any, client:any) {
                         console.log('error1',err);
                         if(err)
@@ -72,7 +72,7 @@ module.exports = {
                             resolve({ code: '500', error: 'Internal Server Error', message: err });
                         }
                         client.addSoapHeader(soapOptions);
-                        console.log(client.describe());
+                        console.log(client.opFindDrugByName.toString(),client.opFindDrugByName);
                         client.opFindDrugByName(data, function(err:any, result:any) {
                             
                             console.log('error2',err);
