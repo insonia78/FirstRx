@@ -2,10 +2,11 @@ const request = require('postman-request');
 const crypto = require('crypto');
 import { response } from 'express';
 import { writeToLog } from './../../src/helper/writeToLog';
-const soap = require('soap');
+//const soap = require('soap');
 const fs = require('fs');
 import path from 'path';
 //const soap = require('strong-soap').soap;
+const soapRequest = require('easy-soap-request');
 
 let private_key: string;
 
@@ -22,7 +23,17 @@ module.exports = {
             signer.end();
             const signature = signer.sign(private_key, 'base64')
            
+            
+
             return await new Promise((resolve, reject) => {
+                const makeSoapRequest = async (xml:string, url:string,soapOptions:any) =>{
+                    const { response } = await soapRequest({ url: url, headers: soapOptions, xml: xml, timeout: 1000 }); // Optional timeout parameter(milliseconds)
+                    const { headers, body, statusCode } = response;
+                    console.log(headers);
+                    console.log(body);
+                    console.log(statusCode);
+
+                } 
                 try {
                     const value = args.value;
                     let url = `${process.env.MEDIMPACT_URL}?WSDL`;
@@ -47,21 +58,25 @@ module.exports = {
         </v1:opFindDrugByName>
     </soapenv:Body>
 </soapenv:Envelope>`;
-                    const options = {
-                        url: url,
-                        headers: {                            
-                            'CC-Timestamp-Signature': signature,
-                            'Content-Type': 'text/xml',
-                        },
-                        body:xml
-                    }
-                    // const soapOptions = {
-                    //         token:obj['medimpact-token'],
-                    //         timeStamp:new Date().toISOString(),
-                    //         clientAccountCode:process.env.MEDIMPACT_CLIENT_CODE,                            
+                    // const options = {
+                    //     url: url,
+                    //     headers: {                            
                     //         'CC-Timestamp-Signature': signature,
                     //         'Content-Type': 'text/xml',
+                    //     },
+                    //     body:xml
+                    // }
+                    const soapOptions = {
+                            token:obj['medimpact-token'],
+                            timeStamp:new Date().toISOString(),
+                            clientAccountCode:process.env.MEDIMPACT_CLIENT_CODE,                            
+                            'CC-Timestamp-Signature': signature,
+                            'Content-Type': 'text/xml',
+                            
+                    }
+                    makeSoapRequest(xml,url,soapOptions);
                         
+                      
                     // }
                     // let data={prefixText:"tyl"};
                     // soap.createClient(url, soapOptions, function(err:any, client:any) {
