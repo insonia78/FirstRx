@@ -37,8 +37,8 @@ module.exports = {
                 try {
                     const value = args.value;
                     let url = `${process.env.MEDIMPACT_URL}?WSDL`;
-                    let envVariables = process.env.APIKEYS;
-                    let obj = JSON.parse(JSON.stringify(envVariables));
+                    let envVariables:string = process.env.APIKEYS === undefined ? "": process.env.APIKEYS.toString();
+                    let obj = JSON.parse(envVariables);
                     const xml = `
                     <?xml version="1.0"?>
 <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" soapenv:encodingStyle="http://www.w3.org/2003/05/soap-encoding">
@@ -67,7 +67,9 @@ module.exports = {
                     //     body:xml
                     // }
                     let v = obj["medimpact-token"];
-                    let subset = Object.keys(obj)
+                    let subset = Object.keys(obj);
+                    console.log("keys",subset);
+
                    let k = subset.filter(key =>{
                        console.log(key,"=",obj[key])
                         if(key.localeCompare("medimpact-token") === 0)
