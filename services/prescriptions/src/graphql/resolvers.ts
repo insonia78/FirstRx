@@ -100,7 +100,7 @@ module.exports = {
                         });
                         client.opFindDrugByName(data2, function(err:any, result:any) {
                             
-                            console.log('error2',err);
+                            console.log('error3',err);
                             console.log('result',result);
                             if(err)
                         {
