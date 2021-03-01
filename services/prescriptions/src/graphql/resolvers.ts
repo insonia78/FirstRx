@@ -48,7 +48,7 @@ module.exports = {
     <soapenv:Header>
         <v1:RequestHeader soapenv:actor="http://schemas.xmlsoap.org/soap/actor/next" soapenv:mustUnderstand="0" xmlns:v1="https://rxsavings-ws.medimpact.com/cashcard-ws-v1_0/soap/cashcard">
             <v1:clientAccountCode>${process.env.MEDIMPACT_CLIENT_CODE}</v1:clientAccountCode>
-            <v1:token>${obj['medimpact-token']}</v1:token>
+            <v1:token>${obj["medimpact-token"]}</v1:token>
             <v1:timeStamp>${new Date().toISOString()}</v1:timeStamp>
         </v1:RequestHeader>
     </soapenv:Header>
@@ -66,7 +66,15 @@ module.exports = {
                     //     },
                     //     body:xml
                     // }
-                    console.log('new soap request=',obj,'=',obj["medimpact-token"]);
+                    let v = obj["medimpact-token"];
+                    let subset = Object.keys(obj)
+                   let k = subset.filter(key =>{
+                        if(key === "medimpact-token")
+                        {
+                            return obj[key];
+                        }
+                    })
+                    console.log('new soap request=',obj,'=',v,":",k);
                     const soapOptions = {
                         
                             token:obj["medimpact-token"],
