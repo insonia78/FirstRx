@@ -2,10 +2,10 @@ const request = require('postman-request');
 const crypto = require('crypto');
 import { response } from 'express';
 import { writeToLog } from './../../src/helper/writeToLog';
-var soap = require('soap');
+//var soap = require('soap');
 const fs = require('fs');
 import path from 'path';
-var soap = require('strong-soap').soap;
+const soap = require('strong-soap').soap;
 
 let private_key: string;
 
@@ -67,9 +67,12 @@ module.exports = {
                     }
                     let data={prefixText:"tyl"};
                     soap.createClient(url, soapOptions, function(err:any, client:any) {
+                        console.log('err',err);
                         var method = client['opFindDrugByName'];
                         method(data, function(err:any, result:any, envelope:any, soapHeader:any) {
-                          //response envelope
+                          
+                           console.log('err1',err);
+                           //response envelope
                           console.log('Response Envelope: \n' + envelope);
                           //'result' is the response body
                           console.log('Result: \n' + JSON.stringify(result));
