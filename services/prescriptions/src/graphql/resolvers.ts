@@ -66,9 +66,10 @@ module.exports = {
                     //     },
                     //     body:xml
                     // }
-                    console.log('new soap request=',obj,'=',obj['medimpact-token']);
+                    console.log('new soap request=',obj,'=',obj["medimpact-token"]);
                     const soapOptions = {
-                            token:obj['medimpact-token'],
+                        
+                            token:obj["medimpact-token"],
                             timeStamp:new Date().toISOString(),
                             clientAccountCode:process.env.MEDIMPACT_CLIENT_CODE,                            
                             'CC-Timestamp-Signature': signature,
