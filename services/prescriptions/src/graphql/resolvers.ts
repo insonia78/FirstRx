@@ -69,10 +69,12 @@ module.exports = {
                     let v = obj["medimpact-token"];
                     let subset = Object.keys(obj)
                    let k = subset.filter(key =>{
-                        if(key === "medimpact-token")
+                       console.log(key,"=",obj[key])
+                        if(key.localeCompare("medimpact-token") === 0)
                         {
                             return obj[key];
                         }
+                        console.log(key,"=",key.localeCompare("medimpact-token"));
                     })
                     console.log('new soap request=',obj,'=',v,":",k);
                     const soapOptions = {
