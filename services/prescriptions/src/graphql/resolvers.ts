@@ -73,7 +73,7 @@ module.exports = {
                             resolve({ code: '500', error: 'Internal Server Error', message: err });
                         }
                         client.addSoapHeader(soapOptions);
-                        console.log(client.opFindDrugByName.toString(),client.opFindDrugByName);
+                        console.log('client.opFindDrugByName.toString()',client.opFindDrugByName.toString(),client.opFindDrugByName);
                         client.opFindDrugByName(data, function(err:any, result:any) {
                             
                             console.log('error2',err);
