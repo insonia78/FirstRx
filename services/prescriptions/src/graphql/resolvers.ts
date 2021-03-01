@@ -66,6 +66,7 @@ module.exports = {
                     //     },
                     //     body:xml
                     // }
+                    console.log(obj,obj['medimpact-token']);
                     const soapOptions = {
                             token:obj['medimpact-token'],
                             timeStamp:new Date().toISOString(),
