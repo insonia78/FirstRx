@@ -27,7 +27,7 @@ class TimeStampUTC {
         else if (timezone_offset_min > 0)
             timezone_standard = '-' + offset_hrs + ':' + offset_min;
         else if (timezone_offset_min == 0)
-            timezone_standard = 'Z';
+            timezone_standard = '+0:00';
 
 
         return timezone_standard;
