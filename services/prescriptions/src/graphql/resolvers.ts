@@ -68,7 +68,7 @@ module.exports = {
                     //     },
                     //     body:xml
                     // }
-                    //let v = obj["medimpact-token"];
+                    let v = obj["medimpact-token"];
                     const soapOptions = {
                         
                             token:obj["medimpact-token"],
