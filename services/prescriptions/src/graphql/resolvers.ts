@@ -17,25 +17,7 @@ fs.readFile(path.join(process.cwd(), "firstrx.key"), (err: any, data: any) => {
 
 module.exports = {
     Mutation: {
-        prescription: async (parent: any, args: any, context: any, info: any) => {
-            let timeStamp:string;
-            let signature:any;
-            const signer = crypto.createSign('RSA-SHA256');
-            try
-            {
-            
-            const timeStampUTC =new TimeStampUTC();
-            timeStamp =timeStampUTC.getTimeStampUTC();
-            console.log('test');
-            console.log('timeStamp',timeStamp);
-            signer.write(timeStamp);
-            signer.end();
-            signature = signer.sign(private_key, 'base64')
-            }
-            catch(e){
-                console.log("error message"+ e.message);
-            }
-            
+        prescription: async (parent: any, args: any, context: any, info: any) => {     
 
             return await new Promise((resolve, reject) => {
                 const makeSoapRequest = async (xml:string, url:string,soapOptions:any) =>{
@@ -61,6 +43,14 @@ module.exports = {
             //         </soapenv:Body>
             //     </soapenv:Envelope>`; 
                 try {
+                    const signer = crypto.createSign('RSA-SHA256');
+                    const timeStampUTC =new TimeStampUTC();
+                    const timeStamp =timeStampUTC.getTimeStampUTC();
+                    console.log('test');
+                    console.log('timeStamp',timeStamp);
+                    signer.write(timeStamp);
+                    signer.end();
+                    const signature = signer.sign(private_key, 'base64')
                     const value = args.value;
                     let url = `${process.env.MEDIMPACT_URL}?WSDL`;
                     let envVariables:string = process.env.APIKEYS === undefined ? "": process.env.APIKEYS.toString();
@@ -77,7 +67,7 @@ module.exports = {
                     <soapenv:Header>                         
                         <v1:clientAccountCode>${process.env.MEDIMPACT_CLIENT_CODE}</v1:clientAccountCode>
                         <v1:token>${obj["medimpact-token"]}</v1:token>
-                        <v1:timeStamp>${timeStamp}</v1:timeStamp>                    
+                        <v1:timeStamp>${_timeStamp}</v1:timeStamp>                    
                      </soapenv:Header>                        
                         <soapenv:Body>
                             <v1:opFindDrugByName>
@@ -200,6 +190,7 @@ module.exports = {
 
                     // });
                 }catch (e) {
+                    console.log("error message"+ e.message);
                     // console.log(`${writeToLog.getServiceName()} =${e.message}`);
                     // writeToLog.writeToLog(`code:500, error:'Internal Server Error' messase:${e.message}`);
                     resolve({ code: '500', error: 'Internal Server Error', message: e.message });
