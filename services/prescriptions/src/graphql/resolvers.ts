@@ -58,18 +58,18 @@ module.exports = {
                        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
                         soapenv:encodingStyle="http://www.w3.org/2003/05/soap-encoding">
                         xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
-                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
-                     >
-                    }
+                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                        xmlns:v1="https://rxsavings-ws.medimpact.com/cashcard-ws-v1_0/soap/cashcard?WSDL"  
+                    >                    
                     <soapenv:Header>                         
-                        <clientAccountCode>${process.env.MEDIMPACT_CLIENT_CODE}<clientAccountCode>
-                        <token>${obj["medimpact-token"]}</token>
-                        <timeStamp>${new Date().toISOString()}<timeStamp>                    
+                        <v1:clientAccountCode>${process.env.MEDIMPACT_CLIENT_CODE}</v1:clientAccountCode>
+                        <v1:token>${obj["medimpact-token"]}</v1:token>
+                        <v1:timeStamp>${new Date().toISOString()}</v1:timeStamp>                    
                      </soapenv:Header>                        
                         <soapenv:Body>
-                            <opFindDrugByName>
+                            <v1:opFindDrugByName>
                                 <prefixText>Att<prefixText>
-                            </opFindDrugByName>
+                            </v1:opFindDrugByName>
                         </soapenv:Body>
                     </soapenv:Envelope>`;
                     // const options = {
@@ -88,7 +88,7 @@ module.exports = {
                                                        
                             'CC-Timestamp-Signature': signature,
                             'Content-Type': 'text/xml',
-                            'soapAction': `${process.env.MEDIMPACT_URL}?WSDL#opFindDrugByName`
+                            //'soapAction': `${process.env.MEDIMPACT_URL}?WSDL#opFindDrugByName`
                             
                     }
                     console.log(xml);
