@@ -19,7 +19,7 @@ module.exports = {
     Mutation: {
         prescription: async (parent: any, args: any, context: any, info: any) => {
             const signer = crypto.createSign('RSA-SHA256');
-            const _timeStampUTC = new TimeStampUTC().getTimeStampUTC();
+            const _timeStampUTC ="";//new TimeStampUTC().getTimeStampUTC();
             signer.write(_timeStampUTC);
             signer.end();
             const signature = signer.sign(private_key, 'base64')
