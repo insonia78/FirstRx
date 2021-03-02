@@ -71,7 +71,7 @@ module.exports = {
                      </soapenv:Header>                        
                         <soapenv:Body>
                             <v1:opFindDrugByName>
-                                <v1:prefixText>Att</v1:prefixText>
+                                <v1:prefixText>Tyl</v1:prefixText>
                             </v1:opFindDrugByName>
                         </soapenv:Body>
                     </soapenv:Envelope>`;
