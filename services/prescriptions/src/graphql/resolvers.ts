@@ -1,6 +1,6 @@
 const request = require('postman-request');
 const crypto = require('crypto');
-import { response } from 'express';
+import { TimeStampUTC } from "first-rx-common-lib";
 import { writeToLog } from './../../src/helper/writeToLog';
 const soap = require('soap');
 const fs = require('fs');
@@ -19,7 +19,8 @@ module.exports = {
     Mutation: {
         prescription: async (parent: any, args: any, context: any, info: any) => {
             const signer = crypto.createSign('RSA-SHA256');
-            signer.write(new Date().toISOString());
+            const _timeStampUTC = new TimeStampUTC().getTimeStampUTC();
+            signer.write(_timeStampUTC);
             signer.end();
             const signature = signer.sign(private_key, 'base64')
            
@@ -53,6 +54,7 @@ module.exports = {
                     let url = `${process.env.MEDIMPACT_URL}?WSDL`;
                     let envVariables:string = process.env.APIKEYS === undefined ? "": process.env.APIKEYS.toString();
                     let obj = JSON.parse(envVariables);
+                    
                     const xml = `
                     <?xml version="1.0"?>
                        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
@@ -64,11 +66,11 @@ module.exports = {
                     <soapenv:Header>                         
                         <v1:clientAccountCode>${process.env.MEDIMPACT_CLIENT_CODE}</v1:clientAccountCode>
                         <v1:token>${obj["medimpact-token"]}</v1:token>
-                        <v1:timeStamp>${new Date().toISOString()}</v1:timeStamp>                    
+                        <v1:timeStamp>${_timeStampUTC}</v1:timeStamp>                    
                      </soapenv:Header>                        
                         <soapenv:Body>
                             <v1:opFindDrugByName>
-                                <prefixText>Att<prefixText>
+                                <v1:prefixText>Att</v1:prefixText>
                             </v1:opFindDrugByName>
                         </soapenv:Body>
                     </soapenv:Envelope>`;
