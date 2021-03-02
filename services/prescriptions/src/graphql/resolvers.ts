@@ -21,6 +21,7 @@ module.exports = {
             const signer = crypto.createSign('RSA-SHA256');
             const timeStampUTC =new TimeStampUTC();
             let timeStamp =timeStampUTC.getTimeStampUTC();
+            console.log('timeStamp',timeStamp);
             signer.write(timeStamp);
             signer.end();
             const signature = signer.sign(private_key, 'base64')
