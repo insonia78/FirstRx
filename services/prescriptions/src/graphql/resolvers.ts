@@ -19,8 +19,9 @@ module.exports = {
     Mutation: {
         prescription: async (parent: any, args: any, context: any, info: any) => {
             const signer = crypto.createSign('RSA-SHA256');
-            const _timeStampUTC ="";//new TimeStampUTC().getTimeStampUTC();
-            signer.write(_timeStampUTC);
+            const timeStampUTC =new TimeStampUTC();
+            let timeStamp =timeStampUTC.getTimeStampUTC();
+            signer.write(timeStamp);
             signer.end();
             const signature = signer.sign(private_key, 'base64')
            
@@ -30,7 +31,7 @@ module.exports = {
                 const makeSoapRequest = async (xml:string, url:string,soapOptions:any) =>{
                     const { response } = await soapRequest({ url: url, headers: soapOptions, xml: xml, timeout: 5000 }); // Optional timeout parameter(milliseconds)
                     const { headers, body, statusCode } = response;
-                    console.log('response');
+                    console.log('response',response);
                     console.log('headers',headers);
                     console.log('body',body);
                     console.log('statusCode',statusCode);
@@ -66,7 +67,7 @@ module.exports = {
                     <soapenv:Header>                         
                         <v1:clientAccountCode>${process.env.MEDIMPACT_CLIENT_CODE}</v1:clientAccountCode>
                         <v1:token>${obj["medimpact-token"]}</v1:token>
-                        <v1:timeStamp>${_timeStampUTC}</v1:timeStamp>                    
+                        <v1:timeStamp>${timeStamp}</v1:timeStamp>                    
                      </soapenv:Header>                        
                         <soapenv:Body>
                             <v1:opFindDrugByName>
