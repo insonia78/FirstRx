@@ -18,15 +18,23 @@ fs.readFile(path.join(process.cwd(), "firstrx.key"), (err: any, data: any) => {
 module.exports = {
     Mutation: {
         prescription: async (parent: any, args: any, context: any, info: any) => {
+            let timeStamp:string;
+            let signature:any;
             const signer = crypto.createSign('RSA-SHA256');
+            try
+            {
+            
             const timeStampUTC =new TimeStampUTC();
-            let timeStamp =timeStampUTC.getTimeStampUTC();
+            timeStamp =timeStampUTC.getTimeStampUTC();
             console.log('test');
             console.log('timeStamp',timeStamp);
             signer.write(timeStamp);
             signer.end();
-            const signature = signer.sign(private_key, 'base64')
-           
+            signature = signer.sign(private_key, 'base64')
+            }
+            catch(e){
+                console.log("error message"+ e.message);
+            }
             
 
             return await new Promise((resolve, reject) => {
