@@ -2,7 +2,7 @@ const request = require('postman-request');
 const crypto = require('crypto');
 import { response } from 'express';
 import { writeToLog } from './../../src/helper/writeToLog';
-//const soap = require('soap');
+const soap = require('soap');
 const fs = require('fs');
 import path from 'path';
 //const soap = require('strong-soap').soap;
@@ -66,19 +66,7 @@ module.exports = {
                     //     },
                     //     body:xml
                     // }
-                    let v = obj["medimpact-token"];
-                    let subset = Object.keys(obj);
-                    console.log("keys",subset);
-
-                   let k = subset.filter(key =>{
-                       console.log(key,"=",obj[key])
-                        if(key.localeCompare("medimpact-token") === 0)
-                        {
-                            return obj[key];
-                        }
-                        console.log(key,"=",key.localeCompare("medimpact-token"));
-                    })
-                    console.log('new soap request=',obj,'=',v,":",k);
+                    //let v = obj["medimpact-token"];
                     const soapOptions = {
                         
                             token:obj["medimpact-token"],
@@ -88,11 +76,11 @@ module.exports = {
                             'Content-Type': 'text/xml',
                             
                     }
-                    makeSoapRequest(xml,url,soapOptions);
+                    //makeSoapRequest(xml,url,soapOptions);
                         
                       
                     // }
-                    // let data={prefixText:"tyl"};
+                     let data={prefixText:"tyl"};
                     // soap.createClient(url, soapOptions, function(err:any, client:any) {
                     //     console.log('err',err);
                     //     var method = client['opFindDrugByName'];
@@ -106,38 +94,38 @@ module.exports = {
                     //     });
                     //   });
                     
-                    // let data2={opFindDrugByName:{prefixText:"tyl"}};
-                    // soap.createClient(url, function(err:any, client:any) {
-                    //     console.log('error1',err);
-                    //     if(err)
-                    //     {
-                    //         resolve({ code: '500', error: 'Internal Server Error', message: err });
-                    //     }
-                    //     client.addSoapHeader(soapOptions);
-                    //     console.log('client.opFindDrugByName.toString()',client.opFindDrugByName.toString(),client.opFindDrugByName);
-                    //     client.opFindDrugByName(data, function(err:any, result:any) {
+                    let data2={opFindDrugByName:{prefixText:"tyl"}};
+                    soap.createClient(url, function(err:any, client:any) {
+                        console.log('error1',err);
+                        if(err)
+                        {
+                            resolve({ code: '500', error: 'Internal Server Error', message: err });
+                        }
+                        client.addSoapHeader(soapOptions);
+                        console.log('client.opFindDrugByName.toString()',client.opFindDrugByName.toString(),client.opFindDrugByName);
+                        client.opFindDrugByName(data, function(err:any, result:any) {
                             
-                    //         console.log('error2',err);
-                    //         console.log('result',result);
-                    //         if(err)
-                    //     {
-                    //         resolve({ code: '500', error: 'Internal Server Error', message: err });
-                    //     }
+                            console.log('error2',err);
+                            console.log('result',result);
+                            if(err)
+                        {
+                            resolve({ code: '500', error: 'Internal Server Error', message: err });
+                        }
 
-                    //     });
-                    //     client.opFindDrugByName(data2, function(err:any, result:any) {
+                        });
+                        client.opFindDrugByName(data2, function(err:any, result:any) {
                             
-                    //         console.log('error3',err);
-                    //         console.log('result',result);
-                    //         if(err)
-                    //     {
-                    //         resolve({ code: '500', error: 'Internal Server Error', message: err });
-                    //     }
+                            console.log('error3',err);
+                            console.log('result',result);
+                            if(err)
+                        {
+                            resolve({ code: '500', error: 'Internal Server Error', message: err });
+                        }
 
-                    //     });
+                        });
 
 
-                    //  });
+                     });
                     console.log('date 2/24/2021',new Date().toISOString());
                     // request(options, (error: any, response: any, body: any) => {
                     //     if (error) {
