@@ -67,7 +67,7 @@ module.exports = {
                     <soapenv:Header>                         
                         <v1:clientAccountCode>${process.env.MEDIMPACT_CLIENT_CODE}</v1:clientAccountCode>
                         <v1:token>${obj["medimpact-token"]}</v1:token>
-                        <v1:timeStamp>${_timeStamp}</v1:timeStamp>                    
+                        <v1:timeStamp>${timeStamp}</v1:timeStamp>                    
                      </soapenv:Header>                        
                         <soapenv:Body>
                             <v1:opFindDrugByName>
