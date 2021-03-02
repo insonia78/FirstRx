@@ -42,6 +42,7 @@ class TimeStampUTC {
             current_hrs = dt.getHours().toString(),
             current_mins = dt.getMinutes().toString(),
             current_secs = dt.getSeconds().toString(),
+            current_millisecs = dt.getMilliseconds().toString(),
             current_datetime;
 
         // Add 0 before date, month, hrs, mins or secs if they are less than 0
@@ -50,10 +51,11 @@ class TimeStampUTC {
         current_hrs = parseInt(current_hrs) < 10 ? '0' + current_hrs : current_hrs;
         current_mins = parseInt(current_mins) < 10 ? '0' + current_mins : current_mins;
         current_secs = parseInt(current_secs) < 10 ? '0' + current_secs : current_secs;
+        current_millisecs = parseInt(current_millisecs) < 10 ? '00' + current_millisecs : current_millisecs;
 
         // Current datetime
         // String such as 2016-07-16T19:20:30
-        current_datetime = current_year + '-' + current_month + '-' + current_date + 'T' + current_hrs + ':' + current_mins + ':' + current_secs;
+        current_datetime = current_year + '-' + current_month + '-' + current_date + 'T' + current_hrs + ':' + current_mins + ':' + current_secs+"."+current_millisecs;
 
         return current_datetime;
 
