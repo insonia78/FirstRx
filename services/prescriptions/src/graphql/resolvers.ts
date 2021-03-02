@@ -33,31 +33,33 @@ module.exports = {
                     console.log(body);
                     console.log(statusCode);
 
-                } 
+                }
+            //     <soapenv:Header>
+            //     <v1:RequestHeader soapenv:actor="http://schemas.xmlsoap.org/soap/actor/next" soapenv:mustUnderstand="0" xmlns:v1="https://rxsavings-ws.medimpact.com/cashcard-ws-v1_0/soap/cashcard">
+            //         <v1:clientAccountCode>${process.env.MEDIMPACT_CLIENT_CODE}</v1:clientAccountCode>
+            //         <v1:token>${obj["medimpact-token"]}</v1:token>
+            //         <v1:timeStamp>${new Date().toISOString()}</v1:timeStamp>
+            //     </v1:RequestHeader>
+            // </soapenv:Header> 
                 try {
                     const value = args.value;
-                    let url = `${process.env.MEDIMPACT_URL}?WSDL`;
+                    let url = `${process.env.MEDIMPACT_URL}`;
                     let envVariables:string = process.env.APIKEYS === undefined ? "": process.env.APIKEYS.toString();
                     let obj = JSON.parse(envVariables);
                     const xml = `
                     <?xml version="1.0"?>
-<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" soapenv:encodingStyle="http://www.w3.org/2003/05/soap-encoding">
-    xmlns:xsi="http://www.w3.org/1999/XMLSchema-instance" 
-                     xmlns:xsd="http://www.w3.org/1999/XMLSchema"
+                       <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
+                        soapenv:encodingStyle="http://www.w3.org/2003/05/soap-encoding">
+                        xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+                        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
                      >
-    <soapenv:Header>
-        <v1:RequestHeader soapenv:actor="http://schemas.xmlsoap.org/soap/actor/next" soapenv:mustUnderstand="0" xmlns:v1="https://rxsavings-ws.medimpact.com/cashcard-ws-v1_0/soap/cashcard">
-            <v1:clientAccountCode>${process.env.MEDIMPACT_CLIENT_CODE}</v1:clientAccountCode>
-            <v1:token>${obj["medimpact-token"]}</v1:token>
-            <v1:timeStamp>${new Date().toISOString()}</v1:timeStamp>
-        </v1:RequestHeader>
-    </soapenv:Header>
-    <soapenv:Body>
-        <v1:opFindDrugByName xmlns:v1="https://rxsavings-ws.medimpact.com/cashcard-ws-v1_0/soap/cashcard">
-            <v1:prefixText>Att</v1:prefixText>
-        </v1:opFindDrugByName>
-    </soapenv:Body>
-</soapenv:Envelope>`;
+   
+                    <soapenv:Body>
+                        <v1:opFindDrugByName xmlns:v1="https://rxsavings-ws.medimpact.com/cashcard-ws-v1_0/soap/cashcard">
+                            <v1:prefixText>Att</v1:prefixText>
+                        </v1:opFindDrugByName>
+                    </soapenv:Body>
+                </soapenv:Envelope>`;
                     // const options = {
                     //     url: url,
                     //     headers: {                            
@@ -74,13 +76,14 @@ module.exports = {
                             clientAccountCode:process.env.MEDIMPACT_CLIENT_CODE,                            
                             'CC-Timestamp-Signature': signature,
                             'Content-Type': 'text/xml',
+                            'soapAction': `${process.env.MEDIMPACT_URL}?WSDL#opFindDrugByName`
                             
                     }
-                    //makeSoapRequest(xml,url,soapOptions);
+                    makeSoapRequest(xml,url,soapOptions);
                         
                       
                     // }
-                     let data={prefixText:"tyl"};
+                     //let data={prefixText:"tyl"};
                     // soap.createClient(url, soapOptions, function(err:any, client:any) {
                     //     console.log('err',err);
                     //     var method = client['opFindDrugByName'];
@@ -94,38 +97,38 @@ module.exports = {
                     //     });
                     //   });
                     
-                    let data2={opFindDrugByName:{prefixText:"tyl"}};
-                    soap.createClient(url, function(err:any, client:any) {
-                        console.log('error1',err);
-                        if(err)
-                        {
-                            resolve({ code: '500', error: 'Internal Server Error', message: err });
-                        }
-                        client.addSoapHeader(soapOptions);
-                        console.log('client.opFindDrugByName.toString()',client.opFindDrugByName.toString(),client.opFindDrugByName);
-                        client.opFindDrugByName(data, function(err:any, result:any) {
+                    // let data2={opFindDrugByName:{prefixText:"tyl"}};
+                    // soap.createClient(url, function(err:any, client:any) {
+                    //     console.log('error1',err);
+                    //     if(err)
+                    //     {
+                    //         resolve({ code: '500', error: 'Internal Server Error', message: err });
+                    //     }
+                    //     client.addSoapHeader(soapOptions);
+                    //     console.log('client.opFindDrugByName.toString()',client.opFindDrugByName.toString(),client.opFindDrugByName);
+                    //     client.opFindDrugByName(data, function(err:any, result:any) {
                             
-                            console.log('error2',err);
-                            console.log('result',result);
-                            if(err)
-                        {
-                            resolve({ code: '500', error: 'Internal Server Error', message: err });
-                        }
+                    //         console.log('error2',err);
+                    //         console.log('result',result);
+                    //         if(err)
+                    //     {
+                    //         resolve({ code: '500', error: 'Internal Server Error', message: err });
+                    //     }
 
-                        });
-                        client.opFindDrugByName(data2, function(err:any, result:any) {
+                    //     });
+                    //     client.opFindDrugByName(data2, function(err:any, result:any) {
                             
-                            console.log('error3',err);
-                            console.log('result',result);
-                            if(err)
-                        {
-                            resolve({ code: '500', error: 'Internal Server Error', message: err });
-                        }
+                    //         console.log('error3',err);
+                    //         console.log('result',result);
+                    //         if(err)
+                    //     {
+                    //         resolve({ code: '500', error: 'Internal Server Error', message: err });
+                    //     }
 
-                        });
+                    //     });
 
 
-                     });
+                    //  });
                     console.log('date 2/24/2021',new Date().toISOString());
                     // request(options, (error: any, response: any, body: any) => {
                     //     if (error) {
