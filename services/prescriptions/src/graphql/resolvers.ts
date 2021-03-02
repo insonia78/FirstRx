@@ -27,11 +27,12 @@ module.exports = {
 
             return await new Promise((resolve, reject) => {
                 const makeSoapRequest = async (xml:string, url:string,soapOptions:any) =>{
-                    const { response } = await soapRequest({ url: url, headers: soapOptions, xml: xml, timeout: 1000 }); // Optional timeout parameter(milliseconds)
+                    const { response } = await soapRequest({ url: url, headers: soapOptions, xml: xml, timeout: 5000 }); // Optional timeout parameter(milliseconds)
                     const { headers, body, statusCode } = response;
-                    console.log(headers);
-                    console.log(body);
-                    console.log(statusCode);
+                    console.log('response');
+                    console.log('headers',headers);
+                    console.log('body',body);
+                    console.log('statusCode',statusCode);
 
                 }
             //     <soapenv:Header>
@@ -40,7 +41,13 @@ module.exports = {
             //         <v1:token>${obj["medimpact-token"]}</v1:token>
             //         <v1:timeStamp>${new Date().toISOString()}</v1:timeStamp>
             //     </v1:RequestHeader>
-            // </soapenv:Header> 
+            // </soapenv:Header>
+            // <soapenv:Body>
+            //             <v1:opFindDrugByName xmlns:v1="https://rxsavings-ws.medimpact.com/cashcard-ws-v1_0/soap/cashcard">
+            //                 <v1:prefixText>Att</v1:prefixText>
+            //             </v1:opFindDrugByName>
+            //         </soapenv:Body>
+            //     </soapenv:Envelope>`; 
                 try {
                     const value = args.value;
                     let url = `${process.env.MEDIMPACT_URL}`;
@@ -53,13 +60,13 @@ module.exports = {
                         xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"  
                      >
-   
-                    <soapenv:Body>
-                        <v1:opFindDrugByName xmlns:v1="https://rxsavings-ws.medimpact.com/cashcard-ws-v1_0/soap/cashcard">
-                            <v1:prefixText>Att</v1:prefixText>
-                        </v1:opFindDrugByName>
-                    </soapenv:Body>
-                </soapenv:Envelope>`;
+                        <soapenv:Header />  
+                        <soapenv:Body>
+                            <opFindDrugByName>
+                                <prefixText>Att<prefixText>
+                            </opFindDrugByName>
+                        </soapenv:Body>
+                    </soapenv:Envelope>`;
                     // const options = {
                     //     url: url,
                     //     headers: {                            
