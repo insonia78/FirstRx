@@ -5,7 +5,7 @@ class TimeStampUTC {
     }
     public getTimeStampUTC(): string {
 
-        return `${this.getDateTime()}${this.getTimeStampUTC()}`;
+        return `${this.getDateTime()}${this.getTimeZone()}`;
 
     }
     private getTimeZone() {
