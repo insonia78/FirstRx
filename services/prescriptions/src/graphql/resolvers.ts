@@ -77,10 +77,10 @@ module.exports = {
                     // }
                     let v = obj["medimpact-token"];
                     const soapOptions = {
-                        
+                            clientAccountCode:process.env.MEDIMPACT_CLIENT_CODE,
                             token:obj["medimpact-token"],
                             timeStamp:new Date().toISOString(),
-                            clientAccountCode:process.env.MEDIMPACT_CLIENT_CODE,                            
+                                                       
                             'CC-Timestamp-Signature': signature,
                             'Content-Type': 'text/xml',
                             'soapAction': `${process.env.MEDIMPACT_URL}?WSDL#opFindDrugByName`
