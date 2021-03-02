@@ -62,7 +62,7 @@ module.exports = {
                         soapenv:encodingStyle="http://www.w3.org/2003/05/soap-encoding">
                         xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                        xmlns:v1="https://rxsavings-ws.medimpact.com/cashcard-ws-v1_0/soap/cashcard?WSDL"  
+                        xmlns:v1=${process.env.MEDIMPACT_URL}"  
                     >                    
                     <soapenv:Header>                         
                         <v1:clientAccountCode>${process.env.MEDIMPACT_CLIENT_CODE}</v1:clientAccountCode>
@@ -79,12 +79,12 @@ module.exports = {
                     const soapOptions = {
                             'CC-Timestamp-Signature': signature,
                             'Content-Type': 'text/xml',
-                            'soapAction': `${process.env.MEDIMPACT_URL}?WSDL#opFindDrugByName`
+                            'soapAction': `${url}#opFindDrugByName`
                             
                     }
                     console.log(xml);
                     console.log('soapOptions',soapOptions);
-                    makeSoapRequest(xml,url,soapOptions);
+                    makeSoapRequest(xml,`${process.env.MEDIMPACT_URL}`,soapOptions);
                         
                       
                     // }
