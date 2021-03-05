@@ -12,9 +12,12 @@ app.set('trust proxy', true);
 app.use(json());
 console.log('medimapctkey', process.env.APIKEYS);
 server.applyMiddleware({ app, path:'/prescriptions/graphql'});
+app.get('/healthcheck',async (req:any, res:any) => {
+  res.status(200).end();
+ //throw new Error();
+});
 app.all('*', async (req:any, res:any) => {
-   console.log('empty request');
-  //throw new Error();
+  throw new Error();
 });
 
 //app.use(errorHandler);
