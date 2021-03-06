@@ -11,6 +11,7 @@ export default function _Head() {
       <meta httpEquiv='pragma' content='no-cache' />
       <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"></meta>
       <link rel="icon" href="/firstRx.ico" />
+      <link rel="shortcut icon" href="/firstRx.ico" />
       <meta name="description" content="FirstRx" />
       <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
       <link rel="preconnect" href="https://fonts.gstatic.com" />
