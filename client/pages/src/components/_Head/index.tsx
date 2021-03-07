@@ -10,10 +10,9 @@ export default function _Head() {
       <meta httpEquiv='expires' content='0' />
       <meta httpEquiv='pragma' content='no-cache' />
       <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0"></meta>
-      <link rel="icon" href="/firstRx.ico" />
       <link rel="shortcut icon" href="/firstRx.ico" />
-      <link rel="apple-touch-icon" sizes="32x32" href="/firstrx-icons/favicon-32x32.png" />
-      <link rel="icon" sizes="32x32" href="/firstrx-icons/favicon-32x32.png" />
+      <link rel="apple-touch-icon"  href="/firstrx-icons/apple-touch-icon.png" />
+      {/* <link rel="icon" href="/firstrx-icons/favicon-32x32.png" /> */}
       <meta name="description" content="FirstRx" />
       <meta name="robots" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1" />
       <link rel="preconnect" href="https://fonts.gstatic.com" />
