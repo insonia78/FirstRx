@@ -82,10 +82,11 @@ module.exports = {
 
                     // }
                     let data = {
+                        findDrugByNameRequest:{
                         clientAccountCode: `${process.env.MEDIMPACT_CLIENT_CODE}`,
                         token: `${obj["medimpact-token"]}`,
                         timestamp: `${new Date().toISOString()}`,
-                        prefixText: "tyl"
+                        prefixText: "tyl"}
                     };
                     // soap.createClient(url, soapOptions, function(err:any, client:any) {
                     //     console.log('err',err);
@@ -107,8 +108,8 @@ module.exports = {
                             resolve({ code: '500', error: 'Internal Server Error', message: err });
                         }
                         client.addSoapHeader(soapOptions);
-                        console.log('client.opFindDrugByName.toString()', client.opFindDrugByName.toString(), client.opFindDrugByName);
-                        client.opFindDrugByName(data, function (err: any, result: any) {
+                        console.log('client.opFindDrugByName.toString()', client);
+                        client.findDrugByNameRequest(data, function (err: any, result: any) {
 
                             console.log('error2', err);
                             console.log('result', result);
@@ -129,7 +130,7 @@ module.exports = {
                     });
 
 
-                });
+               
             // console.log('date 2/24/2021',new Date().toISOString());
             // const options={
             //     url:`${url}`,
