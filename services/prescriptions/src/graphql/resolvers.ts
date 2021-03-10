@@ -112,7 +112,7 @@ module.exports = {
                 //         </soapenv:Body>
                 //     </soapenv:Envelope>`; 
                 try {
-                    console.log('UTC',new Date(new Date().toISOString()).toLocaleString('en-US', { timeZone: 'America/Los_Angeles'});
+                    console.log('UTC',new Date(new Date().toISOString()).toLocaleString('en-US', { timeZone: 'America/Los_Angeles'}));
                     const signer = crypto.createSign('RSA-SHA256');
                     const timeStampUTC = new TimeStampUTC();
                     const timeStamp = timeStampUTC.getTimeStampUTC();
