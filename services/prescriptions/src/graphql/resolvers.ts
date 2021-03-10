@@ -62,7 +62,7 @@ module.exports = {
                         soapenv:encodingStyle="http://www.w3.org/2003/05/soap-encoding"
                         xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
                         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-                        xmlns:v1="${url}"  
+                        xmlns:v1='${url}'  
                     >                    
                     <soapenv:Header>                         
                         <v1:clientAccountCode>${process.env.MEDIMPACT_CLIENT_CODE}</v1:clientAccountCode>
