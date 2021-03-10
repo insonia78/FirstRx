@@ -77,7 +77,7 @@ module.exports = {
 
                     }
                     console.log(xml);
-                   // makeSoapRequest(xml, `${url}`, soapOptions);
+                    makeSoapRequest(xml, `${url}`, soapOptions);
 
 
                     // }
@@ -102,22 +102,22 @@ module.exports = {
                     //   });
 
                     //  let data2={opFindDrugByName:{prefixText:"tyl"}};
-                    soap.createClient(url, function (err: any, client: any) {
-                        console.log('error1', err);
-                        if (err) {
-                            resolve({ code: '500', error: 'Internal Server Error', message: err });
-                        }
-                        client.addSoapHeader(soapOptions);
-                        console.log('client.opFindDrugByName.toString()', client);
-                        client.opFindDrugByName(data, function (err: any, result: any) {
+                    // soap.createClient(url, function (err: any, client: any) {
+                    //     console.log('error1', err);
+                    //     if (err) {
+                    //         resolve({ code: '500', error: 'Internal Server Error', message: err });
+                    //     }
+                    //     client.addSoapHeader(soapOptions);
+                    //     console.log('client.opFindDrugByName.toString()', client);
+                    //     client.opFindDrugByName(data, function (err: any, result: any) {
 
-                            console.log('error2', err);
-                            console.log('result', result);
-                            if (err) {
-                                resolve({ code: '500', error: 'Internal Server Error', message: err });
-                            }
+                    //         console.log('error2', err);
+                    //         console.log('result', result);
+                    //         if (err) {
+                    //             resolve({ code: '500', error: 'Internal Server Error', message: err });
+                    //         }
 
-                        });
+                    //     });
                         // client.opFindDrugByN(data2, function(err:any, result:any) {
 
                         //     console.log('error3',err);
@@ -127,7 +127,7 @@ module.exports = {
                         //     resolve({ code: '500', error: 'Internal Server Error', message: err });
                         // }
 
-                    });
+                   // });
 
 
                
