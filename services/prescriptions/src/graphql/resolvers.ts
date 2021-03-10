@@ -21,7 +21,8 @@ module.exports = {
 
             return await new Promise((resolve, reject) => {
                 const makeSoapRequest = async (xml: string, url: string, soapOptions: any) => {
-                    const { response } = await soapRequest({ url: url, headers: soapOptions, xml: xml, timeout: 5000 }); // Optional timeout parameter(milliseconds)
+                    const { response } = await soapRequest({ url: url, headers: soapOptions, xml: xml, timeout: 5000 })
+                                              .catch((err:any) => console.log(err)); // Optional timeout parameter(milliseconds)
                     const { headers, body, statusCode } = response;
                     console.log('response', response);
                     console.log('headers', headers);
