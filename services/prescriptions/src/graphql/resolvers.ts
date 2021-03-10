@@ -105,7 +105,7 @@ module.exports = {
                     //     });
                     //   });
                     
-                    //  let data2={opFindDrugByName:{prefixText:"tyl"}};
+                     let data2={opFindDrugByName:{prefixText:"tyl"}};
                     soap.createClient(url, function(err:any, client:any) {
                         console.log('error1',err);
                         if(err)
@@ -114,16 +114,16 @@ module.exports = {
                         }
                         client.addSoapHeader(soapOptions);
                         console.log('client.opFindDrugByName.toString()',client.opFindDrugByName.toString(),client.opFindDrugByName);
-                        client.opFindDrugByName(data, function(err:any, result:any) {
+                        // client.opFindDrugByName(data, function(err:any, result:any) {
                             
-                            console.log('error2',err);
-                            console.log('result',result);
-                            if(err)
-                        {
-                            resolve({ code: '500', error: 'Internal Server Error', message: err });
-                        }
+                        //     console.log('error2',err);
+                        //     console.log('result',result);
+                        //     if(err)
+                        // {
+                        //     resolve({ code: '500', error: 'Internal Server Error', message: err });
+                        // }
 
-                        });
+                        // });
                         client.opFindDrugByName(data2, function(err:any, result:any) {
                             
                             console.log('error3',err);
