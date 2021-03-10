@@ -2,10 +2,10 @@ const request = require('postman-request');
 const crypto = require('crypto');
 import { TimeStampUTC } from "first-rx-common-lib";
 import { writeToLog } from './../../src/helper/writeToLog';
-//const soap = require('soap');
+const soap = require('soap');
 const fs = require('fs');
 import path from 'path';
-const soap = require('strong-soap').soap;
+//const soap = require('strong-soap').soap;
 const soapRequest = require('easy-soap-request');
 
 let private_key: string;
