@@ -73,10 +73,10 @@ class TimeStampUTC {
             current_millisecs = '0'+ current_millisecs;
         else if(current_millisecs.length  < 2)
             current_millisecs = '00'+ current_millisecs;       
-        current_millisecs = parseInt(current_millisecs) < 10 ? '00' + current_millisecs : current_millisecs;
+        //current_millisecs = parseInt(current_millisecs) < 10 ? '00' + current_millisecs : current_millisecs;
 
         
-        current_datetime = current_year + '-' + current_month + '-' + current_date + 'T' + current_hrs + ':' + current_mins + ':' + current_secs +':'+current_millisecs;
+        current_datetime = current_year + '-' + current_month + '-' + current_date + 'T' + current_hrs + ':' + current_mins + ':' + current_secs +'.'+current_millisecs;
 
         return current_datetime;
 
