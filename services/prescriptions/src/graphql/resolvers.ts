@@ -56,7 +56,7 @@ module.exports = {
                     let envVariables:string = process.env.APIKEYS === undefined ? "": process.env.APIKEYS.toString();
                     let obj = JSON.parse(envVariables);
                     
-                    const xml = `
+                    let xml = `
                     <?xml version="1.0"?>
                        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" 
                         soapenv:encodingStyle="http://www.w3.org/2003/05/soap-encoding"
@@ -74,8 +74,21 @@ module.exports = {
                                 <v1:prefixText>Tyl</v1:prefixText>
                             </v1:opFindDrugByName>
                         </soapenv:Body>
-                    </soapenv:Envelope>`;
-                   
+                    </soapenv:Envelope>
+                    `;
+                     xml=`<?xml version="1.0" encoding="UTF-8"?>
+<soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="https://uatrxsavings-ws.medimpact.com/cashcard-ws-v1_0/soap/cashcard?WSDL" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" soapenv:encodingStyle="http://www.w3.org/2003/05/soap-encoding">
+   <soapenv:Header>
+      <v1:clientAccountCode>MIC61</v1:clientAccountCode>
+      <v1:token>YhduMOjhnf1X3TT5CW2qOdoeKnKDGTDFAJ73h6FW9MmMI2jgjiUZUXZhbHjG38O5HGIBGSfLkJhFfAxdfepx/1PbjW5Oe9zFeoBHrRUHBb9lXQigsNXzLylEmA3mKYu+XOjvq4zaIFh8x+Vvq1LuXKeA1zHu/NdOZhUrWBiHWJzdpgw/PsGTv46mdi3M+R9c+p46wirIx2DNv+RairZaiTJnIpVZUFUyydl60tsmeCKWvXhoSs+oLlygaUVyYKAtmArR0AsSA+Ud0LuJ4mfWumA3EyMkr1qekHoMsXMzKnDNIoxcasoreJkg4Bi35vc1ASU00F7Q2Gzev9O1gfkGfw==</v1:token>
+      <v1:timeStamp>${timeStamp}</v1:timeStamp>
+   </soapenv:Header>
+   <soapenv:Body>
+      <v1:opFindDrugByName>
+         <v1:prefixText>Tyl</v1:prefixText>
+      </v1:opFindDrugByName>
+   </soapenv:Body>
+</soapenv:Envelope>`;
                     const soapOptions = {
                             'CC-Timestamp-Signature': signature,
                             'Content-Type': 'text/xml',
