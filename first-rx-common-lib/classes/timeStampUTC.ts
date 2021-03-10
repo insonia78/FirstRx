@@ -27,7 +27,7 @@ class TimeStampUTC {
         else if (timezone_offset_min > 0)
             timezone_standard = '-' + offset_hrs + ':' + offset_min;
         else if (timezone_offset_min == 0)
-            timezone_standard = 'Z';
+            timezone_standard = '+0:00';
 
 
         return timezone_standard;
@@ -58,7 +58,7 @@ class TimeStampUTC {
         current_millisecs = parseInt(current_millisecs) < 10 ? '00' + current_millisecs : current_millisecs;
 
         
-        current_datetime = current_year + '-' + current_month + '-' + current_date + 'T' + current_hrs + ':' + current_mins + ':' + current_secs /*+':'+current_millisecs;*/
+        current_datetime = current_year + '-' + current_month + '-' + current_date + 'T' + current_hrs + ':' + current_mins + ':' + current_secs +':'+current_millisecs;
 
         return current_datetime;
 

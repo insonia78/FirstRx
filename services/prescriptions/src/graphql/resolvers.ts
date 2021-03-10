@@ -46,7 +46,7 @@ module.exports = {
                 try {
                     const signer = crypto.createSign('RSA-SHA256');
                     const timeStampUTC = new TimeStampUTC();
-                    const timeStamp = new Date().toISOString(); //timeStampUTC.getTimeStampUTC();
+                    const timeStamp = timeStampUTC.getTimeStampUTC();
                     console.log('test');
                     console.log('timeStamp', timeStamp);
                     signer.write(timeStamp);
