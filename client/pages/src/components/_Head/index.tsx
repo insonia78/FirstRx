@@ -2,7 +2,7 @@
 import Head from 'next/head';
 //initial-scale=1.0, shrink-to-fit=yes
 export default function _Head() {
-.map
+
   return (
     <Head>
       <title>FirstRx</title>
