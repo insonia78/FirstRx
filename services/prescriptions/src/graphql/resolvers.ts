@@ -72,7 +72,7 @@ module.exports = {
                  </soapenv:Envelope>`;
 
                     const soapOptions = {
-                        'CC-Timestamp-Signature': [signature],
+                        'CC-Timestamp-Signature': signature,
                         'Content-Type': 'text/xml',
 
                     }
@@ -109,7 +109,7 @@ module.exports = {
                         }
                         client.addSoapHeader(soapOptions);
                         console.log('client.opFindDrugByName.toString()', client);
-                        client.findDrugByNameRequest(data, function (err: any, result: any) {
+                        client.opFindDrugByName(data, function (err: any, result: any) {
 
                             console.log('error2', err);
                             console.log('result', result);
