@@ -52,7 +52,7 @@ module.exports = {
                     signer.end();
                     const signature = signer.sign(private_key, 'base64')
                     const value = args.value;
-                    let url = `${process.env.MEDIMPACT_URL}?WSDL`;
+                    let url = `${process.env.MEDIMPACT_URL}`;
                     let envVariables: string = process.env.APIKEYS === undefined ? "" : process.env.APIKEYS.toString();
                     let obj = JSON.parse(envVariables);
 
@@ -63,7 +63,7 @@ module.exports = {
                        <v1:findDrugByNameRequest>
                           <v1:clientAccountCode>${process.env.MEDIMPACT_CLIENT_CODE}</v1:clientAccountCode>
                           <v1:token>${obj["medimpact-token"]}</v1:token>
-                          <v1:timestamp>${new Date().toISOString()}</v1:timestamp>
+                          <v1:timestamp>${timeStamp}</v1:timestamp>
                           <v1:prefixText>ben</v1:prefixText>
                           <!--Optional:-->
                           <v1:count>10</v1:count>
@@ -77,7 +77,7 @@ module.exports = {
 
                     }
                     console.log(xml);
-                    //makeSoapRequest(xml, `${url}`, soapOptions);
+                   // makeSoapRequest(xml, `${url}`, soapOptions);
 
 
                     // }
