@@ -48,7 +48,7 @@ class TimeStampUTC {
             timezone_standard = '+0:00';
 
 
-        return '-8:00';
+        return 'Z';
         
 
     }
@@ -76,7 +76,7 @@ class TimeStampUTC {
         //current_millisecs = parseInt(current_millisecs) < 10 ? '00' + current_millisecs : current_millisecs;
 
         
-        current_datetime = current_year + '-' + current_month + '-' + current_date + 'T' + current_hrs + ':' + current_mins + ':' + current_secs +'.'+current_millisecs;
+        current_datetime = current_year + '-' + current_month + '-' + current_date + 'T' + current_hrs + ':' + current_mins + ':' + current_secs; //+'.'+current_millisecs;
 
         return current_datetime;
 
