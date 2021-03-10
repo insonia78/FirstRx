@@ -56,27 +56,27 @@ module.exports = {
                     let envVariables:string = process.env.APIKEYS === undefined ? "": process.env.APIKEYS.toString();
                     let obj = JSON.parse(envVariables);
                     
-                    let xml = `<?xml version="1.0"?>
+                    const xml = `<?xml version="1.0"?>
                     <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:v1="http://rx-savings.medimpact.com/contract/PricingEngine/v1.0">
                     <soapenv:Header/>
                     <soapenv:Body>
                        <v1:findDrugByNameRequest>
                           <v1:clientAccountCode>${process.env.MEDIMPACT_CLIENT_CODE}</v1:clientAccountCode>
                           <v1:token>${obj["medimpact-token"]}</v1:token>
-                          <v1:timestamp>${timeStamp}</v1:timestamp>
+                          <v1:timestamp>${new Date().toISOString()}</v1:timestamp>
                           <v1:prefixText>ben</v1:prefixText>
                           <!--Optional:-->
                           <v1:count>10</v1:count>
                        </v1:findDrugByNameRequest>
                     </soapenv:Body>
-                 </soapenv:Envelope>
-                 `;
+                 </soapenv:Envelope>`;
                      
                     const soapOptions = {
                             'CC-Timestamp-Signature': signature,
                             'Content-Type': 'text/xml',           
                             
-                    }                    
+                    }  
+                    console.log(xml);                  
                     makeSoapRequest(xml,`${url}`,soapOptions);
                         
                       
