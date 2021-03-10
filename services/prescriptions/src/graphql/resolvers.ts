@@ -48,12 +48,12 @@ class TimeStampUTC {
             timezone_standard = '+0:00';
 
 
-        return '+0:00';
+        return '-5:00';
         
 
     }
     private getDateTime() {
-        let dt = new Date(new Date().toUTCString()),
+        let dt = new Date(),
             current_date = dt.getDate().toString(),
             current_month = (dt.getMonth() + 1).toString(),
             current_year = dt.getFullYear().toString(),
