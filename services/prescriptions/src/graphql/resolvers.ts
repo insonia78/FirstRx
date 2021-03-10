@@ -53,7 +53,7 @@ class TimeStampUTC {
 
     }
     private getDateTime() {
-        let dt = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles'})),
+        let dt = new Date(new Date().toUTCString()),
             current_date = dt.getDate().toString(),
             current_month = (dt.getMonth() + 1).toString(),
             current_year = dt.getFullYear().toString(),
@@ -112,7 +112,7 @@ module.exports = {
                 //         </soapenv:Body>
                 //     </soapenv:Envelope>`; 
                 try {
-                    console.log('UTC',new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles'})).getMilliseconds().toString());
+                    console.log('UTC',new Date(new Date().toUTCString()));
                     const signer = crypto.createSign('RSA-SHA256');
                     const timeStampUTC = new TimeStampUTC();
                     const timeStamp = timeStampUTC.getTimeStampUTC();
