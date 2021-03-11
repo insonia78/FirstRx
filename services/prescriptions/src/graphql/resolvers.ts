@@ -117,8 +117,8 @@ module.exports = {
                     console.log('UTC',new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles'})));
                     const signer = crypto.createSign('RSA-SHA256');
                     const timeStampUTC = new TimeStampUTC();
-                    const timeStamp = moment().utcOffset('-0800').format('YYYY-MM-DD[T]HH:mm:ss.SSSZ');
-                    //const timeStamp = moment().utc().format('YYYY-MM-DD[T]HH:mm:ss.SSSZ');
+                    //const timeStamp = moment().utcOffset('-0800').format('YYYY-MM-DD[T]HH:mm:ss.SSSZ');
+                    const timeStamp = moment().utc().format('YYYY-MM-DD[T]HH:mm:ss.SSSZ');
                     
                     console.log('timeStamp', timeStamp);
                     signer.write(timeStamp);
@@ -217,6 +217,7 @@ module.exports = {
                 },
                 body:xml         
             };
+            console.log('options', options);
             request(options, (error: any, response: any) => {
                 if (error) {
                     console.log(`${writeToLog.getServiceName()} = ${error}`);
