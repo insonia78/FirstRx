@@ -133,8 +133,9 @@ module.exports = {
                     <soapenv:Body>
                        <v1:findDrugByNameRequest>
                           <v1:clientAccountCode>${process.env.MEDIMPACT_CLIENT_CODE}</v1:clientAccountCode>
-                          <v1:token>${obj["medimpact-token"]}</v1:token>
+                          <!--<v1:token>${obj["medimpact-token"]}</v1:token>-->
                           <v1:timestamp>${timeStamp}</v1:timestamp>
+                          <v1:token>SwciN4Xq6jRhVqSGWYoV6H4cg8ZceZeEB5FUO76SK/VhqWQyhlCDQxhtpUKNLtVX1mpgngmfueCmZHJI8JZ78C+NPbMYWR/DPlDa8ptVFTpDx1vrX/7vhNf7PTD1LzIk52JIQ2vcdgb17z+DO4khe7ZPQ8v4oZaOqIxKLd4WoU7QNj+R0jcwWp5F8SOBfHu2trnAkAXgyoOmbO81Fiye4Lay+XrSDUTpR68GZzQGp/Wqnk25bM0oqBKV/QEm74k2kfpxVoIDrQx1m1Zs2OkYP36BdrBVWsHPLm9jLJZg196eD/PhNh5KhRM/jvlO4e6OHf/YpMP8b0ERdktEHgyblg==</v1:token>
                           <v1:prefixText>ben</v1:prefixText>
                           <!--Optional:-->
                           <v1:count>10</v1:count>
