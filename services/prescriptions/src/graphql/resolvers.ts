@@ -149,17 +149,18 @@ module.exports = {
 
                     }
                     console.log(xml);
-                    makeSoapRequest(xml, `${url}`, soapOptions);
+                    //makeSoapRequest(xml, `${url}`, soapOptions);
 
 
                     // }
-                    let data = {
-                        findDrugByNameRequest:{
-                        clientAccountCode: `${process.env.MEDIMPACT_CLIENT_CODE}`,
-                        token: `${obj["medimpact-token"]}`,
-                        timestamp: `${new Date().toISOString()}`,
-                        prefixText: "tyl"}
-                    };
+                    // let data = {
+                    //     findDrugByNameRequest:{
+                    //     clientAcc
+                    //     ountCode: `${process.env.MEDIMPACT_CLIENT_CODE}`,
+                    //     token: `${obj["medimpact-token"]}`,
+                    //     timestamp: `${new Date().toISOString()}`,
+                    //     prefixText: "tyl"}
+                    // };
                     // soap.createClient(url, soapOptions, function(err:any, client:any) {
                     //     console.log('err',err);
                     //     var method = client['opFindDrugByName'];
@@ -204,56 +205,58 @@ module.exports = {
 
                
             //console.log('date 2/24/2021',new Date().toISOString());
-            // const options={                
-            //     headers:
-            //     {
-            //         'CC-Timestamp-Signature': signature,
-            //         'Content-Type': 'text/xml'
-            //     },
-            //     body:xml         
-            // };
-            // request.post(`${url}`,options, (error: any, response: any, body: any) => {
-            //     if (error) {
-            //         console.log(`${writeToLog.getServiceName()} = ${error}`);
-            //         writeToLog.writeToLog(`code:500, error:InternalServerError, message:${error}`);
-            //         resolve({ code: '500', error: 'Internal Server Error', message: 'Something went wrong' });
+            const options={
+                url:url,
+                method:"POST",                
+                headers:
+                {
+                    'CC-Timestamp-Signature': signature,
+                    'Content-Type': 'text/xml'
+                },
+                body:xml         
+            };
+            request(options, (error: any, response: any, body: any) => {
+                if (error) {
+                    console.log(`${writeToLog.getServiceName()} = ${error}`);
+                    writeToLog.writeToLog(`code:500, error:InternalServerError, message:${error}`);
+                    resolve({ code: '500', error: 'Internal Server Error', message: 'Something went wrong' });
 
-            //     }
-            //     else {
+                }
+                else {
 
-            //         console.log('response from server', body, response);
-            //         if (Object.keys(body = JSON.parse(body)).length !== 0) {
-            //             // console.log(body);
-            //             // console.log('inside predictions',body['predictions']);
-            //             // console.log('inside predictions1',body.predictions);
-            //             // console.log('inside predictions1',body.predictions.length);
-            //             // if (body['predictions'].length === 1) {
-            //             //     getAddressByGeoLocation(body, body.predictions[0].place_id, resolve)
-            //             // }
-            //             // else {
+                    console.log('response from server', body, response);
+                    if (Object.keys(body = JSON.parse(body)).length !== 0) {
+                        // console.log(body);
+                        // console.log('inside predictions',body['predictions']);
+                        // console.log('inside predictions1',body.predictions);
+                        // console.log('inside predictions1',body.predictions.length);
+                        // if (body['predictions'].length === 1) {
+                        //     getAddressByGeoLocation(body, body.predictions[0].place_id, resolve)
+                        // }
+                        // else {
 
-            //             //     if (body.error !== undefined) {
-            //             //         console.log(`${writeToLog.getServiceName()} = ${body.error}`);
-            //             //         writeToLog.writeToLog(`code:400, error:InternalServerError, message:${body.error}`);
-            //             //         Object.assign(body, { code: 400, message: body.error });
-            //             //     }
-            //             //     else {
-            //             //         Object.assign(body, { code: 200 });
-            //             //     }
-            //             //     resolve(body);
-            //             // }
+                        //     if (body.error !== undefined) {
+                        //         console.log(`${writeToLog.getServiceName()} = ${body.error}`);
+                        //         writeToLog.writeToLog(`code:400, error:InternalServerError, message:${body.error}`);
+                        //         Object.assign(body, { code: 400, message: body.error });
+                        //     }
+                        //     else {
+                        //         Object.assign(body, { code: 200 });
+                        //     }
+                        //     resolve(body);
+                        // }
 
 
-            //         }
-            //         else {
-            //             console.log(`${writeToLog.getServiceName()} = Returned no response`);
-            //             writeToLog.writeToLog(`code:400, message: ${url} returned no response`);
-            //             resolve({ code: 400, message: 'Returned no response' });
-            //         }
+                    }
+                    else {
+                        console.log(`${writeToLog.getServiceName()} = Returned no response`);
+                        writeToLog.writeToLog(`code:400, message: ${url} returned no response`);
+                        resolve({ code: 400, message: 'Returned no response' });
+                    }
 
-            //     }
+                }
 
-            // });
+            });
         }catch(e) {
             console.log("error message" + e.message);
             // console.log(`${writeToLog.getServiceName()} =${e.message}`);
