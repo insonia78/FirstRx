@@ -48,7 +48,7 @@ class TimeStampUTC {
             timezone_standard = '+00:00';
 
 
-        return '-8:00' ;
+        return '+0000' ;
         
 
     }
