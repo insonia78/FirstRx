@@ -45,10 +45,10 @@ class TimeStampUTC {
         else if (timezone_offset_min > 0)
             timezone_standard = '-' + offset_hrs + ':' + offset_min;
         else if (timezone_offset_min == 0)
-            timezone_standard = '+0:00';
+            timezone_standard = '+00:00';
 
 
-        return '-5:00';
+        return timezone_standard;
         
 
     }
