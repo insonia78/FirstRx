@@ -5,7 +5,7 @@ import { natsWrapper } from './nats-wrapper';
 const json_p = require('/prescriptions/package.json');
 
 const start = async () => {
-  console.log('welcome');
+  
   const server_id = `${json_p.name}_${randomBytes(8).toString('hex')}`;
   // if (!process.env.NATS_URL) {
   //   throw new Error('NATS_URL must be defined');
