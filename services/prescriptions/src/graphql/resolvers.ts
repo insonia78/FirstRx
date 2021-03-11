@@ -7,6 +7,7 @@ const fs = require('fs');
 import path from 'path';
 //const soap = require('strong-soap').soap;
 const soapRequest = require('easy-soap-request');
+const moment = require('moment')
 
 let private_key: string;
 
@@ -114,7 +115,7 @@ module.exports = {
                     console.log('UTC',new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles'})));
                     const signer = crypto.createSign('RSA-SHA256');
                     const timeStampUTC = new TimeStampUTC();
-                    const timeStamp = timeStampUTC.getTimeStampUTC();
+                    const timeStamp = moment().utc().format('YYYY-MM-DD[T]HH:mm:ss.SSS[Z]');
                     console.log('test');
                     console.log('timeStamp', timeStamp);
                     signer.write(timeStamp);
