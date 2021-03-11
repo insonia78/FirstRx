@@ -48,12 +48,12 @@ class TimeStampUTC {
             timezone_standard = '+00:00';
 
 
-        return '-0800' ;
+        return '+00:00' ;
         
 
     }
     private getDateTime() {
-        let dt = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles'})),
+        let dt = new Date(),//new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles'})),
             current_date = dt.getDate().toString(),
             current_month = (dt.getMonth() + 1).toString(),
             current_year = dt.getFullYear().toString(),
@@ -75,7 +75,7 @@ class TimeStampUTC {
             current_millisecs = '00'+ current_millisecs;       
        
         
-        current_datetime = current_year + '-' + current_month + '-' + current_date + 'T' + current_hrs + ':' + current_mins + ':' + current_secs +'.'+current_millisecs;
+        current_datetime = current_year + '-' + current_month + '-' + current_date + 'T' + current_hrs + ':' + current_mins + ':' + current_secs //+'.'+current_millisecs;
 
         return current_datetime;
 
