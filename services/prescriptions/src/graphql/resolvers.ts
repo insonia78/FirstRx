@@ -1,6 +1,7 @@
 //const request = require('postman-request');
 const request = require('request');
 const crypto = require('crypto');
+const DOMParser = require("xmldom").DOMParser;
 
 import { writeToLog } from './../../src/helper/writeToLog';
 const soap = require('soap');
@@ -116,8 +117,8 @@ module.exports = {
                     console.log('UTC',new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles'})));
                     const signer = crypto.createSign('RSA-SHA256');
                     const timeStampUTC = new TimeStampUTC();
-                    //const timeStamp = moment().utcOffset('+0000').format('YYYY-MM-DD[T]HH:mm:ss.SSSZ');
-                    const timeStamp = moment().utc().format('YYYY-MM-DD[T]HH:mm:ss.SSSZ');
+                    const timeStamp = moment().utcOffset('-0800').format('YYYY-MM-DD[T]HH:mm:ss.SSSZ');
+                    //const timeStamp = moment().utc().format('YYYY-MM-DD[T]HH:mm:ss.SSSZ');
                     
                     console.log('timeStamp', timeStamp);
                     signer.write(timeStamp);
@@ -135,9 +136,8 @@ module.exports = {
                     <soapenv:Body>
                        <v1:findDrugByNameRequest>
                           <v1:clientAccountCode>${process.env.MEDIMPACT_CLIENT_CODE}</v1:clientAccountCode>
-                          <!--<v1:token>${obj["medimpact-token"]}</v1:token>-->
+                          <v1:token>${obj["medimpact-token"]}</v1:token>
                           <v1:timestamp>${timeStamp}</v1:timestamp>
-                          <v1:token>SwciN4Xq6jRhVqSGWYoV6H4cg8ZceZeEB5FUO76SK/VhqWQyhlCDQxhtpUKNLtVX1mpgngmfueCmZHJI8JZ78C+NPbMYWR/DPlDa8ptVFTpDx1vrX/7vhNf7PTD1LzIk52JIQ2vcdgb17z+DO4khe7ZPQ8v4oZaOqIxKLd4WoU7QNj+R0jcwWp5F8SOBfHu2trnAkAXgyoOmbO81Fiye4Lay+XrSDUTpR68GZzQGp/Wqnk25bM0oqBKV/QEm74k2kfpxVoIDrQx1m1Zs2OkYP36BdrBVWsHPLm9jLJZg196eD/PhNh5KhRM/jvlO4e6OHf/YpMP8b0ERdktEHgyblg==</v1:token>
                           <v1:prefixText>ben</v1:prefixText>
                           <!--Optional:-->
                           <v1:count>10</v1:count>
@@ -207,9 +207,9 @@ module.exports = {
 
                
             //console.log('date 2/24/2021',new Date().toISOString());
-            const options={
-                url:url,
-                method:"POST",                
+            const options={ 
+                method:"POST",     
+                url:url,                         
                 headers:
                 {
                     'CC-Timestamp-Signature': signature,
@@ -230,6 +230,13 @@ module.exports = {
                     console.log('response headers',response.headers);
                     console.log('response body',response.body);
                     console.log('response statusCode',response.statusCode);
+                    let text = response.body;
+                    let parser = new DOMParser();
+                    let xmlDoc = parser.parseFromString(text, "text/xml");
+                    let xmlResult = xmlDoc.getElementsByTagName(`prefixText`)[0]
+                      .childNodes[0].nodeValue;
+                      console.log('xmlResult',xmlResult);
+                    resolve(xmlResult);
                     // if (Object.keys(body = JSON.parse(body)).length !== 0) {
                     //     // console.log(body);
                     //     // console.log('inside predictions',body['predictions']);
