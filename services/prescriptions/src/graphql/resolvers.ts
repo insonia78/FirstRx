@@ -48,12 +48,12 @@ class TimeStampUTC {
             timezone_standard = '+00:00';
 
 
-        return timezone_standard;
+        return '-08:00' ;
         
 
     }
     private getDateTime() {
-        let dt = new Date(),
+        let dt = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles'})),
             current_date = dt.getDate().toString(),
             current_month = (dt.getMonth() + 1).toString(),
             current_year = dt.getFullYear().toString(),
@@ -73,8 +73,7 @@ class TimeStampUTC {
             current_millisecs = '0'+ current_millisecs;
         else if(current_millisecs.length  < 2)
             current_millisecs = '00'+ current_millisecs;       
-        //current_millisecs = parseInt(current_millisecs) < 10 ? '00' + current_millisecs : current_millisecs;
-
+       
         
         current_datetime = current_year + '-' + current_month + '-' + current_date + 'T' + current_hrs + ':' + current_mins + ':' + current_secs +'.'+current_millisecs;
 
@@ -112,7 +111,7 @@ module.exports = {
                 //         </soapenv:Body>
                 //     </soapenv:Envelope>`; 
                 try {
-                    console.log('UTC',new Date(new Date().toUTCString()));
+                    console.log('UTC',new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles'})));
                     const signer = crypto.createSign('RSA-SHA256');
                     const timeStampUTC = new TimeStampUTC();
                     const timeStamp = timeStampUTC.getTimeStampUTC();
