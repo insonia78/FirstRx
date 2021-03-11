@@ -115,7 +115,7 @@ module.exports = {
                     console.log('UTC',new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles'})));
                     const signer = crypto.createSign('RSA-SHA256');
                     const timeStampUTC = new TimeStampUTC();
-                    const timeStamp = moment().utcOffset('+0000').format('YYYY-MM-DD[T]HH:mm:ss.SSSZZ');
+                    const timeStamp = moment().utcOffset('+0000').format('YYYY-MM-DD[T]HH:mm:ss.SSSZ');
                     console.log('test');
                     console.log('timeStamp', timeStamp);
                     signer.write(timeStamp);
@@ -132,9 +132,7 @@ module.exports = {
                     <soapenv:Body>
                        <v1:findDrugByNameRequest>
                           <v1:clientAccountCode>${process.env.MEDIMPACT_CLIENT_CODE}</v1:clientAccountCode>
-                          <v1:token>
-                          SwciN4Xq6jRhVqSGWYoV6H4cg8ZceZeEB5FUO76SK/VhqWQyhlCDQxhtpUKNLtVX1mpgngmfueCmZHJI8JZ78C+NPbMYWR/DPlDa8ptVFTpDx1vrX/7vhNf7PTD1LzIk52JIQ2vcdgb17z+DO4khe7ZPQ8v4oZaOqIxKLd4WoU7QNj+R0jcwWp5F8SOBfHu2trnAkAXgyoOmbO81Fiye4Lay+XrSDUTpR68GZzQGp/Wqnk25bM0oqBKV/QEm74k2kfpxVoIDrQx1m1Zs2OkYP36BdrBVWsHPLm9jLJZg196eD/PhNh5KhRM/jvlO4e6OHf/YpMP8b0ERdktEHgyblg==
-                          </v1:token>
+                          <v1:token>SwciN4Xq6jRhVqSGWYoV6H4cg8ZceZeEB5FUO76SK/VhqWQyhlCDQxhtpUKNLtVX1mpgngmfueCmZHJI8JZ78C+NPbMYWR/DPlDa8ptVFTpDx1vrX/7vhNf7PTD1LzIk52JIQ2vcdgb17z+DO4khe7ZPQ8v4oZaOqIxKLd4WoU7QNj+R0jcwWp5F8SOBfHu2trnAkAXgyoOmbO81Fiye4Lay+XrSDUTpR68GZzQGp/Wqnk25bM0oqBKV/QEm74k2kfpxVoIDrQx1m1Zs2OkYP36BdrBVWsHPLm9jLJZg196eD/PhNh5KhRM/jvlO4e6OHf/YpMP8b0ERdktEHgyblg==</v1:token>
                           <v1:timestamp>${timeStamp}</v1:timestamp>
                           <v1:prefixText>ben</v1:prefixText>
                           <!--Optional:-->
