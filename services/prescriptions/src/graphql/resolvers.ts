@@ -223,8 +223,9 @@ module.exports = {
 
                 }
                 else {
-
-                    console.log('response from server', body, response);
+                             
+                    console.log('response from server', body);
+                    console.log('response headers',response.headers);
                     if (Object.keys(body = JSON.parse(body)).length !== 0) {
                         // console.log(body);
                         // console.log('inside predictions',body['predictions']);
