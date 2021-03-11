@@ -1,4 +1,5 @@
-const request = require('postman-request');
+//const request = require('postman-request');
+const request = require('request');
 const crypto = require('crypto');
 
 import { writeToLog } from './../../src/helper/writeToLog';
@@ -216,7 +217,7 @@ module.exports = {
                 },
                 body:xml         
             };
-            request(options, (error: any, response: any, body: any) => {
+            request(options, (error: any, response: any) => {
                 if (error) {
                     console.log(`${writeToLog.getServiceName()} = ${error}`);
                     writeToLog.writeToLog(`code:500, error:InternalServerError, message:${error}`);
@@ -225,10 +226,10 @@ module.exports = {
                 }
                 else {
                              
-                    console.log('response from server', body);
+                    //console.log('response from server', body);
                     console.log('response headers',response.headers);
-                    console.log('response headers',response.body);
-                    console.log('response headers',response.statusCode);
+                    console.log('response body',response.body);
+                    console.log('response statusCode',response.statusCode);
                     // if (Object.keys(body = JSON.parse(body)).length !== 0) {
                     //     // console.log(body);
                     //     // console.log('inside predictions',body['predictions']);
