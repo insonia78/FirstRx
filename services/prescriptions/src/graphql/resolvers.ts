@@ -115,7 +115,7 @@ module.exports = {
                     console.log('UTC',new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Los_Angeles'})));
                     const signer = crypto.createSign('RSA-SHA256');
                     const timeStampUTC = new TimeStampUTC();
-                    const timeStamp = moment().zone('+0000').format('YYYY-MM-DD[T]HH:mm:ss.SSSZZ');
+                    const timeStamp = moment().utcOffset('+0000').format('YYYY-MM-DD[T]HH:mm:ss.SSSZZ');
                     console.log('test');
                     console.log('timeStamp', timeStamp);
                     signer.write(timeStamp);
