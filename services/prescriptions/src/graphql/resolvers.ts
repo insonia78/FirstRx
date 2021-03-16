@@ -18,7 +18,7 @@ fs.readFile(path.join(process.cwd(), "firstrx.key"), (err: any, data: any) => {
 
 });
 
-var public_key = '';
+let public_key:string;
 
 fs.readFile('firstrx.crt', (err: any, data: any) => {
     if (err) {
@@ -344,7 +344,7 @@ module.exports = {
 
                         let options = {
                             method: "POST",
-                            url: "http://pv2medccws1:8080/cashcard-ws-v1_0/soap/cashcard",
+                            url: `${process.env.MEDIMPACT_URL}`,
                             headers: {
                                 'Content-Type': 'text/xml',
                                 'CC-Timestamp-Signature': signature
