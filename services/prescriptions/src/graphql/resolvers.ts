@@ -287,7 +287,7 @@ module.exports = {
 
 
 
-
+                   console.log('inside');
                     const dateToLocalISO = (date: any) => {
                         const off = date.getTimezoneOffset()
                         const absoff = Math.abs(off)
