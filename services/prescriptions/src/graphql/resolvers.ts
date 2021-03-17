@@ -303,7 +303,7 @@ module.exports = {
                         const signer = crypto.createSign('RSA-SHA256');
                         // Test it:
                         let d = new Date();
-                        var myTimeStamp = dateToLocalISO(d);
+                        var myTimeStamp =  moment().utcOffset('-0700').format('YYYY-MM-DD[T]HH:mm:ss.SSSZ');
 
 
                         console.log("test-->", myTimeStamp);
