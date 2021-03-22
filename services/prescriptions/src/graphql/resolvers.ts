@@ -128,7 +128,7 @@ module.exports = {
 
 
                     }
-                    query(prescription, 'prefixText');
+                    query(prescription, 'drugNameSuggestion');
 
 
                 } catch (e) {
