@@ -86,31 +86,36 @@ export default function FindPrescriptionHome({ language, location = undefined, p
       alert(err);
     },
     update(proxy, result) {
-      if (result.data.prescription.length === 1) {
-        setIfPrescriptionDetailsExists(true);
-        console.log('result.data', result.data.prescription);
-        setPrescriptionDetailsForPrescriptionDetailComponent(result.data.prescription);
-        let data = {
-          search_name: result.data.prescription[0].search_name,
-          name: result.data.prescription[0].name,
-          generic_name: result.data.prescription[0].generic_name,
-          manufacturer: result.data.prescription[0].manufacturer,
-          form: result.data.prescription[0].form[0],
-          quantity: result.data.prescription[0].quantity[0],
-          dosage: result.data.prescription[0].dosage[0].dosage,
+      if (result.data.code === 200) {
+        if (result.data.prescription.length === 1) {
+          setIfPrescriptionDetailsExists(true);
+          console.log('result.data', result.data.prescription);
+          setPrescriptionDetailsForPrescriptionDetailComponent(result.data.prescription);
+          let data = {
+            search_name: result.data.prescription[0].search_name,
+            name: result.data.prescription[0].name,
+            generic_name: result.data.prescription[0].generic_name,
+            manufacturer: result.data.prescription[0].manufacturer,
+            form: result.data.prescription[0].form[0],
+            quantity: result.data.prescription[0].quantity[0],
+            dosage: result.data.prescription[0].dosage[0].dosage,
 
+          }
+          setPrescriptionDetails(data);
+          return;
         }
-        setPrescriptionDetails(data);
-        return;
+        let options = [];
+        console.log(result.data.prescription);
+        result.data.prescription.forEach((element, index) => {
+          options.push(<option key={`prescription${index}`} value={element} />);
+
+        })
+        console.log('options', options);
+        setPrescriptionsForDataList(options);
       }
-      let options = [];
-
-      result.data.prescription.forEach((element, index) => {
-        options.push(<option key={`prescription${index}`} value={element} />);
-
-      })
-      console.log('options', options);
-      setPrescriptionsForDataList(options);
+      else{
+        alert(result.data.message);
+      }
     }
   });
 
@@ -122,9 +127,11 @@ export default function FindPrescriptionHome({ language, location = undefined, p
    * @context prescription // used for apollo.link curently baseUri
    */
   const searchPrescription = (e) => {
-    setValueForInputValue(e.target.value);
-    getPrescriptions({ variables: { prescription: e.target.value }, context: { clientName: 'prescriptions' } });
-
+    if(e.target.value.length.trim() >= 3 )
+    {
+       setValueForInputValue(e.target.value);
+       getPrescriptions({ variables: { prescription: e.target.value }, context: { clientName: 'prescriptions' } });
+    }
 
   }
   /**
@@ -200,7 +207,7 @@ export default function FindPrescriptionHome({ language, location = undefined, p
           className="desktop-main-left-find-prescription-home-datalist"
           id="prescriptions">
           {prescriptionsforDataList}
-        </datalist>     
+        </datalist>
 
 
         {ifPrescriptionDetailsExists &&

@@ -120,6 +120,7 @@ module.exports = {
                                else{
                                 resolve({code:204,message:`No Data for ${args.prescription}`});
                                }
+                               console.log(xmlResult);
                             }
                         });
 
