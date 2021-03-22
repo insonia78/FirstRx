@@ -90,9 +90,6 @@ module.exports = {
                             },
                             body: xml
                         };
-
-
-                        console.log("options ", options);
                         request(options, function (error: any, response: any) {
                             if (error) {
                                 console.log(error);
