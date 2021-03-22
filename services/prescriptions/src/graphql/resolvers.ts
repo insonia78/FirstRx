@@ -36,6 +36,7 @@ module.exports = {
             
             if(prescription.length < 3)
             {
+                console.log(`code:422, message:"Request is not valid`);
                 return {code:422, message:"Request is not valid"}
             }
             return await new Promise((resolve, reject) => {
@@ -104,6 +105,7 @@ module.exports = {
                                 let parser = new DOMParser();
                                 let xmlDoc = parser.parseFromString(text, "text/xml");
                                 let xmlResult:string|any = "";
+                                console.log('text',response.body);
                                 if( xmlDoc.getElementsByTagName(`${elementToParse}`).length === 1)
                                 {
 
