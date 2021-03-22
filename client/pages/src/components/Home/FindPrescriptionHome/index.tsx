@@ -106,7 +106,7 @@ export default function FindPrescriptionHome({ language, location = undefined, p
       let options = [];
 
       result.data.prescription.forEach((element, index) => {
-        options.push(<option key={`prescription${index}`} value={element.search_name} />);
+        options.push(<option key={`prescription${index}`} value={element} />);
 
       })
       console.log('options', options);
