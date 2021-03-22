@@ -99,7 +99,8 @@ module.exports = {
                                 reject(new Error(error)); // reject instead of throwing, handle with `catch`
                                 return;
                             }
-                            if (response.statusCode === 200) {
+                            if (response.statusCode === 200 && response.body !== '') 
+                            {
                                 let text = response.body;
 
                                 let parser = new DOMParser();
