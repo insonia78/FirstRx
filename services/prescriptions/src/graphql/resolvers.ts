@@ -122,6 +122,9 @@ module.exports = {
                                }
                                console.log(xmlResult);
                             }
+                            else{
+                                resolve({code:204,message:`No Data for ${args.prescription}`});
+                            }
                         });
 
 
