@@ -127,7 +127,7 @@ export default function FindPrescriptionHome({ language, location = undefined, p
    * @context prescription // used for apollo.link curently baseUri
    */
   const searchPrescription = (e) => {
-    if(e.target.value.trim() >= 3 )
+    if(e.target.value.trim().length >= 3 )
     {       
        getPrescriptions({ variables: { prescription: e.target.value }, context: { clientName: 'prescriptions' } });
     }
