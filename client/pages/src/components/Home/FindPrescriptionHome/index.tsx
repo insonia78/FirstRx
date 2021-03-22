@@ -127,11 +127,11 @@ export default function FindPrescriptionHome({ language, location = undefined, p
    * @context prescription // used for apollo.link curently baseUri
    */
   const searchPrescription = (e) => {
-    if(e.target.value.length.trim() >= 3 )
-    {
-       setValueForInputValue(e.target.value);
+    if(e.target.value.trim() >= 3 )
+    {       
        getPrescriptions({ variables: { prescription: e.target.value }, context: { clientName: 'prescriptions' } });
     }
+    setValueForInputValue(e.target.value);
 
   }
   /**
