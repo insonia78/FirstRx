@@ -7,6 +7,7 @@ module.exports = gql(`
             code:Int
             message:String
             prescriptions:[String]
+            error:String
         }
         type Query{            
             hello:String

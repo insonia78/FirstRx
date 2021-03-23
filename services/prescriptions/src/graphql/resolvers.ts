@@ -118,12 +118,12 @@ module.exports = {
                                     resolve({code:response.statusCode,message:'',prescriptions:xmlResult});
                                }
                                else{
-                                resolve({code:204,message:`No Data for ${args.prescription}`,prescriptions:""});
+                                resolve({code:204,message:`No Data for ${args.prescription}`,prescriptions:[]});
                                }
                                console.log(xmlResult);
                             }
                             else{
-                                resolve({code:204,message:`No Data for ${args.prescription}`,prescriptions:""});
+                                resolve({code:204,message:`No Data for ${args.prescription}`,prescriptions:[]});
                             }
                         });
 
