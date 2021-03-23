@@ -4,9 +4,9 @@ module.exports = gql(`
         
         
         type GetPrescriptionDetails{
-            code
-            message
-            prescriptions
+            code:Int
+            message:String
+            prescriptions:[String]
         }
         type Query{            
             hello:String
