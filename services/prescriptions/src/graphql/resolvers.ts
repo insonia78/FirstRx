@@ -115,15 +115,15 @@ module.exports = {
                                         xmlResult += xmlDoc.getElementsByTagName(`${elementToParse}`)[i].childNodes[0].nodeValue + ",";
                                     }
                                     xmlResult = xmlResult.split(',');
-                                    resolve({code:response.statusCode,prescription:xmlResult});
+                                    resolve({code:response.statusCode,message:'',prescriptions:xmlResult});
                                }
                                else{
-                                resolve({code:204,message:`No Data for ${args.prescription}`});
+                                resolve({code:204,message:`No Data for ${args.prescription}`,prescriptions:""});
                                }
                                console.log(xmlResult);
                             }
                             else{
-                                resolve({code:204,message:`No Data for ${args.prescription}`});
+                                resolve({code:204,message:`No Data for ${args.prescription}`,prescriptions:""});
                             }
                         });
 
