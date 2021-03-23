@@ -86,7 +86,7 @@ export default function FindPrescriptionHome({ language, location = undefined, p
       alert(err);
     },
     update(proxy, result) {
-      console.log(result);
+      console.log('result',result);
       if (result.data.code === 200) {
         if (result.data.prescription.length === 1) {
           setIfPrescriptionDetailsExists(true);
