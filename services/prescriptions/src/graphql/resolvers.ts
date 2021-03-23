@@ -59,9 +59,6 @@ module.exports = {
                         <soapenv:Header/>
                         <soapenv:Body>
                             <v1:findDrugByNameRequest>
-                            <!--                   <v1:clientAccountCode>MA01</v1:clientAccountCode> 
-                                <v1:token>cHHHT2hI/BDAUt9SEnloLwMF8MKgXY2YiBHUlsMU5FTJCBZqj5mgRQB5CtITinZUXm3jlCz4vCzwcSPabjJuhKCjhPd71w0L/K8qlMyXLemxJnZ8s6UZrJm2y0QGdCwr47A8SHYF50gNq13DvZfVtktsaoafrc1QylbsV0UMX43tRm0Ew2BE5lMc/6aqgQlgMMWeiELkTWPf+pJFPpABqBKazRvCXgVd1cCi++BmYIkT1IUqxvrPdVuiVZOu266NM4H88WhGMaeylIo9iKCvPZt3FE3JTIwS9lZCZyRgILdWKnp+w+krwGYPyYBew2oLEnyIogFP0ISdWrY1Xk1BTw==</v1:token> -->
-                                            <v1:clientAccountCode>MIC61</v1:clientAccountCode>
                                 <v1:clientAccountCode>${process.env.MEDIMPACT_CLIENT_CODE}</v1:clientAccountCode>
                                 <v1:token>${obj["medimpact-token"]}</v1:token>
                                 <v1:timestamp>${myTimeStamp}</v1:timestamp>
