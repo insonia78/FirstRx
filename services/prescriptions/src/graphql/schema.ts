@@ -2,19 +2,11 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql(`
         
-        type Dosage {
-            dosage: String
-            quantity: String
-            type: String
-        }
+        
         type GetPrescriptionDetails{
-            search_name:String
-            name:String
-            generic_name:String
-            manufacturer:String
-            form:[String]
-            dosage:[Dosage]
-            quantity:[String]
+            code
+            message
+            prescriptions
         }
         type Query{            
             hello:String

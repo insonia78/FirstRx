@@ -20,18 +20,9 @@ const GET_PRESCRIPTIONS = gql`
 mutation  prescription($prescription:String){
       prescription(prescription:$prescription)
       {
-            search_name
-            name
-            generic_name
-            manufacturer
-            form
-            quantity
-            dosage{
-              dosage
-              quantity
-              type
-
-            }
+            code
+            message
+            prescriptions
       }
 }
 `;
@@ -88,25 +79,25 @@ export default function FindPrescriptionHome({ language, location = undefined, p
     update(proxy, result) {
       console.log('result',result);
       if (result.data.code === 200) {
-        if (result.data.prescription.length === 1) {
+        if (result.data.prescriptions.length === 1) {
           setIfPrescriptionDetailsExists(true);
-          console.log('result.data', result.data.prescription);
-          setPrescriptionDetailsForPrescriptionDetailComponent(result.data.prescription);
+          console.log('result.data', result.data.prescriptions);
+          setPrescriptionDetailsForPrescriptionDetailComponent(result.data.prescriptions);
           let data = {
-            search_name: result.data.prescription[0].search_name,
-            name: result.data.prescription[0].name,
-            generic_name: result.data.prescription[0].generic_name,
-            manufacturer: result.data.prescription[0].manufacturer,
-            form: result.data.prescription[0].form[0],
-            quantity: result.data.prescription[0].quantity[0],
-            dosage: result.data.prescription[0].dosage[0].dosage,
+            search_name: result.data.prescriptions[0].search_name,
+            name: result.data.prescriptions[0].name,
+            generic_name: result.data.prescriptions[0].generic_name,
+            manufacturer: result.data.prescriptions[0].manufacturer,
+            form: result.data.prescriptions[0].form[0],
+            quantity: result.data.prescriptions[0].quantity[0],
+            dosage: result.data.prescriptions[0].dosage[0].dosage,
 
           }
           setPrescriptionDetails(data);
           return;
         }
         let options = [];
-        console.log(result.data.prescription);
+        console.log(result.data.prescriptions);
         result.data.prescription.forEach((element, index) => {
           options.push(<option key={`prescription${index}`} value={element} />);
 
