@@ -23,6 +23,7 @@ mutation  prescription($prescription:String){
             code
             message
             prescriptions
+            error
       }
 }
 `;
@@ -78,11 +79,11 @@ export default function FindPrescriptionHome({ language, location = undefined, p
     },
     update(proxy, result) {
       console.log('result',result);
-      if (result.data.code === 200) {
-        if (result.data.prescriptions.length === 1) {
+      if (result.data.prescription.code === 200) {
+        if (result.data.prescription.prescriptions.length === 1) {
           setIfPrescriptionDetailsExists(true);
-          console.log('result.data', result.data.prescriptions);
-          setPrescriptionDetailsForPrescriptionDetailComponent(result.data.prescriptions);
+          console.log('result.data', result.data.prescription.prescriptions);
+          setPrescriptionDetailsForPrescriptionDetailComponent(result.data.prescription.prescriptions);
           let data = {
             search_name: result.data.prescriptions[0].search_name,
             name: result.data.prescriptions[0].name,
@@ -97,8 +98,8 @@ export default function FindPrescriptionHome({ language, location = undefined, p
           return;
         }
         let options = [];
-        console.log(result.data.prescriptions);
-        result.data.prescription.forEach((element, index) => {
+        console.log(result.data.prescription.prescriptions);
+        result.data.prescription.prescriptions.forEach((element, index) => {
           options.push(<option key={`prescription${index}`} value={element} />);
 
         })
@@ -106,7 +107,7 @@ export default function FindPrescriptionHome({ language, location = undefined, p
         setPrescriptionsForDataList(options);
       }
       else{
-        alert(result.data.message);
+        alert(result.data.prescription.message);
       }
     }
   });
