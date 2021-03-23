@@ -79,7 +79,8 @@ module.exports = {
                         verify.end();
 
                         console.log("--verification-->>>>>>>>>>>>", verify.verify(public_key, signature, 'base64'));
-
+                    
+                        console.log(xml); 
 
                         let options = {
                             method: "POST",
