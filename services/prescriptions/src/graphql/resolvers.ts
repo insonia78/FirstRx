@@ -111,7 +111,11 @@ module.exports = {
                                 console.log('text',response.body);
                                 if( xmlDoc.getElementsByTagName(`${elementToParse}`).length === 1)
                                 {
-
+                                    for (let i = 0; i < xmlDoc.getElementsByTagName(`${elementToParse}`).length; i++) {
+                                        xmlResult += xmlDoc.getElementsByTagName(`${elementToParse}`)[i].childNodes[0].nodeValue + ",";
+                                    }
+                                    xmlResult = xmlResult.split(',');
+                                    resolve({code:response.statusCode,message:'',prescriptions:xmlResult});
 
                                 }
                                 else if( xmlDoc.getElementsByTagName(`${elementToParse}`).length > 1)
