@@ -43,20 +43,14 @@ const Home = ({ render }) => {
     const [routerHasPath, setRouterHasPath] = useState((router.asPath === '/' ? false : true));
 
     let data = {
-        search_name: "",
-        name: "",
-        generic_name: "",
-        manufacturer: "",
-        form: "",
-        quantity: "",
-        dosage: [],
+        search_name: "",        
     }
 
     /**@gets @sets    sthe size of the window used in version 1*/
     const [windowWidth, setWindowWidth] = useState(0);
 
     /** @gets @sets prescription used when using the back button to pass the pescription*/
-    const [getPrescription, setPrescriptionUseState] = useState({ ...data });
+    const [getPrescription, setPrescriptionUseState] = useState(data);
 
     /**
      * Used for responsive design for version 1 of wire frames 
@@ -74,9 +68,7 @@ const Home = ({ render }) => {
 
     const setPrescription = (value) => {
 
-        setPrescriptionUseState(getPrescription => ({
-            ...getPrescription, ...value
-        }));
+        setPrescriptionUseState(value);
 
     }
 

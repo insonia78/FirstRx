@@ -49,90 +49,7 @@ module.exports = {
                     const signer = crypto.createSign('RSA-SHA256');
 
                     var myTimeStamp = moment().utcOffset('-0700').format('YYYY-MM-DD[T]HH:mm:ss.SSSZ');
-
-
-
-                     const getPrescriptionDetails= (Temp: any, elementToParse: any) => {
-                       
-
-
-                        signer.write(myTimeStamp);
-                        signer.end();
-                        const signature = signer.sign(private_key, 'base64');
-                        let xml = `
-                        <soapenv:Envelope xmlns:soapenv=\"http://schemas.xmlsoap.org/soap/envelope/\" 
-                        xmlns:v1=\"http://rx-savings.medimpact.com/contract/PricingEngine/v1.0\">
-                        <soapenv:Header/>
-                        <soapenv:Body>
-                            <v1:findDrugByNameRequest>
-                                <v1:clientAccountCode>${process.env.MEDIMPACT_CLIENT_CODE}</v1:clientAccountCode>
-                                <v1:token>${obj["medimpact-token"]}</v1:token>
-                                <v1:timestamp>${myTimeStamp}</v1:timestamp>
-                                <v1:prefixText>${Temp}</v1:prefixText>
-                                <!--Optional:-->
-                                <v1:count>10</v1:count>
-                            </v1:findDrugByNameRequest>
-                        </soapenv:Body>
-                    </soapenv:Envelope>`;
-
-
-                        const verify = crypto.createVerify('RSA-SHA256');
-
-                        verify.write(myTimeStamp);
-                        verify.end();
-
-                        console.log("--verification-->>>>>>>>>>>>", verify.verify(public_key, signature, 'base64'));
-                    
-                        console.log(xml); 
-
-                        let options = {
-                            method: "POST",
-                            url: `${process.env.MEDIMPACT_URL}`,
-                            headers: {
-                                'Content-Type': 'text/xml',
-                                'CC-Timestamp-Signature': signature
-                            },
-                            body: xml
-                        };
-                        request(options, function (error: any, response: any) {
-                            if (error) {
-                                console.log(error);
-                                reject(new Error(error)); // reject instead of throwing, handle with `catch`
-                                return;
-                            }
-                            
-                            if (response.statusCode === 200 && response.body !== '') 
-                            {
-                                let xml = response.body;
-
-                                let parser = new DOMParser();
-                                let xmlDoc = parser.parseFromString(xml, "text/xml");
-                                let xmlResult:string|any = "";
-                                
-                                if( xmlDoc.getElementsByTagName(`${elementToParse}`).length > 0)
-                                {
-                                    let toJson = convert.xml2json(xml, {compact: true, spaces: 4});
-                                     console.log('toJson',toJson);
-                                    resolve({code:response.statusCode,message:'',prescriptions:toJson});
-
-                                }                                
-                               else{
-                                resolve({code:204,message:`No Data for ${args.prescription}`,prescriptions:[]});
-                               }
-                               console.log(xmlResult);
-                            }
-                            else{
-                                resolve({code:204,message:`No Data for ${args.prescription}`,prescriptions:[]});
-                            }
-                        });
-
-
-                    }
-
-
                     const query = (Temp: any, elementToParse: any) => {
-                       
-
 
                         signer.write(myTimeStamp);
                         signer.end();
@@ -182,9 +99,11 @@ module.exports = {
                             if (response.statusCode === 200 && response.body !== '') 
                             {
                                 let xml = response.body;
-                                let toJson = convert.xml2json(xml, {compact: false, spaces: 4});
-                                console.log('toJson',toJson);
-                                resolve({code:204,message:`No Data for ${toJson}`,prescriptions:[]});
+                                let toJson = convert.xml2json(xml, {compact: true, spaces: 4});
+                                let data = toJson['"soap:Body"']["findDrugByNameResponse"]["drugNames"]["drugNameSuggestion"];
+                                console.log('toJson',toJson['"soap:Body"']["findDrugByNameResponse"]["drugNames"]["drugNameSuggestion"]);
+                                resolve({code:response.statusCode,message:'',prescriptions:data});
+                               // resolve({code:204,message:`No Data for ${toJson}`,prescriptions:[]});
 
                             //     let parser = new DOMParser();
                             //     let xmlDoc = parser.parseFromString(text, "text/xml");

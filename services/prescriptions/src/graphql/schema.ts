@@ -2,11 +2,13 @@ const { gql } = require('apollo-server-express');
 
 module.exports = gql(`
         
-        
+        type DrugNameSuggestion{
+            _text:String
+        }
         type GetPrescriptionDetails{
             code:Int
             message:String
-            prescriptions:[String]
+            prescriptions:[DrugNameSuggestion]
             error:String
         }
         type Query{            
