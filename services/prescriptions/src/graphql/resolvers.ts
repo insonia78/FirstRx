@@ -181,33 +181,36 @@ module.exports = {
                             console.log('body', response.body, 'statusCode', response.statusCode);
                             if (response.statusCode === 200 && response.body !== '') 
                             {
-                                let text = response.body;
+                                let xml = response.body;
+                                let toJson = convert.xml2json(xml, {compact: true, spaces: 4});
+                                console.log('toJson',toJson);
+                                resolve({code:204,message:`No Data for ${toJson}`,prescriptions:[]});
 
-                                let parser = new DOMParser();
-                                let xmlDoc = parser.parseFromString(text, "text/xml");
-                                let xmlResult:string|any = "";
-                                console.log('text',response.body);
-                                if( xmlDoc.getElementsByTagName(`${elementToParse}`).length === 1)
-                                {
+                            //     let parser = new DOMParser();
+                            //     let xmlDoc = parser.parseFromString(text, "text/xml");
+                            //     let xmlResult:string|any = "";
+                            //     console.log('text',response.body);
+                            //     if( xmlDoc.getElementsByTagName(`${elementToParse}`).length === 1)
+                            //     {
                                      
-                                    for (let i = 0; i < xmlDoc.getElementsByTagName(`${elementToParse}`).length; i++) {
-                                        xmlResult += xmlDoc.getElementsByTagName(`${elementToParse}`)[i].childNodes[0].nodeValue;
-                                    }
-                                   // xmlResult = xmlResult.split(',');
-                                    resolve({code:response.statusCode,message:'',prescriptions:[xmlResult]});
+                            //         for (let i = 0; i < xmlDoc.getElementsByTagName(`${elementToParse}`).length; i++) {
+                            //             xmlResult += xmlDoc.getElementsByTagName(`${elementToParse}`)[i].childNodes[0].nodeValue;
+                            //         }
+                            //        // xmlResult = xmlResult.split(',');
+                            //         resolve({code:response.statusCode,message:'',prescriptions:[xmlResult]});
 
-                                }
-                                else if( xmlDoc.getElementsByTagName(`${elementToParse}`).length > 1)
-                                {
-                                    for (let i = 0; i < xmlDoc.getElementsByTagName(`${elementToParse}`).length; i++) {
-                                        xmlResult += xmlDoc.getElementsByTagName(`${elementToParse}`)[i].childNodes[0].nodeValue + ",";
-                                    }
-                                    xmlResult = xmlResult.split(',');
-                                    resolve({code:response.statusCode,message:'',prescriptions:xmlResult});
-                               }
-                               else{
-                                resolve({code:204,message:`No Data for ${args.prescription}`,prescriptions:[]});
-                               }
+                            //     }
+                            //     else if( xmlDoc.getElementsByTagName(`${elementToParse}`).length > 1)
+                            //     {
+                            //         for (let i = 0; i < xmlDoc.getElementsByTagName(`${elementToParse}`).length; i++) {
+                            //             xmlResult += xmlDoc.getElementsByTagName(`${elementToParse}`)[i].childNodes[0].nodeValue + ",";
+                            //         }
+                            //         xmlResult = xmlResult.split(',');
+                            //         resolve({code:response.statusCode,message:'',prescriptions:xmlResult});
+                            //    }
+                            //    else{
+                            //     resolve({code:204,message:`No Data for ${args.prescription}`,prescriptions:[]});
+                            //    }
                                
                             }
                             else{
