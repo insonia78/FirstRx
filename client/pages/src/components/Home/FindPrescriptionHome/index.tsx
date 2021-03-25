@@ -205,7 +205,7 @@ export default function FindPrescriptionHome({ language, location = undefined, p
 
         {ifPrescriptionDetailsExists &&
           <>
-            <PrescriptionDetailedForm language={language} dataFromServer={prescriptionDetailsForPrescriptionDetailComponent} prescriptionFromRoute={prescriptionFromRoute} setPrescriptionDetails={setPrescriptionDetails} />
+            {/* /<PrescriptionDetailedForm language={language} dataFromServer={prescriptionDetailsForPrescriptionDetailComponent} prescriptionFromRoute={prescriptionFromRoute} setPrescriptionDetails={setPrescriptionDetails} /> */}
             <div className="clickthrough">
               <a><div className="back cursor" onClick={clearInput}>Start Over</div></a>
               <div className='cursor' onClick={() => router.push
