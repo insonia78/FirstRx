@@ -2,7 +2,7 @@
 const request = require('request');
 const crypto = require('crypto');
 const DOMParser = require("xmldom").DOMParser;
-
+const convert = require('xml-js');
 import { writeToLog } from './../../src/helper/writeToLog';
 const soap = require('soap');
 const fs = require('fs');
@@ -100,32 +100,22 @@ module.exports = {
                                 reject(new Error(error)); // reject instead of throwing, handle with `catch`
                                 return;
                             }
-                            console.log('body', response.body, 'statusCode', response.statusCode);
+                            
                             if (response.statusCode === 200 && response.body !== '') 
                             {
-                                let text = response.body;
+                                let xml = response.body;
 
                                 let parser = new DOMParser();
-                                let xmlDoc = parser.parseFromString(text, "text/xml");
+                                let xmlDoc = parser.parseFromString(xml, "text/xml");
                                 let xmlResult:string|any = "";
-                                console.log('text',response.body);
-                                if( xmlDoc.getElementsByTagName(`${elementToParse}`).length === 1)
+                                
+                                if( xmlDoc.getElementsByTagName(`${elementToParse}`).length > 0)
                                 {
-                                    for (let i = 0; i < xmlDoc.getElementsByTagName(`${elementToParse}`).length; i++) {
-                                        xmlResult += xmlDoc.getElementsByTagName(`${elementToParse}`)[i].childNodes[0].nodeValue;
-                                    }
-                                   // xmlResult = xmlResult.split(',');
-                                    resolve({code:response.statusCode,message:'',prescriptions:xmlResult});
+                                    let toJson = convert.xml2json(xml, {compact: true, spaces: 4});
+                                     console.log('toJson',toJson);
+                                    resolve({code:response.statusCode,message:'',prescriptions:toJson});
 
-                                }
-                                else if( xmlDoc.getElementsByTagName(`${elementToParse}`).length > 1)
-                                {
-                                    for (let i = 0; i < xmlDoc.getElementsByTagName(`${elementToParse}`).length; i++) {
-                                        xmlResult += xmlDoc.getElementsByTagName(`${elementToParse}`)[i].childNodes[0].nodeValue + ",";
-                                    }
-                                    xmlResult = xmlResult.split(',');
-                                    resolve({code:response.statusCode,message:'',prescriptions:xmlResult});
-                               }
+                                }                                
                                else{
                                 resolve({code:204,message:`No Data for ${args.prescription}`,prescriptions:[]});
                                }
