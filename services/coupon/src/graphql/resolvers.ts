@@ -204,7 +204,7 @@ module.exports = {
                                         xmlResult += xmlDoc.getElementsByTagName(`${elementToParse}`)[i].childNodes[0].nodeValue;
                                     }
                                    // xmlResult = xmlResult.split(',');
-                                    resolve({code:response.statusCode,message:'',prescriptions:[xmlResult]});
+                                    resolve({code:response.statusCode,message:'',prescriptions:xmlResult});
 
                                 }
                                 else if( xmlDoc.getElementsByTagName(`${elementToParse}`).length > 1)
