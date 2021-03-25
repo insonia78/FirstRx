@@ -182,7 +182,7 @@ module.exports = {
                             if (response.statusCode === 200 && response.body !== '') 
                             {
                                 let xml = response.body;
-                                let toJson = convert.xml2json(xml, {compact: true, spaces: 4});
+                                let toJson = convert.xml2json(xml, {compact: false, spaces: 4});
                                 console.log('toJson',toJson);
                                 resolve({code:204,message:`No Data for ${toJson}`,prescriptions:[]});
 
