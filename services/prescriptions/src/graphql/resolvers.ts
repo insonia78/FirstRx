@@ -100,10 +100,12 @@ module.exports = {
                             {
                                 let xml = response.body;
                                 let toJson = convert.xml2json(xml, {compact: true, spaces: 4});
-                                console.log(Object.keys(toJson));
-                                console.log('element',Object.keys(toJson).find(key => {if(key === "drugNameSuggestion"){ return toJson[key]}}));
-                                let data = toJson["findDrugByNameResponse"]["drugNames"]["drugNameSuggestion"];
-                                console.log('toJson',toJson["findDrugByNameResponse"]["drugNames"]["drugNameSuggestion"]);
+                                console.log(toJson);
+                                console.log('element',Object.keys(toJson).find(key => console.log(key)));
+                                console.log(JSON.parse(toJson));
+                                toJson = JSON.parse(toJson);
+                                let data = toJson['soap:Body']["findDrugByNameResponse"]["drugNames"]["drugNameSuggestion"];
+                                console.log('toJson',data);
                                 resolve({code:response.statusCode,message:'',prescriptions:data});
                                // resolve({code:204,message:`No Data for ${toJson}`,prescriptions:[]});
 
