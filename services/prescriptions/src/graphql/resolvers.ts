@@ -100,8 +100,8 @@ module.exports = {
                             {
                                 let xml = response.body;
                                 let toJson = convert.xml2json(xml, {compact: true, spaces: 4});
-                                let data = toJson['"soap:Body"']["findDrugByNameResponse"]["drugNames"]["drugNameSuggestion"];
-                                console.log('toJson',toJson['"soap:Body"']["findDrugByNameResponse"]["drugNames"]["drugNameSuggestion"]);
+                                let data = toJson["soap:Body"]["findDrugByNameResponse"]["drugNames"]["drugNameSuggestion"];
+                                console.log('toJson',toJson["soap:Body"]["findDrugByNameResponse"]["drugNames"]["drugNameSuggestion"]);
                                 resolve({code:response.statusCode,message:'',prescriptions:data});
                                // resolve({code:204,message:`No Data for ${toJson}`,prescriptions:[]});
 
