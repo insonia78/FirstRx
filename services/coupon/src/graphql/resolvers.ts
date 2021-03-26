@@ -1,7 +1,7 @@
 //const request = require('postman-request');
 const request = require('request');
 const crypto = require('crypto');
-const DOMParser = require("xmldom").DOMParser;
+
 const convert = require('xml-js');
 import { writeToLog } from './../../src/helper/writeToLog';
 const soap = require('soap');
