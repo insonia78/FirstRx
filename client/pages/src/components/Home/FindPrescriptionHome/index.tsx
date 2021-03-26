@@ -63,7 +63,7 @@ export default function FindPrescriptionHome({ language, location = undefined, p
 
 
   const router = useRouter();
-  console.log('added');
+  
 
   /**
    * Call to the service Prescription to retreve the prescriptionsfordatalist available
