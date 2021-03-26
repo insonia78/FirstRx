@@ -7,6 +7,7 @@ import { writeToLog } from './../../src/helper/writeToLog';
 const soap = require('soap');
 const fs = require('fs');
 import path from 'path';
+import e from 'express';
 //const soap = require('strong-soap').soap;
 const soapRequest = require('easy-soap-request');
 const moment = require('moment')
@@ -49,7 +50,8 @@ module.exports = {
                     const signer = crypto.createSign('RSA-SHA256');
 
                     var myTimeStamp = moment().utcOffset('-0700').format('YYYY-MM-DD[T]HH:mm:ss.SSSZ');
-                    const query = (Temp: any, elementToParse: any) => {
+                    
+                    const query = (Temp: any) => {
 
                         signer.write(myTimeStamp);
                         signer.end();
@@ -100,41 +102,15 @@ module.exports = {
                             {
                                 let xml = response.body;
                                 let toJson = convert.xml2json(xml, {compact: true, spaces: 4});
-                                console.log(toJson);
-                                
-                                console.log(JSON.parse(toJson));
                                 toJson = JSON.parse(toJson);
-                                console.log(Object.keys(toJson));
                                 let data = toJson["soap:Envelope"]['soap:Body']["findDrugByNameResponse"]["drugNames"]["drugNameSuggestion"];
-                                console.log('toJson',data);
-                                resolve({code:response.statusCode,message:'',prescriptions:data});
-                               // resolve({code:204,message:`No Data for ${toJson}`,prescriptions:[]});
+                                
+                                if(data.length > 0)
+                                   resolve({code:response.statusCode,message:'',prescriptions:data});
+                                else
+                                  resolve({code:204,message:`No Data for ${toJson}`,prescriptions:[]});
 
-                            //     let parser = new DOMParser();
-                            //     let xmlDoc = parser.parseFromString(text, "text/xml");
-                            //     let xmlResult:string|any = "";
-                            //     console.log('text',response.body);
-                            //     if( xmlDoc.getElementsByTagName(`${elementToParse}`).length === 1)
-                            //     {
-                                     
-                            //         for (let i = 0; i < xmlDoc.getElementsByTagName(`${elementToParse}`).length; i++) {
-                            //             xmlResult += xmlDoc.getElementsByTagName(`${elementToParse}`)[i].childNodes[0].nodeValue;
-                            //         }
-                            //        // xmlResult = xmlResult.split(',');
-                            //         resolve({code:response.statusCode,message:'',prescriptions:[xmlResult]});
-
-                            //     }
-                            //     else if( xmlDoc.getElementsByTagName(`${elementToParse}`).length > 1)
-                            //     {
-                            //         for (let i = 0; i < xmlDoc.getElementsByTagName(`${elementToParse}`).length; i++) {
-                            //             xmlResult += xmlDoc.getElementsByTagName(`${elementToParse}`)[i].childNodes[0].nodeValue + ",";
-                            //         }
-                            //         xmlResult = xmlResult.split(',');
-                            //         resolve({code:response.statusCode,message:'',prescriptions:xmlResult});
-                            //    }
-                            //    else{
-                            //     resolve({code:204,message:`No Data for ${args.prescription}`,prescriptions:[]});
-                            //    }
+                            
                                
                             }
                             else{
@@ -144,7 +120,8 @@ module.exports = {
 
 
                     }
-                    query(prescription, 'drugNameSuggestion');
+
+                    query(prescription);
 
 
                 } catch (e) {
