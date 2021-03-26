@@ -22,7 +22,9 @@ mutation  prescription($prescription:String){
       {
             code
             message
-            prescriptions
+            prescriptions{
+              _text
+            }
             error
       }
 }
