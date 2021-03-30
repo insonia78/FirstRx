@@ -87,19 +87,13 @@ export default function FindPrescriptionHome({ language, location = undefined, p
           console.log('result.data', result.data.prescription.prescriptions);
           //setPrescriptionDetailsForPrescriptionDetailComponent(result.data.prescription.prescriptions);
           let data = {
-            search_name: result.data.prescriptions[0]._text,
+            search_name: result.data.prescription.prescriptions[0]._text,
           }
           setPrescriptionDetails(data);
           return;
         }
         let options = [];
-        console.log(result.data.prescription.prescriptions);
-        result.data.prescription.prescriptions.forEach((element, index) => {
-          options.push(<option key={`prescription${index}`} value={element._text} />);
-
-        })
-        console.log('options', options);
-        setPrescriptionsForDataList(options);
+        setPrescriptionsForDataList(result.data.prescription.prescriptions);
       }
       else{
         alert(result.data.prescription.message);
@@ -114,9 +108,12 @@ export default function FindPrescriptionHome({ language, location = undefined, p
    * @mutation getPrescriptions
    * @context prescription // used for apollo.link curently baseUri
    */
+  let clicked = 0;
   const searchPrescription = (e) => {
+    e.preventDefault();
     if(e.target.value.trim().length >= 3 )
-    {       
+    {  
+      console.log('clicked',clicked++);     
        getPrescriptions({ variables: { prescription: e.target.value }, context: { clientName: 'prescriptions' } });
     }
     setValueForInputValue(e.target.value);
@@ -168,10 +165,11 @@ export default function FindPrescriptionHome({ language, location = undefined, p
        * refrencing version of: 1/28/2021
        * source: https://github.com/emilynorton?tab=repositories
        */}
+      {mutationError && <>{console.log('m',mutationError)}</>}
       {mutationLoading && < div className='circular_progress'>
         <CircularProgress style={{ width: '6vmax', height: '6vmax' }} />
       </div>}
-
+       
       {resetDataFromRoute && (prescriptionFromRoute = undefined)}
       {(language === 'english' || language === undefined) && <> <h3><span>Start Here: Step 1 of 3: </span>Your Prescription</h3></>}
       {language === 'spanish' && <><h3><span>{'<Spanish>'} Start Here: Step 1 of 3: </span>Your Prescription</h3></>}
@@ -194,13 +192,14 @@ export default function FindPrescriptionHome({ language, location = undefined, p
         <datalist
           className="desktop-main-left-find-prescription-home-datalist"
           id="prescriptions">
-          {prescriptionsforDataList}
+         {prescriptionsforDataList.map((element,i) => <option key={`prescription${i}`} value={element._text} />)}
         </datalist>
-
+        
 
         {ifPrescriptionDetailsExists &&
           <>
-            {/* /<PrescriptionDetailedForm language={language} dataFromServer={prescriptionDetailsForPrescriptionDetailComponent} prescriptionFromRoute={prescriptionFromRoute} setPrescriptionDetails={setPrescriptionDetails} /> */}
+            {console.log('ifPrescriptionDetailsExists',ifPrescriptionDetailsExists)}
+            {/* <PrescriptionDetailedForm language={language} dataFromServer={prescriptionDetailsForPrescriptionDetailComponent} prescriptionFromRoute={prescriptionFromRoute} setPrescriptionDetails={setPrescriptionDetails} /> */}
             <div className="clickthrough">
               <a><div className="back cursor" onClick={clearInput}>Start Over</div></a>
               <div className='cursor' onClick={() => router.push
