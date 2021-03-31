@@ -10,26 +10,33 @@ const moment = require('moment')
 
 let private_key: string;
 
-fs.readFile(path.join(process.cwd(), "firstrx.key"), (err: any, data: any) => {
-    private_key = data;
+// fs.readFile(path.join(process.cwd(), "firstrx.key"), (err: any, data: any) => {
+//     private_key = data;
 
-});
+// });
 
 let public_key: string;
 
-fs.readFile('firstrx.crt', (err: any, data: any) => {
-    if (err) {
-        console.error(err)
-        return
-    }
-    public_key = data;
-});
+// fs.readFile('firstrx.crt', (err: any, data: any) => {
+//     if (err) {
+//         console.error(err)
+//         return
+//     }
+//     public_key = data;
+// });
+
+
+
+
+
+
+
 
 
 module.exports = {
     Mutation: {
         coupon: async (parent: any, args: any, context: any, info: any) => {
-            let prescription = args.prescription.trim();
+           let prescription = "";//args.prescription.trim();
 
 
             const xmlSampleResponse = `
@@ -771,7 +778,10 @@ module.exports = {
 
              console.log(convert.xml2json(xmlSampleResponse, {compact: true, spaces: 4}));
              let toJson = convert.xml2json(xmlSampleResponse, {compact: true, spaces: 4});
-             return toJson;
+             toJson = JSON.parse(toJson);
+             let data =  toJson["soap:Envelope"]["soap:Body"]["getPharmacyDrugPricingResponse"]["drugs"]["locatedDrug"];
+               
+             return{ code: 200, message: ``, coupons:data };
             return await new Promise((resolve, reject) => {
 
                 try {

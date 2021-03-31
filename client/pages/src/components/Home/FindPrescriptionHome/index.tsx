@@ -199,7 +199,8 @@ export default function FindPrescriptionHome({ language, location = undefined, p
         {ifPrescriptionDetailsExists &&
           <>
             {console.log('ifPrescriptionDetailsExists',ifPrescriptionDetailsExists)}
-            {/* <PrescriptionDetailedForm language={language} dataFromServer={prescriptionDetailsForPrescriptionDetailComponent} prescriptionFromRoute={prescriptionFromRoute} setPrescriptionDetails={setPrescriptionDetails} /> */}
+            <div style={{width:'inherit',height:'3vh'}} > </div>
+             {/* <PrescriptionDetailedForm language={language} dataFromServer={prescriptionDetailsForPrescriptionDetailComponent} prescriptionFromRoute={prescriptionFromRoute} setPrescriptionDetails={setPrescriptionDetails} /> */}
             <div className="clickthrough">
               <a><div className="back cursor" onClick={clearInput}>Start Over</div></a>
               <div className='cursor' onClick={() => router.push

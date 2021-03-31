@@ -5,6 +5,103 @@ import PrescriptionDetailedForm from '../../component/PrescriptionDetailedForm';
 import CouponsTiles from '../../component/CouponsTiles';
 //import styles from '../../../../../styles/ChooseYourCoupon.module.scss'; used in version 1
 
+
+const GET_COUPONS = gql`
+mutation  coupon($prescription:String,$latitude:String,$longitude:String){
+      coupon(prescription:$prescription,latitude:$latitude,longitude:$longitude)
+      {
+            code
+            message
+            coupons
+            {
+              pharmacy
+              {
+                name{
+                  _text
+                }
+                streetAddress{
+                  _text
+                }
+                city{
+                  _text
+                }
+                state{
+                  _text
+                }
+                zipCode{
+                  _text
+                }
+                latitude{
+                  _text
+                }
+                longitude{
+                  _text
+                }
+                hoursOfOperation{
+                  _text
+                }
+                phone{
+                  _text
+                }
+                npi{
+                  _text
+                }
+                chainCode{
+                  _text
+                }
+                distance{
+                  _text
+                }
+
+              }
+              drug
+              {
+                ndcCode{
+                  _text
+                }
+                brandGenericIndicator{
+                  _text
+                }
+                gsn{
+                  _text
+                }
+                drugRanking{
+                  _text
+                }
+                quantity{
+                  _text
+                }
+                quantityRanking{
+                  _text
+                }
+              }
+              pricing{
+                price{
+                  _text
+                }
+                priceBasis{
+                  _text
+                }
+                usualAndCustomaryPrice{
+                  _text
+                }
+                macPrice{
+                  _text
+                }
+                awpPrice{
+                  _text
+                }
+
+              }
+
+            }
+            error
+      }
+}
+`;
+
+
+
 /**
  * @Pages
  * 
@@ -65,7 +162,42 @@ const ChooseYourCoupon = ({ language, prescriptionFromRoute, location }) => {
 
 
   }
-  fillCoupon();
+
+  /**
+   * Call to the service Prescription to retreve the prescriptionsfordatalist available
+   * @useState  setPrescriptionDetailsForPrescriptionDetailComponent
+   * @param setPrescriptionDetails // passed in from the function
+   * @useState
+   *  
+   */
+  const [getCoupons, { loading: mutationLoading, error: mutationError },] = useMutation(GET_COUPONS, {
+    onError(err) {
+      console.log(err);
+      alert(err);
+    },
+    update(proxy, result) {
+      console.log('result', result);
+      // if (result.data.prescription.code === 200) {
+      //   if (result.data.prescription.prescriptions.length === 1) {
+
+      //     console.log('result.data', result.data.prescription.prescriptions);
+      //     //setPrescriptionDetailsForPrescriptionDetailComponent(result.data.prescription.prescriptions);
+      //     let data = {
+      //       search_name: result.data.prescription.prescriptions[0]._text,
+      //     }
+      //     //setPrescriptionDetails(data);
+      //     return;
+      //   }
+      //   let options = [];
+      //   //setPrescriptionsForDataList(result.data.prescription.prescriptions);
+      // }
+      // else{
+      //   alert(result.data.prescription.message);
+      // }
+    }
+  });
+  //fillCoupon();
+  getCoupons({ variables: { prescription: prescriptionFromRoute.search_name, latitude: location.latitude, longitude: location.longitude }, context: { clientName: 'coupon' } })
   return (
     <div>
 
@@ -74,30 +206,30 @@ const ChooseYourCoupon = ({ language, prescriptionFromRoute, location }) => {
          * source: https://github.com/emilynorton?tab=repositories
          */}
 
-          {(language === 'english' || language === undefined) && <> <h3><span>Step 3 of 3: </span>Choose Your Coupon</h3></>}
-          {language === 'spanish' && <><h3><span>{'<Spanish>'} Step 3 of 3: </span>Choose Your Coupon</h3></>}
-          <div  className='location cursor'>
-            {(language === 'english' || language === undefined) &&
-              <>
-                Location: {location} <u onClick={returnToLocation}>Clear</u>
-              </>
+      {(language === 'english' || language === undefined) && <> <h3><span>Step 3 of 3: </span>Choose Your Coupon</h3></>}
+      {language === 'spanish' && <><h3><span>{'<Spanish>'} Step 3 of 3: </span>Choose Your Coupon</h3></>}
+      <div className='location cursor'>
+        {(language === 'english' || language === undefined) &&
+          <>
+            Location: {location} <u onClick={returnToLocation}>Clear</u>
+          </>
 
-            }
-            {language === 'spanish' &&
-              <>
-                {'<Spanish>'}Location: {location} <u onClick={returnToLocation}>Clear</u>
-              </>
-            }
-          </div>
-          <PrescriptionDetailedForm language={language} disabled={true} prescriptionFromRoute={prescriptionFromRoute} />
-          <div className="list_info">
-								<p><span>Sorted by: </span>Price</p>
-								<p><span>Number of Results: </span>3</p>
-								<p className="radius"><span>Radius: </span>15 miles</p>
-					</div>
-          <div>
-            {arr}                
-          </div>  
+        }
+        {language === 'spanish' &&
+          <>
+            {'<Spanish>'}Location: {location} <u onClick={returnToLocation}>Clear</u>
+          </>
+        }
+      </div>
+      <PrescriptionDetailedForm language={language} disabled={true} prescriptionFromRoute={prescriptionFromRoute} />
+      <div className="list_info">
+        <p><span>Sorted by: </span>Price</p>
+        <p><span>Number of Results: </span>3</p>
+        <p className="radius"><span>Radius: </span>15 miles</p>
+      </div>
+      <div>
+        {arr}
+      </div>
 
 
       {/* 

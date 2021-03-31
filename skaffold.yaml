@@ -23,6 +23,16 @@ build:
             dest: "."
             src: src/**/*.ts
     - 
+      context: services/coupon
+      docker: 
+        dockerfile: Dockerfile
+      image: insonia78/services/coupon
+      sync: 
+        manual: 
+          - 
+            dest: "."
+            src: src/**/*.ts
+    - 
       context: client
       docker: 
         dockerfile: Dockerfile

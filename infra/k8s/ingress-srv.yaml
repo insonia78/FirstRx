@@ -14,10 +14,10 @@ spec:
             backend:
               serviceName: text-messages-srv
               servicePort: 7000
-          # - path: /coupon/graphql
-          #   backend:
-          #     serviceName: location-srv
-          #     servicePort: 6000  
+          - path: /coupon/graphql
+            backend:
+              serviceName: coupon-srv
+              servicePort: 6000  
           - path: /location/graphql
             backend:
               serviceName: location-srv
