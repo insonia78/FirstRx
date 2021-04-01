@@ -776,11 +776,11 @@ module.exports = {
    </soap:Body>
 </soap:Envelope>`;
 
-             console.log(convert.xml2json(xmlSampleResponse, {compact: true, spaces: 4}));
+            
              let toJson = convert.xml2json(xmlSampleResponse, {compact: true, spaces: 4});
              toJson = JSON.parse(toJson);
-             let data =  toJson["soap:Envelope"]["soap:Body"]["getPharmacyDrugPricingResponse"]["drugs"]["locatedDrug"];
-               
+             let data =  toJson["soap:Envelope"]["soap:Body"]["getPharmacyDrugPricingResponse"];
+              console.log(data); 
              return{ code: 200, message: ``, coupons:data };
             return await new Promise((resolve, reject) => {
 

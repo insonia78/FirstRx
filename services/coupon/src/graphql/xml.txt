@@ -1544,6 +1544,256 @@
                             "_text": "1"
                         }
                     }
+                },
+                "names": {
+                    "locatedDrugName": {
+                        "drugName": {
+                            "_text": "SAVAYSA"
+                        },
+                        "brandGenericIndicator": {
+                            "_text": "B"
+                        },
+                        "isSelected": {
+                            "_text": "true"
+                        }
+                    }
+                },
+                "quantities": {
+                    "locatedDrugQty": [
+                        {
+                            "quantity": {
+                                "_text": "30.0"
+                            },
+                            "quantityUom": {
+                                "_text": "TABLET"
+                            },
+                            "gsn": {
+                                "_text": "73295"
+                            },
+                            "isSelected": {
+                                "_text": "true"
+                            },
+                            "ranking": {
+                                "_text": "1"
+                            }
+                        },
+                        {
+                            "quantity": {
+                                "_text": "90.0"
+                            },
+                            "quantityUom": {
+                                "_text": "TABLET"
+                            },
+                            "gsn": {
+                                "_text": "73295"
+                            },
+                            "isSelected": {
+                                "_text": "false"
+                            },
+                            "ranking": {
+                                "_text": "2"
+                            }
+                        },
+                        {
+                            "quantity": {
+                                "_text": "19.0"
+                            },
+                            "quantityUom": {
+                                "_text": "TABLET"
+                            },
+                            "gsn": {
+                                "_text": "73295"
+                            },
+                            "isSelected": {
+                                "_text": "false"
+                            },
+                            "ranking": {
+                                "_text": "3"
+                            }
+                        },
+                        {
+                            "quantity": {
+                                "_text": "27.0"
+                            },
+                            "quantityUom": {
+                                "_text": "TABLET"
+                            },
+                            "gsn": {
+                                "_text": "73295"
+                            },
+                            "isSelected": {
+                                "_text": "false"
+                            },
+                            "ranking": {
+                                "_text": "3"
+                            }
+                        },
+                        {
+                            "quantity": {
+                                "_text": "4.0"
+                            },
+                            "quantityUom": {
+                                "_text": "TABLET"
+                            },
+                            "gsn": {
+                                "_text": "73295"
+                            },
+                            "isSelected": {
+                                "_text": "false"
+                            },
+                            "ranking": {
+                                "_text": "3"
+                            }
+                        },
+                        {
+                            "quantity": {
+                                "_text": "60.0"
+                            },
+                            "quantityUom": {
+                                "_text": "TABLET"
+                            },
+                            "gsn": {
+                                "_text": "73295"
+                            },
+                            "isSelected": {
+                                "_text": "false"
+                            },
+                            "ranking": {
+                                "_text": "3"
+                            }
+                        },
+                        {
+                            "quantity": {
+                                "_text": "15.0"
+                            },
+                            "quantityUom": {
+                                "_text": "TABLET"
+                            },
+                            "gsn": {
+                                "_text": "73295"
+                            },
+                            "isSelected": {
+                                "_text": "false"
+                            },
+                            "ranking": {
+                                "_text": "4"
+                            }
+                        },
+                        {
+                            "quantity": {
+                                "_text": "23.0"
+                            },
+                            "quantityUom": {
+                                "_text": "TABLET"
+                            },
+                            "gsn": {
+                                "_text": "73295"
+                            },
+                            "isSelected": {
+                                "_text": "false"
+                            },
+                            "ranking": {
+                                "_text": "4"
+                            }
+                        },
+                        {
+                            "quantity": {
+                                "_text": "5.0"
+                            },
+                            "quantityUom": {
+                                "_text": "TABLET"
+                            },
+                            "gsn": {
+                                "_text": "73295"
+                            },
+                            "isSelected": {
+                                "_text": "false"
+                            },
+                            "ranking": {
+                                "_text": "4"
+                            }
+                        },
+                        {
+                            "quantity": {
+                                "_text": "20.0"
+                            },
+                            "quantityUom": {
+                                "_text": "TABLET"
+                            },
+                            "gsn": {
+                                "_text": "73295"
+                            },
+                            "isSelected": {
+                                "_text": "false"
+                            },
+                            "ranking": {
+                                "_text": "5"
+                            }
+                        },
+                        {
+                            "quantity": {
+                                "_text": "45.0"
+                            },
+                            "quantityUom": {
+                                "_text": "TABLET"
+                            },
+                            "gsn": {
+                                "_text": "73295"
+                            },
+                            "isSelected": {
+                                "_text": "false"
+                            },
+                            "ranking": {
+                                "_text": "5"
+                            }
+                        }
+                    ]
+                },
+                "strengths": {
+                    "locatedDrugStrength": [
+                        {
+                            "strength": {
+                                "_text": "60 mg"
+                            },
+                            "gsn": {
+                                "_text": "73295"
+                            },
+                            "isSelected": {
+                                "_text": "true"
+                            },
+                            "ranking": {
+                                "_text": "1"
+                            }
+                        },
+                        {
+                            "strength": {
+                                "_text": "30 mg"
+                            },
+                            "gsn": {
+                                "_text": "73294"
+                            },
+                            "isSelected": {
+                                "_text": "false"
+                            },
+                            "ranking": {
+                                "_text": "2"
+                            }
+                        },
+                        {
+                            "strength": {
+                                "_text": "15 mg"
+                            },
+                            "gsn": {
+                                "_text": "73293"
+                            },
+                            "isSelected": {
+                                "_text": "false"
+                            },
+                            "ranking": {
+                                "_text": "3"
+                            }
+                        }
+                    ]
                 }
             }
         }

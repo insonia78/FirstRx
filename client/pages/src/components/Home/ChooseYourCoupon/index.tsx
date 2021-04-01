@@ -10,97 +10,357 @@ const GET_COUPONS = gql`
 mutation  coupon($prescription:String,$latitude:String,$longitude:String){
       coupon(prescription:$prescription,latitude:$latitude,longitude:$longitude)
       {
-            code
+           code
             message
             coupons
             {
-              pharmacy
-              {
-                name{
-                  _text
-                }
-                streetAddress{
-                  _text
-                }
-                city{
-                  _text
-                }
-                state{
-                  _text
-                }
-                zipCode{
-                  _text
-                }
-                latitude{
-                  _text
-                }
-                longitude{
-                  _text
-                }
-                hoursOfOperation{
-                  _text
-                }
-                phone{
-                  _text
-                }
-                npi{
-                  _text
-                }
-                chainCode{
-                  _text
-                }
-                distance{
-                  _text
-                }
+                
+                drugs
+                {
+                  locatedDrug
+                  {
+                    pharmacy
+                    {
+                        name{
+                          _text
+                        }
+                        streetAddress{
+                          _text
+                        }
+                        city{
+                          _text
+                        }
+                        state{
+                          _text
+                        }
+                        zipCode{
+                          _text
+                        }
+                        latitude{
+                          _text
+                        }
+                        longitude{
+                          _text
+                        }
+                        hoursOfOperation{
+                          _text
+                        }
+                        phone{
+                          _text
+                        }
+                        npi{
+                          _text
+                        }
+                        chainCode{
+                          _text
+                        }
+                        distance{
+                          _text
+                        }
 
-              }
-              drug
-              {
-                ndcCode{
-                  _text
-                }
-                brandGenericIndicator{
-                  _text
-                }
-                gsn{
-                  _text
-                }
-                drugRanking{
-                  _text
-                }
-                quantity{
-                  _text
-                }
-                quantityRanking{
-                  _text
-                }
-              }
-              pricing{
-                price{
-                  _text
-                }
-                priceBasis{
-                  _text
-                }
-                usualAndCustomaryPrice{
-                  _text
-                }
-                macPrice{
-                  _text
-                }
-                awpPrice{
-                  _text
-                }
+                    }
+                    drug
+                    {
+                        ndcCode{
+                          _text
+                        }
+                        brandGenericIndicator{
+                          _text
+                        }
+                        gsn{
+                          _text
+                        }
+                        drugRanking{
+                          _text
+                        }
+                        quantity{
+                          _text
+                        }
+                        quantityRanking{
+                          _text
+                        }
+                    }
+                    pricing
+                    {
+                        price{
+                          _text
+                        }
+                        priceBasis{
+                          _text
+                        }
+                        usualAndCustomaryPrice{
+                          _text
+                        }
+                        macPrice{
+                          _text
+                        }
+                        awpPrice{
+                          _text
+                        }
 
-              }
+                    }
+                  }
+                }
+                forms 
+                {
+                  locatedDrugForm
+                  {
+                    form{
+                      _text
+                    }
+                    gsn{
+                      _text
+                    }
+                    isSelected{
+                      _text
+                    }
+                    ranking{
+                      _text
+                    }
+                    awpPrice{
+                      _text
+                    }
+                  }
+                }
+                names
+                {
+                  locatedDrugName
+                  {
+                      drugName{
+                      _text
+                    }
+                    brandGenericIndicator{
+                      _text
+                    }
+                    isSelected{
+                      _text
+                    }
+                  }
+
+                 }
+                quantities
+                {
+                  locatedDrugQty
+                  {
+                      quantity{
+                        _text
+                      }
+                      quantityUomr{
+                        _text
+                      }
+                      gsn{
+                        _text
+                      }
+                      isSelected{
+                        _text
+                      }
+                      ranking{
+                        _text
+                      }
+                  }
+                }
+                strengths
+                {
+                  locatedDrugStrength
+                  {
+                      strength{
+                        _text
+                      }                    
+                      gsn{
+                        _text
+                      }
+                      isSelected{
+                        _text
+                      }
+                      ranking{
+                        _text
+                      }
+                  }
+
+                }                                 
 
             }
             error
       }
 }
 `;
+// interface DurgsInterface{
 
 
+// }
+
+
+// interface GetPharmacyDrugPricingResponseInterface{
+
+//   coupons:
+  
+      
+//       drugs
+//       {
+//         locatedDrug
+//         {
+//           pharmacy
+//           {
+//               name{
+//                 _text
+//               }
+//               streetAddress{
+//                 _text
+//               }
+//               city{
+//                 _text
+//               }
+//               state{
+//                 _text
+//               }
+//               zipCode{
+//                 _text
+//               }
+//               latitude{
+//                 _text
+//               }
+//               longitude{
+//                 _text
+//               }
+//               hoursOfOperation{
+//                 _text
+//               }
+//               phone{
+//                 _text
+//               }
+//               npi{
+//                 _text
+//               }
+//               chainCode{
+//                 _text
+//               }
+//               distance{
+//                 _text
+//               }
+
+//           }
+//           drug
+//           {
+//               ndcCode{
+//                 _text
+//               }
+//               brandGenericIndicator{
+//                 _text
+//               }
+//               gsn{
+//                 _text
+//               }
+//               drugRanking{
+//                 _text
+//               }
+//               quantity{
+//                 _text
+//               }
+//               quantityRanking{
+//                 _text
+//               }
+//           }
+//           pricing
+//           {
+//               price{
+//                 _text
+//               }
+//               priceBasis{
+//                 _text
+//               }
+//               usualAndCustomaryPrice{
+//                 _text
+//               }
+//               macPrice{
+//                 _text
+//               }
+//               awpPrice{
+//                 _text
+//               }
+
+//           }
+//         }
+//       }
+//       forms 
+//       {
+//         locatedDrugForm
+//         {
+//           form{
+//             _text
+//           }
+//           gsn{
+//             _text
+//           }
+//           isSelected{
+//             _text
+//           }
+//           ranking{
+//             _text
+//           }
+//           awpPrice{
+//             _text
+//           }
+//         }
+//       }
+//       names
+//       {
+//         locatedDrugName
+//         {
+//             drugName{
+//             _text
+//           }
+//           brandGenericIndicator{
+//             _text
+//           }
+//           isSelected{
+//             _text
+//           }
+//         }
+
+//        }
+//       quantities
+//       {
+//         locatedDrugQty
+//         {
+//             quantity{
+//               _text
+//             }
+//             quantityUomr{
+//               _text
+//             }
+//             gsn{
+//               _text
+//             }
+//             isSelected{
+//               _text
+//             }
+//             ranking{
+//               _text
+//             }
+//         }
+//       }
+//       strengths
+//       {
+//         locatedDrugStrength
+//         {
+//             strength{
+//               _text
+//             }                    
+//             gsn{
+//               _text
+//             }
+//             isSelected{
+//               _text
+//             }
+//             ranking{
+//               _text
+//             }
+//         }
+
+//       }                                 
+
+//   }
+// }
 
 /**
  * @Pages
@@ -124,7 +384,7 @@ mutation  coupon($prescription:String,$latitude:String,$longitude:String){
 const ChooseYourCoupon = ({ language, prescriptionFromRoute, location }) => {
 
 
-  const [coupons, setCoupons] = useState([])
+  const [coupons, setCoupons] = useState<any>({})
   const router = useRouter();
 
 
@@ -157,7 +417,9 @@ const ChooseYourCoupon = ({ language, prescriptionFromRoute, location }) => {
   const fillCoupon = () => {
 
     for (let i = 0; i < 7; i++) {
-      arr.push(<CouponsTiles language={language} prescription={prescriptionFromRoute} couponsData={prescriptionFromRoute} />);
+      arr.push(
+        <CouponsTiles language={language} prescription={prescriptionFromRoute} couponsData={prescriptionFromRoute} />);
+
     }
 
 
@@ -176,28 +438,19 @@ const ChooseYourCoupon = ({ language, prescriptionFromRoute, location }) => {
       alert(err);
     },
     update(proxy, result) {
-      console.log('result', result);
-      // if (result.data.prescription.code === 200) {
-      //   if (result.data.prescription.prescriptions.length === 1) {
 
-      //     console.log('result.data', result.data.prescription.prescriptions);
-      //     //setPrescriptionDetailsForPrescriptionDetailComponent(result.data.prescription.prescriptions);
-      //     let data = {
-      //       search_name: result.data.prescription.prescriptions[0]._text,
-      //     }
-      //     //setPrescriptionDetails(data);
-      //     return;
-      //   }
-      //   let options = [];
-      //   //setPrescriptionsForDataList(result.data.prescription.prescriptions);
-      // }
-      // else{
-      //   alert(result.data.prescription.message);
-      // }
+      if (result.data.coupon.code === 200)
+      {
+        console.log(result.data.coupon.coupons);
+         setCoupons(result.data.coupon.coupons);
+      }
+      else
+        alert(result.data.coupon.message);
+
     }
   });
   //fillCoupon();
-  getCoupons({ variables: { prescription: prescriptionFromRoute.search_name, latitude: location.latitude, longitude: location.longitude }, context: { clientName: 'coupon' } })
+  Object.keys(coupons).length <= 0 && getCoupons({ variables: { prescription: prescriptionFromRoute.search_name, latitude: location.latitude, longitude: location.longitude }, context: { clientName: 'coupon' } })
   return (
     <div>
 
@@ -228,7 +481,7 @@ const ChooseYourCoupon = ({ language, prescriptionFromRoute, location }) => {
         <p className="radius"><span>Radius: </span>15 miles</p>
       </div>
       <div>
-        {arr}
+        {Object.keys(coupons).length > 0 && coupons['drugs']['locateDrug'].map(element => <CouponsTiles language={language} prescription={prescriptionFromRoute} couponsData={element} />)}
       </div>
 
 

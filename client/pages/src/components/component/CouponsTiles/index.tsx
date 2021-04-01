@@ -43,7 +43,7 @@ const CouponsTiles = ({ language, prescription, couponsData }) => {
             <div className="coupon article">
 
                 <div className="price">
-                    <a href="#"><div>$8.09</div></a>
+                    <a href="#"><div>{`$${couponsData.pricing.price._text}`}</div></a>
                 </div>
 
                 <div onClick={sendToCoupon} className="coupon_button cursor">
@@ -53,7 +53,7 @@ const CouponsTiles = ({ language, prescription, couponsData }) => {
                 </div>
 
                 <div className="pharmacy">
-                    <div className="pharmacy"><address><strong>Walgreens</strong> 1201 E. Superior Street, Duluth, MN 55805 </address><a href="https://maps.google.com" target="_blank">Map</a></div>
+                    <div className="pharmacy"><address><strong>{couponsData.pharmacy.name._text}</strong> {`${couponsData.pharmacy.streetAddress._text}, ${couponsData.pharmacy.city._text}, ${couponsData.pharmacy.state._text} ${couponsData.pharmacy.zipCode._text.split("-")[0]}`}</address>&nbsp;<a href={`https://maps.google.com/@${couponsData.pharmacy.latitude._text},${couponsData.pharmacy.longitude._text}`} target="_blank">Map</a></div>
                 </div>
 
             </div>

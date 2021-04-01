@@ -1,6 +1,7 @@
 const convert = require('xml-js');
 const fs = require('fs');
 
+
 const xmlSampleResponse = `
 <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
 <soap:Body>
@@ -628,7 +629,112 @@ const xmlSampleResponse = `
   <ranking>1</ranking>
 </locatedDrugForm>
 </forms>
-
+<names>
+<locatedDrugName>
+  <drugName>SAVAYSA</drugName>
+  <brandGenericIndicator>B</brandGenericIndicator>
+  <isSelected>true</isSelected>
+</locatedDrugName>
+</names>
+<quantities>
+<locatedDrugQty>
+  <quantity>30.0</quantity>
+  <quantityUom>TABLET</quantityUom>
+  <gsn>73295</gsn>
+  <isSelected>true</isSelected>
+  <ranking>1</ranking>
+</locatedDrugQty>
+<locatedDrugQty>
+  <quantity>90.0</quantity>
+  <quantityUom>TABLET</quantityUom>
+  <gsn>73295</gsn>
+  <isSelected>false</isSelected>
+  <ranking>2</ranking>
+</locatedDrugQty>
+<locatedDrugQty>
+  <quantity>19.0</quantity>
+  <quantityUom>TABLET</quantityUom>
+  <gsn>73295</gsn>
+  <isSelected>false</isSelected>
+  <ranking>3</ranking>
+</locatedDrugQty>
+<locatedDrugQty>
+  <quantity>27.0</quantity>
+  <quantityUom>TABLET</quantityUom>
+  <gsn>73295</gsn>
+  <isSelected>false</isSelected>
+  <ranking>3</ranking>
+</locatedDrugQty>
+<locatedDrugQty>
+  <quantity>4.0</quantity>
+  <quantityUom>TABLET</quantityUom>
+  <gsn>73295</gsn>
+  <isSelected>false</isSelected>
+  <ranking>3</ranking>
+</locatedDrugQty>
+<locatedDrugQty>
+  <quantity>60.0</quantity>
+  <quantityUom>TABLET</quantityUom>
+  <gsn>73295</gsn>
+  <isSelected>false</isSelected>
+  <ranking>3</ranking>
+</locatedDrugQty>
+<locatedDrugQty>
+  <quantity>15.0</quantity>
+  <quantityUom>TABLET</quantityUom>
+  <gsn>73295</gsn>
+  <isSelected>false</isSelected>
+  <ranking>4</ranking>
+</locatedDrugQty>
+<locatedDrugQty>
+  <quantity>23.0</quantity>
+  <quantityUom>TABLET</quantityUom>
+  <gsn>73295</gsn>
+  <isSelected>false</isSelected>
+  <ranking>4</ranking>
+</locatedDrugQty>
+<locatedDrugQty>
+  <quantity>5.0</quantity>
+  <quantityUom>TABLET</quantityUom>
+  <gsn>73295</gsn>
+  <isSelected>false</isSelected>
+  <ranking>4</ranking>
+</locatedDrugQty>
+<locatedDrugQty>
+  <quantity>20.0</quantity>
+  <quantityUom>TABLET</quantityUom>
+  <gsn>73295</gsn>
+  <isSelected>false</isSelected>
+  <ranking>5</ranking>
+</locatedDrugQty>
+<locatedDrugQty>
+  <quantity>45.0</quantity>
+  <quantityUom>TABLET</quantityUom>
+  <gsn>73295</gsn>
+  <isSelected>false</isSelected>
+  <ranking>5</ranking>
+</locatedDrugQty>
+</quantities>
+<strengths>
+<locatedDrugStrength>
+  <strength>60 mg</strength>
+  <gsn>73295</gsn>
+  <isSelected>true</isSelected>
+  <ranking>1</ranking>
+</locatedDrugStrength>
+<locatedDrugStrength>
+  <strength>30 mg</strength>
+  <gsn>73294</gsn>
+  <isSelected>false</isSelected>
+  <ranking>2</ranking>
+</locatedDrugStrength>
+<locatedDrugStrength>
+  <strength>15 mg</strength>
+  <gsn>73293</gsn>
+  <isSelected>false</isSelected>
+  <ranking>3</ranking>
+</locatedDrugStrength>
+</strengths>
 </getPharmacyDrugPricingResponse>
 </soap:Body>
 </soap:Envelope>`;
