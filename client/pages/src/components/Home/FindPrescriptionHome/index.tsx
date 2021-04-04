@@ -111,6 +111,15 @@ export default function FindPrescriptionHome({ language, location = undefined, p
   let clicked = 0;
   const searchPrescription = (e) => {
     e.preventDefault();
+    let value = prescriptionsforDataList.find((element) => e.target.value === element ))
+    
+    if(value !== undefined)
+    {
+      setPrescriptionDetails([value]);
+      return
+    }
+     
+    
     if(e.target.value.trim().length >= 3 )
     {  
       console.log('clicked',clicked++);     
