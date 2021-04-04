@@ -85,7 +85,7 @@ module.exports = {
                     let envVariables: string = process.env.APIKEYS === undefined ? "" : process.env.APIKEYS.toString();
                     let obj = JSON.parse(envVariables);
                     const signer = crypto.createSign('RSA-SHA256');
-
+                    console.log('enviroment variables',JSON.stringify(obj));
                     var myTimeStamp = moment().utcOffset('-0700').format('YYYY-MM-DD[T]HH:mm:ss.SSSZ');
 
                     const query = (Temp: any) => {
@@ -137,9 +137,9 @@ module.exports = {
                             console.log('body1', response.body, 'statusCode', response.statusCode);
                             if (response.statusCode === 200 && response.body !== '') {
                                 let xml = response.body;
-                                let toJson = convert.xml2json(xml, { compact: true, spaces: 4 });
+                                let toJson:any = convert.xml2json(xml, { compact: true, spaces: 4 });
                                 toJson = JSON.parse(toJson);
-                                let data = toJson["soap:Envelope"]['soap:Body']["findDrugByNameResponse"]["drugNames"]["drugNameSuggestion"];
+                                let data:any[] =  toJson["soap:Envelope"]['soap:Body']["findDrugByNameResponse"]["drugNames"] !== undefined ?  toJson["soap:Envelope"]['soap:Body']["findDrugByNameResponse"]["drugNames"]["drugNameSuggestion"] : [];
 
                                 if (data.length > 0)
                                     resolve({ code: response.statusCode, message: '', prescriptions: Array.isArray(data) ? data : [data]});
