@@ -35,46 +35,46 @@ module.exports = {
         prescription: async (parent: any, args: any, context: any, info: any) => {
             let prescription = args.prescription.trim();
 
-//             const xmlSampleResponse = `
-//             <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-//    <soap:Body>
-//       <findDrugByNameResponse xmlns="http://rx-savings.medimpact.com/contract/PricingEngine/v1.0">
-//          <drugNames>
-//             <drugNameSuggestion>BENACTYZINE HCL (BULK)</drugNameSuggestion>
-//             <drugNameSuggestion>BENADRYL</drugNameSuggestion>
-//             <drugNameSuggestion>BENADRYL ALLERGY</drugNameSuggestion>
-//             <drugNameSuggestion>BENADRYL EXTRA STRENGTH</drugNameSuggestion>
-//             <drugNameSuggestion>BENADRYL ITCH COOLING</drugNameSuggestion>
-//             <drugNameSuggestion>BENADRYL ITCH RELIEF STICK</drugNameSuggestion>
-//             <drugNameSuggestion>BENADRYL ITCH STOPPING</drugNameSuggestion>
-//             <drugNameSuggestion>BENAZEPRIL</drugNameSuggestion>
-//             <drugNameSuggestion>BENAZEPRIL HCL (BULK)</drugNameSuggestion>
-//             <drugNameSuggestion>BENAZEPRIL-HYDROCHLOROTHIAZIDE</drugNameSuggestion>
-//          </drugNames>
-//       </findDrugByNameResponse>
-//    </soap:Body>
-// </soap:Envelope>`;
-//             try{
+            //             const xmlSampleResponse = `
+            //             <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+            //    <soap:Body>
+            //       <findDrugByNameResponse xmlns="http://rx-savings.medimpact.com/contract/PricingEngine/v1.0">
+            //          <drugNames>
+            //             <drugNameSuggestion>BENACTYZINE HCL (BULK)</drugNameSuggestion>
+            //             <drugNameSuggestion>BENADRYL</drugNameSuggestion>
+            //             <drugNameSuggestion>BENADRYL ALLERGY</drugNameSuggestion>
+            //             <drugNameSuggestion>BENADRYL EXTRA STRENGTH</drugNameSuggestion>
+            //             <drugNameSuggestion>BENADRYL ITCH COOLING</drugNameSuggestion>
+            //             <drugNameSuggestion>BENADRYL ITCH RELIEF STICK</drugNameSuggestion>
+            //             <drugNameSuggestion>BENADRYL ITCH STOPPING</drugNameSuggestion>
+            //             <drugNameSuggestion>BENAZEPRIL</drugNameSuggestion>
+            //             <drugNameSuggestion>BENAZEPRIL HCL (BULK)</drugNameSuggestion>
+            //             <drugNameSuggestion>BENAZEPRIL-HYDROCHLOROTHIAZIDE</drugNameSuggestion>
+            //          </drugNames>
+            //       </findDrugByNameResponse>
+            //    </soap:Body>
+            // </soap:Envelope>`;
+            //             try{
 
-//             let toJson = convert.xml2json(xmlSampleResponse, { compact: true, spaces: 4 });
-//             toJson = JSON.parse(toJson);
-            
-//             let data = toJson["soap:Envelope"]['soap:Body']["findDrugByNameResponse"]["drugNames"]["drugNameSuggestion"];
-            
-//             for (let i = 0; i < data.length; i++) {
-                
-//                 if (data[i]._text === prescription)
-//                 {  
-//                     let a = { code: 200, message: '', prescriptions: [data[i]] };
-//                     console.log('a',a);                  
-//                     return  a ;
-//                 }
-//             }
-//             let b = { code: 200, message: '', prescriptions: data }; 
-//             return { code: 200, message: '', prescriptions: data } ;
-//         }catch(e){
-//             console.log(e.message);
-//         }
+            //             let toJson = convert.xml2json(xmlSampleResponse, { compact: true, spaces: 4 });
+            //             toJson = JSON.parse(toJson);
+
+            //             let data = toJson["soap:Envelope"]['soap:Body']["findDrugByNameResponse"]["drugNames"]["drugNameSuggestion"];
+
+            //             for (let i = 0; i < data.length; i++) {
+
+            //                 if (data[i]._text === prescription)
+            //                 {  
+            //                     let a = { code: 200, message: '', prescriptions: [data[i]] };
+            //                     console.log('a',a);                  
+            //                     return  a ;
+            //                 }
+            //             }
+            //             let b = { code: 200, message: '', prescriptions: data }; 
+            //             return { code: 200, message: '', prescriptions: data } ;
+            //         }catch(e){
+            //             console.log(e.message);
+            //         }
             if (prescription.length < 3) {
                 console.log(`code:422, message:"Request is not valid`);
                 return { code: 422, message: "Request is not valid" }
@@ -85,7 +85,7 @@ module.exports = {
                     let envVariables: string = process.env.APIKEYS === undefined ? "" : process.env.APIKEYS.toString();
                     let obj = JSON.parse(envVariables);
                     const signer = crypto.createSign('RSA-SHA256');
-                    console.log('enviroment variables',JSON.stringify(obj));
+                    console.log('enviroment variables', JSON.stringify(obj));
                     var myTimeStamp = moment().utcOffset('-0700').format('YYYY-MM-DD[T]HH:mm:ss.SSSZ');
 
                     const query = (Temp: any) => {
@@ -102,7 +102,7 @@ module.exports = {
                                 <v1:clientAccountCode>${process.env.MEDIMPACT_CLIENT_CODE}</v1:clientAccountCode>
                                 <v1:token>${obj["medimpact-token"]}</v1:token>
                                 <v1:timestamp>${myTimeStamp}</v1:timestamp>
-                                <v1:prefixText>${Temp}</v1:prefixText>
+                                <v1:prefixText>${Temp.trim()}</v1:prefixText>
                                 <!--Optional:-->
                                 <v1:count>10</v1:count>
                             </v1:findDrugByNameRequest>
@@ -136,16 +136,19 @@ module.exports = {
                             }
                             console.log('body1', response.body, 'statusCode', response.statusCode);
                             if (response.statusCode === 200 && response.body !== '') {
-                                let xml = response.body;
-                                let toJson:any = convert.xml2json(xml, { compact: true, spaces: 4 });
-                                toJson = JSON.parse(toJson);
-                                let data:any[] =  toJson["soap:Envelope"]['soap:Body']["findDrugByNameResponse"]["drugNames"] !== undefined ?  toJson["soap:Envelope"]['soap:Body']["findDrugByNameResponse"]["drugNames"]["drugNameSuggestion"] : [];
+                                try {
+                                    let xml = response.body;
+                                    let toJson: any = convert.xml2json(xml, { compact: true, spaces: 4 });
+                                    toJson = JSON.parse(toJson);
+                                    let data: any[] = toJson["soap:Envelope"]['soap:Body']["findDrugByNameResponse"]["drugNames"] !== undefined ? toJson["soap:Envelope"]['soap:Body']["findDrugByNameResponse"]["drugNames"]["drugNameSuggestion"] : [];
 
-                                if (data.length > 0)
-                                    resolve({ code: response.statusCode, message: '', prescriptions: Array.isArray(data) ? data : [data]});
-                                else
-                                    resolve({ code: 204, message: `No Data for ${toJson}`, prescriptions: [] });
-
+                                    if (data.length > 0)
+                                        resolve({ code: response.statusCode, message: '', prescriptions: Array.isArray(data) ? data : [data] });
+                                    else
+                                        resolve({ code: 204, message: `No Data for ${toJson}`, prescriptions: [] });
+                                } catch (e) {
+                                    resolve({ code: '500', error: 'Internal Server Error', message: e.message });
+                                }
 
 
                             }
