@@ -111,8 +111,8 @@ export default function FindPrescriptionHome({ language, location = undefined, p
   let clicked = 0;
   const searchPrescription = (e:any) => {
     e.preventDefault();
-    let value = prescriptionsforDataList.find((element) => e.target.value === element._text);
-    
+    let value = prescriptionsforDataList.find((element) => { console.log(element._text,'=',e.target.value); if(e.target.value === element._text){ return element._text }});
+    console.log('prescription value',value,e.target.value );
     if(value === e.target.value.trim())
     {
       setPrescriptionDetails([value]);
