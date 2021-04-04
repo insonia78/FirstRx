@@ -109,11 +109,11 @@ export default function FindPrescriptionHome({ language, location = undefined, p
    * @context prescription // used for apollo.link curently baseUri
    */
   let clicked = 0;
-  const searchPrescription = (e) => {
+  const searchPrescription = (e:any) => {
     e.preventDefault();
-    let value = prescriptionsforDataList.find((element) => e.target.value === element );
+    let value = prescriptionsforDataList.find((element) => e.target.value === element._text);
     
-    if(value === e.target.value)
+    if(value === e.target.value.trim())
     {
       setPrescriptionDetails([value]);
       return
