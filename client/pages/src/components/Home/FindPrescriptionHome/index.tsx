@@ -111,21 +111,26 @@ export default function FindPrescriptionHome({ language, location = undefined, p
   let clicked = 0;
   const searchPrescription = (e:any) => {
     e.preventDefault();
-    let value = prescriptionsforDataList.find((element) => { console.log(element._text,'==',e.target.value); if(e.target.value === element._text){ return element._text }});
-    console.log('prescription value',value,e.target.value );
-    if(value === e.target.value.trim())
+    let value = prescriptionsforDataList.find((element) => e.target.value.trim() === element._text );
+    if(value !== undefined && value._text === e.target.value.trim())
     {
-      setPrescriptionDetails([value]);
-      return
-    }
-     
-    
-    if(e.target.value.trim().length >= 3 )
+      console.log( 'inside test', value._text, value._text === e.target.value.trim() )
+      let data = {
+        search_name: value._text,
+      }
+      setIfPrescriptionDetailsExists(true);
+      setPrescriptionDetails(data);
+      
+    }  
+    else if (e.target.value.trim().length >= 3 )
     {  
       console.log('clicked',clicked++);     
-       getPrescriptions({ variables: { prescription: e.target.value }, context: { clientName: 'prescriptions' } });
+       getPrescriptions({ variables: { prescription: e.target.value.trim() }, context: { clientName: 'prescriptions' } });
     }
-    setValueForInputValue(e.target.value);
+    else{
+      console.log('minimum of 3 charaters');
+    }
+    setValueForInputValue(e.target.value.trim());
 
   }
   /**
