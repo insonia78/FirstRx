@@ -78,6 +78,8 @@ module.exports = {
                     url += '&components=country:us';
                     url += '&radius=500';
                     url +=  `&key=${obj['google-key']}`;   //`&key=${process.env.GOOGLE_API_MAPS_KEY}`;
+                    
+                    console.log('google url',url);
                     request(url, (error: any, response: any, body: any) => {
                         if (error) {
                             console.log(`${writeToLog.getServiceName()} = ${error}`);
