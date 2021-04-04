@@ -10,8 +10,9 @@ import  {writeToLog}  from './../../src/helper/writeToLog';
 module.exports = {
     Mutation: {
         GetLocationFromZipOrCity: async (parent: any, args: any, context: any, info: any) => {
-            let envVariables = process.env.APIKEYS;
-            let obj = JSON.parse(JSON.stringify(envVariables));
+            let envVariables: string = process.env.APIKEYS === undefined ? "" : process.env.APIKEYS.toString();
+            console.log('enviroment variables', envVariables);
+            let obj = JSON.parse(envVariables);
             
             const getAddressByGeoLocation = (bodyfromplaces:any,place_id:string,resolve:any)=>{
               
