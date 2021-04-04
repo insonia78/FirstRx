@@ -207,9 +207,9 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
       };
 
       let valueMyLocation = ` ${myLocation.postCode}, ${myLocation.city}, ${myLocation.state}`;
-      myLocation.myLocation = valueMyLocation
+      Object.assign(myLocation ,{myLocation:valueMyLocation})
       setLocation(myLocation);
-      setValueForInputValue(valueMyLocation);
+      setValueForInputValue(JSON.stringify(myLocation));
     }
     var handleError = function (err) {
       console.warn(err);

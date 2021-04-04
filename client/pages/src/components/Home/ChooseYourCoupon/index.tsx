@@ -307,6 +307,7 @@ const ChooseYourCoupon = ({ language, prescriptionFromRoute, location }) => {
 
 
   console.log('Datafromlocation',prescriptionFromRoute,location);
+  location = JSON.parse(location);
 
   let pharmacyText: PharmacyTextInterface = {
     _text: ""
@@ -431,22 +432,22 @@ const ChooseYourCoupon = ({ language, prescriptionFromRoute, location }) => {
   }
   let arr = [];
 
-  /**
-   * helper function for development 
-   * filles the coupons
-   * 
-   * @component CouponTiles 
-   */
-  const fillCoupon = () => {
+  // /**
+  //  * helper function for development 
+  //  * filles the coupons
+  //  * 
+  //  * @component CouponTiles 
+  //  */
+  // const fillCoupon = () => {
 
-    for (let i = 0; i < 7; i++) {
-      arr.push(
-        <CouponsTiles language={language} prescription={prescriptionFromRoute} couponsData={prescriptionFromRoute} />);
+  //   for (let i = 0; i < 7; i++) {
+  //     arr.push(
+  //       <CouponsTiles language={language} prescription={prescriptionFromRoute} couponsData={prescriptionFromRoute} />);
 
-    }
+  //   }
 
 
-  }
+  // }
 
   /**
    * Call to the service Prescription to retreve the prescriptionsfordatalist available
