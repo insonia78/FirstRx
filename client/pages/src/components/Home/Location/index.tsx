@@ -209,7 +209,7 @@ const Location = ({ language, prescriptionFromRoute, location }) => {
       let valueMyLocation = ` ${myLocation.postCode}, ${myLocation.city}, ${myLocation.state}`;
       Object.assign(myLocation ,{myLocation:valueMyLocation})
       setLocation(myLocation);
-      setValueForInputValue(JSON.stringify(myLocation));
+      setValueForInputValue(valueMyLocation);
     }
     var handleError = function (err) {
       console.warn(err);
@@ -320,7 +320,7 @@ const createLocationWithOutCommas = (value) =>{
               query: {
                 component: 'prescription',
                 prescriptions: prescriptionFromRoute,
-                location: valueForInputValue.trim(),
+                location: JSON.stringify(getLocation).trim(),
                 language: language
 
               }

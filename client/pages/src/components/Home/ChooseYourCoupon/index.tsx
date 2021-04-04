@@ -491,7 +491,7 @@ const ChooseYourCoupon = ({ language, prescriptionFromRoute, location }) => {
       <div className='location cursor'>
         {(language === 'english' || language === undefined) &&
           <>
-            Location: {location} <u onClick={returnToLocation}>Clear</u>
+            Location: {location.myLocation} <u onClick={returnToLocation}>Clear</u>
           </>
 
         }
