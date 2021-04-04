@@ -306,7 +306,7 @@ export interface PharmacyTextInterface {
 const ChooseYourCoupon = ({ language, prescriptionFromRoute, location }) => {
 
 
-  
+  console.log('Datafromlocation',prescriptionFromRoute,location);
 
   let pharmacyText: PharmacyTextInterface = {
     _text: ""
