@@ -134,7 +134,7 @@ module.exports = {
                                 reject(new Error(error)); // reject instead of throwing, handle with `catch`
                                 return;
                             }
-                            console.log('body', response.body, 'statusCode', response.statusCode);
+                            console.log('body1', response.body, 'statusCode', response.statusCode);
                             if (response.statusCode === 200 && response.body !== '') {
                                 let xml = response.body;
                                 let toJson = convert.xml2json(xml, { compact: true, spaces: 4 });
