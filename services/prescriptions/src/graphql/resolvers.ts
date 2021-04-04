@@ -14,20 +14,20 @@ const moment = require('moment')
 
 let private_key: string;
 
-// fs.readFile(path.join(process.cwd(), "firstrx.key"), (err: any, data: any) => {
-//     private_key = data;
+fs.readFile(path.join(process.cwd(), "firstrx.key"), (err: any, data: any) => {
+    private_key = data;
 
-// });
+});
 
 let public_key: string;
 
-// fs.readFile('firstrx.crt', (err: any, data: any) => {
-//     if (err) {
-//         console.error(err)
-//         return
-//     }
-//     public_key = data;
-// });
+fs.readFile('firstrx.crt', (err: any, data: any) => {
+    if (err) {
+        console.error(err)
+        return
+    }
+    public_key = data;
+});
 
 
 module.exports = {
@@ -35,46 +35,46 @@ module.exports = {
         prescription: async (parent: any, args: any, context: any, info: any) => {
             let prescription = args.prescription.trim();
 
-            const xmlSampleResponse = `
-            <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
-   <soap:Body>
-      <findDrugByNameResponse xmlns="http://rx-savings.medimpact.com/contract/PricingEngine/v1.0">
-         <drugNames>
-            <drugNameSuggestion>BENACTYZINE HCL (BULK)</drugNameSuggestion>
-            <drugNameSuggestion>BENADRYL</drugNameSuggestion>
-            <drugNameSuggestion>BENADRYL ALLERGY</drugNameSuggestion>
-            <drugNameSuggestion>BENADRYL EXTRA STRENGTH</drugNameSuggestion>
-            <drugNameSuggestion>BENADRYL ITCH COOLING</drugNameSuggestion>
-            <drugNameSuggestion>BENADRYL ITCH RELIEF STICK</drugNameSuggestion>
-            <drugNameSuggestion>BENADRYL ITCH STOPPING</drugNameSuggestion>
-            <drugNameSuggestion>BENAZEPRIL</drugNameSuggestion>
-            <drugNameSuggestion>BENAZEPRIL HCL (BULK)</drugNameSuggestion>
-            <drugNameSuggestion>BENAZEPRIL-HYDROCHLOROTHIAZIDE</drugNameSuggestion>
-         </drugNames>
-      </findDrugByNameResponse>
-   </soap:Body>
-</soap:Envelope>`;
-            try{
+//             const xmlSampleResponse = `
+//             <soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+//    <soap:Body>
+//       <findDrugByNameResponse xmlns="http://rx-savings.medimpact.com/contract/PricingEngine/v1.0">
+//          <drugNames>
+//             <drugNameSuggestion>BENACTYZINE HCL (BULK)</drugNameSuggestion>
+//             <drugNameSuggestion>BENADRYL</drugNameSuggestion>
+//             <drugNameSuggestion>BENADRYL ALLERGY</drugNameSuggestion>
+//             <drugNameSuggestion>BENADRYL EXTRA STRENGTH</drugNameSuggestion>
+//             <drugNameSuggestion>BENADRYL ITCH COOLING</drugNameSuggestion>
+//             <drugNameSuggestion>BENADRYL ITCH RELIEF STICK</drugNameSuggestion>
+//             <drugNameSuggestion>BENADRYL ITCH STOPPING</drugNameSuggestion>
+//             <drugNameSuggestion>BENAZEPRIL</drugNameSuggestion>
+//             <drugNameSuggestion>BENAZEPRIL HCL (BULK)</drugNameSuggestion>
+//             <drugNameSuggestion>BENAZEPRIL-HYDROCHLOROTHIAZIDE</drugNameSuggestion>
+//          </drugNames>
+//       </findDrugByNameResponse>
+//    </soap:Body>
+// </soap:Envelope>`;
+//             try{
 
-            let toJson = convert.xml2json(xmlSampleResponse, { compact: true, spaces: 4 });
-            toJson = JSON.parse(toJson);
+//             let toJson = convert.xml2json(xmlSampleResponse, { compact: true, spaces: 4 });
+//             toJson = JSON.parse(toJson);
             
-            let data = toJson["soap:Envelope"]['soap:Body']["findDrugByNameResponse"]["drugNames"]["drugNameSuggestion"];
+//             let data = toJson["soap:Envelope"]['soap:Body']["findDrugByNameResponse"]["drugNames"]["drugNameSuggestion"];
             
-            for (let i = 0; i < data.length; i++) {
+//             for (let i = 0; i < data.length; i++) {
                 
-                if (data[i]._text === prescription)
-                {  
-                    let a = { code: 200, message: '', prescriptions: [data[i]] };
-                    console.log('a',a);                  
-                    return  a ;
-                }
-            }
-            let b = { code: 200, message: '', prescriptions: data }; 
-            return { code: 200, message: '', prescriptions: data } ;
-        }catch(e){
-            console.log(e.message);
-        }
+//                 if (data[i]._text === prescription)
+//                 {  
+//                     let a = { code: 200, message: '', prescriptions: [data[i]] };
+//                     console.log('a',a);                  
+//                     return  a ;
+//                 }
+//             }
+//             let b = { code: 200, message: '', prescriptions: data }; 
+//             return { code: 200, message: '', prescriptions: data } ;
+//         }catch(e){
+//             console.log(e.message);
+//         }
             if (prescription.length < 3) {
                 console.log(`code:422, message:"Request is not valid`);
                 return { code: 422, message: "Request is not valid" }

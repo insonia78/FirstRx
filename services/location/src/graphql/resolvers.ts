@@ -21,6 +21,7 @@ module.exports = {
                 url += place_id;
                 url +=  `&key=${obj['google-key']}`;
 
+                console.log('google url',url);
                 request(url, (error: any, response: any, body: any) => {
                     if (error)
                     {
