@@ -1,5 +1,7 @@
 //import styles from '../../../../../styles/PrescriptionDetailedForm.module.scss';// for version 1 with wire frames
 
+import { GetLocatedDrugFormInterface, GetLocatedDrugQtyInterface, GetLocatedDrugStrengthInterface, LocatedDrugStrengthInterface } from "../../Home/ChooseYourCoupon";
+
 /**
  * @COMPONENT
  * Displays the details of the prescription selected
@@ -14,23 +16,20 @@
  * @useState setPrescriptionDetails // sets the prescription chosen 
  */
 
-const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer = undefined, prescriptionFromRoute = undefined, setPrescriptionDetails = undefined }) => {
-    
-
-
-    console.log('prescriptionFromRoute',prescriptionFromRoute, dataFromServer,dataFromServer  );
+const PrescriptionDetailedForm = ({ language, disabled = false, coupons, prescriptionName, setValuesForFilterCoupons,filterCoupons }) => {
+       
     let manufacturer = "";
-    let form = "";
-    let dosage = "";
-    let quantity = "";
-    if (prescriptionFromRoute !== undefined) {
-        prescriptionFromRoute = JSON.parse(prescriptionFromRoute);
-        manufacturer = prescriptionFromRoute.manufacturer;
-        form = prescriptionFromRoute.form;
-        dosage = prescriptionFromRoute.dosage;
-        quantity = prescriptionFromRoute.quantity;
-    }
+    let form:GetLocatedDrugFormInterface[] = !Array.isArray(coupons['forms']['locatedDrugForm']) ? [coupons['forms']['locatedDrugForm']] : coupons['forms']['locatedDrugForm'][0];
+    let dosage:GetLocatedDrugStrengthInterface[] =  !Array.isArray(coupons['strengths']['locatedDrugStrength']) ? [coupons['strengths']['locatedDrugStrength']] : coupons['strengths']['locatedDrugStrength'].sort((a,b)=> a.strength._text.toUpperCase().localeCompare(b.strength._text.toUpperCase()));
+    let quantity:GetLocatedDrugQtyInterface[] = !Array.isArray(coupons['quantities']['locatedDrugQty']) ? [coupons['quantities']['locatedDrugQty']]: coupons['quantities']['locatedDrugQty'].sort((a,b)=> parseFloat(a.quantity._text) - parseFloat(b.quantity._text));
     
+    let val={
+        form:form[0].form._text,
+        dosage:dosage[0].strength._text,
+        quantity:quantity[0].quantity._text                 
+    }
+    setValuesForFilterCoupons(val);
+      
     /**
      * Sets the values from the select tag
      * 
@@ -41,7 +40,8 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
         let val = {
             [e.target.name]: e.target.value
         }
-        setPrescriptionDetails(val);
+        setValuesForFilterCoupons(val);
+        filterCoupons();
     }
     return (
         <>
@@ -60,7 +60,7 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
                 </>
             }
             <div id="rx" className="rx">
-                <h4> {(prescriptionFromRoute !== undefined ? prescriptionFromRoute.search_name : (dataFromServer === undefined  ? "" : dataFromServer.length === 0 ? "" : dataFromServer[0].search_name))}</h4>
+                <h4> {prescriptionName.search_name}</h4>
 
                 <p>
                     {(language === 'english' || language === undefined) && <><label htmlFor="mfg">Manufacturer</label></>}
@@ -70,16 +70,10 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
                         disabled={disabled}
                         name="mfg"
                         onChange={onChange}
-                        defaultValue={prescriptionFromRoute && manufacturer}
+                        defaultValue={manufacturer}
                         id="mfg"
                     >
-                        {
-                            dataFromServer && dataFromServer.map((element, index) =>
-                                <option key={`manufactor${index}`} value={element.manufacturer}>{element.manufacturer}</option>
-
-                            )
-                        }
-                        {dataFromServer === undefined ? <option value={manufacturer}>{manufacturer}</option> : dataFromServer.length === 0 ? <option value={manufacturer}>{manufacturer}</option> : undefined}
+                       
                     
                     </select>
                 </p>
@@ -92,20 +86,9 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
                         disabled={disabled}
                         name="form"
                         onChange={onChange}
-                        defaultValue={prescriptionFromRoute && form}
                         id="form"
                     >
-                        {
-                            dataFromServer && dataFromServer.map(element =>
-                                element.form.map((e, index) =>
-                                    <option key={`form${index}`} value={e}>{e}</option>
-
-                                )
-
-
-                            )
-                        }
-                        {dataFromServer === undefined ? <option value={form} >{form} </option> : dataFromServer.length === 0 ? <option value={form}>{form} </option> : undefined}
+                       {form.map((e:GetLocatedDrugFormInterface,i:number)=> <option key={i} value={e.form._text} >{e.form._text}</option>)}
                     
                     </select>
                 </p>
@@ -119,18 +102,12 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
                         id="dosage"
                         disabled={disabled}
                         onChange={onChange}
-                        defaultValue={prescriptionFromRoute && dosage}
-                    >
+                        
+                    >                        
                         {
-                            dataFromServer && dataFromServer.map(element =>
-                                element.dosage.map((e, index) =>
-                                    <option key={`dosage${index}`} value={e.dosage}>{e.dosage}</option>
-
-                                )
-
-                            )
+                            dosage.map((e:GetLocatedDrugStrengthInterface,i:number) => <option key={i} value={e.strength._text} >{e.strength._text}</option>)   
                         }
-                        {dataFromServer === undefined ? <option value={dosage} > {dosage} </option> : dataFromServer.length === 0 ? <option value={dosage} > {dosage} </option> : undefined}
+                        
                     
                     </select>
                 </p>
@@ -140,22 +117,14 @@ const PrescriptionDetailedForm = ({ language, disabled = false, dataFromServer =
                     {language === 'spanish' && <>{'<Spanish>'}<label htmlFor="qty">Quantity</label></>}
 
                     <select
-                        name="qty"
+                        name="quantity"
                         id="qty"
                         disabled={disabled}
                         onChange={onChange}
-                        defaultValue={prescriptionFromRoute && quantity}
-                    >
                         
-                        {
-                            dataFromServer && dataFromServer.map(element =>                                
-                                element.quantity.map((e, index) =>
-                                    <option key={`qty${index}`} value={e}>{e}</option>
-                               )
-                            )
-                        }
-                        {dataFromServer === undefined ? <option value={quantity} > {quantity} </option> : dataFromServer.length === 0 ? <option value={quantity} > {quantity} </option> : undefined}
-                    
+                    >
+                     {  quantity.map((e:GetLocatedDrugQtyInterface,i:number)=> <option key={i} value={e.quantity._text} >{e.quantity._text}</option>)}   
+                      
                     </select>
                 </p>
             </div>

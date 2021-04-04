@@ -184,183 +184,104 @@ mutation  coupon($prescription:String,$latitude:String,$longitude:String){
       }
 }
 `;
-// interface DurgsInterface{
+export interface CouponStructureInterface {
+  drugs: DrugsInterface;
+  forms: LocatedDrugFormInterface;
+  names: LocatedDrugNameInterface;
+  quantities: LocatedDrugQtyInterface;
+  strengths: LocatedDrugStrengthInterface;
+}
+export interface LocatedDrugFormInterface {
+  locatedDrugForm: GetLocatedDrugFormInterface[];
+}
+export interface LocatedDrugNameInterface {
+  locatedDrugName: GetLocatedDrugNameInterface;
+}
+export interface DrugsInterface {
+  locatedDrug:LocatedDrugInterface[];
+}
+export interface LocatedDrugQtyInterface {
+  locatedDrugQty: GetLocatedDrugQtyInterface[]
+
+}
+export interface LocatedDrugStrengthInterface {
+  locatedDrugStrength: GetLocatedDrugStrengthInterface[];
+}
+export interface GetLocatedDrugStrengthInterface {
+  strength: PharmacyTextInterface;
+  gsn: PharmacyTextInterface;
+  isSelected: PharmacyTextInterface;
+  ranking: PharmacyTextInterface;
+}
 
 
-// }
+export interface GetLocatedDrugQtyInterface {
+  quantity: PharmacyTextInterface
+  quantityUomr: PharmacyTextInterface
+  gsn: PharmacyTextInterface
+  isSelected: PharmacyTextInterface
+  ranking: PharmacyTextInterface
+}
+
+export interface GetLocatedDrugFormInterface {
+  form: PharmacyTextInterface;
+  gsn: PharmacyTextInterface;
+  isSelected: PharmacyTextInterface;
+  ranking: PharmacyTextInterface;
+  awpPrice: PharmacyTextInterface;
+}
+
+export interface GetLocatedDrugNameInterface {
+  drugName: PharmacyTextInterface
+  brandGenericIndicator: PharmacyTextInterface
+  isSelected: PharmacyTextInterface
+}
 
 
-// interface GetPharmacyDrugPricingResponseInterface{
 
-//   coupons:
-  
-      
-//       drugs
-//       {
-//         locatedDrug
-//         {
-//           pharmacy
-//           {
-//               name{
-//                 _text
-//               }
-//               streetAddress{
-//                 _text
-//               }
-//               city{
-//                 _text
-//               }
-//               state{
-//                 _text
-//               }
-//               zipCode{
-//                 _text
-//               }
-//               latitude{
-//                 _text
-//               }
-//               longitude{
-//                 _text
-//               }
-//               hoursOfOperation{
-//                 _text
-//               }
-//               phone{
-//                 _text
-//               }
-//               npi{
-//                 _text
-//               }
-//               chainCode{
-//                 _text
-//               }
-//               distance{
-//                 _text
-//               }
+export interface LocatedDrugInterface {
+  pharmacy: PharmacyInterface
+  drug: DrugInterface
+  pricing: PricingInterface
+}
 
-//           }
-//           drug
-//           {
-//               ndcCode{
-//                 _text
-//               }
-//               brandGenericIndicator{
-//                 _text
-//               }
-//               gsn{
-//                 _text
-//               }
-//               drugRanking{
-//                 _text
-//               }
-//               quantity{
-//                 _text
-//               }
-//               quantityRanking{
-//                 _text
-//               }
-//           }
-//           pricing
-//           {
-//               price{
-//                 _text
-//               }
-//               priceBasis{
-//                 _text
-//               }
-//               usualAndCustomaryPrice{
-//                 _text
-//               }
-//               macPrice{
-//                 _text
-//               }
-//               awpPrice{
-//                 _text
-//               }
+export interface PharmacyInterface {
+  name: PharmacyTextInterface;
+  streetAddress: PharmacyTextInterface;
+  city: PharmacyTextInterface;
+  state: PharmacyTextInterface;
+  zipCode: PharmacyTextInterface;
+  latitude: PharmacyTextInterface;
+  longitude: PharmacyTextInterface;
+  hoursOfOperatio: PharmacyTextInterface;
+  phone: PharmacyTextInterface;
+  npi: PharmacyTextInterface;
+  chainCode: PharmacyTextInterface;
+  distance: PharmacyTextInterface;
+}
 
-//           }
-//         }
-//       }
-//       forms 
-//       {
-//         locatedDrugForm
-//         {
-//           form{
-//             _text
-//           }
-//           gsn{
-//             _text
-//           }
-//           isSelected{
-//             _text
-//           }
-//           ranking{
-//             _text
-//           }
-//           awpPrice{
-//             _text
-//           }
-//         }
-//       }
-//       names
-//       {
-//         locatedDrugName
-//         {
-//             drugName{
-//             _text
-//           }
-//           brandGenericIndicator{
-//             _text
-//           }
-//           isSelected{
-//             _text
-//           }
-//         }
+export interface DrugInterface {
+  ndcCode: PharmacyTextInterface;
+  brandGenericIndicator: PharmacyTextInterface;
+  gsn: PharmacyTextInterface;
+  drugRanking: PharmacyTextInterface;
+  quantity: PharmacyTextInterface;
+  quantityRacking: PharmacyTextInterface;
+}
 
-//        }
-//       quantities
-//       {
-//         locatedDrugQty
-//         {
-//             quantity{
-//               _text
-//             }
-//             quantityUomr{
-//               _text
-//             }
-//             gsn{
-//               _text
-//             }
-//             isSelected{
-//               _text
-//             }
-//             ranking{
-//               _text
-//             }
-//         }
-//       }
-//       strengths
-//       {
-//         locatedDrugStrength
-//         {
-//             strength{
-//               _text
-//             }                    
-//             gsn{
-//               _text
-//             }
-//             isSelected{
-//               _text
-//             }
-//             ranking{
-//               _text
-//             }
-//         }
+export interface PricingInterface {
+  price: PharmacyTextInterface;
+  priceBasis: PharmacyTextInterface;
+  usualAndCustomaryPrice: PharmacyTextInterface;
+  macPrice: PharmacyTextInterface;
+  awpPrice: PharmacyTextInterface;
+}
+export interface PharmacyTextInterface {
+  _text: string;
+}
 
-//       }                                 
 
-//   }
-// }
+
 
 /**
  * @Pages
@@ -381,11 +302,113 @@ mutation  coupon($prescription:String,$latitude:String,$longitude:String){
  * @component PrescriptionDetailedForm
  */
 
+ let allTheData:CouponStructureInterface;
 const ChooseYourCoupon = ({ language, prescriptionFromRoute, location }) => {
 
 
-  const [coupons, setCoupons] = useState<any>({})
+  
+
+  let pharmacyText: PharmacyTextInterface = {
+    _text: ""
+  }
+
+  let locatedDrugStrength: GetLocatedDrugStrengthInterface[];
+
+  let locatedDrugQty: GetLocatedDrugQtyInterface[];
+
+  let locatedDrugForm: GetLocatedDrugFormInterface[];
+
+  let drug: DrugInterface = {
+    ndcCode: pharmacyText,
+    brandGenericIndicator: pharmacyText,
+    gsn: pharmacyText,
+    drugRanking: pharmacyText,
+    quantity: pharmacyText,
+    quantityRacking: pharmacyText
+  }
+
+  let pharmacy: PharmacyInterface = {
+    name: pharmacyText,
+    streetAddress: pharmacyText,
+    city: pharmacyText,
+    state: pharmacyText,
+    zipCode: pharmacyText,
+    latitude: pharmacyText,
+    longitude: pharmacyText,
+    hoursOfOperatio: pharmacyText,
+    phone: pharmacyText,
+    npi: pharmacyText,
+    chainCode: pharmacyText,
+    distance: pharmacyText,
+  }
+
+  let pricing = {
+    price: pharmacyText,
+    priceBasis: pharmacyText,
+    usualAndCustomaryPrice: pharmacyText,
+    macPrice: pharmacyText,
+    awpPrice: pharmacyText,
+  }
+
+
+  let locatedDrug: LocatedDrugInterface[] = []; 
+
+  let locatedDrugName: GetLocatedDrugNameInterface = {
+    drugName: pharmacyText,
+    brandGenericIndicator: pharmacyText,
+    isSelected: pharmacyText
+  }
+
+  let drugs: DrugsInterface = {
+    locatedDrug
+  };
+  let forms: LocatedDrugFormInterface = {
+    locatedDrugForm
+  };
+  let names: LocatedDrugNameInterface = {
+    locatedDrugName
+
+  };
+  let quantities: LocatedDrugQtyInterface = {
+    locatedDrugQty
+  };
+
+  let strengths: LocatedDrugStrengthInterface = {
+    locatedDrugStrength
+  };
+  let couponData: CouponStructureInterface = {
+    drugs,
+    forms,
+    names,
+    quantities,
+    strengths
+
+  }
+  const [coupons, setCoupons] = useState<CouponStructureInterface>(couponData);
   const router = useRouter();
+  const [ valuesForFilter,setValuesForFilter ] = useState({
+    form:"",
+    dosage:"",
+    quantity:""                 
+});
+  
+ let  filterValues = {form:"",
+ dosage:"",
+ quantity:""  }
+  const setValuesForFilterCoupons = (value:any) =>{
+         
+    setValuesForFilter(Object.assign(valuesForFilter ,value));
+        //setValuesForFilter(Object.assign(valuesForFilter,value));
+      
+        //fileterCoupons();
+                
+  }
+  const fileterCoupons =()=>{
+
+    //coupons.drugs.locatedDrug = allTheData.drugs.locatedDrug.filter((e:LocatedDrugInterface) => e.drug.quantity._text === valuesForFilter.quantity);
+    setCoupons(JSON.parse(JSON.stringify(coupons)));
+            
+  }
 
 
   /**
@@ -436,21 +459,24 @@ const ChooseYourCoupon = ({ language, prescriptionFromRoute, location }) => {
     onError(err) {
       console.log(err);
       alert(err);
+      
     },
     update(proxy, result) {
-
-      if (result.data.coupon.code === 200)
-      {
-        console.log(result.data.coupon.coupons);
-         setCoupons(result.data.coupon.coupons);
+      console.log('result',result); 
+      if (result.data.coupon.code === 200) {  
+          allTheData = result.data.coupon.coupons;
+          setCoupons(result.data.coupon.coupons);
+          console.log('allthedataresponse',allTheData);
       }
       else
         alert(result.data.coupon.message);
-
     }
   });
   //fillCoupon();
-  Object.keys(coupons).length <= 0 && getCoupons({ variables: { prescription: prescriptionFromRoute.search_name, latitude: location.latitude, longitude: location.longitude }, context: { clientName: 'coupon' } })
+  // Object.keys(coupons).length <= 0 && getCoupons({ variables: { prescription: prescriptionFromRoute.search_name, latitude: location.latitude, longitude: location.longitude }, context: { clientName: 'coupon' } })
+  allTheData === undefined && getCoupons({ variables: { prescription: prescriptionFromRoute.search_name, latitude: location.latitude, longitude: location.longitude }, context: { clientName: 'coupon' } })
+
+
   return (
     <div>
 
@@ -474,14 +500,23 @@ const ChooseYourCoupon = ({ language, prescriptionFromRoute, location }) => {
           </>
         }
       </div>
-      <PrescriptionDetailedForm language={language} disabled={true} prescriptionFromRoute={prescriptionFromRoute} />
+      {console.log('displaying info',(coupons['drugs'].locatedDrug !== undefined), coupons['drugs'].locatedDrug)  }
+      {coupons['drugs'].locatedDrug.length > 0 && <PrescriptionDetailedForm language={language} 
+                                disabled={false}
+                                coupons={coupons}                               
+                                prescriptionName={prescriptionFromRoute}
+                                filterCoupons={fileterCoupons}
+                                setValuesForFilterCoupons={setValuesForFilterCoupons} /> }
       <div className="list_info">
         <p><span>Sorted by: </span>Price</p>
         <p><span>Number of Results: </span>3</p>
         <p className="radius"><span>Radius: </span>15 miles</p>
       </div>
       <div>
-        {Object.keys(coupons).length > 0 && coupons['drugs']['locateDrug'].map(element => <CouponsTiles language={language} prescription={prescriptionFromRoute} couponsData={element} />)}
+        {console.log('data',coupons['drugs'])}
+        {coupons['drugs'].locatedDrug.map(element =>{ console.log(element.drug.quantity._text,' ===', valuesForFilter.quantity,element.drug.quantity._text === valuesForFilter.quantity) 
+            if(element.drug.quantity._text === valuesForFilter.quantity)              
+                return <CouponsTiles language={language} prescription={prescriptionFromRoute} couponsData={element} />})}
       </div>
 
 

@@ -86,8 +86,7 @@ module.exports = gql(`
             pricing:GetPricing
            
         }
-        type LocatedDrug
-        {
+        type LocatedDrug{
             locatedDrug:[GetLocatedDrug]
         }
         type GetPharmacyDrugPricingResponse{
