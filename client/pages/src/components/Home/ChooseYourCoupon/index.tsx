@@ -500,8 +500,7 @@ const ChooseYourCoupon = ({ language, prescriptionFromRoute, location }) => {
           </>
         }
       </div>
-      {console.log('displaying info',(coupons['drugs'].locatedDrug !== undefined), coupons['drugs'].locatedDrug)  }
-      {coupons['drugs'].locatedDrug.length > 0 && <PrescriptionDetailedForm language={language} 
+       {coupons['drugs'].locatedDrug.length > 0 && <PrescriptionDetailedForm language={language} 
                                 disabled={false}
                                 coupons={coupons}                               
                                 prescriptionName={prescriptionFromRoute}
@@ -512,9 +511,8 @@ const ChooseYourCoupon = ({ language, prescriptionFromRoute, location }) => {
         <p><span>Number of Results: </span>3</p>
         <p className="radius"><span>Radius: </span>15 miles</p>
       </div>
-      <div>
-        {console.log('data',coupons['drugs'])}
-        {coupons['drugs'].locatedDrug.map(element =>{ console.log(element.drug.quantity._text,' ===', valuesForFilter.quantity,element.drug.quantity._text === valuesForFilter.quantity) 
+      <div>        
+        {coupons['drugs'].locatedDrug.map(element =>{  
             if(element.drug.quantity._text === valuesForFilter.quantity)              
                 return <CouponsTiles language={language} prescription={prescriptionFromRoute} couponsData={element} />})}
       </div>
