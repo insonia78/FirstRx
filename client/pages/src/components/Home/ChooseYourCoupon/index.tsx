@@ -305,7 +305,9 @@ export interface PharmacyTextInterface {
  let allTheData:CouponStructureInterface;
 const ChooseYourCoupon = ({ language, prescriptionFromRoute, location }) => {
 
-
+      location = JSON.parse(location);  
+      prescriptionFromRoute = JSON.parse(prescriptionFromRoute);
+      console.log('location',location,prescriptionFromRoute);
   
 
   let pharmacyText: PharmacyTextInterface = {
@@ -490,7 +492,7 @@ const ChooseYourCoupon = ({ language, prescriptionFromRoute, location }) => {
       <div className='location cursor'>
         {(language === 'english' || language === undefined) &&
           <>
-            Location: {location} <u onClick={returnToLocation}>Clear</u>
+            Location: {location.myLocation} <u onClick={returnToLocation}>Clear</u>
           </>
 
         }

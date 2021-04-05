@@ -320,7 +320,7 @@ const createLocationWithOutCommas = (value) =>{
               query: {
                 component: 'prescription',
                 prescriptions: prescriptionFromRoute,
-                location: valueForInputValue.trim(),
+                location: JSON.stringify(getLocation).trim(),
                 language: language
 
               }
@@ -340,7 +340,7 @@ const createLocationWithOutCommas = (value) =>{
                 query: {
                   component: 'choose-your-coupon',
                   prescriptions: prescriptionFromRoute,
-                  location: valueForInputValue.trim(),
+                  location: JSON.stringify(getLocation).trim(),
                   language: language
                 },
               })
