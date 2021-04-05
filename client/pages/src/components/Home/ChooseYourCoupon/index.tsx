@@ -475,7 +475,7 @@ const ChooseYourCoupon = ({ language, prescriptionFromRoute, location }) => {
   });
   //fillCoupon();
   // Object.keys(coupons).length <= 0 && getCoupons({ variables: { prescription: prescriptionFromRoute.search_name, latitude: location.latitude, longitude: location.longitude }, context: { clientName: 'coupon' } })
-  allTheData === undefined && getCoupons({ variables: { prescription: prescriptionFromRoute.search_name, latitude: location.latitude, longitude: location.longitude }, context: { clientName: 'coupon' } })
+  allTheData === undefined && getCoupons({ variables: { prescription:prescriptionFromRoute.search_name, latitude:`${location.latitude}`,longitude:`${location.longitude}` },context: { clientName: 'coupon' } })
 
 
   return (
