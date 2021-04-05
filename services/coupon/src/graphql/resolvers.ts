@@ -824,9 +824,7 @@ module.exports = {
                                 <!--You have a CHOICE of the next 3 items at this level-->
                                 <v1:drugName>${prescription.trim()}</v1:drugName>
                              </v1:drugCriteria>
-                            </v1:getPharmacyDrugPricingRequest>
-                    
-                            </v1:findDrugByNameRequest>
+                            </v1:getPharmacyDrugPricingRequest>                           
                         </soapenv:Body>
                     </soapenv:Envelope>`;
 
