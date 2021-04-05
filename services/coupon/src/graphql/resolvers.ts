@@ -1,7 +1,7 @@
 //const request = require('postman-request');
 const request = require('request');
 const crypto = require('crypto');
-
+const fs = require('fs');
 import { writeToLog } from './../../src/helper/writeToLog';
 import path from 'path';
 import { xml2json } from 'xml-js';
@@ -10,20 +10,20 @@ const moment = require('moment')
 
 let private_key: string;
 
-// fs.readFile(path.join(process.cwd(), "firstrx.key"), (err: any, data: any) => {
-//     private_key = data;
+fs.readFile(path.join(process.cwd(), "firstrx.key"), (err: any, data: any) => {
+    private_key = data;
 
-// });
+});
 
 let public_key: string;
 
-// fs.readFile('firstrx.crt', (err: any, data: any) => {
-//     if (err) {
-//         console.error(err)
-//         return
-//     }
-//     public_key = data;
-// });
+fs.readFile('firstrx.crt', (err: any, data: any) => {
+    if (err) {
+        console.error(err)
+        return
+    }
+    public_key = data;
+});
 
 
 
