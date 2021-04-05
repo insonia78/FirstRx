@@ -305,7 +305,9 @@ export interface PharmacyTextInterface {
  let allTheData:CouponStructureInterface;
 const ChooseYourCoupon = ({ language, prescriptionFromRoute, location }) => {
 
-
+      location = JSON.parse(location);  
+      prescriptionFromRoute = JSON.parse(prescriptionFromRoute);
+      console.log('location',location,prescriptionFromRoute);
   console.log('Datafromlocation',prescriptionFromRoute,location);
   location = JSON.parse(location);
 
