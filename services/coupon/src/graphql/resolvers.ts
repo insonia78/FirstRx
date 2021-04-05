@@ -816,13 +816,13 @@ module.exports = {
                                 <v1:timestamp>${myTimeStamp}</v1:timestamp>
                                 <v1:pharmacyCriteria>
                                 <v1:locationCriteria>
-                                    <v1:latitude>${latitude}</v1:latitude>
-                                   <v1:longitude>${longitude}</v1:longitude>
+                                    <v1:latitude>${latitude.trim()}</v1:latitude>
+                                   <v1:longitude>${longitude.trim()}</v1:longitude>
                                 </v1:locationCriteria>
                              </v1:pharmacyCriteria>
                              <v1:drugCriteria>
                                 <!--You have a CHOICE of the next 3 items at this level-->
-                                <v1:drugName>${prescription}</v1:drugName>
+                                <v1:drugName>${prescription.trim()}</v1:drugName>
                              </v1:drugCriteria>
                             </v1:getPharmacyDrugPricingRequest>
                     
@@ -862,6 +862,7 @@ module.exports = {
                                 let xml = response.body;
                                 let toJson = convert.xml2json(xml, {compact: true, spaces: 4});
                                 toJson = JSON.parse(toJson);
+                                console.log('response',JSON.stringify(toJson));
                                 let data =  toJson["soap:Envelope"]["soap:Body"]["getPharmacyDrugPricingResponse"];
                                 resolve({ code: 200, message: ``, coupons:data });
                               }catch(e){
