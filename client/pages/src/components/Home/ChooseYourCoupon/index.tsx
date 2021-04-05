@@ -307,9 +307,7 @@ const ChooseYourCoupon = ({ language, prescriptionFromRoute, location }) => {
 
       location = JSON.parse(location);  
       prescriptionFromRoute = JSON.parse(prescriptionFromRoute);
-      console.log('location',location,prescriptionFromRoute);
-  console.log('Datafromlocation',prescriptionFromRoute,location);
-  location = JSON.parse(location);
+      
 
   let pharmacyText: PharmacyTextInterface = {
     _text: ""
