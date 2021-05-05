@@ -53,7 +53,7 @@ const CouponsTiles = ({ language, prescription, couponsData }) => {
                 </div>
 
                 <div className="pharmacy">
-                    <div className="pharmacy"><address><strong>{couponsData.pharmacy.name._text}</strong> {`${couponsData.pharmacy.streetAddress._text}, ${couponsData.pharmacy.city._text}, ${couponsData.pharmacy.state._text} ${couponsData.pharmacy.zipCode._text.split("-")[0]}`}</address>&nbsp;<a href={`https://maps.google.com/@${couponsData.pharmacy.latitude._text},${couponsData.pharmacy.longitude._text}`} target="_blank">Map</a></div>
+                    <div className="pharmacy"><address><strong>{couponsData.pharmacy.name._text}</strong> {`${couponsData.pharmacy.streetAddress._text}, ${couponsData.pharmacy.city._text}, ${couponsData.pharmacy.state._text} ${couponsData.pharmacy.zipCode._text.split("-")[0]}`}</address>&nbsp;<a href={`https://www.google.com/maps/search/?api=1&query=${couponsData.pharmacy.latitude._text}%2C${couponsData.pharmacy.longitude._text}`} target="_blank">Map</a></div>
                 </div>
 
             </div>
