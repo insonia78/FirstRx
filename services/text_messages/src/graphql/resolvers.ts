@@ -1,9 +1,9 @@
 const request = require('postman-request');
 const { response } = require('express');
-const dotenv = require('dotenv');
-dotenv.config();
+// const dotenv = require('dotenv');
+// dotenv.config();
 
-let envVariables = process.env.APIKEYS;
+let envVariables = process.env.APIKEYS === undefined ? "" : process.env.APIKEYS.toString();
 let obj = JSON.parse(JSON.stringify(envVariables));
 
 const client = require('twilio')(

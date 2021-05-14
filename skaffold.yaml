@@ -41,17 +41,7 @@ build:
         manual: 
           - 
             dest: "."
-            src: src/**/*.ts
-    - 
-      context: first-rx-common-lib
-      docker: 
-        dockerfile: Dockerfile
-      image: first-rx-common-lib
-      sync: 
-        manual: 
-          - 
-            dest: "."
-            src: ./*.ts
+            src: src/**/*.ts    
     - 
       context: services/text_messages
       docker: 

@@ -6,7 +6,7 @@ const json_p = require('/prescriptions/package.json');
 
 const start = async () => {
   
-  const server_id = `${json_p.name}_${randomBytes(8).toString('hex')}`;
+  const server_id = `_${randomBytes(8).toString('hex')}`;
   // if (!process.env.NATS_URL) {
   //   throw new Error('NATS_URL must be defined');
   // }

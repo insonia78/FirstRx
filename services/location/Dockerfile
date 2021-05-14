@@ -16,8 +16,8 @@ ENV GOOGLE_GEOCODE_URL $GOOGLE_GEOCODE_URL_ARGS
 ENV GOOGLE_PLACE_URL $GOOGLE_PLACE_URL_ARGS
 
 COPY package.json .
-RUN npm install
-RUN npm install first-rx-common-lib  
+RUN npm install 
+
 COPY . .
 
 EXPOSE $PORT
