@@ -1,3 +1,4 @@
+# apiVersion: networking.k8s.io/v1beta1
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata: 
@@ -10,29 +11,29 @@ spec:
     - host: firstrx.dev
       http:
         paths:
-          - path: /text-message/graphql
-            pathType: Prefix
-            backend:
-              service:
-                 name: text-messages-srv
-                 port: 
-                   number: 7000
+          # - path: /text-message/graphql
+          #   pathType: Prefix
+          #   backend:
+          #     service:
+          #        name: text-messages-srv
+          #        port: 
+          #          number: 7000
           - path: /coupon/graphql
-            pathType: Prefix
+            pathType: Exact
             backend:
               service:
-                  name: coupon-srv
-                  port:
+                 name: coupon-srv
+                 port: 
                    number: 6000  
           - path: /location/graphql
-            pathType: Prefix
+            pathType: Exact
             backend:
               service:
                  name: location-srv
                  port: 
-                   number: 5000              
+                   number: 5000
           - path: /prescriptions/graphql
-            pathType: Prefix
+            pathType: Exact
             backend:
               service:
                  name: prescriptions-srv
@@ -42,9 +43,9 @@ spec:
             pathType: Prefix
             backend:
               service:
-                 name: client-srv
+                 name: prescriptions-srv
                  port: 
                    number: 3000
-            
+              
          
              
