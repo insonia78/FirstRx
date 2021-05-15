@@ -17,7 +17,6 @@ ENV MEDIMPACT_CLIENT_CODE=$MEDIMPACT_CLIENT_CODE_ARG
 
 COPY package.json .
 RUN npm install
-RUN npm update
 
 COPY . .
 
