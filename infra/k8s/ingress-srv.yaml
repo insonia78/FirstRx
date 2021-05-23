@@ -18,14 +18,14 @@ spec:
           #     service:
           #        name: text-messages-srv
           #        port: 
-          #          number: 7000
-          # - path: /coupon/graphql
-          #   pathType: Exact
-          #   backend:
-          #     service:
-          #        name: coupon-srv
-          #        port: 
-          #          number: 6000  
+          #         number: 7000
+          - path: /coupon/graphql
+            pathType: Exact
+            backend:
+              service:
+                 name: coupon-srv
+                 port: 
+                   number: 6000  
           - path: /location/graphql
             pathType: Exact
             backend:
@@ -33,13 +33,13 @@ spec:
                  name: location-srv
                  port: 
                    number: 5000
-          # - path: /prescriptions/graphql
-          #   pathType: Exact
-          #   backend:
-          #     service:
-          #        name: prescriptions-srv
-          #        port: 
-          #          number: 4000                      
+          - path: /prescriptions/graphql
+            pathType: Exact
+            backend:
+              service:
+                 name: prescriptions-srv
+                 port: 
+                   number: 4000                      
           - path: /?(.*)
             pathType: Prefix
             backend:
